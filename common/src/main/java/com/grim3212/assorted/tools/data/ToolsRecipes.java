@@ -100,6 +100,7 @@ public class ToolsRecipes extends ConditionalRecipeProvider {
 
         armorSet(ToolsItems.CHICKEN_SUIT_HELMET.get(), ToolsItems.CHICKEN_SUIT_CHESTPLATE.get(), ToolsItems.CHICKEN_SUIT_LEGGINGS.get(), ToolsItems.CHICKEN_SUIT_BOOTS.get(), LibCommonTags.Items.FEATHERS, "chickensuit");
         scubaSuit();
+        lavaSuit();
 
         multiTool(ToolsItems.WOODEN_MULTITOOL.get(), Items.WOODEN_PICKAXE, Items.WOODEN_SHOVEL, Items.WOODEN_AXE, Items.WOODEN_HOE, Items.WOODEN_SWORD, ItemTags.PLANKS);
         multiTool(ToolsItems.STONE_MULTITOOL.get(), Items.STONE_PICKAXE, Items.STONE_SHOVEL, Items.STONE_AXE, Items.STONE_HOE, Items.STONE_SWORD, ItemTags.STONE_TOOL_MATERIALS);
@@ -251,6 +252,30 @@ public class ToolsRecipes extends ConditionalRecipeProvider {
                 .pattern("LCL").pattern("L L").pattern("L L").unlockedBy("has_copper", has(LibCommonTags.Items.INGOTS_COPPER)).save(this.output, recipeKey(key(leggings.asItem())));
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, boots).define('L', LibCommonTags.Items.LEATHER).define('C', LibCommonTags.Items.INGOTS_COPPER)
                 .pattern("L L").pattern("LCL").unlockedBy("has_copper", has(LibCommonTags.Items.INGOTS_COPPER)).save(this.output, recipeKey(key(boots.asItem())));
+    }
+
+    /**
+     * The lava suit: magma cream for the suit, blaze rods for its fittings, crying obsidian for the
+     * visor, and a netherite ingot in each of the two pieces that take the worst of it. Every part
+     * of it comes out of the nether, which is the only place it is any use.
+     */
+    private void lavaSuit() {
+        ItemLike helmet = ToolsItems.LAVA_HELMET.get();
+        ItemLike chestplate = ToolsItems.LAVA_CHESTPLATE.get();
+        ItemLike leggings = ToolsItems.LAVA_LEGGINGS.get();
+        ItemLike boots = ToolsItems.LAVA_BOOTS.get();
+
+        this.addConditions(and(partEnabled(ToolsConditions.Parts.LAVA_SUIT), itemTagExists(LibCommonTags.Items.INGOTS_NETHERITE)),
+                key(helmet.asItem()), key(chestplate.asItem()), key(leggings.asItem()), key(boots.asItem()));
+
+        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, helmet).define('M', Items.MAGMA_CREAM).define('O', Items.CRYING_OBSIDIAN)
+                .pattern("MMM").pattern("MOM").unlockedBy("has_magma_cream", has(Items.MAGMA_CREAM)).save(this.output, recipeKey(key(helmet.asItem())));
+        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, chestplate).define('M', Items.MAGMA_CREAM).define('N', LibCommonTags.Items.INGOTS_NETHERITE).define('B', LibCommonTags.Items.RODS_BLAZE)
+                .pattern("M M").pattern("MNM").pattern("MBM").unlockedBy("has_netherite", has(LibCommonTags.Items.INGOTS_NETHERITE)).save(this.output, recipeKey(key(chestplate.asItem())));
+        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, leggings).define('M', Items.MAGMA_CREAM).define('N', LibCommonTags.Items.INGOTS_NETHERITE).define('B', LibCommonTags.Items.RODS_BLAZE)
+                .pattern("MNM").pattern("M M").pattern("B B").unlockedBy("has_netherite", has(LibCommonTags.Items.INGOTS_NETHERITE)).save(this.output, recipeKey(key(leggings.asItem())));
+        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, boots).define('M', Items.MAGMA_CREAM).define('B', LibCommonTags.Items.RODS_BLAZE)
+                .pattern("M M").pattern("MBM").unlockedBy("has_magma_cream", has(Items.MAGMA_CREAM)).save(this.output, recipeKey(key(boots.asItem())));
     }
 
     private void armorSet(ItemLike helmet, ItemLike chestplate, ItemLike leggings, ItemLike boots, TagKey<Item> input, String condition) {

@@ -147,6 +147,11 @@ public class ToolsItemModelProvider extends ModelProvider {
         armor(itemModels, ToolsItems.SCUBA_LEGGINGS.get());
         armor(itemModels, ToolsItems.SCUBA_BOOTS.get());
 
+        armor(itemModels, ToolsItems.LAVA_HELMET.get());
+        armor(itemModels, ToolsItems.LAVA_CHESTPLATE.get());
+        armor(itemModels, ToolsItems.LAVA_LEGGINGS.get());
+        armor(itemModels, ToolsItems.LAVA_BOOTS.get());
+
         tool(itemModels, ToolsItems.WOODEN_MULTITOOL.get());
         tool(itemModels, ToolsItems.STONE_MULTITOOL.get());
         tool(itemModels, ToolsItems.GOLDEN_MULTITOOL.get());

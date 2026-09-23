@@ -75,6 +75,13 @@ public class ToolsLanguageProvider extends LibLanguageProvider {
         this.add("item.assortedtools.scuba_leggings", "Scuba Legs");
         this.add("item.assortedtools.scuba_boots", "Scuba Fins");
 
+        this.add("item.assortedtools.lava_helmet", "Lava Hood");
+        this.add("item.assortedtools.lava_chestplate", "Lava Suit");
+        this.add("item.assortedtools.lava_leggings", "Lava Legs");
+        this.add("item.assortedtools.lava_boots", "Lava Boots");
+
+        this.add("effect.assortedtools.lava_striding", "Lava Striding");
+
         this.add("tooltip.ultimate.fragment", "A fragment of a powerful tool from an ancient civilization");
         this.add("tooltip.pokeball.stored", "Stored: %s");
         this.add("tooltip.pokeball.stored_custom_name", "Stored: %s (%s)");
@@ -283,6 +290,13 @@ public class ToolsLanguageProvider extends LibLanguageProvider {
                         + "The Mask and tank together let you breathe under water and see better than you would without it."
                         + BREAK
                         + "The Legs and fins together move you through water far quicker than swimming.");
+
+        this.add("manual.assortedtools.chapter.armor.lava_suit.title", "Lava Suit");
+        this.add("manual.assortedtools.chapter.armor.lava_suit",
+                "The lava suit is like the scuba suit but for lava." + BREAK
+                        + "You will need all four pieces to avoid burning alive though."
+                        + BREAK
+                        + "The Legs and boots on their own let you swim through lava as you would through water.");
 
         this.add("manual.assortedtools.chapter.armor.chicken_suit.title", "Chicken Suit");
         this.add("manual.assortedtools.chapter.armor.chicken_suit",

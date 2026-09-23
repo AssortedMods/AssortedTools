@@ -4,6 +4,9 @@
   "compatibilityLevel": "JAVA_21",
   "package": "com.grim3212.assorted.tools.mixin",
   "mixins": [
+    "entity.EntityFireImmuneMixin",
+    "entity.LivingEntityHotFloorMixin",
+    "entity.LivingEntityLavaSwimMixin",
     "item.ItemStackDestroySpeedMixin"
   ],
   "client": [],

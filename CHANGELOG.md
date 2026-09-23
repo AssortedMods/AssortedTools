@@ -3,6 +3,7 @@
 ## 11.1.3
 
 - Added a scuba suit from a dead mod I worked on ages ago.
+- Added a lava suit to go with it.
 
 ## 11.1.2
 

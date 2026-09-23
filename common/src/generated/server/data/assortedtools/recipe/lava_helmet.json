@@ -1,0 +1,48 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:and",
+      "values": [
+        {
+          "type": "assortedlib:part_enabled",
+          "part": "lavasuit"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:ingots/netherite"
+        }
+      ]
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:and",
+      "values": [
+        {
+          "condition": "assortedlib:part_enabled",
+          "part": "lavasuit"
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:ingots/netherite"
+          ]
+        }
+      ]
+    }
+  ],
+  "key": {
+    "M": "minecraft:magma_cream",
+    "O": "minecraft:crying_obsidian"
+  },
+  "pattern": [
+    "MMM",
+    "MOM"
+  ],
+  "result": {
+    "id": "assortedtools:lava_helmet"
+  }
+}

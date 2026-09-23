@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedtools:lava_striding_swims_like_water",
+  "structure": "assortedtools:test_box",
+  "max_ticks": 120,
+  "setup_ticks": 0,
+  "required": true
+}

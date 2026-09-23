@@ -14,24 +14,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.equipment.ArmorType;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * The scuba suit, which works in halves rather than as one set: the mask and tank let you breathe
- * and see down there, the legs and fins move you through the water.
- */
+/** The scuba suit, in halves: mask and tank to breathe and see, legs and fins to swim. */
 public class ScubaArmorItem extends ConfigurableArmorItem {
 
-    /** Long enough that the wearer keeps it between refreshes, short enough to lapse on surfacing. */
+    /** Short enough to lapse on surfacing. */
     private static final int EFFECT_DURATION = 60;
-    /**
-     * Only refresh once the effect has nearly run out. Re-adding every tick would send the wearer
-     * an effect update packet every tick, for an effect that has not changed.
-     */
+    /** Refreshing every tick would send an effect update packet every tick. */
     private static final int REFRESH_BELOW = 20;
-    /**
-     * How often a working half costs its two pieces a point of durability. At five seconds a point
-     * the mask outlasts eleven minutes underwater, which is a long dive and still a tank that runs
-     * down. A half that is not doing anything - out of water, or missing its partner - is free.
-     */
+    /** A point of durability every five seconds, and only while the half is working. */
     private static final int WEAR_INTERVAL = 100;
 
     public ScubaArmorItem(ArmorType type, Properties builderIn) {
@@ -81,7 +71,7 @@ public class ScubaArmorItem extends ConfigurableArmorItem {
             return;
         }
 
-        // Ambient and particle-free, like a beacon's: the suit should not trail bubbles of its own.
+        // Ambient and particle-free, so the suit does not trail bubbles of its own.
         wearer.addEffect(new MobEffectInstance(effect, EFFECT_DURATION, 0, true, false, true));
     }
 }

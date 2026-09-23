@@ -20,6 +20,7 @@ public final class ToolsGameTests {
         ShearsTests.register(out);
         EnchantmentTests.register(out);
         ScubaSuitTests.register(out);
+        LavaSuitTests.register(out);
         ProjectileTests.register(out);
         SpearTests.register(out);
         TooltipTests.register(out);

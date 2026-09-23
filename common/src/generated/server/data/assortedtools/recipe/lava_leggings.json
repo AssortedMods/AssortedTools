@@ -1,0 +1,50 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:and",
+      "values": [
+        {
+          "type": "assortedlib:part_enabled",
+          "part": "lavasuit"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:ingots/netherite"
+        }
+      ]
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:and",
+      "values": [
+        {
+          "condition": "assortedlib:part_enabled",
+          "part": "lavasuit"
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:ingots/netherite"
+          ]
+        }
+      ]
+    }
+  ],
+  "key": {
+    "B": "#c:rods/blaze",
+    "M": "minecraft:magma_cream",
+    "N": "#c:ingots/netherite"
+  },
+  "pattern": [
+    "MNM",
+    "M M",
+    "B B"
+  ],
+  "result": {
+    "id": "assortedtools:lava_leggings"
+  }
+}

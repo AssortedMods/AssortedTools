@@ -22,6 +22,7 @@ public class ToolsCommonConfig {
     public final Supplier<Boolean> pokeballEnabled;
     public final Supplier<Boolean> chickenSuitEnabled;
     public final Supplier<Boolean> scubaSuitEnabled;
+    public final Supplier<Boolean> lavaSuitEnabled;
     public final Supplier<Boolean> extraMaterialsEnabled;
     public final Supplier<Boolean> spearsEnabled;
     public final Supplier<Boolean> throwingSpearsEnabled;
@@ -62,6 +63,7 @@ public class ToolsCommonConfig {
     public final ItemTierConfig ultimateItemTier;
     public final ArmorMaterialConfig chickenSuitArmorMaterial;
     public final ArmorMaterialConfig scubaSuitArmorMaterial;
+    public final ArmorMaterialConfig lavaSuitArmorMaterial;
 
     public final Map<String, ModdedItemTierConfig> moddedTiers;
     public final Map<String, ArmorMaterialConfig> moddedArmors;
@@ -79,6 +81,7 @@ public class ToolsCommonConfig {
         multiToolsEnabled = builder.defineBoolean("parts.multiToolsEnabled", true, "Set this to true if you would like multitools to be craftable and found in the creative tab.");
         pokeballEnabled = builder.defineBoolean("parts.pokeballEnabled", true, "Set this to true if you would like the pokeball to be craftable and found in the creative tab.");
         scubaSuitEnabled = builder.defineBoolean("parts.scubaSuitEnabled", true, "Set this to true if you would like the scuba suit to be craftable and found in the creative tab.");
+        lavaSuitEnabled = builder.defineBoolean("parts.lavaSuitEnabled", true, "Set this to true if you would like the lava suit to be craftable and found in the creative tab.");
         chickenSuitEnabled = builder.defineBoolean("parts.chickenSuitEnabled", true, "Set this to true if you would like the chicken suit to be craftable and found in the creative tab as well as if you want the Chicken Jump enchantment to be able to be applied.");
         extraMaterialsEnabled = builder.defineBoolean("parts.extraMaterialsEnabled", true, "Set this to true if you would like to enable support for crafting the extra tools and armor that this supports. For example, Steel, Copper, or Ruby tools and armor.");
         spearsEnabled = builder.defineBoolean("parts.spearsEnabled", true, "Set this to true if you would like spears like vanilla's, for the extra materials, to be craftable and found in the creative tab.");
@@ -122,9 +125,8 @@ public class ToolsCommonConfig {
         ultimateItemTier = new ItemTierConfig(builder, "ultimate", "ultimate_fist", ToolsItemTier.ULTIMATE);
 
         chickenSuitArmorMaterial = new ArmorMaterialConfig(builder, "chicken_suit", "chicken_suit", 5, 15, 0.0F, 0.0F, new int[]{1, 2, 3, 1}, () -> ToolsArmorMaterials.CHICKEN_SUIT);
-        // A wetsuit, not plate: a little sturdier than leather, well short of iron. What it is
-        // worn for is what it does in the water, not what it stops.
         scubaSuitArmorMaterial = new ArmorMaterialConfig(builder, "scuba_suit", "scuba_suit", 12, 12, 0.0F, 0.0F, new int[]{1, 3, 4, 2}, () -> ToolsArmorMaterials.SCUBA);
+        lavaSuitArmorMaterial = new ArmorMaterialConfig(builder, "lava_suit", "lava_suit", 20, 9, 0.0F, 0.0F, new int[]{2, 6, 7, 2}, () -> ToolsArmorMaterials.LAVA);
 
         moddedTiers = new HashMap<>();
         moddedTiers.put("tin", new ModdedItemTierConfig(builder, "tin", "modded_tool_overrides", ToolsItemTier.TIN));

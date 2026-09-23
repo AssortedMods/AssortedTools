@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedtools:lava_boots_alone_see_off_a_hot_floor",
+  "structure": "assortedtools:test_box",
+  "max_ticks": 100,
+  "setup_ticks": 0,
+  "required": true
+}

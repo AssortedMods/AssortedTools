@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedtools:lava_halves_need_both_pieces_and_lava",
+  "structure": "assortedtools:test_box",
+  "max_ticks": 100,
+  "setup_ticks": 0,
+  "required": true
+}

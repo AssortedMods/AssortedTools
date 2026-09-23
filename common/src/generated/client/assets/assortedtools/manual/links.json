@@ -411,6 +411,15 @@
     },
     {
       "items": [
+        "assortedtools:lava_boots",
+        "assortedtools:lava_chestplate",
+        "assortedtools:lava_helmet",
+        "assortedtools:lava_leggings"
+      ],
+      "page": "assortedtools:armor/lava_suit"
+    },
+    {
+      "items": [
         "assortedtools:breaking_wand",
         "assortedtools:building_wand",
         "assortedtools:mining_wand"

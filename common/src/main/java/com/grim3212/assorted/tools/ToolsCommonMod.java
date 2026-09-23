@@ -4,6 +4,7 @@ import com.grim3212.assorted.tools.common.item.ToolsDataComponents;
 import com.grim3212.assorted.lib.events.*;
 import com.grim3212.assorted.lib.platform.Services;
 import com.grim3212.assorted.tools.common.crafting.ToolsConditions;
+import com.grim3212.assorted.tools.common.effect.ToolsMobEffects;
 import com.grim3212.assorted.tools.common.enchantment.ToolsEnchantments;
 import com.grim3212.assorted.tools.common.entity.ToolsEntities;
 import com.grim3212.assorted.tools.common.handlers.*;
@@ -22,6 +23,7 @@ public class ToolsCommonMod {
         ToolsItems.init();
         ToolsEntities.init();
         ToolsEnchantments.init();
+        ToolsMobEffects.init();
         ToolsPackets.init();
         ToolsConditions.init();
         ToolsCreativeItems.init();

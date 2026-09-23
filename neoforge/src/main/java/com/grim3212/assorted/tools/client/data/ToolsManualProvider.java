@@ -80,11 +80,13 @@ public class ToolsManualProvider extends LibManualProvider {
         // The chicken and scuba suits are their own pages, so the plain sets exclude them.
         armor.recipesById("armor", recipeId("steel_helmet"), recipeId("steel_chestplate"), recipeId("steel_leggings"), recipeId("steel_boots"))
                 .every(50)
-                .opensEveryItem(id -> isArmor(id) && !id.getPath().startsWith("chicken_suit_") && !id.getPath().startsWith("scuba_"));
+                .opensEveryItem(id -> isArmor(id) && !id.getPath().startsWith("chicken_suit_") && !id.getPath().startsWith("scuba_") && !id.getPath().startsWith("lava_"));
         armor.recipes("chicken_suit", ToolsItems.CHICKEN_SUIT_HELMET.get(), ToolsItems.CHICKEN_SUIT_CHESTPLATE.get(), ToolsItems.CHICKEN_SUIT_LEGGINGS.get(), ToolsItems.CHICKEN_SUIT_BOOTS.get()).whenPartEnabled(ToolsConditions.Parts.CHICKEN_SUIT).every(50)
                 .opensEveryItem(id -> id.getPath().startsWith("chicken_suit_"));
         armor.recipes("scuba_suit", ToolsItems.SCUBA_HELMET.get(), ToolsItems.SCUBA_CHESTPLATE.get(), ToolsItems.SCUBA_LEGGINGS.get(), ToolsItems.SCUBA_BOOTS.get()).whenPartEnabled(ToolsConditions.Parts.SCUBA_SUIT).every(50)
                 .opensEveryItem(id -> id.getPath().startsWith("scuba_"));
+        armor.recipes("lava_suit", ToolsItems.LAVA_HELMET.get(), ToolsItems.LAVA_CHESTPLATE.get(), ToolsItems.LAVA_LEGGINGS.get(), ToolsItems.LAVA_BOOTS.get()).whenPartEnabled(ToolsConditions.Parts.LAVA_SUIT).every(50)
+                .opensEveryItem(id -> id.getPath().startsWith("lava_"));
     }
 
     private void addWands() {

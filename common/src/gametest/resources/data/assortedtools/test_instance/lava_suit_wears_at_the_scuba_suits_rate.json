@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedtools:lava_suit_wears_at_the_scuba_suits_rate",
+  "structure": "assortedtools:test_box",
+  "max_ticks": 260,
+  "setup_ticks": 0,
+  "required": true
+}

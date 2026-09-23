@@ -72,6 +72,13 @@ public class ToolsCreativeItems {
             items.add(ToolsItems.SCUBA_BOOTS.get());
         }
 
+        if (ToolsCommonMod.COMMON_CONFIG.lavaSuitEnabled.get()) {
+            items.add(ToolsItems.LAVA_HELMET.get());
+            items.add(ToolsItems.LAVA_CHESTPLATE.get());
+            items.add(ToolsItems.LAVA_LEGGINGS.get());
+            items.add(ToolsItems.LAVA_BOOTS.get());
+        }
+
         if (ToolsCommonMod.COMMON_CONFIG.portableWorkbenchEnabled.get()) {
             items.add(ToolsItems.PORTABLE_WORKBENCH.get());
         }

@@ -19,6 +19,7 @@ import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
@@ -64,8 +65,12 @@ public class ToolsClientGameTests implements FabricClientGameTest {
                     throw new AssertionError("a full pokeball's tooltip is " + stored);
                 }
 
+                // Under its key, or, from AssortedLib 4.2.0 on, as the pieces its line is wrapped
+                // into; LibClientGameTests covers the wrapping itself.
                 List<String> fragment = tooltipKeys(client, new ItemStack(ToolsItems.U_FRAGMENT.get()));
-                if (!fragment.contains(FragmentItem.DESCRIPTION_KEY)) {
+                String description = Component.translatable(FragmentItem.DESCRIPTION_KEY).getString();
+                String shown = String.join(" ", fragment.stream().filter(line -> !line.isEmpty() && description.contains(line)).toList());
+                if (!fragment.contains(FragmentItem.DESCRIPTION_KEY) && !shown.equals(description)) {
                     throw new AssertionError("a fragment's tooltip is " + fragment);
                 }
 
