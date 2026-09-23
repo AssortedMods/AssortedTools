@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedtools:scuba_halves_need_both_pieces_and_water",
+  "structure": "assortedtools:test_box",
+  "max_ticks": 100,
+  "setup_ticks": 0,
+  "required": true
+}

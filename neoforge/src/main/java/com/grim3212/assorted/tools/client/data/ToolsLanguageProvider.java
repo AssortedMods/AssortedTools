@@ -70,6 +70,11 @@ public class ToolsLanguageProvider extends LibLanguageProvider {
         this.add("item.assortedtools.chicken_suit_leggings", "Chicken Legs");
         this.add("item.assortedtools.chicken_suit_boots", "Chicken Boots");
 
+        this.add("item.assortedtools.scuba_helmet", "Scuba Mask");
+        this.add("item.assortedtools.scuba_chestplate", "Scuba Tank");
+        this.add("item.assortedtools.scuba_leggings", "Scuba Legs");
+        this.add("item.assortedtools.scuba_boots", "Scuba Fins");
+
         this.add("tooltip.ultimate.fragment", "A fragment of a powerful tool from an ancient civilization");
         this.add("tooltip.pokeball.stored", "Stored: %s");
         this.add("tooltip.pokeball.stored_custom_name", "Stored: %s (%s)");
@@ -271,6 +276,13 @@ public class ToolsLanguageProvider extends LibLanguageProvider {
         this.add("manual.assortedtools.chapter.armor.armor",
                 "A full four piece set for every material this mod adds tools for, on the same ladder the "
                         + "tools use.");
+
+        this.add("manual.assortedtools.chapter.armor.scuba_suit.title", "Scuba Suit");
+        this.add("manual.assortedtools.chapter.armor.scuba_suit",
+                "The scuba suit works in halves to allow for an easier time under water." + BREAK
+                        + "The Mask and tank together let you breathe under water and see better than you would without it."
+                        + BREAK
+                        + "The Legs and fins together move you through water far quicker than swimming.");
 
         this.add("manual.assortedtools.chapter.armor.chicken_suit.title", "Chicken Suit");
         this.add("manual.assortedtools.chapter.armor.chicken_suit",

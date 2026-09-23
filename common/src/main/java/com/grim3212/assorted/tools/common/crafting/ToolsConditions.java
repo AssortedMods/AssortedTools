@@ -12,6 +12,7 @@ public class ToolsConditions {
         public static final String BOOMERANGS = "boomerangs";
         public static final String POKEBALL = "pokeball";
         public static final String CHICKEN_SUIT = "chickensuit";
+        public static final String SCUBA_SUIT = "scubasuit";
         public static final String SPEARS = "spears";
         public static final String THROWING_SPEARS = "throwingspears";
         public static final String BETTER_BUCKETS = "betterbuckets";
@@ -32,6 +33,7 @@ public class ToolsConditions {
         Services.CONDITIONS.registerPartCondition(Parts.BOOMERANGS, () -> ToolsCommonMod.COMMON_CONFIG.boomerangsEnabled.get());
         Services.CONDITIONS.registerPartCondition(Parts.POKEBALL, () -> ToolsCommonMod.COMMON_CONFIG.pokeballEnabled.get());
         Services.CONDITIONS.registerPartCondition(Parts.CHICKEN_SUIT, () -> ToolsCommonMod.COMMON_CONFIG.chickenSuitEnabled.get());
+        Services.CONDITIONS.registerPartCondition(Parts.SCUBA_SUIT, () -> ToolsCommonMod.COMMON_CONFIG.scubaSuitEnabled.get());
         Services.CONDITIONS.registerPartCondition(Parts.SPEARS, () -> ToolsCommonMod.COMMON_CONFIG.spearsEnabled.get());
         Services.CONDITIONS.registerPartCondition(Parts.THROWING_SPEARS, () -> ToolsCommonMod.COMMON_CONFIG.throwingSpearsEnabled.get());
         Services.CONDITIONS.registerPartCondition(Parts.BETTER_BUCKETS, () -> ToolsCommonMod.COMMON_CONFIG.betterBucketsEnabled.get());

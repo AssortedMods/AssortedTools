@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedtools:scuba_wears_down_while_it_is_working",
+  "structure": "assortedtools:test_box",
+  "max_ticks": 260,
+  "setup_ticks": 0,
+  "required": true
+}

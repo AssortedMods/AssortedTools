@@ -48,6 +48,11 @@ public class ToolsItems {
     public static final IRegistryObject<ChickenSuitArmor> CHICKEN_SUIT_LEGGINGS = register("chicken_suit_leggings", props -> new ChickenSuitArmor(ArmorType.LEGGINGS, props));
     public static final IRegistryObject<ChickenSuitArmor> CHICKEN_SUIT_BOOTS = register("chicken_suit_boots", props -> new ChickenSuitArmor(ArmorType.BOOTS, props));
 
+    public static final IRegistryObject<ScubaArmorItem> SCUBA_HELMET = register("scuba_helmet", props -> new ScubaArmorItem(ArmorType.HELMET, props));
+    public static final IRegistryObject<ScubaArmorItem> SCUBA_CHESTPLATE = register("scuba_chestplate", props -> new ScubaArmorItem(ArmorType.CHESTPLATE, props));
+    public static final IRegistryObject<ScubaArmorItem> SCUBA_LEGGINGS = register("scuba_leggings", props -> new ScubaArmorItem(ArmorType.LEGGINGS, props));
+    public static final IRegistryObject<ScubaArmorItem> SCUBA_BOOTS = register("scuba_boots", props -> new ScubaArmorItem(ArmorType.BOOTS, props));
+
     public static final IRegistryObject<PokeballItem> POKEBALL = register("pokeball", props -> new PokeballItem(props));
 
     public static final IRegistryObject<MultiToolItem> WOODEN_MULTITOOL = register("wooden_multitool", props -> new MultiToolItem(ToolsCommonMod.COMMON_CONFIG.woodItemTier, props));

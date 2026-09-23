@@ -1,5 +1,9 @@
 # Changelog
 
+## 11.1.3
+
+- Added a scuba suit from a dead mod I worked on ages ago.
+
 ## 11.1.2
 
 Brought over from GrimPack:

@@ -19,6 +19,7 @@ public final class ToolsGameTests {
         MiningToolTests.register(out);
         ShearsTests.register(out);
         EnchantmentTests.register(out);
+        ScubaSuitTests.register(out);
         ProjectileTests.register(out);
         SpearTests.register(out);
         TooltipTests.register(out);

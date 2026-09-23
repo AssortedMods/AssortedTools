@@ -26,6 +26,7 @@ import java.util.function.Supplier;
  */
 public enum ToolsArmorMaterials {
     CHICKEN_SUIT(() -> ToolsCommonMod.COMMON_CONFIG.chickenSuitArmorMaterial, () -> BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.WOOL_PLACE), () -> LibCommonTags.Items.FEATHERS),
+    SCUBA(() -> ToolsCommonMod.COMMON_CONFIG.scubaSuitArmorMaterial, () -> SoundEvents.ARMOR_EQUIP_LEATHER, () -> LibCommonTags.Items.LEATHER),
     TIN(() -> ToolsCommonMod.COMMON_CONFIG.moddedArmors.get("tin"), () -> SoundEvents.ARMOR_EQUIP_IRON, () -> ToolsTags.Items.INGOTS_TIN),
     COPPER(() -> ToolsCommonMod.COMMON_CONFIG.moddedArmors.get("copper"), () -> SoundEvents.ARMOR_EQUIP_IRON, () -> LibCommonTags.Items.INGOTS_COPPER),
     SILVER(() -> ToolsCommonMod.COMMON_CONFIG.moddedArmors.get("silver"), () -> SoundEvents.ARMOR_EQUIP_DIAMOND, () -> ToolsTags.Items.INGOTS_SILVER),

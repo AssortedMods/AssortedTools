@@ -402,6 +402,15 @@
     },
     {
       "items": [
+        "assortedtools:scuba_boots",
+        "assortedtools:scuba_chestplate",
+        "assortedtools:scuba_helmet",
+        "assortedtools:scuba_leggings"
+      ],
+      "page": "assortedtools:armor/scuba_suit"
+    },
+    {
+      "items": [
         "assortedtools:breaking_wand",
         "assortedtools:building_wand",
         "assortedtools:mining_wand"

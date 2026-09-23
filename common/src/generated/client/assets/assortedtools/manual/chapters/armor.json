@@ -37,6 +37,25 @@
       ],
       "text": "manual.assortedtools.chapter.armor.chicken_suit",
       "title": "manual.assortedtools.chapter.armor.chicken_suit.title"
+    },
+    {
+      "type": "assortedlib:recipe",
+      "conditions": [
+        {
+          "type": "assortedlib:part_enabled",
+          "part": "scubasuit"
+        }
+      ],
+      "id": "scuba_suit",
+      "interval": 50,
+      "recipes": [
+        "assortedtools:scuba_helmet",
+        "assortedtools:scuba_chestplate",
+        "assortedtools:scuba_leggings",
+        "assortedtools:scuba_boots"
+      ],
+      "text": "manual.assortedtools.chapter.armor.scuba_suit",
+      "title": "manual.assortedtools.chapter.armor.scuba_suit.title"
     }
   ],
   "sort_order": 30

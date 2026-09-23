@@ -77,12 +77,14 @@ public class ToolsManualProvider extends LibManualProvider {
     private void addArmor() {
         ChapterBuilder armor = this.chapter("armor").whenPartEnabled(ToolsConditions.Parts.EXTRA_MATERIAL);
 
-        // The chicken suit is its own page, so the plain sets exclude it.
+        // The chicken and scuba suits are their own pages, so the plain sets exclude them.
         armor.recipesById("armor", recipeId("steel_helmet"), recipeId("steel_chestplate"), recipeId("steel_leggings"), recipeId("steel_boots"))
                 .every(50)
-                .opensEveryItem(id -> isArmor(id) && !id.getPath().startsWith("chicken_suit_"));
+                .opensEveryItem(id -> isArmor(id) && !id.getPath().startsWith("chicken_suit_") && !id.getPath().startsWith("scuba_"));
         armor.recipes("chicken_suit", ToolsItems.CHICKEN_SUIT_HELMET.get(), ToolsItems.CHICKEN_SUIT_CHESTPLATE.get(), ToolsItems.CHICKEN_SUIT_LEGGINGS.get(), ToolsItems.CHICKEN_SUIT_BOOTS.get()).whenPartEnabled(ToolsConditions.Parts.CHICKEN_SUIT).every(50)
                 .opensEveryItem(id -> id.getPath().startsWith("chicken_suit_"));
+        armor.recipes("scuba_suit", ToolsItems.SCUBA_HELMET.get(), ToolsItems.SCUBA_CHESTPLATE.get(), ToolsItems.SCUBA_LEGGINGS.get(), ToolsItems.SCUBA_BOOTS.get()).whenPartEnabled(ToolsConditions.Parts.SCUBA_SUIT).every(50)
+                .opensEveryItem(id -> id.getPath().startsWith("scuba_"));
     }
 
     private void addWands() {

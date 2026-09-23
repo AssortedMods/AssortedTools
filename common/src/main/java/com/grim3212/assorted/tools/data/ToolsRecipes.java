@@ -99,6 +99,7 @@ public class ToolsRecipes extends ConditionalRecipeProvider {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, ToolsItems.POWER_STAFF.get()).define('I', LibCommonTags.Items.INGOTS_IRON).define('D', LibCommonTags.Items.GEMS_DIAMOND).define('R', LibCommonTags.Items.DUSTS_REDSTONE).pattern("IDI").pattern("IRI").pattern(" I ").unlockedBy("has_diamond", has(LibCommonTags.Items.GEMS_DIAMOND)).save(this.output, recipeKey(ToolsItems.POWER_STAFF.getId()));
 
         armorSet(ToolsItems.CHICKEN_SUIT_HELMET.get(), ToolsItems.CHICKEN_SUIT_CHESTPLATE.get(), ToolsItems.CHICKEN_SUIT_LEGGINGS.get(), ToolsItems.CHICKEN_SUIT_BOOTS.get(), LibCommonTags.Items.FEATHERS, "chickensuit");
+        scubaSuit();
 
         multiTool(ToolsItems.WOODEN_MULTITOOL.get(), Items.WOODEN_PICKAXE, Items.WOODEN_SHOVEL, Items.WOODEN_AXE, Items.WOODEN_HOE, Items.WOODEN_SWORD, ItemTags.PLANKS);
         multiTool(ToolsItems.STONE_MULTITOOL.get(), Items.STONE_PICKAXE, Items.STONE_SHOVEL, Items.STONE_AXE, Items.STONE_HOE, Items.STONE_SWORD, ItemTags.STONE_TOOL_MATERIALS);
@@ -227,6 +228,29 @@ public class ToolsRecipes extends ConditionalRecipeProvider {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, hoe).define('X', input).define('S', LibCommonTags.Items.RODS_WOODEN).pattern("XX").pattern(" S").pattern(" S").unlockedBy("has_item", has(input)).save(this.output, recipeKey(key(hoe.asItem())));
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, hoe).define('X', input).define('S', LibCommonTags.Items.RODS_WOODEN).pattern("XX").pattern("S ").pattern("S ").unlockedBy("has_item", has(input)).save(this.output, recipeKey(Identifier.fromNamespaceAndPath(Constants.MOD_ID, key(hoe.asItem()).getPath() + "_alt")));
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, sword).define('X', input).define('S', LibCommonTags.Items.RODS_WOODEN).pattern("X").pattern("X").pattern("S").unlockedBy("has_item", has(input)).save(this.output, recipeKey(key(sword.asItem())));
+    }
+
+    /**
+     * The scuba suit: a leather wetsuit with a glass visor in the mask and copper fittings on the
+     * tank, legs and fins. {@link #armorSet} cannot build it, working as it does from one material.
+     */
+    private void scubaSuit() {
+        ItemLike helmet = ToolsItems.SCUBA_HELMET.get();
+        ItemLike chestplate = ToolsItems.SCUBA_CHESTPLATE.get();
+        ItemLike leggings = ToolsItems.SCUBA_LEGGINGS.get();
+        ItemLike boots = ToolsItems.SCUBA_BOOTS.get();
+
+        this.addConditions(and(partEnabled(ToolsConditions.Parts.SCUBA_SUIT), itemTagExists(LibCommonTags.Items.INGOTS_COPPER)),
+                key(helmet.asItem()), key(chestplate.asItem()), key(leggings.asItem()), key(boots.asItem()));
+
+        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, helmet).define('L', LibCommonTags.Items.LEATHER).define('G', LibCommonTags.Items.GLASS)
+                .pattern("LLL").pattern("LGL").unlockedBy("has_leather", has(LibCommonTags.Items.LEATHER)).save(this.output, recipeKey(key(helmet.asItem())));
+        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, chestplate).define('L', LibCommonTags.Items.LEATHER).define('C', LibCommonTags.Items.INGOTS_COPPER)
+                .pattern("L L").pattern("LCL").pattern("LLL").unlockedBy("has_copper", has(LibCommonTags.Items.INGOTS_COPPER)).save(this.output, recipeKey(key(chestplate.asItem())));
+        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, leggings).define('L', LibCommonTags.Items.LEATHER).define('C', LibCommonTags.Items.INGOTS_COPPER)
+                .pattern("LCL").pattern("L L").pattern("L L").unlockedBy("has_copper", has(LibCommonTags.Items.INGOTS_COPPER)).save(this.output, recipeKey(key(leggings.asItem())));
+        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, boots).define('L', LibCommonTags.Items.LEATHER).define('C', LibCommonTags.Items.INGOTS_COPPER)
+                .pattern("L L").pattern("LCL").unlockedBy("has_copper", has(LibCommonTags.Items.INGOTS_COPPER)).save(this.output, recipeKey(key(boots.asItem())));
     }
 
     private void armorSet(ItemLike helmet, ItemLike chestplate, ItemLike leggings, ItemLike boots, TagKey<Item> input, String condition) {

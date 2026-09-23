@@ -65,6 +65,13 @@ public class ToolsCreativeItems {
             items.add(ToolsItems.CHICKEN_SUIT_BOOTS.get());
         }
 
+        if (ToolsCommonMod.COMMON_CONFIG.scubaSuitEnabled.get()) {
+            items.add(ToolsItems.SCUBA_HELMET.get());
+            items.add(ToolsItems.SCUBA_CHESTPLATE.get());
+            items.add(ToolsItems.SCUBA_LEGGINGS.get());
+            items.add(ToolsItems.SCUBA_BOOTS.get());
+        }
+
         if (ToolsCommonMod.COMMON_CONFIG.portableWorkbenchEnabled.get()) {
             items.add(ToolsItems.PORTABLE_WORKBENCH.get());
         }
