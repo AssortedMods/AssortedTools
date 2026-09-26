@@ -2,6 +2,7 @@ package com.grim3212.assorted.tools.gametest;
 
 import java.util.List;
 import net.minecraft.core.component.DataComponentType;
+import com.grim3212.assorted.tools.api.util.ToolsDamageSources;
 import com.grim3212.assorted.tools.common.item.ToolsDataComponents;
 import com.grim3212.assorted.tools.common.item.CapturedEntity;
 import com.grim3212.assorted.tools.common.entity.BetterSpearEntity;
@@ -10,6 +11,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.animal.cow.Cow;
@@ -36,6 +38,7 @@ final class ProjectileTests {
         out.accept("spear_sticks_in_a_block_and_is_picked_up", ProjectileTests::spearSticksInABlockAndIsPickedUp);
         out.accept("spear_damages_a_mob", ProjectileTests::spearDamagesAMob);
         out.accept("boomerangs_fly_out_and_return", ProjectileTests::boomerangsFlyOutAndReturn);
+        out.accept("spears_and_boomerangs_deal_projectile_damage", ProjectileTests::spearsAndBoomerangsDealProjectileDamage);
     }
 
     /**
@@ -127,6 +130,13 @@ final class ProjectileTests {
      * and a full one names its mob. NeoForge also builds the full tooltip on the server, so there
      * it is checked too; {@code ToolsClientGameTests} covers Fabric.
      */
+    /** In {@code #minecraft:is_projectile} as tridents are, so Projectile Protection and the like treat them as thrown. */
+    private static void spearsAndBoomerangsDealProjectileDamage(GameTestHelper helper) {
+        helper.assertTrue(ToolsDamageSources.source(helper.getLevel(), ToolsDamageSources.SPEAR, null, null).is(DamageTypeTags.IS_PROJECTILE), "spear damage is not projectile damage");
+        helper.assertTrue(ToolsDamageSources.source(helper.getLevel(), ToolsDamageSources.BOOMERANG, null, null).is(DamageTypeTags.IS_PROJECTILE), "boomerang damage is not projectile damage");
+        helper.succeed();
+    }
+
     private static void pokeballTooltipNamesWhatItHolds(GameTestHelper helper) {
         DataComponentType<CapturedEntity> type = ToolsDataComponents.CAPTURED_ENTITY.get();
 

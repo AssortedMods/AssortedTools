@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "assortedtools:spear",
+      "required": false
+    },
+    {
+      "id": "assortedtools:boomerang",
+      "required": false
+    }
+  ]
+}

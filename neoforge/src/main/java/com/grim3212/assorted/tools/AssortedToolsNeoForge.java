@@ -3,6 +3,7 @@ package com.grim3212.assorted.tools;
 import com.grim3212.assorted.tools.client.data.ToolsLanguageProvider;
 import com.grim3212.assorted.tools.client.data.ToolsManualProvider;
 import com.grim3212.assorted.lib.data.ForgeBlockTagProvider;
+import com.grim3212.assorted.lib.data.ForgeDamageTypeTagsProvider;
 import com.grim3212.assorted.lib.data.ForgeItemTagProvider;
 import com.grim3212.assorted.lib.data.ForgeDatapackRegistryProvider;
 import com.grim3212.assorted.tools.client.data.ToolsEquipmentAssetProvider;
@@ -12,6 +13,7 @@ import com.grim3212.assorted.tools.common.item.NeoForgeBetterBucketFluidHandler;
 import com.grim3212.assorted.tools.common.item.ToolsItems;
 import com.grim3212.assorted.tools.client.data.ToolsItemModelProvider;
 import com.grim3212.assorted.tools.data.ToolsBlockTagProvider;
+import com.grim3212.assorted.tools.data.ToolsDamageTypeTagProvider;
 import com.grim3212.assorted.tools.data.ToolsChestLoot;
 import com.grim3212.assorted.tools.data.ToolsEnchantmentData;
 import com.grim3212.assorted.tools.data.ToolsEnchantmentTagProvider;
@@ -71,6 +73,7 @@ public class AssortedToolsNeoForge {
         // Enchantments are datapack registry content now, not registered from code.
         event.addProvider(new ForgeDatapackRegistryProvider(Constants.MOD_ID, new ToolsEnchantmentData()).datpackEntriesProvider(packOutput, lookupProvider));
         event.addProvider(new ToolsEnchantmentTagProvider(packOutput, lookupProvider));
+        event.addProvider(new ForgeDamageTypeTagsProvider(packOutput, lookupProvider, Constants.MOD_ID, new ToolsDamageTypeTagProvider(packOutput, lookupProvider)));
     }
 
     /** Registers each better bucket's {@code ResourceHandler<FluidResource>} item capability. */
