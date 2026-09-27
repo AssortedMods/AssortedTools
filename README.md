@@ -3,7 +3,7 @@
 An assortment of tools and armor. Each group of tools is also its own mod if you only want some of them.
 
 - [Assorted Tools](mods/tools) has all of them in one download
-- [Assorted Extra Materials](mods/extramaterials) adds tools, armor and spears in tin, steel, ruby and more
+- [Assorted Gear Sets](mods/gearsets) adds tools, armor and spears in tin, steel, ruby and more
 - [Assorted Hammers](mods/hammers) adds hammers that break any block in one hit
 - [Assorted Multitools](mods/multitools) adds one tool that does the work of five
 - [Assorted Machetes](mods/machetes) adds machetes that cut through undergrowth

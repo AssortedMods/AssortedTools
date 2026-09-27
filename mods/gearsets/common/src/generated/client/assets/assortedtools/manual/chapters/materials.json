@@ -1,0 +1,36 @@
+{
+  "pages": [
+    {
+      "type": "assortedlib:text",
+      "id": "materials",
+      "text": "manual.assortedtools.chapter.materials.materials",
+      "title": "manual.assortedtools.chapter.materials.materials.title"
+    },
+    {
+      "type": "assortedlib:recipe",
+      "id": "basic",
+      "interval": 50,
+      "recipes": [
+        "assortedgearsets:steel_pickaxe",
+        "assortedgearsets:steel_axe",
+        "assortedgearsets:steel_shovel",
+        "assortedgearsets:steel_hoe",
+        "assortedgearsets:steel_sword"
+      ],
+      "text": "manual.assortedtools.chapter.materials.basic",
+      "title": "manual.assortedtools.chapter.materials.basic.title"
+    },
+    {
+      "type": "assortedlib:recipe",
+      "id": "spears",
+      "interval": 50,
+      "recipes": [
+        "assortedgearsets:steel_spear",
+        "assortedgearsets:ruby_spear",
+        "assortedgearsets:emerald_spear"
+      ],
+      "text": "manual.assortedtools.chapter.materials.spears",
+      "title": "manual.assortedtools.chapter.materials.spears.title"
+    }
+  ]
+}

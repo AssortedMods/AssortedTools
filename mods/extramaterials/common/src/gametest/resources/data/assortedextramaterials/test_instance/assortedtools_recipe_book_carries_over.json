@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:function",
-  "environment": "minecraft:default",
-  "function": "assortedextramaterials:assortedtools_recipe_book_carries_over",
-  "structure": "assortedextramaterials:test_box",
-  "max_ticks": 1,
-  "setup_ticks": 0,
-  "required": true
-}

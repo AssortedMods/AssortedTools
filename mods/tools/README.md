@@ -1,6 +1,6 @@
 # Assorted Tools
 
-An assortment of tools and armor. This includes Assorted Extra Materials, Assorted Hammers, Assorted Multitools,
+An assortment of tools and armor. This includes Assorted Gear Sets, Assorted Hammers, Assorted Multitools,
 Assorted Machetes, Assorted Shears, Assorted Portable Workbench, Assorted Throwing Spears, Assorted Boomerangs,
 Assorted Buckets, Assorted Suits, Assorted Wands, Assorted Staffs, Assorted Ultimate Fist and Assorted Pokeball in one
 download.

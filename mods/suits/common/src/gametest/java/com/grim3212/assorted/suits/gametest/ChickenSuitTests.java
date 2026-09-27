@@ -30,20 +30,20 @@ import java.util.function.Consumer;
 import static com.grim3212.assorted.lib.test.TestSupport.stand;
 import static com.grim3212.assorted.lib.test.TestSupport.survivalPlayer;
 
-/** Chicken jump is obtainable, the chicken suit takes it at a table, and an anvil moves it onto other armour. */
+/** Chicken jump is obtainable, the chicken suit takes it at a table, and an anvil moves it onto other armor. */
 final class ChickenSuitTests {
 
     private ChickenSuitTests() {
     }
 
     static void register(BiConsumer<String, Consumer<GameTestHelper>> out) {
-        out.accept("chicken_suit_converts_armour_in_an_anvil", ChickenSuitTests::chickenSuitConvertsArmourInAnAnvil);
+        out.accept("chicken_suit_converts_armor_in_an_anvil", ChickenSuitTests::chickenSuitConvertsArmorInAnAnvil);
         out.accept("chicken_jump_is_obtainable", ChickenSuitTests::chickenJumpIsObtainable);
-        out.accept("chicken_suit_takes_armour_enchantments", ChickenSuitTests::chickenSuitTakesArmourEnchantments);
+        out.accept("chicken_suit_takes_armor_enchantments", ChickenSuitTests::chickenSuitTakesArmorEnchantments);
         out.accept("jei_plugin_is_registered_on_fabric", ChickenSuitTests::jeiPluginIsRegisteredOnFabric);
     }
 
-    private static void chickenSuitConvertsArmourInAnAnvil(GameTestHelper helper) {
+    private static void chickenSuitConvertsArmorInAnAnvil(GameTestHelper helper) {
         ServerPlayer player = survivalPlayer(helper, ItemStack.EMPTY);
         stand(helper, player, new BlockPos(4, 1, 4));
 
@@ -52,7 +52,7 @@ final class ChickenSuitTests {
 
         ItemStack output = matching.getOutput();
         helper.assertTrue(output.is(Items.IRON_CHESTPLATE), "converting an iron chestplate gave back " + output);
-        helper.assertValueEqual(SuitsEnchantments.getLevel(output, SuitsEnchantments.CHICKEN_JUMP), 1, "chicken jump level on the converted armour");
+        helper.assertValueEqual(SuitsEnchantments.getLevel(output, SuitsEnchantments.CHICKEN_JUMP), 1, "chicken jump level on the converted armor");
         helper.assertValueEqual(matching.getMaterialCost(), 1, "chicken suit pieces consumed");
         helper.assertValueEqual(matching.getCost(), 5, "level cost of converting a chestplate");
 
@@ -61,9 +61,9 @@ final class ChickenSuitTests {
         ChickenSuitConversionHandler.anvilUpdateEvent(mismatched);
         helper.assertTrue(mismatched.getOutput().isEmpty(), "a chicken suit chestplate converted a helmet");
 
-        AnvilUpdatedEvent notArmour = new AnvilUpdatedEvent(new ItemStack(Items.DIAMOND_PICKAXE), new ItemStack(SuitsItems.CHICKEN_SUIT_HELMET.get()), "", 0, player);
-        ChickenSuitConversionHandler.anvilUpdateEvent(notArmour);
-        helper.assertTrue(notArmour.getOutput().isEmpty(), "a chicken suit helmet converted a pickaxe");
+        AnvilUpdatedEvent notArmor = new AnvilUpdatedEvent(new ItemStack(Items.DIAMOND_PICKAXE), new ItemStack(SuitsItems.CHICKEN_SUIT_HELMET.get()), "", 0, player);
+        ChickenSuitConversionHandler.anvilUpdateEvent(notArmor);
+        helper.assertTrue(notArmor.getOutput().isEmpty(), "a chicken suit helmet converted a pickaxe");
 
         helper.succeed();
     }
@@ -83,12 +83,12 @@ final class ChickenSuitTests {
         helper.succeed();
     }
 
-    private static void chickenSuitTakesArmourEnchantments(GameTestHelper helper) {
+    private static void chickenSuitTakesArmorEnchantments(GameTestHelper helper) {
         List<String> missing = new ArrayList<>();
-        expectArmour(missing, ItemTags.HEAD_ARMOR_ENCHANTABLE, SuitsItems.CHICKEN_SUIT_HELMET.get());
-        expectArmour(missing, ItemTags.CHEST_ARMOR_ENCHANTABLE, SuitsItems.CHICKEN_SUIT_CHESTPLATE.get());
-        expectArmour(missing, ItemTags.LEG_ARMOR_ENCHANTABLE, SuitsItems.CHICKEN_SUIT_LEGGINGS.get());
-        expectArmour(missing, ItemTags.FOOT_ARMOR_ENCHANTABLE, SuitsItems.CHICKEN_SUIT_BOOTS.get());
+        expectArmor(missing, ItemTags.HEAD_ARMOR_ENCHANTABLE, SuitsItems.CHICKEN_SUIT_HELMET.get());
+        expectArmor(missing, ItemTags.CHEST_ARMOR_ENCHANTABLE, SuitsItems.CHICKEN_SUIT_CHESTPLATE.get());
+        expectArmor(missing, ItemTags.LEG_ARMOR_ENCHANTABLE, SuitsItems.CHICKEN_SUIT_LEGGINGS.get());
+        expectArmor(missing, ItemTags.FOOT_ARMOR_ENCHANTABLE, SuitsItems.CHICKEN_SUIT_BOOTS.get());
         helper.assertTrue(missing.isEmpty(), missing.size() + " item/tag pairs are missing from the enchantable tags: " + String.join(", ", missing));
         helper.succeed();
     }
@@ -98,7 +98,7 @@ final class ChickenSuitTests {
         helper.succeed();
     }
 
-    private static void expectArmour(List<String> missing, TagKey<Item> slotTag, Item item) {
+    private static void expectArmor(List<String> missing, TagKey<Item> slotTag, Item item) {
         for (TagKey<Item> tag : List.of(slotTag, ItemTags.ARMOR_ENCHANTABLE, ItemTags.EQUIPPABLE_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.VANISHING_ENCHANTABLE)) {
             if (!new ItemStack(item).is(tag)) {
                 missing.add(BuiltInRegistries.ITEM.getKey(item) + " not in #" + tag.location());

@@ -1,0 +1,31 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:ingots/silver"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:ingots/silver"
+      ]
+    }
+  ],
+  "key": {
+    "S": "#c:rods/wooden",
+    "X": "#c:ingots/silver"
+  },
+  "pattern": [
+    "XX",
+    "XS",
+    " S"
+  ],
+  "result": {
+    "id": "assortedgearsets:silver_axe"
+  }
+}

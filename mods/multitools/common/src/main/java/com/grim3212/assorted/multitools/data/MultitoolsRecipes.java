@@ -73,7 +73,7 @@ public class MultitoolsRecipes extends ConditionalRecipeProvider {
 
     /**
      * The five tools come from their {@code c:<kind>/<material>} tags rather than items, so this mod does not need
-     * Assorted Extra Materials; the recipe only loads once some mod fills all five and the material itself.
+     * Assorted Gear Sets; the recipe only loads once some mod fills all five and the material itself.
      */
     private void extraMultiTool(ItemLike output, String material, TagKey<Item> input) {
         Identifier id = id(output.asItem());

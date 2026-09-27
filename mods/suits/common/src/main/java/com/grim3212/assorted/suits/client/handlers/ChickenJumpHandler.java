@@ -105,7 +105,7 @@ public class ChickenJumpHandler {
     private static int getMaxJumps(Player player) {
         // Start at one for original jump
         int maxJumps = 1;
-        // getArmorSlots() is gone; the humanoid armour slots are walked through EquipmentSlotGroup.
+        // getArmorSlots() is gone; the humanoid armor slots are walked through EquipmentSlotGroup.
         for (EquipmentSlot slot : EquipmentSlotGroup.ARMOR) {
             if (slot.getType() != EquipmentSlot.Type.HUMANOID_ARMOR)
                 continue;

@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "assortedgearsets:aluminum"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "assortedgearsets:aluminum"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "assortedgearsets:aluminum"
+      }
+    ]
+  }
+}

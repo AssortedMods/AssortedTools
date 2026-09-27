@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:gems/amethyst"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:gems/amethyst"
+      ]
+    }
+  ],
+  "key": {
+    "X": "#c:gems/amethyst"
+  },
+  "pattern": [
+    "XXX",
+    "X X",
+    "X X"
+  ],
+  "result": {
+    "id": "assortedgearsets:amethyst_leggings"
+  }
+}

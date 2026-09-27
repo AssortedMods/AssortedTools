@@ -24,7 +24,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 /**
- * The lava suit's halves. The diver is an armour stand for the reason {@link ScubaSuitTests} gives,
+ * The lava suit's halves. The diver is an armor stand for the reason {@link ScubaSuitTests} gives,
  * and being fire immune it is asked what the suit granted, not whether it survived.
  */
 final class LavaSuitTests {

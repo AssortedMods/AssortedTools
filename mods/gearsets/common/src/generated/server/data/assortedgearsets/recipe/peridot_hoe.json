@@ -1,0 +1,31 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:gems/peridot"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:gems/peridot"
+      ]
+    }
+  ],
+  "key": {
+    "S": "#c:rods/wooden",
+    "X": "#c:gems/peridot"
+  },
+  "pattern": [
+    "XX",
+    " S",
+    " S"
+  ],
+  "result": {
+    "id": "assortedgearsets:peridot_hoe"
+  }
+}

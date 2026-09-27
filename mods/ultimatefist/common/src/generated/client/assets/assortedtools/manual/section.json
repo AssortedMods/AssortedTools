@@ -4,7 +4,16 @@
     "assortedmultitools:diamond_multitool",
     "assortedwands:building_wand",
     "assortedboomerangs:diamond_boomerang",
-    "assortedextramaterials:steel_pickaxe"
+    "assortedgearsets:steel_pickaxe",
+    "assortedmachetes:iron_machete",
+    "assortedshears:diamond_shears",
+    "assortedportableworkbench:portable_workbench",
+    "assortedthrowingspears:diamond_throwing_spear",
+    "assortedbuckets:gold_bucket",
+    "assortedsuits:chicken_suit_helmet",
+    "assortedstaffs:phoenix_staff",
+    "assortedultimatefist:ultimate_fist",
+    "assortedpokeball:pokeball"
   ],
   "sort_order": 120
 }

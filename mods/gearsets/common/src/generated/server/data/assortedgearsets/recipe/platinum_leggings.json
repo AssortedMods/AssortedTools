@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:ingots/platinum"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:ingots/platinum"
+      ]
+    }
+  ],
+  "key": {
+    "X": "#c:ingots/platinum"
+  },
+  "pattern": [
+    "XXX",
+    "X X",
+    "X X"
+  ],
+  "result": {
+    "id": "assortedgearsets:platinum_leggings"
+  }
+}
