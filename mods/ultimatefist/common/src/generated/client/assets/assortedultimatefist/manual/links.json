@@ -1,0 +1,23 @@
+{
+  "links": [
+    {
+      "items": [
+        "assortedultimatefist:a_fragment",
+        "assortedultimatefist:e_fragment",
+        "assortedultimatefist:i_fragment",
+        "assortedultimatefist:l_fragment",
+        "assortedultimatefist:m_fragment",
+        "assortedultimatefist:missing_fragment",
+        "assortedultimatefist:t_fragment",
+        "assortedultimatefist:u_fragment"
+      ],
+      "page": "assortedtools:ultimate/fragments"
+    },
+    {
+      "items": [
+        "assortedultimatefist:ultimate_fist"
+      ],
+      "page": "assortedtools:ultimate/fist"
+    }
+  ]
+}

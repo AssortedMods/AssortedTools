@@ -1,21 +1,8 @@
 {
   "neoforge:conditions": [
     {
-      "type": "neoforge:and",
-      "values": [
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "throwingspears"
-        },
-        {
-          "type": "assortedlib:item_tag_populated",
-          "tag": "c:ingots/copper"
-        },
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "extramaterials"
-        }
-      ]
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:ingots/copper"
     }
   ],
   "parent": "minecraft:recipes/root",
@@ -39,23 +26,10 @@
   },
   "fabric:load_conditions": [
     {
-      "condition": "fabric:and",
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
       "values": [
-        {
-          "condition": "assortedlib:part_enabled",
-          "part": "throwingspears"
-        },
-        {
-          "condition": "fabric:tags_populated",
-          "registry": "minecraft:item",
-          "values": [
-            "c:ingots/copper"
-          ]
-        },
-        {
-          "condition": "assortedlib:part_enabled",
-          "part": "extramaterials"
-        }
+        "c:ingots/copper"
       ]
     }
   ],

@@ -1,10 +1,4 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "assortedlib:part_enabled",
-      "part": "multitools"
-    }
-  ],
   "parent": "minecraft:recipes/root",
   "criteria": {
     "has_netherite_block": {
@@ -24,12 +18,6 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
-  "fabric:load_conditions": [
-    {
-      "condition": "assortedlib:part_enabled",
-      "part": "multitools"
-    }
-  ],
   "requirements": [
     [
       "has_the_recipe",

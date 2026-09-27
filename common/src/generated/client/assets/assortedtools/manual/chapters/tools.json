@@ -8,12 +8,6 @@
     },
     {
       "type": "assortedlib:recipe",
-      "conditions": [
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "extramaterials"
-        }
-      ],
       "id": "basic",
       "interval": 50,
       "recipes": [
@@ -28,12 +22,6 @@
     },
     {
       "type": "assortedlib:recipe",
-      "conditions": [
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "hammers"
-        }
-      ],
       "id": "hammers",
       "interval": 50,
       "recipes": [
@@ -46,16 +34,6 @@
     },
     {
       "type": "assortedlib:recipe",
-      "conditions": [
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "extramaterials"
-        },
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "multitools"
-        }
-      ],
       "id": "multitools",
       "interval": 50,
       "recipes": [
@@ -69,12 +47,6 @@
     },
     {
       "type": "assortedlib:recipe",
-      "conditions": [
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "machetes"
-        }
-      ],
       "id": "machetes",
       "interval": 50,
       "recipes": [
@@ -87,12 +59,6 @@
     },
     {
       "type": "assortedlib:recipe",
-      "conditions": [
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "portableworkbench"
-        }
-      ],
       "id": "portable_workbench",
       "recipes": [
         "assortedtools:portable_workbench"
@@ -102,16 +68,6 @@
     },
     {
       "type": "assortedlib:recipe",
-      "conditions": [
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "extramaterials"
-        },
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "moreshears"
-        }
-      ],
       "id": "shears",
       "interval": 50,
       "recipes": [

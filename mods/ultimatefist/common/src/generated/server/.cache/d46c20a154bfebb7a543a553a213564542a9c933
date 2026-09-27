@@ -1,0 +1,9 @@
+// 26.2	2026-09-26T15:54:46.6933004	Tags for minecraft:item mod id assortedultimatefist
+80d96e34c5f7af6c928b8ad3c7c6af9a84b99e8f data/assortedultimatefist/tags/item/ultimate_fragments.json
+ce962e9841d44a3e11c52a3dbd48be21952732a4 data/c/tags/item/tools/melee_weapon.json
+ce962e9841d44a3e11c52a3dbd48be21952732a4 data/minecraft/tags/item/enchantable/durability.json
+ce962e9841d44a3e11c52a3dbd48be21952732a4 data/minecraft/tags/item/enchantable/fire_aspect.json
+ce962e9841d44a3e11c52a3dbd48be21952732a4 data/minecraft/tags/item/enchantable/melee_weapon.json
+ce962e9841d44a3e11c52a3dbd48be21952732a4 data/minecraft/tags/item/enchantable/sharp_weapon.json
+ce962e9841d44a3e11c52a3dbd48be21952732a4 data/minecraft/tags/item/enchantable/vanishing.json
+ce962e9841d44a3e11c52a3dbd48be21952732a4 data/minecraft/tags/item/enchantable/weapon.json

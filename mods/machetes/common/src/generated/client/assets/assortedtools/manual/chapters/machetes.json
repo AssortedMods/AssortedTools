@@ -1,0 +1,17 @@
+{
+  "pages": [
+    {
+      "type": "assortedlib:recipe",
+      "id": "machetes",
+      "interval": 50,
+      "recipes": [
+        "assortedmachetes:wood_machete",
+        "assortedmachetes:iron_machete",
+        "assortedmachetes:diamond_machete"
+      ],
+      "text": "manual.assortedtools.chapter.machetes.machetes",
+      "title": "manual.assortedtools.chapter.machetes.machetes.title"
+    }
+  ],
+  "sort_order": 40
+}

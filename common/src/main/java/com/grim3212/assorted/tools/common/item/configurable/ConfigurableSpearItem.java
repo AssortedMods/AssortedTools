@@ -1,27 +1,25 @@
 package com.grim3212.assorted.tools.common.item.configurable;
 
-import com.grim3212.assorted.tools.api.item.ITiered;
-import com.grim3212.assorted.tools.config.ItemTierConfig;
-import com.grim3212.assorted.tools.config.ModdedItemTierConfig;
+import com.grim3212.assorted.lib.core.tool.ITiered;
+import com.grim3212.assorted.lib.core.tool.ToolTier;
+import com.grim3212.assorted.tools.config.SpearConfig;
 import net.minecraft.world.item.Item;
 
 /**
- * A spear as vanilla makes them - a lunge weapon, not a thrown one - from a configured tool material.
- * {@code Properties#spear} builds every component vanilla's own spears carry from the material plus
- * the nine lunge values, which come from the material's configuration like its other numbers
- * ({@link ModdedItemTierConfig#getSpearStats}).
+ * A spear as vanilla makes them, a lunge weapon rather than a thrown one, from a configured tool material and the
+ * nine lunge values in its {@link SpearConfig}.
  */
 public class ConfigurableSpearItem extends Item implements ITiered {
 
-    private final ModdedItemTierConfig tierHolder;
+    private final ToolTier tier;
 
-    public ConfigurableSpearItem(ModdedItemTierConfig tierHolder, Properties props) {
-        super(tierHolder.getSpearStats().apply(props, tierHolder.material()));
-        this.tierHolder = tierHolder;
+    public ConfigurableSpearItem(ToolTier tier, SpearConfig spear, Properties props) {
+        super(spear.getSpearStats().apply(props, tier.material()));
+        this.tier = tier;
     }
 
     @Override
-    public ItemTierConfig getTierHolder() {
-        return tierHolder;
+    public ToolTier getToolTier() {
+        return this.tier;
     }
 }

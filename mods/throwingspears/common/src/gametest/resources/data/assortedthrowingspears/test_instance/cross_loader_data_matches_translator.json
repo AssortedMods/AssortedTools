@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedthrowingspears:cross_loader_data_matches_translator",
+  "structure": "assortedthrowingspears:test_box",
+  "max_ticks": 1,
+  "setup_ticks": 0,
+  "required": true
+}

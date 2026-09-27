@@ -41,7 +41,7 @@ public class AnvilRecipes {
     public static List<IJeiAnvilRecipe> chickenEnchantRecipes(IVanillaRecipeFactory recipeFactory, IIngredientManager ingredientManager, HolderLookup.Provider registries) {
         List<IJeiAnvilRecipe> recipes = new ArrayList<>();
 
-        // Not registered at all while the chicken suit part is disabled.
+        // A datapack may have removed it.
         Optional<Holder.Reference<Enchantment>> chickenJumpHolder = registries.lookupOrThrow(Registries.ENCHANTMENT).get(ToolsEnchantments.CHICKEN_JUMP);
         if (chickenJumpHolder.isEmpty()) {
             return recipes;

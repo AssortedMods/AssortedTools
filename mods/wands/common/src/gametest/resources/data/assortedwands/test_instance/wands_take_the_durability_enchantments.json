@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedwands:wands_take_the_durability_enchantments",
+  "structure": "assortedwands:test_box",
+  "max_ticks": 1,
+  "setup_ticks": 0,
+  "required": true
+}

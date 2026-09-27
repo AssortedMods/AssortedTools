@@ -1,0 +1,14 @@
+{
+  "death.attack.assortedboomerangs.boomerang": "%1$s was boomerang'd by %2$s",
+  "death.attack.assortedboomerangs.boomerang.item": "%1$s was boomerang'd by %2$s with %3$s",
+  "entity.assortedboomerangs.diamond_boomerang": "Diamond Boomerang",
+  "entity.assortedboomerangs.wood_boomerang": "Wood Boomerang",
+  "item.assortedboomerangs.diamond_boomerang": "Diamond Boomerang",
+  "item.assortedboomerangs.wood_boomerang": "Wooden Boomerang",
+  "itemGroup.assortedtools": "Assorted Tools",
+  "manual.assortedtools.chapter.boomerangs": "Boomerangs",
+  "manual.assortedtools.chapter.boomerangs.boomerangs": "A boomerang is thrown with right click, flies out to its limit and comes back to you. It hurts what it passes through on the way.\n\nThe diamond one goes further and hits harder, and can be set to follow where you are looking rather than flying straight.\n\nThey might even pickup some items on the way.",
+  "manual.assortedtools.chapter.boomerangs.boomerangs.title": "Boomerangs",
+  "manual.assortedtools.description": "Tool and armor sets for every material, buckets that hold more than one, throwing weapons and the wands that do the digging for you.",
+  "manual.assortedtools.title": "Assorted Tools"
+}

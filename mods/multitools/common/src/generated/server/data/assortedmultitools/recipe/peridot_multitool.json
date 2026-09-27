@@ -1,0 +1,98 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:and",
+      "values": [
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:gems/peridot"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:pickaxes/peridot"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:shovels/peridot"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:axes/peridot"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:hoes/peridot"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:swords/peridot"
+        }
+      ]
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:and",
+      "values": [
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:gems/peridot"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:pickaxes/peridot"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:shovels/peridot"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:axes/peridot"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:hoes/peridot"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:swords/peridot"
+          ]
+        }
+      ]
+    }
+  ],
+  "ingredients": [
+    "#c:pickaxes/peridot",
+    "#c:shovels/peridot",
+    "#c:axes/peridot",
+    "#c:hoes/peridot",
+    "#c:swords/peridot",
+    "#c:gems/peridot",
+    "#c:gems/peridot",
+    "#c:gems/peridot",
+    "#c:gems/peridot"
+  ],
+  "result": {
+    "id": "assortedmultitools:peridot_multitool"
+  }
+}

@@ -40,8 +40,6 @@ public class JEIAssortedTools implements IModPlugin {
      */
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        if (ToolsCommonMod.COMMON_CONFIG.portableWorkbenchEnabled.get()) {
-            registration.addCraftingStation(RecipeTypes.CRAFTING, ToolsItems.PORTABLE_WORKBENCH.get());
-        }
+        registration.addCraftingStation(RecipeTypes.CRAFTING, ToolsItems.PORTABLE_WORKBENCH.get());
     }
 }

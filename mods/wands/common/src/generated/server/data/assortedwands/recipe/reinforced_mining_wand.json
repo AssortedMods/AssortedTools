@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": "#c:storage_blocks/diamond",
+    "X": "#c:obsidians"
+  },
+  "pattern": [
+    "XGX",
+    "XGX",
+    "XGX"
+  ],
+  "result": {
+    "id": "assortedwands:reinforced_mining_wand"
+  }
+}

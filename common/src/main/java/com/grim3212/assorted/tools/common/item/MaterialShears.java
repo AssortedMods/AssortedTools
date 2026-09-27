@@ -1,7 +1,7 @@
 package com.grim3212.assorted.tools.common.item;
 
-import com.grim3212.assorted.tools.api.item.ITiered;
-import com.grim3212.assorted.tools.config.ItemTierConfig;
+import com.grim3212.assorted.lib.core.tool.ITiered;
+import com.grim3212.assorted.lib.core.tool.ToolTier;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.dispenser.ShearsDispenseItemBehavior;
 import net.minecraft.server.level.ServerLevel;
@@ -22,9 +22,9 @@ import net.minecraft.world.level.gameevent.GameEvent;
  */
 public class MaterialShears extends ShearsItem implements ITiered {
 
-    private final ItemTierConfig tierHolder;
+    private final ToolTier tierHolder;
 
-    public MaterialShears(Properties props, ItemTierConfig tierHolder) {
+    public MaterialShears(Properties props, ToolTier tierHolder) {
         // The 0.952 factor is the durability ratio vanilla iron shears have to iron tools, kept so
         // every material's shears stay in the same proportion to its other tools.
         super(props.durability((int) Math.rint(tierHolder.getMaxUses() * 0.952F))
@@ -36,7 +36,7 @@ public class MaterialShears extends ShearsItem implements ITiered {
     }
 
     @Override
-    public ItemTierConfig getTierHolder() {
+    public ToolTier getToolTier() {
         return this.tierHolder;
     }
 

@@ -1,9 +1,9 @@
 package com.grim3212.assorted.tools.common.item;
 
+import com.grim3212.assorted.lib.core.item.ISwitchModes;
 import com.grim3212.assorted.lib.platform.Services;
 import com.grim3212.assorted.lib.util.NBTHelper;
 import com.grim3212.assorted.tools.ToolsCommonMod;
-import com.grim3212.assorted.tools.api.item.ISwitchModes;
 import com.grim3212.assorted.tools.api.util.WandCoord3D;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;

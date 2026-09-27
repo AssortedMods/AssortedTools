@@ -1,21 +1,8 @@
 {
   "neoforge:conditions": [
     {
-      "type": "neoforge:and",
-      "values": [
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "moreshears"
-        },
-        {
-          "type": "assortedlib:item_tag_populated",
-          "tag": "c:ingots/bronze"
-        },
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "extramaterials"
-        }
-      ]
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:ingots/bronze"
     }
   ],
   "parent": "minecraft:recipes/root",
@@ -49,23 +36,10 @@
   },
   "fabric:load_conditions": [
     {
-      "condition": "fabric:and",
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
       "values": [
-        {
-          "condition": "assortedlib:part_enabled",
-          "part": "moreshears"
-        },
-        {
-          "condition": "fabric:tags_populated",
-          "registry": "minecraft:item",
-          "values": [
-            "c:ingots/bronze"
-          ]
-        },
-        {
-          "condition": "assortedlib:part_enabled",
-          "part": "extramaterials"
-        }
+        "c:ingots/bronze"
       ]
     }
   ],

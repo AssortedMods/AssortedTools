@@ -1,20 +1,21 @@
 package com.grim3212.assorted.tools.gametest;
 
+import com.grim3212.assorted.lib.core.tool.ArmorMaterialConfig;
 import com.grim3212.assorted.lib.util.LibCommonTags;
 import com.grim3212.assorted.tools.ToolsCommonMod;
 import com.grim3212.assorted.tools.common.item.ToolsItems;
-import com.grim3212.assorted.tools.config.ArmorMaterialConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.minecraft.gametest.framework.GameTestHelper;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
+
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -130,15 +131,19 @@ final class MaterialSetTests {
 
         ToolsItems.MATERIAL_GROUPS.forEach((name, group) -> {
             ArmorMaterialConfig armor = ToolsCommonMod.COMMON_CONFIG.moddedArmors.get(name);
-            int expected = armor.getHelmetReductionAmount() + armor.getChestPlateReductionAmount() + armor.getLeggingsReductionAmount() + armor.getBootsReductionAmount();
+            int expected = totalReduction(armor);
             assertArmourValue(helper, player, name, group.HELMET.get(), group.CHESTPLATE.get(), group.LEGGINGS.get(), group.BOOTS.get(), expected);
         });
 
         ArmorMaterialConfig chicken = ToolsCommonMod.COMMON_CONFIG.chickenSuitArmorMaterial;
         assertArmourValue(helper, player, "chicken_suit",
                 ToolsItems.CHICKEN_SUIT_HELMET.get(), ToolsItems.CHICKEN_SUIT_CHESTPLATE.get(), ToolsItems.CHICKEN_SUIT_LEGGINGS.get(), ToolsItems.CHICKEN_SUIT_BOOTS.get(),
-                chicken.getHelmetReductionAmount() + chicken.getChestPlateReductionAmount() + chicken.getLeggingsReductionAmount() + chicken.getBootsReductionAmount());
+                totalReduction(chicken));
 
         helper.succeed();
+    }
+
+    private static int totalReduction(ArmorMaterialConfig armor) {
+        return armor.getReductionAmounts().values().stream().mapToInt(Integer::intValue).sum();
     }
 }

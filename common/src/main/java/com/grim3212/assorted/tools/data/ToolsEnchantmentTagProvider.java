@@ -8,10 +8,7 @@ import net.minecraft.data.PackOutput;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-/**
- * Every enchantment is obtainable. A disabled part's enchantments are not registered
- * ({@link ToolsEnchantmentData#conditions()}), so they drop out of these tags on their own.
- */
+/** Every enchantment is obtainable. */
 public class ToolsEnchantmentTagProvider extends LibEnchantmentTagProvider {
 
     public ToolsEnchantmentTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookup) {

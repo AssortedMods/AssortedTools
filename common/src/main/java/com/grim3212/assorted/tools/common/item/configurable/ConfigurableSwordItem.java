@@ -1,7 +1,7 @@
 package com.grim3212.assorted.tools.common.item.configurable;
 
-import com.grim3212.assorted.tools.api.item.ITiered;
-import com.grim3212.assorted.tools.config.ItemTierConfig;
+import com.grim3212.assorted.lib.core.tool.ITiered;
+import com.grim3212.assorted.lib.core.tool.ToolTier;
 import net.minecraft.world.item.Item;
 
 /**
@@ -10,15 +10,15 @@ import net.minecraft.world.item.Item;
  */
 public class ConfigurableSwordItem extends Item implements ITiered {
 
-    private final ItemTierConfig tierHolder;
+    private final ToolTier tierHolder;
 
-    public ConfigurableSwordItem(ItemTierConfig tierHolder, Properties builder) {
+    public ConfigurableSwordItem(ToolTier tierHolder, Properties builder) {
         super(builder.sword(tierHolder.material(), ConfigurableTools.SWORD_DAMAGE, ConfigurableTools.SWORD_SPEED));
         this.tierHolder = tierHolder;
     }
 
     @Override
-    public ItemTierConfig getTierHolder() {
+    public ToolTier getToolTier() {
         return tierHolder;
     }
 }

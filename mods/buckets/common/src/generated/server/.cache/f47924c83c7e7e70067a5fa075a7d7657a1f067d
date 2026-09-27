@@ -1,0 +1,6 @@
+// 26.2	2026-09-26T18:34:12.8078328	Tags for minecraft:item mod id assortedbuckets
+1d8e1b088d2eac1dd56b6dd7383039090b831744 data/c/tags/item/buckets/milk.json
+b2ff0e8509c2acaf469e30fd31f8a9df72ddb552 data/c/tags/item/containers/fluid.json
+b2ff0e8509c2acaf469e30fd31f8a9df72ddb552 data/minecraft/tags/item/enchantable/durability.json
+b2ff0e8509c2acaf469e30fd31f8a9df72ddb552 data/minecraft/tags/item/enchantable/vanishing.json
+aba42cf56cdffb8dbc04c63838e208394c325885 data/minecraft/tags/item/piglin_loved.json

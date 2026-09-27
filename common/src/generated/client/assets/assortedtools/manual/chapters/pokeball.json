@@ -1,10 +1,4 @@
 {
-  "conditions": [
-    {
-      "type": "assortedlib:part_enabled",
-      "part": "pokeball"
-    }
-  ],
   "pages": [
     {
       "type": "assortedlib:recipe",

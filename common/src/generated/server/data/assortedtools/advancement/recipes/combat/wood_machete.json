@@ -1,17 +1,8 @@
 {
   "neoforge:conditions": [
     {
-      "type": "neoforge:and",
-      "values": [
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "machetes"
-        },
-        {
-          "type": "assortedlib:item_tag_populated",
-          "tag": "minecraft:planks"
-        }
-      ]
+      "type": "assortedlib:item_tag_populated",
+      "tag": "minecraft:planks"
     }
   ],
   "parent": "minecraft:recipes/root",
@@ -35,19 +26,10 @@
   },
   "fabric:load_conditions": [
     {
-      "condition": "fabric:and",
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
       "values": [
-        {
-          "condition": "assortedlib:part_enabled",
-          "part": "machetes"
-        },
-        {
-          "condition": "fabric:tags_populated",
-          "registry": "minecraft:item",
-          "values": [
-            "minecraft:planks"
-          ]
-        }
+        "minecraft:planks"
       ]
     }
   ],

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "#c:ingots/netherite",
+  "base": "assortedhammers:diamond_hammer",
+  "result": {
+    "id": "assortedhammers:netherite_hammer"
+  },
+  "template": "minecraft:netherite_upgrade_smithing_template"
+}

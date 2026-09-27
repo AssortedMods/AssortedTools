@@ -1,10 +1,4 @@
 {
-  "conditions": [
-    {
-      "type": "assortedlib:part_enabled",
-      "part": "betterbuckets"
-    }
-  ],
   "pages": [
     {
       "type": "assortedlib:recipe",
@@ -22,12 +16,6 @@
     },
     {
       "type": "assortedlib:item",
-      "conditions": [
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "betterbuckets"
-        }
-      ],
       "id": "milk",
       "interval": 50,
       "items": [

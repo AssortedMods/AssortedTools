@@ -1,13 +1,13 @@
 package com.grim3212.assorted.tools;
 
-import com.grim3212.assorted.tools.common.item.ToolsDataComponents;
+import com.grim3212.assorted.lib.core.item.ModeSwitching;
 import com.grim3212.assorted.lib.events.*;
 import com.grim3212.assorted.lib.platform.Services;
-import com.grim3212.assorted.tools.common.crafting.ToolsConditions;
 import com.grim3212.assorted.tools.common.effect.ToolsMobEffects;
 import com.grim3212.assorted.tools.common.enchantment.ToolsEnchantments;
 import com.grim3212.assorted.tools.common.entity.ToolsEntities;
 import com.grim3212.assorted.tools.common.handlers.*;
+import com.grim3212.assorted.tools.common.item.ToolsDataComponents;
 import com.grim3212.assorted.tools.common.item.ToolsItems;
 import com.grim3212.assorted.tools.common.network.ToolsPackets;
 import com.grim3212.assorted.tools.config.ToolsCommonConfig;
@@ -25,7 +25,7 @@ public class ToolsCommonMod {
         ToolsEnchantments.init();
         ToolsMobEffects.init();
         ToolsPackets.init();
-        ToolsConditions.init();
+        ModeSwitching.enable();
         ToolsCreativeItems.init();
 
         Services.EVENTS.registerEvent(AnvilUpdatedEvent.class, (final AnvilUpdatedEvent event) -> ChickenSuitConversionHandler.anvilUpdateEvent(event));

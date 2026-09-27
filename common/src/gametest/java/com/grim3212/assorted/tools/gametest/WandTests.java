@@ -1,11 +1,11 @@
 package com.grim3212.assorted.tools.gametest;
 
+import com.grim3212.assorted.lib.core.network.CycleModePacket;
 import com.grim3212.assorted.lib.util.NBTHelper;
 import com.grim3212.assorted.tools.common.item.ToolsItems;
 import com.grim3212.assorted.tools.common.item.WandBreakingItem;
 import com.grim3212.assorted.tools.common.item.WandBuildingItem;
 import com.grim3212.assorted.tools.common.item.WandMiningItem;
-import com.grim3212.assorted.tools.common.network.ToolCycleModesPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.server.level.ServerPlayer;
@@ -13,6 +13,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -50,12 +51,12 @@ final class WandTests {
         wand.onCraftedBy(stack, player);
         helper.assertValueEqual(NBTHelper.getString(stack, "Mode"), "mineall", "the mode a freshly crafted mining wand starts in");
 
-        ToolCycleModesPacket.handle(new ToolCycleModesPacket(InteractionHand.MAIN_HAND), player);
+        CycleModePacket.handle(new CycleModePacket(InteractionHand.MAIN_HAND), player);
         helper.assertValueEqual(NBTHelper.getString(player.getItemInHand(InteractionHand.MAIN_HAND), "Mode"), "minedirt", "the mode after one cycle");
 
         // Back round to mineall: a plain mining wand only has the three non reinforced modes.
-        ToolCycleModesPacket.handle(new ToolCycleModesPacket(InteractionHand.MAIN_HAND), player);
-        ToolCycleModesPacket.handle(new ToolCycleModesPacket(InteractionHand.MAIN_HAND), player);
+        CycleModePacket.handle(new CycleModePacket(InteractionHand.MAIN_HAND), player);
+        CycleModePacket.handle(new CycleModePacket(InteractionHand.MAIN_HAND), player);
         helper.assertValueEqual(NBTHelper.getString(player.getItemInHand(InteractionHand.MAIN_HAND), "Mode"), "mineall", "the mode after cycling all the way round");
 
         final BlockPos start = new BlockPos(2, 1, 4);
@@ -148,7 +149,7 @@ final class WandTests {
         stand(helper, player, new BlockPos(4, 1, 3));
         wand.onCraftedBy(stack, player);
 
-        ToolCycleModesPacket.handle(new ToolCycleModesPacket(InteractionHand.MAIN_HAND), player);
+        CycleModePacket.handle(new CycleModePacket(InteractionHand.MAIN_HAND), player);
         helper.assertValueEqual(NBTHelper.getString(player.getItemInHand(InteractionHand.MAIN_HAND), "Mode"), "minedirt", "the mode the plants are cleared in");
 
         useOnTopOf(helper, player, start);
@@ -186,7 +187,7 @@ final class WandTests {
         stand(helper, player, new BlockPos(3, 1, 3));
         wand.onCraftedBy(stack, player);
 
-        ToolCycleModesPacket.handle(new ToolCycleModesPacket(InteractionHand.MAIN_HAND), player);
+        CycleModePacket.handle(new CycleModePacket(InteractionHand.MAIN_HAND), player);
         helper.assertValueEqual(NBTHelper.getString(player.getItemInHand(InteractionHand.MAIN_HAND), "Mode"), "minedirt", "the mode the soil is dug in");
 
         useOnTopOf(helper, player, soil.get(0));
@@ -241,7 +242,7 @@ final class WandTests {
         reinforced.onCraftedBy(reinforcedStack, player);
         player.setItemInHand(InteractionHand.MAIN_HAND, reinforcedStack);
 
-        ToolCycleModesPacket.handle(new ToolCycleModesPacket(InteractionHand.MAIN_HAND), player);
+        CycleModePacket.handle(new CycleModePacket(InteractionHand.MAIN_HAND), player);
         helper.assertValueEqual(NBTHelper.getString(player.getItemInHand(InteractionHand.MAIN_HAND), "Mode"), "breakall", "the mode after one cycle on a reinforced breaking wand");
 
         useOnTopOf(helper, player, stoneStart);

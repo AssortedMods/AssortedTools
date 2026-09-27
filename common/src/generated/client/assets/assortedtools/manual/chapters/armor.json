@@ -1,10 +1,4 @@
 {
-  "conditions": [
-    {
-      "type": "assortedlib:part_enabled",
-      "part": "extramaterials"
-    }
-  ],
   "pages": [
     {
       "type": "assortedlib:recipe",
@@ -21,12 +15,6 @@
     },
     {
       "type": "assortedlib:recipe",
-      "conditions": [
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "chickensuit"
-        }
-      ],
       "id": "chicken_suit",
       "interval": 50,
       "recipes": [
@@ -40,12 +28,6 @@
     },
     {
       "type": "assortedlib:recipe",
-      "conditions": [
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "scubasuit"
-        }
-      ],
       "id": "scuba_suit",
       "interval": 50,
       "recipes": [
@@ -59,12 +41,6 @@
     },
     {
       "type": "assortedlib:recipe",
-      "conditions": [
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "lavasuit"
-        }
-      ],
       "id": "lava_suit",
       "interval": 50,
       "recipes": [

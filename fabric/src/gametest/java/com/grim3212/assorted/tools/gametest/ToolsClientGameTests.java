@@ -1,5 +1,6 @@
 package com.grim3212.assorted.tools.gametest;
 
+import com.grim3212.assorted.lib.client.key.ModeSwitchKey;
 import com.grim3212.assorted.lib.core.fluid.FluidInformation;
 import com.grim3212.assorted.lib.core.fluid.IFluidVariantHandler;
 import com.grim3212.assorted.lib.platform.ClientServices;
@@ -24,6 +25,7 @@ import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityTypes;
@@ -34,6 +36,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -91,6 +94,31 @@ public class ToolsClientGameTests implements FabricClientGameTest {
             });
 
             frozenMobsAreDrawnAsIce(context, world);
+            modeKeyCyclesTheHeldWand(context, world);
+        }
+    }
+
+    /** Lib's switch-modes key, which Tools turns on: one key in Controls, and pressing it cycles the wand in hand on the server. */
+    private static void modeKeyCyclesTheHeldWand(ClientGameTestContext context, TestSingleplayerContext world) {
+        context.runOnClient(client -> {
+            long keys = Arrays.stream(client.options.keyMappings).filter(key -> key.getName().equals("key.assortedlib.switch_modes")).count();
+            if (keys != 1 || ModeSwitchKey.key() == null) {
+                throw new AssertionError("expected one switch-modes key, found " + keys);
+            }
+        });
+
+        world.getServer().runOnServer(server -> {
+            ItemStack wand = new ItemStack(ToolsItems.MINING_WAND.get());
+            NBTHelper.putString(wand, "Mode", "mineall");
+            server.getPlayerList().getPlayers().getFirst().setItemInHand(InteractionHand.MAIN_HAND, wand);
+        });
+        context.waitFor(client -> client.player.getMainHandItem().is(ToolsItems.MINING_WAND.get()));
+
+        context.getInput().pressKey(ModeSwitchKey.key());
+        try {
+            context.waitFor(client -> !NBTHelper.getString(client.player.getMainHandItem(), "Mode").equals("mineall"), 100);
+        } catch (AssertionError e) {
+            throw new AssertionError("pressing the switch-modes key did not change the held wand's mode", e);
         }
     }
 

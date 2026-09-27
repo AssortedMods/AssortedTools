@@ -1,0 +1,31 @@
+{
+  "pages": [
+    {
+      "type": "assortedlib:item",
+      "id": "fragments",
+      "interval": 30,
+      "items": [
+        "assortedultimatefist:u_fragment",
+        "assortedultimatefist:l_fragment",
+        "assortedultimatefist:t_fragment",
+        "assortedultimatefist:i_fragment",
+        "assortedultimatefist:m_fragment",
+        "assortedultimatefist:a_fragment",
+        "assortedultimatefist:missing_fragment",
+        "assortedultimatefist:e_fragment"
+      ],
+      "text": "manual.assortedtools.chapter.ultimate.fragments",
+      "title": "manual.assortedtools.chapter.ultimate.fragments.title"
+    },
+    {
+      "type": "assortedlib:recipe",
+      "id": "fist",
+      "recipes": [
+        "assortedultimatefist:ultimate_fist"
+      ],
+      "text": "manual.assortedtools.chapter.ultimate.fist",
+      "title": "manual.assortedtools.chapter.ultimate.fist.title"
+    }
+  ],
+  "sort_order": 140
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "#c:ingots/netherite",
+  "base": "assortedmachetes:diamond_machete",
+  "result": {
+    "id": "assortedmachetes:netherite_machete"
+  },
+  "template": "minecraft:netherite_upgrade_smithing_template"
+}

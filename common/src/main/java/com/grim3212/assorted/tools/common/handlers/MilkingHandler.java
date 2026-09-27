@@ -64,7 +64,7 @@ public class MilkingHandler {
             if (!player.isCreative() && !((LivingEntity) entity).isBaby()) {
                 if (stack.getItem() instanceof BetterMilkBucketItem) {
                     BetterMilkBucketItem bucket = (BetterMilkBucketItem) stack.getItem();
-                    int milkingLevel = bucket.getParent().tierHolder.getMilkingLevel();
+                    int milkingLevel = bucket.getParent().bucketConfig.getMilkingLevel();
 
                     if (bucket != null) {
                         for (int i = 0; i <= milkingLevel; i++) {
@@ -87,7 +87,7 @@ public class MilkingHandler {
                 } else if (stack.getItem() instanceof BetterBucketItem) {
                     BetterBucketItem bucket = (BetterBucketItem) stack.getItem();
                     Identifier bucketName = Services.PLATFORM.getRegistry(Registries.ITEM).getRegistryName(bucket);
-                    int milkingLevel = bucket.tierHolder.getMilkingLevel();
+                    int milkingLevel = bucket.bucketConfig.getMilkingLevel();
 
                     if (bucket != null) {
                         for (int i = 0; i <= milkingLevel; i++) {

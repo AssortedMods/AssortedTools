@@ -1,0 +1,31 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:ingots/netherite"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:ingots/netherite"
+      ]
+    }
+  ],
+  "key": {
+    "I": "#c:ingots/netherite",
+    "S": "#c:rods/wooden"
+  },
+  "pattern": [
+    "III",
+    "ISI",
+    " S "
+  ],
+  "result": {
+    "id": "assortedhammers:netherite_hammer"
+  }
+}

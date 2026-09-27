@@ -1,0 +1,98 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:and",
+      "values": [
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:ingots/bronze"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:pickaxes/bronze"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:shovels/bronze"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:axes/bronze"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:hoes/bronze"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:swords/bronze"
+        }
+      ]
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:and",
+      "values": [
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:ingots/bronze"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:pickaxes/bronze"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:shovels/bronze"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:axes/bronze"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:hoes/bronze"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:swords/bronze"
+          ]
+        }
+      ]
+    }
+  ],
+  "ingredients": [
+    "#c:pickaxes/bronze",
+    "#c:shovels/bronze",
+    "#c:axes/bronze",
+    "#c:hoes/bronze",
+    "#c:swords/bronze",
+    "#c:ingots/bronze",
+    "#c:ingots/bronze",
+    "#c:ingots/bronze",
+    "#c:ingots/bronze"
+  ],
+  "result": {
+    "id": "assortedmultitools:bronze_multitool"
+  }
+}

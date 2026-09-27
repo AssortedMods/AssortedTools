@@ -1,0 +1,6 @@
+// 26.2	2026-09-26T15:44:45.9461823	Tags for minecraft:item mod id assortedshears
+8da6b044ad478d8f64aab49291d156f68329b1de data/assortedshears/tags/item/enchantable/shears.json
+7266987d0fc79e0cc58cffe405f3889f62115bd6 data/c/tags/item/tools/shear.json
+7266987d0fc79e0cc58cffe405f3889f62115bd6 data/minecraft/tags/item/enchantable/durability.json
+7266987d0fc79e0cc58cffe405f3889f62115bd6 data/minecraft/tags/item/enchantable/vanishing.json
+bb529439c09a4d4cd571e560b31bd30f644891fe data/minecraft/tags/item/piglin_loved.json

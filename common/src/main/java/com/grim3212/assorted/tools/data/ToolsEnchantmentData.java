@@ -1,10 +1,7 @@
 package com.grim3212.assorted.tools.data;
 
 import com.google.common.collect.Lists;
-import com.grim3212.assorted.lib.core.conditions.LibConditionProvider;
 import com.grim3212.assorted.lib.data.LibDatapackRegistryProvider;
-import com.grim3212.assorted.lib.platform.Services;
-import com.grim3212.assorted.tools.common.crafting.ToolsConditions;
 import com.grim3212.assorted.tools.common.enchantment.ToolsEnchantments;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
@@ -19,7 +16,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Writes the mod's enchantments as datapack JSON. Weights and anvil costs follow the old rarity
@@ -35,22 +31,6 @@ public class ToolsEnchantmentData extends LibDatapackRegistryProvider {
     @Override
     public List<ResourceKey<? extends Registry<?>>> registries() {
         return Lists.newArrayList(Registries.ENCHANTMENT);
-    }
-
-    /**
-     * Each enchantment exists only while its part is enabled. The four spear enchantments name each
-     * other as exclusive, which is safe because they share one part.
-     */
-    @Override
-    public Map<ResourceKey<?>, List<LibConditionProvider>> conditions() {
-        List<LibConditionProvider> spears = List.of(Services.CONDITIONS.partEnabled(ToolsConditions.Parts.THROWING_SPEARS));
-        return Map.of(
-                ToolsEnchantments.CHICKEN_JUMP, List.of(Services.CONDITIONS.partEnabled(ToolsConditions.Parts.CHICKEN_SUIT)),
-                ToolsEnchantments.BOUNCINESS, spears,
-                ToolsEnchantments.CONDUCTIVE, spears,
-                ToolsEnchantments.FLAMMABLE, spears,
-                ToolsEnchantments.UNSTABLE, spears,
-                ToolsEnchantments.CORAL_CUTTER, List.of(Services.CONDITIONS.partEnabled(ToolsConditions.Parts.MORE_SHEARS)));
     }
 
     private static void bootstrap(BootstrapContext<Enchantment> context) {

@@ -1,0 +1,18 @@
+{
+  "pages": [
+    {
+      "type": "assortedlib:recipe",
+      "id": "armor",
+      "interval": 50,
+      "recipes": [
+        "assortedextramaterials:steel_helmet",
+        "assortedextramaterials:steel_chestplate",
+        "assortedextramaterials:steel_leggings",
+        "assortedextramaterials:steel_boots"
+      ],
+      "text": "manual.assortedtools.chapter.armor.armor",
+      "title": "manual.assortedtools.chapter.armor.armor.title"
+    }
+  ],
+  "sort_order": 90
+}

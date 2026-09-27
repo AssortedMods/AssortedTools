@@ -3,11 +3,24 @@ package com.grim3212.assorted.tools.config;
 import com.google.common.collect.Lists;
 import com.grim3212.assorted.lib.config.ConfigurationType;
 import com.grim3212.assorted.lib.config.IConfigurationBuilder;
+import com.grim3212.assorted.lib.core.tool.ArmorMaterialConfig;
+import com.grim3212.assorted.lib.core.tool.ToolTier;
+import com.grim3212.assorted.lib.core.tool.ToolTiers;
 import com.grim3212.assorted.lib.platform.Services;
+import com.grim3212.assorted.lib.util.LibCommonTags;
 import com.grim3212.assorted.tools.Constants;
-import com.grim3212.assorted.tools.api.item.ToolsArmorMaterials;
-import com.grim3212.assorted.tools.api.item.ToolsItemTier;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ToolMaterial;
+import net.minecraft.world.item.equipment.EquipmentAsset;
+import net.minecraft.world.item.equipment.EquipmentAssets;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,25 +28,6 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class ToolsCommonConfig {
-    public final Supplier<Boolean> wandsEnabled;
-    public final Supplier<Boolean> boomerangsEnabled;
-    public final Supplier<Boolean> hammersEnabled;
-    public final Supplier<Boolean> multiToolsEnabled;
-    public final Supplier<Boolean> pokeballEnabled;
-    public final Supplier<Boolean> chickenSuitEnabled;
-    public final Supplier<Boolean> scubaSuitEnabled;
-    public final Supplier<Boolean> lavaSuitEnabled;
-    public final Supplier<Boolean> extraMaterialsEnabled;
-    public final Supplier<Boolean> spearsEnabled;
-    public final Supplier<Boolean> throwingSpearsEnabled;
-    public final Supplier<Boolean> betterBucketsEnabled;
-    public final Supplier<Boolean> moreShearsEnabled;
-    public final Supplier<Boolean> ultimateFistEnabled;
-    public final Supplier<Boolean> machetesEnabled;
-    public final Supplier<Boolean> portableWorkbenchEnabled;
-    public final Supplier<Boolean> staffsEnabled;
-    public final Supplier<Boolean> powerStaffEnabled;
-
     public final Supplier<Boolean> hideUncraftableItems;
     public final Supplier<Boolean> allowPartialBucketAmounts;
     public final Supplier<Boolean> freeBuildMode;
@@ -53,46 +47,23 @@ public class ToolsCommonConfig {
     public final Supplier<Boolean> diamondBoomerangFollows;
     public final Supplier<List<? extends Float>> conductivityLightningChances;
 
-    public final ItemTierConfig woodItemTier;
-    public final ItemTierConfig stoneItemTier;
-    public final ItemTierConfig goldItemTier;
-    public final ItemTierConfig ironItemTier;
-    public final ItemTierConfig diamondItemTier;
-    public final ItemTierConfig netheriteItemTier;
-
-    public final ItemTierConfig ultimateItemTier;
+    /** Wood through netherite and the extra materials, shared with the other Assorted mods through Lib. */
+    public final ToolTiers tiers;
+    public final ToolTier ultimateItemTier;
     public final ArmorMaterialConfig chickenSuitArmorMaterial;
     public final ArmorMaterialConfig scubaSuitArmorMaterial;
     public final ArmorMaterialConfig lavaSuitArmorMaterial;
 
-    public final Map<String, ModdedItemTierConfig> moddedTiers;
-    public final Map<String, ArmorMaterialConfig> moddedArmors;
+    // Keyed by tier name.
+    public final Map<String, BucketConfig> buckets = new HashMap<>();
+    public final Map<String, Supplier<Double>> multiToolModifiers = new HashMap<>();
+    public final Map<String, SpearConfig> spears = new HashMap<>();
+    public final Map<String, ArmorMaterialConfig> moddedArmors = new HashMap<>();
 
     public ToolsCommonConfig() {
-        // NEEDED_AT_REGISTRATION, not NOT_SYNCED: nearly everything in this file decides what an
-        // item is built from, and since 1.21.2 that has to be known while the item is constructed.
-        // A plain common config is not loaded until after RegisterEvent, and reading one there
-        // throws "Cannot get config value before config is loaded" on NeoForge.
+        // Needed at registration: nearly everything here decides what an item is built from, and items bake it in as they are constructed.
         final IConfigurationBuilder builder = Services.CONFIG.createBuilder(ConfigurationType.NEEDED_AT_REGISTRATION, Constants.MOD_ID + "-common");
-
-        wandsEnabled = builder.defineBoolean("parts.wandsEnabled", true, "Set this to true if you would like wands to be craftable and found in the creative tab.");
-        boomerangsEnabled = builder.defineBoolean("parts.boomerangsEnabled", true, "Set this to true if you would like boomerangs to be craftable and found in the creative tab.");
-        hammersEnabled = builder.defineBoolean("parts.hammersEnabled", true, "Set this to true if you would like hammers to be craftable and found in the creative tab.");
-        multiToolsEnabled = builder.defineBoolean("parts.multiToolsEnabled", true, "Set this to true if you would like multitools to be craftable and found in the creative tab.");
-        pokeballEnabled = builder.defineBoolean("parts.pokeballEnabled", true, "Set this to true if you would like the pokeball to be craftable and found in the creative tab.");
-        scubaSuitEnabled = builder.defineBoolean("parts.scubaSuitEnabled", true, "Set this to true if you would like the scuba suit to be craftable and found in the creative tab.");
-        lavaSuitEnabled = builder.defineBoolean("parts.lavaSuitEnabled", true, "Set this to true if you would like the lava suit to be craftable and found in the creative tab.");
-        chickenSuitEnabled = builder.defineBoolean("parts.chickenSuitEnabled", true, "Set this to true if you would like the chicken suit to be craftable and found in the creative tab as well as if you want the Chicken Jump enchantment to be able to be applied.");
-        extraMaterialsEnabled = builder.defineBoolean("parts.extraMaterialsEnabled", true, "Set this to true if you would like to enable support for crafting the extra tools and armor that this supports. For example, Steel, Copper, or Ruby tools and armor.");
-        spearsEnabled = builder.defineBoolean("parts.spearsEnabled", true, "Set this to true if you would like spears like vanilla's, for the extra materials, to be craftable and found in the creative tab.");
-        throwingSpearsEnabled = builder.defineBoolean("parts.throwingSpearsEnabled", true, "Set this to true if you would like the throwing spears to be craftable and found in the creative tab as well as the Enchantments for it to be enchanted on books.");
-        betterBucketsEnabled = builder.defineBoolean("parts.betterBucketsEnabled", true, "Set this to true if you would like better buckets to be craftable and found in the creative tab.");
-        moreShearsEnabled = builder.defineBoolean("parts.moreShearsEnabled", true, "Set this to true if you would like the extra shears to be craftable and found in the creative tab.");
-        ultimateFistEnabled = builder.defineBoolean("parts.ultimateFistEnabled", true, "Set this to true if you would like the ultimate fist to be craftable and found in the creative tab as well as the fragments generate in loot.");
-        machetesEnabled = builder.defineBoolean("parts.machetesEnabled", true, "Set this to true if you would like machetes to be craftable and found in the creative tab.");
-        portableWorkbenchEnabled = builder.defineBoolean("parts.portableWorkbenchEnabled", true, "Set this to true if you would like the portable workbench to be craftable and found in the creative tab.");
-        staffsEnabled = builder.defineBoolean("parts.staffsEnabled", true, "Set this to true if you would like the Neptune and Phoenix staffs to be craftable and found in the creative tab.");
-        powerStaffEnabled = builder.defineBoolean("parts.powerStaffEnabled", true, "Set this to true if you would like the power staff to be craftable and found in the creative tab.");
+        this.tiers = ToolTiers.get();
 
         hideUncraftableItems = builder.defineBoolean("general.hideUncraftableItems", false, "For any item that is unobtainable (like missing materials from other mods) hide it from the creative menu / JEI.");
 
@@ -116,56 +87,70 @@ public class ToolsCommonConfig {
 
         conductivityLightningChances = builder.defineList("better_spears.conductivityLightningChances", Lists.newArrayList(0.6F, 0.3F, 0.1F), Float.class, "The chances modifier for lightning to spawn at each level of conductivity. The smaller the number the higher chance.");
 
-        woodItemTier = new ItemTierConfig(builder, "wood", "vanilla_tool_overrides", ToolMaterial.WOOD, 6.0F, -3.2F, 1, 0, 1000f, true, 1.5f);
-        stoneItemTier = new ItemTierConfig(builder, "stone", "vanilla_tool_overrides", ToolMaterial.STONE, 7.0F, -3.2F, 1, 0, 5000f, true, 1.5f);
-        goldItemTier = new ItemTierConfig(builder, "gold", "vanilla_tool_overrides", ToolMaterial.GOLD, 6.0F, -3.0F, 4, 0, 5000f, false, 1.5f);
-        ironItemTier = new ItemTierConfig(builder, "iron", "vanilla_tool_overrides", ToolMaterial.IRON, 6.0F, -3.1F, 1, 0, 5000f, false, 1.5f);
-        diamondItemTier = new ItemTierConfig(builder, "diamond", "vanilla_tool_overrides", ToolMaterial.DIAMOND, 5.0F, -3.0F, 16, 1, 5000f, false, 1.5f);
-        netheriteItemTier = new ItemTierConfig(builder, "netherite", "vanilla_tool_overrides", ToolMaterial.NETHERITE, 5.0F, -3.0F, 64, 2, 10000f, false, 1.5f);
-        ultimateItemTier = new ItemTierConfig(builder, "ultimate", "ultimate_fist", ToolsItemTier.ULTIMATE);
+        ultimateItemTier = new ToolTier(builder, "ultimate_fist", "ultimate", new ToolMaterial(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 1561, 64F, 64F, 0, LibCommonTags.Items.NETHER_STARS), 0F, 0F);
 
-        chickenSuitArmorMaterial = new ArmorMaterialConfig(builder, "chicken_suit", "chicken_suit", 5, 15, 0.0F, 0.0F, new int[]{1, 2, 3, 1}, () -> ToolsArmorMaterials.CHICKEN_SUIT);
-        scubaSuitArmorMaterial = new ArmorMaterialConfig(builder, "scuba_suit", "scuba_suit", 12, 12, 0.0F, 0.0F, new int[]{1, 3, 4, 2}, () -> ToolsArmorMaterials.SCUBA);
-        lavaSuitArmorMaterial = new ArmorMaterialConfig(builder, "lava_suit", "lava_suit", 20, 9, 0.0F, 0.0F, new int[]{2, 6, 7, 2}, () -> ToolsArmorMaterials.LAVA);
+        chickenSuitArmorMaterial = armor(builder, "chicken_suit", "chicken_suit", 5, 15, 0.0F, 0.0F, new int[]{1, 2, 3, 1}, () -> BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.WOOL_PLACE), LibCommonTags.Items.FEATHERS, "chicken_suit");
+        scubaSuitArmorMaterial = armor(builder, "scuba_suit", "scuba_suit", 12, 12, 0.0F, 0.0F, new int[]{1, 3, 4, 2}, () -> SoundEvents.ARMOR_EQUIP_LEATHER, LibCommonTags.Items.LEATHER, "scuba");
+        lavaSuitArmorMaterial = armor(builder, "lava_suit", "lava_suit", 20, 9, 0.0F, 0.0F, new int[]{2, 6, 7, 2}, () -> SoundEvents.ARMOR_EQUIP_NETHERITE, LibCommonTags.Items.INGOTS_NETHERITE, "lava");
 
-        moddedTiers = new HashMap<>();
-        moddedTiers.put("tin", new ModdedItemTierConfig(builder, "tin", "modded_tool_overrides", ToolsItemTier.TIN));
-        moddedTiers.put("copper", new ModdedItemTierConfig(builder, "copper", "modded_tool_overrides", ToolsItemTier.COPPER));
-        moddedTiers.put("silver", new ModdedItemTierConfig(builder, "silver", "modded_tool_overrides", ToolsItemTier.SILVER));
-        moddedTiers.put("aluminum", new ModdedItemTierConfig(builder, "aluminum", "modded_tool_overrides", ToolsItemTier.ALUMINUM));
-        moddedTiers.put("nickel", new ModdedItemTierConfig(builder, "nickel", "modded_tool_overrides", ToolsItemTier.NICKEL));
-        moddedTiers.put("platinum", new ModdedItemTierConfig(builder, "platinum", "modded_tool_overrides", ToolsItemTier.PLATINUM));
-        moddedTiers.put("lead", new ModdedItemTierConfig(builder, "lead", "modded_tool_overrides", ToolsItemTier.LEAD));
-        moddedTiers.put("bronze", new ModdedItemTierConfig(builder, "bronze", "modded_tool_overrides", ToolsItemTier.BRONZE));
-        moddedTiers.put("electrum", new ModdedItemTierConfig(builder, "electrum", "modded_tool_overrides", ToolsItemTier.ELECTRUM));
-        moddedTiers.put("invar", new ModdedItemTierConfig(builder, "invar", "modded_tool_overrides", ToolsItemTier.INVAR));
-        moddedTiers.put("steel", new ModdedItemTierConfig(builder, "steel", "modded_tool_overrides", ToolsItemTier.STEEL));
-        moddedTiers.put("ruby", new ModdedItemTierConfig(builder, "ruby", "modded_tool_overrides", ToolsItemTier.RUBY));
-        moddedTiers.put("amethyst", new ModdedItemTierConfig(builder, "amethyst", "modded_tool_overrides", ToolsItemTier.AMETHYST));
-        moddedTiers.put("sapphire", new ModdedItemTierConfig(builder, "sapphire", "modded_tool_overrides", ToolsItemTier.SAPPHIRE));
-        moddedTiers.put("topaz", new ModdedItemTierConfig(builder, "topaz", "modded_tool_overrides", ToolsItemTier.TOPAZ));
-        moddedTiers.put("emerald", new ModdedItemTierConfig(builder, "emerald", "modded_tool_overrides", ToolsItemTier.EMERALD));
-        moddedTiers.put("peridot", new ModdedItemTierConfig(builder, "peridot", "modded_tool_overrides", ToolsItemTier.PERIDOT));
+        bucket(builder, "wood", 1, 0, 1000f, true);
+        bucket(builder, "stone", 1, 0, 5000f, true);
+        bucket(builder, "gold", 4, 0, 5000f, false);
+        bucket(builder, "diamond", 16, 1, 5000f, false);
+        bucket(builder, "netherite", 64, 2, 10000f, false);
 
-        moddedArmors = new HashMap<>();
-        moddedArmors.put("tin", new ArmorMaterialConfig(builder, "tin", "modded_armor_overrides", 8, 14, 0.0F, 0.0F, new int[]{1, 3, 5, 2}, () -> ToolsArmorMaterials.TIN));
-        moddedArmors.put("copper", new ArmorMaterialConfig(builder, "copper", "modded_armor_overrides", 11, 14, 0.0F, 0.0F, new int[]{2, 5, 6, 2}, () -> ToolsArmorMaterials.COPPER));
-        moddedArmors.put("silver", new ArmorMaterialConfig(builder, "silver", "modded_armor_overrides", 27, 14, 0.0F, 0.0F, new int[]{3, 6, 8, 3}, () -> ToolsArmorMaterials.SILVER));
-        moddedArmors.put("aluminum", new ArmorMaterialConfig(builder, "aluminum", "modded_armor_overrides", 13, 10, 0.0F, 0.0F, new int[]{2, 5, 6, 2}, () -> ToolsArmorMaterials.ALUMINUM));
-        moddedArmors.put("nickel", new ArmorMaterialConfig(builder, "nickel", "modded_armor_overrides", 13, 10, 0.0F, 0.0F, new int[]{2, 3, 4, 2}, () -> ToolsArmorMaterials.NICKEL));
-        moddedArmors.put("platinum", new ArmorMaterialConfig(builder, "platinum", "modded_armor_overrides", 36, 18, 3.0F, 0.2F, new int[]{3, 6, 8, 3}, () -> ToolsArmorMaterials.PLATINUM));
-        moddedArmors.put("lead", new ArmorMaterialConfig(builder, "lead", "modded_armor_overrides", 13, 4, 0.0F, 0.0F, new int[]{2, 3, 4, 2}, () -> ToolsArmorMaterials.LEAD));
-        moddedArmors.put("bronze", new ArmorMaterialConfig(builder, "bronze", "modded_armor_overrides", 14, 13, 0.0F, 0.1F, new int[]{2, 5, 6, 2}, () -> ToolsArmorMaterials.BRONZE));
-        moddedArmors.put("electrum", new ArmorMaterialConfig(builder, "electrum", "modded_armor_overrides", 13, 13, 0.0F, 0.0F, new int[]{2, 5, 6, 2}, () -> ToolsArmorMaterials.ELECTRUM));
-        moddedArmors.put("invar", new ArmorMaterialConfig(builder, "invar", "modded_armor_overrides", 15, 11, 0.2F, 0.1F, new int[]{2, 5, 6, 2}, () -> ToolsArmorMaterials.INVAR));
-        moddedArmors.put("steel", new ArmorMaterialConfig(builder, "steel", "modded_armor_overrides", 26, 10, 0.5F, 0.3F, new int[]{2, 6, 7, 2}, () -> ToolsArmorMaterials.STEEL));
-        moddedArmors.put("ruby", new ArmorMaterialConfig(builder, "ruby", "modded_armor_overrides", 34, 10, 2.0F, 0.0F, new int[]{3, 6, 8, 3}, () -> ToolsArmorMaterials.RUBY));
-        moddedArmors.put("amethyst", new ArmorMaterialConfig(builder, "amethyst", "modded_armor_overrides", 31, 14, 1.0F, 0.0F, new int[]{3, 6, 8, 3}, () -> ToolsArmorMaterials.AMETHYST));
-        moddedArmors.put("sapphire", new ArmorMaterialConfig(builder, "sapphire", "modded_armor_overrides", 31, 14, 1.0F, 0.0F, new int[]{3, 6, 8, 3}, () -> ToolsArmorMaterials.SAPPHIRE));
-        moddedArmors.put("topaz", new ArmorMaterialConfig(builder, "topaz", "modded_armor_overrides", 30, 8, 1.0F, 0.0F, new int[]{3, 6, 8, 3}, () -> ToolsArmorMaterials.TOPAZ));
-        moddedArmors.put("emerald", new ArmorMaterialConfig(builder, "emerald", "modded_armor_overrides", 32, 14, 2.0F, 0.0F, new int[]{3, 6, 8, 3}, () -> ToolsArmorMaterials.EMERALD));
-        moddedArmors.put("peridot", new ArmorMaterialConfig(builder, "peridot", "modded_armor_overrides", 30, 8, 1.0F, 0.0F, new int[]{3, 6, 8, 3}, () -> ToolsArmorMaterials.PERIDOT));
+        extra(builder, "tin", 4, 0, 8, 14, 0.0F, 0.0F, new int[]{1, 3, 5, 2}, SoundEvents.ARMOR_EQUIP_IRON);
+        extra(builder, "copper", 8, 0, 11, 14, 0.0F, 0.0F, new int[]{2, 5, 6, 2}, SoundEvents.ARMOR_EQUIP_IRON);
+        extra(builder, "silver", 12, 1, 27, 14, 0.0F, 0.0F, new int[]{3, 6, 8, 3}, SoundEvents.ARMOR_EQUIP_DIAMOND);
+        extra(builder, "aluminum", 2, 0, 13, 10, 0.0F, 0.0F, new int[]{2, 5, 6, 2}, SoundEvents.ARMOR_EQUIP_IRON);
+        extra(builder, "nickel", 8, 1, 13, 10, 0.0F, 0.0F, new int[]{2, 3, 4, 2}, SoundEvents.ARMOR_EQUIP_IRON);
+        extra(builder, "platinum", 24, 2, 36, 18, 3.0F, 0.2F, new int[]{3, 6, 8, 3}, SoundEvents.ARMOR_EQUIP_DIAMOND);
+        extra(builder, "lead", 4, 0, 13, 4, 0.0F, 0.0F, new int[]{2, 3, 4, 2}, SoundEvents.ARMOR_EQUIP_IRON);
+        extra(builder, "bronze", 8, 1, 14, 13, 0.0F, 0.1F, new int[]{2, 5, 6, 2}, SoundEvents.ARMOR_EQUIP_IRON);
+        extra(builder, "electrum", 18, 1, 13, 13, 0.0F, 0.0F, new int[]{2, 5, 6, 2}, SoundEvents.ARMOR_EQUIP_IRON);
+        extra(builder, "invar", 10, 1, 15, 11, 0.2F, 0.1F, new int[]{2, 5, 6, 2}, SoundEvents.ARMOR_EQUIP_IRON);
+        extra(builder, "steel", 16, 1, 26, 10, 0.5F, 0.3F, new int[]{2, 6, 7, 2}, SoundEvents.ARMOR_EQUIP_IRON);
+        extra(builder, "ruby", 8, 1, 34, 10, 2.0F, 0.0F, new int[]{3, 6, 8, 3}, SoundEvents.ARMOR_EQUIP_DIAMOND);
+        extra(builder, "amethyst", 8, 0, 31, 14, 1.0F, 0.0F, new int[]{3, 6, 8, 3}, SoundEvents.ARMOR_EQUIP_DIAMOND);
+        extra(builder, "sapphire", 8, 0, 31, 14, 1.0F, 0.0F, new int[]{3, 6, 8, 3}, SoundEvents.ARMOR_EQUIP_DIAMOND);
+        extra(builder, "topaz", 8, 0, 30, 8, 1.0F, 0.0F, new int[]{3, 6, 8, 3}, SoundEvents.ARMOR_EQUIP_DIAMOND);
+        extra(builder, "emerald", 10, 1, 32, 14, 2.0F, 0.0F, new int[]{3, 6, 8, 3}, SoundEvents.ARMOR_EQUIP_DIAMOND);
+        extra(builder, "peridot", 8, 0, 30, 8, 1.0F, 0.0F, new int[]{3, 6, 8, 3}, SoundEvents.ARMOR_EQUIP_DIAMOND);
+
+        for (ToolTier tier : this.tiers.vanilla()) {
+            multiTool(builder, tier.getName());
+        }
+        this.tiers.extras().keySet().forEach(name -> multiTool(builder, name));
 
         builder.setup();
+    }
+
+    public BucketConfig bucket(ToolTier tier) {
+        return this.buckets.get(tier.getName());
+    }
+
+    public float multiToolModifier(ToolTier tier) {
+        return this.multiToolModifiers.get(tier.getName()).get().floatValue();
+    }
+
+    private void bucket(IConfigurationBuilder builder, String name, int maxBuckets, int milkingLevel, float maxPickupTemp, boolean breaksAfterUse) {
+        this.buckets.put(name, new BucketConfig(builder, "better_buckets", name, maxBuckets, milkingLevel, maxPickupTemp, breaksAfterUse));
+    }
+
+    private void multiTool(IConfigurationBuilder builder, String name) {
+        this.multiToolModifiers.put(name, builder.defineDouble("multitools." + name + ".durabilityModifier", 1.5F, 0F, 1000F, "The modifier that will be used to calculate the multitool maximum uses. Normal tool material maxUses * this modifier."));
+    }
+
+    /** An extra material's bucket, spear and armour; its tool numbers are the shared tier's. */
+    private void extra(IConfigurationBuilder builder, String name, int maxBuckets, int milkingLevel, int durability, int enchantability, float toughness, float knockbackResistance, int[] reductionAmounts, Holder<SoundEvent> equipSound) {
+        ToolTier tier = this.tiers.extra(name);
+        bucket(builder, name, maxBuckets, milkingLevel, 5000f, false);
+        this.spears.put(name, new SpearConfig(builder, "spears", name, tier.getHarvestLevel()));
+        this.moddedArmors.put(name, armor(builder, "extra_armor", name, durability, enchantability, toughness, knockbackResistance, reductionAmounts, () -> equipSound, tier.getRepairItems(), name));
+    }
+
+    private static ArmorMaterialConfig armor(IConfigurationBuilder builder, String path, String name, int durability, int enchantability, float toughness, float knockbackResistance, int[] reductionAmounts, Supplier<Holder<SoundEvent>> equipSound, TagKey<Item> repairItems, String asset) {
+        ResourceKey<EquipmentAsset> assetId = ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath(Constants.MOD_ID, asset));
+        return new ArmorMaterialConfig(builder, path, name, durability, enchantability, toughness, knockbackResistance, reductionAmounts, equipSound, repairItems, assetId);
     }
 }

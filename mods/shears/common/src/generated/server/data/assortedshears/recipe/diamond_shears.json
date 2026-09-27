@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:gems/diamond"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:gems/diamond"
+      ]
+    }
+  ],
+  "key": {
+    "I": "#c:gems/diamond",
+    "L": "#c:leathers"
+  },
+  "pattern": [
+    " I",
+    "IL"
+  ],
+  "result": {
+    "id": "assortedshears:diamond_shears"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:ingots/bronze"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:ingots/bronze"
+      ]
+    }
+  ],
+  "key": {
+    "I": "#c:ingots/bronze",
+    "S": "#c:rods/wooden"
+  },
+  "pattern": [
+    "  I",
+    " S ",
+    "S  "
+  ],
+  "result": {
+    "id": "assortedextramaterials:bronze_spear"
+  }
+}

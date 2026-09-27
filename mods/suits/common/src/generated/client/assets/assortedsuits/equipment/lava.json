@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "assortedsuits:lava"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "assortedsuits:lava"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "assortedsuits:lava"
+      }
+    ]
+  }
+}

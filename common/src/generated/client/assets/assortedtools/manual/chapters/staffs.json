@@ -2,12 +2,6 @@
   "pages": [
     {
       "type": "assortedlib:recipe",
-      "conditions": [
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "staffs"
-        }
-      ],
       "id": "neptune",
       "recipes": [
         "assortedtools:neptune_staff"
@@ -17,12 +11,6 @@
     },
     {
       "type": "assortedlib:recipe",
-      "conditions": [
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "staffs"
-        }
-      ],
       "id": "phoenix",
       "recipes": [
         "assortedtools:phoenix_staff"
@@ -32,12 +20,6 @@
     },
     {
       "type": "assortedlib:recipe",
-      "conditions": [
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "staffs"
-        }
-      ],
       "id": "frost",
       "interval": 60,
       "recipes": [
@@ -49,12 +31,6 @@
     },
     {
       "type": "assortedlib:recipe",
-      "conditions": [
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "powerstaff"
-        }
-      ],
       "id": "power",
       "recipes": [
         "assortedtools:power_staff"

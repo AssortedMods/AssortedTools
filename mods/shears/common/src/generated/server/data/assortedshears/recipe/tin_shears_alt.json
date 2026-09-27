@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:ingots/tin"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:ingots/tin"
+      ]
+    }
+  ],
+  "key": {
+    "I": "#c:ingots/tin",
+    "L": "#c:leathers"
+  },
+  "pattern": [
+    "LI",
+    "I "
+  ],
+  "result": {
+    "id": "assortedshears:tin_shears"
+  }
+}

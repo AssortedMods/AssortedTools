@@ -1,15 +1,16 @@
 package com.grim3212.assorted.tools.client.data;
 
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
-import net.minecraft.world.item.Item;
-import net.minecraft.resources.Identifier;
-import net.minecraft.core.registries.BuiltInRegistries;
 import com.grim3212.assorted.lib.data.LibLanguageProvider;
 import com.grim3212.assorted.tools.Constants;
 import com.grim3212.assorted.tools.api.ToolsTags;
 import com.grim3212.assorted.tools.data.ToolsItemTagProvider;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Generates the en_us.json of this mod. A block, item or entity whose name is its id in title case needs
@@ -29,8 +30,6 @@ public class ToolsLanguageProvider extends LibLanguageProvider {
     protected void addNames() {
         this.add("itemGroup.assortedtools", "Assorted Tools");
 
-        this.add("key.category.assortedtools.general", "Assorted Tools");
-        this.add("key.assortedtools.tool_switch_modes", "Switch Tool Modes");
 
         this.add("enchantment.assortedtools.chicken_jump", "Chicken Jump");
         this.add("enchantment.assortedtools.chicken_jump.desc", "Lets you hover like a chicken as well as get one extra jump per armor enchanted with Chicken Jump");

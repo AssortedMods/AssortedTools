@@ -2,16 +2,6 @@
   "pages": [
     {
       "type": "assortedlib:recipe",
-      "conditions": [
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "extramaterials"
-        },
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "spears"
-        }
-      ],
       "id": "spears",
       "interval": 50,
       "recipes": [
@@ -24,12 +14,6 @@
     },
     {
       "type": "assortedlib:recipe",
-      "conditions": [
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "throwingspears"
-        }
-      ],
       "id": "throwing_spears",
       "interval": 50,
       "recipes": [
@@ -42,12 +26,6 @@
     },
     {
       "type": "assortedlib:recipe",
-      "conditions": [
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "boomerangs"
-        }
-      ],
       "id": "boomerangs",
       "interval": 50,
       "recipes": [

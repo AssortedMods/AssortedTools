@@ -1,10 +1,10 @@
 package com.grim3212.assorted.tools.gametest;
 
+import com.grim3212.assorted.lib.core.tool.HarvestTiers;
+import com.grim3212.assorted.lib.core.tool.ToolTier;
 import com.grim3212.assorted.lib.util.LibCommonTags;
-import com.grim3212.assorted.tools.api.item.HarvestTiers;
 import com.grim3212.assorted.tools.common.item.MultiToolItem;
 import com.grim3212.assorted.tools.common.item.ToolsItems;
-import com.grim3212.assorted.tools.config.ItemTierConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.server.level.ServerPlayer;
@@ -15,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -88,7 +89,7 @@ final class MiningToolTests {
         ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
         // Cobweb is the one block the multitool answers for by hand rather than through the tag.
         helper.assertValueEqual(stack.getDestroySpeed(Blocks.COBWEB.defaultBlockState()), 15.0F, "multitool speed on cobweb");
-        float efficiency = multitool.getTierHolder().getEfficiency();
+        float efficiency = multitool.getToolTier().getEfficiency();
         helper.assertValueEqual(stack.getDestroySpeed(Blocks.STONE.defaultBlockState()), efficiency, "multitool speed on stone");
         helper.assertValueEqual(stack.getDestroySpeed(Blocks.OAK_LOG.defaultBlockState()), efficiency, "multitool speed on a log");
         helper.assertValueEqual(stack.getDestroySpeed(Blocks.DIRT.defaultBlockState()), efficiency, "multitool speed on dirt");
@@ -210,7 +211,7 @@ final class MiningToolTests {
         // Glass is in none of the mineable tags, so every one of these falls back to bare hands.
         final BlockState glass = Blocks.GLASS.defaultBlockState();
 
-        List<ItemTierConfig> tiers = new ArrayList<>();
+        List<ToolTier> tiers = new ArrayList<>();
         List<Item> pickaxes = new ArrayList<>();
 
         for (ToolsItems.MaterialGroup group : ToolsItems.MATERIAL_GROUPS.values()) {
@@ -238,8 +239,8 @@ final class MiningToolTests {
         order.sort(Comparator.comparingDouble(i -> tiers.get(i).getEfficiency()));
 
         for (int i = 1; i < order.size(); i++) {
-            ItemTierConfig slower = tiers.get(order.get(i - 1));
-            ItemTierConfig faster = tiers.get(order.get(i));
+            ToolTier slower = tiers.get(order.get(i - 1));
+            ToolTier faster = tiers.get(order.get(i));
             float slowSpeed = new ItemStack(pickaxes.get(order.get(i - 1))).getDestroySpeed(stone);
             float fastSpeed = new ItemStack(pickaxes.get(order.get(i))).getDestroySpeed(stone);
             helper.assertTrue(slowSpeed <= fastSpeed, slower.getName() + " mines faster than " + faster.getName() + ", the wrong way round for their configured efficiencies");

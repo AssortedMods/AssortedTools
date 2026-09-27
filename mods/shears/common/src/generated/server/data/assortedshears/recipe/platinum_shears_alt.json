@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:ingots/platinum"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:ingots/platinum"
+      ]
+    }
+  ],
+  "key": {
+    "I": "#c:ingots/platinum",
+    "L": "#c:leathers"
+  },
+  "pattern": [
+    "LI",
+    "I "
+  ],
+  "result": {
+    "id": "assortedshears:platinum_shears"
+  }
+}

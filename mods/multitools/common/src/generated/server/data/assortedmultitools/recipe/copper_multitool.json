@@ -1,0 +1,98 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:and",
+      "values": [
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:ingots/copper"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:pickaxes/copper"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:shovels/copper"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:axes/copper"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:hoes/copper"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:swords/copper"
+        }
+      ]
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:and",
+      "values": [
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:ingots/copper"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:pickaxes/copper"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:shovels/copper"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:axes/copper"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:hoes/copper"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:swords/copper"
+          ]
+        }
+      ]
+    }
+  ],
+  "ingredients": [
+    "#c:pickaxes/copper",
+    "#c:shovels/copper",
+    "#c:axes/copper",
+    "#c:hoes/copper",
+    "#c:swords/copper",
+    "#c:ingots/copper",
+    "#c:ingots/copper",
+    "#c:ingots/copper",
+    "#c:ingots/copper"
+  ],
+  "result": {
+    "id": "assortedmultitools:copper_multitool"
+  }
+}

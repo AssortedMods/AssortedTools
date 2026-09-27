@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedstaffs:frost_rod_crafts_through_to_a_neptune_staff",
+  "structure": "assortedstaffs:test_box",
+  "max_ticks": 1,
+  "setup_ticks": 0,
+  "required": true
+}

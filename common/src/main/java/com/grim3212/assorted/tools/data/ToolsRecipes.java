@@ -4,7 +4,6 @@ import com.grim3212.assorted.lib.core.conditions.ConditionalRecipeProvider;
 import com.grim3212.assorted.lib.util.LibCommonTags;
 import com.grim3212.assorted.tools.Constants;
 import com.grim3212.assorted.tools.api.ToolsTags;
-import com.grim3212.assorted.tools.common.crafting.ToolsConditions;
 import com.grim3212.assorted.tools.common.item.ToolsItems;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
@@ -35,24 +34,7 @@ public class ToolsRecipes extends ConditionalRecipeProvider {
 
     @Override
     public void registerConditions() {
-        this.addConditions(partEnabled(ToolsConditions.Parts.BOOMERANGS), ToolsItems.WOOD_BOOMERANG.getId(), ToolsItems.DIAMOND_BOOMERANG.getId());
-        this.addConditions(partEnabled(ToolsConditions.Parts.POKEBALL), ToolsItems.POKEBALL.getId());
-        this.addConditions(partEnabled(ToolsConditions.Parts.WANDS), ToolsItems.BUILDING_WAND.getId(), ToolsItems.BREAKING_WAND.getId(), ToolsItems.MINING_WAND.getId(), ToolsItems.REINFORCED_BUILDING_WAND.getId(), ToolsItems.REINFORCED_BREAKING_WAND.getId(), ToolsItems.REINFORCED_MINING_WAND.getId());
-        this.addConditions(partEnabled(ToolsConditions.Parts.ULTIMATE_FIST), ToolsItems.ULTIMATE_FIST.getId());
-        this.addConditions(partEnabled(ToolsConditions.Parts.PORTABLE_WORKBENCH), ToolsItems.PORTABLE_WORKBENCH.getId());
-        this.addConditions(partEnabled(ToolsConditions.Parts.STAFFS), ToolsItems.NEPTUNE_STAFF.getId(), ToolsItems.PHOENIX_STAFF.getId(), ToolsItems.FROST_POWDER.getId(), ToolsItems.ICE_CHARGE.getId());
-        this.addConditions(partEnabled(ToolsConditions.Parts.POWER_STAFF), ToolsItems.POWER_STAFF.getId());
-
-        this.addConditions(partEnabled(ToolsConditions.Parts.MULTITOOL), Identifier.parse(ToolsItems.NETHERITE_MULTITOOL.getId() + "_smithing"));
-        this.addConditions(partEnabled(ToolsConditions.Parts.HAMMERS), Identifier.parse(ToolsItems.NETHERITE_HAMMER.getId() + "_smithing"));
-        this.addConditions(partEnabled(ToolsConditions.Parts.THROWING_SPEARS), Identifier.parse(ToolsItems.NETHERITE_THROWING_SPEAR.getId() + "_smithing"));
-        this.addConditions(partEnabled(ToolsConditions.Parts.BETTER_BUCKETS), Identifier.parse(ToolsItems.NETHERITE_BUCKET.getId() + "_smithing"));
-        this.addConditions(partEnabled(ToolsConditions.Parts.MORE_SHEARS), Identifier.parse(ToolsItems.NETHERITE_SHEARS.getId() + "_smithing"));
-        this.addConditions(partEnabled(ToolsConditions.Parts.MACHETES), Identifier.parse(ToolsItems.NETHERITE_MACHETE.getId() + "_smithing"));
-
-        // Our namespace, not minecraft's: Fabric's datagen moves every recipe id into the mod's
-        // namespace, so a minecraft: key never matched there and the recipe lost its condition.
-        this.addConditions(partEnabled(ToolsConditions.Parts.BETTER_BUCKETS), prefix("cake_alt"));
+        // Each pattern adds its own material condition as it builds.
     }
 
     @Override
@@ -98,7 +80,7 @@ public class ToolsRecipes extends ConditionalRecipeProvider {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, ToolsItems.PHOENIX_STAFF.get()).define('D', LibCommonTags.Items.GEMS_DIAMOND).define('C', Items.FIRE_CHARGE).define('S', LibCommonTags.Items.RODS_BLAZE).pattern("D").pattern("C").pattern("S").unlockedBy("has_blaze_rod", has(LibCommonTags.Items.RODS_BLAZE)).save(this.output, recipeKey(ToolsItems.PHOENIX_STAFF.getId()));
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, ToolsItems.POWER_STAFF.get()).define('I', LibCommonTags.Items.INGOTS_IRON).define('D', LibCommonTags.Items.GEMS_DIAMOND).define('R', LibCommonTags.Items.DUSTS_REDSTONE).pattern("IDI").pattern("IRI").pattern(" I ").unlockedBy("has_diamond", has(LibCommonTags.Items.GEMS_DIAMOND)).save(this.output, recipeKey(ToolsItems.POWER_STAFF.getId()));
 
-        armorSet(ToolsItems.CHICKEN_SUIT_HELMET.get(), ToolsItems.CHICKEN_SUIT_CHESTPLATE.get(), ToolsItems.CHICKEN_SUIT_LEGGINGS.get(), ToolsItems.CHICKEN_SUIT_BOOTS.get(), LibCommonTags.Items.FEATHERS, "chickensuit");
+        armorSet(ToolsItems.CHICKEN_SUIT_HELMET.get(), ToolsItems.CHICKEN_SUIT_CHESTPLATE.get(), ToolsItems.CHICKEN_SUIT_LEGGINGS.get(), ToolsItems.CHICKEN_SUIT_BOOTS.get(), LibCommonTags.Items.FEATHERS);
         scubaSuit();
         lavaSuit();
 
@@ -110,15 +92,15 @@ public class ToolsRecipes extends ConditionalRecipeProvider {
         multiTool(ToolsItems.NETHERITE_MULTITOOL.get(), Items.NETHERITE_PICKAXE, Items.NETHERITE_SHOVEL, Items.NETHERITE_AXE, Items.NETHERITE_HOE, Items.NETHERITE_SWORD, LibCommonTags.Items.INGOTS_NETHERITE);
 
         ToolsItems.MATERIAL_GROUPS.forEach((s, group) -> {
-            toolSet(group.PICKAXE.get(), group.SHOVEL.get(), group.AXE.get(), group.HOE.get(), group.SWORD.get(), group.material, ToolsConditions.Parts.EXTRA_MATERIAL);
-            hammerPattern(group.HAMMER.get(), group.material, ToolsConditions.Parts.EXTRA_MATERIAL);
-            multiTool(group.MULTITOOL.get(), group.PICKAXE.get(), group.SHOVEL.get(), group.AXE.get(), group.HOE.get(), group.SWORD.get(), group.material, ToolsConditions.Parts.EXTRA_MATERIAL);
-            armorSet(group.HELMET.get(), group.CHESTPLATE.get(), group.LEGGINGS.get(), group.BOOTS.get(), group.material, ToolsConditions.Parts.EXTRA_MATERIAL);
-            spearPattern(group.THROWING_SPEAR.get(), group.material, ToolsConditions.Parts.EXTRA_MATERIAL);
-            lungeSpearPattern(group.SPEAR.get(), group.material, ToolsConditions.Parts.EXTRA_MATERIAL);
-            bucketPattern(group.BUCKET.get(), group.material, ToolsConditions.Parts.EXTRA_MATERIAL);
-            shearPattern(group.SHEARS.get(), group.material, ToolsConditions.Parts.EXTRA_MATERIAL);
-            machetePattern(group.MACHETE.get(), group.material, ToolsConditions.Parts.EXTRA_MATERIAL);
+            toolSet(group.PICKAXE.get(), group.SHOVEL.get(), group.AXE.get(), group.HOE.get(), group.SWORD.get(), group.material);
+            hammerPattern(group.HAMMER.get(), group.material);
+            multiTool(group.MULTITOOL.get(), group.PICKAXE.get(), group.SHOVEL.get(), group.AXE.get(), group.HOE.get(), group.SWORD.get(), group.material);
+            armorSet(group.HELMET.get(), group.CHESTPLATE.get(), group.LEGGINGS.get(), group.BOOTS.get(), group.material);
+            spearPattern(group.THROWING_SPEAR.get(), group.material);
+            lungeSpearPattern(group.SPEAR.get(), group.material);
+            bucketPattern(group.BUCKET.get(), group.material);
+            shearPattern(group.SHEARS.get(), group.material);
+            machetePattern(group.MACHETE.get(), group.material);
         });
 
         SmithingTransformRecipeBuilder.smithing(Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(ToolsItems.DIAMOND_MULTITOOL.get()), Ingredient.of(Blocks.NETHERITE_BLOCK), RecipeCategory.TOOLS, ToolsItems.NETHERITE_MULTITOOL.get()).unlocks("has_netherite_block", has(Blocks.NETHERITE_BLOCK)).save(this.output, recipeKey(ToolsItems.NETHERITE_MULTITOOL.getId() + "_smithing"));
@@ -145,30 +127,19 @@ public class ToolsRecipes extends ConditionalRecipeProvider {
     }
 
     private void shearPattern(ItemLike output, TagKey<Item> input) {
-        this.addConditions(and(partEnabled(ToolsConditions.Parts.MORE_SHEARS), itemTagExists(input)), key(output.asItem()), Identifier.parse(key(output.asItem()) + "_alt"));
+        this.addConditions(itemTagExists(input), key(output.asItem()), Identifier.parse(key(output.asItem()) + "_alt"));
 
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, output).define('I', input).define('L', LibCommonTags.Items.LEATHER).pattern(" I").pattern("IL").unlockedBy("has_leather", has(LibCommonTags.Items.LEATHER)).unlockedBy("has_item", has(input)).save(this.output, recipeKey(key(output.asItem())));
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, output).define('I', input).define('L', LibCommonTags.Items.LEATHER).pattern("LI").pattern("I ").unlockedBy("has_leather", has(LibCommonTags.Items.LEATHER)).unlockedBy("has_item", has(input)).save(this.output, recipeKey(Identifier.parse(key(output.asItem()) + "_alt")));
     }
 
-    private void shearPattern(ItemLike output, TagKey<Item> input, String condition) {
-        this.addConditions(and(partEnabled(ToolsConditions.Parts.MORE_SHEARS), itemTagExists(input), partEnabled(condition)), key(output.asItem()), Identifier.parse(key(output.asItem()) + "_alt"));
-
-        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, output).define('I', input).define('L', LibCommonTags.Items.LEATHER).pattern(" I").pattern("IL").unlockedBy("has_leather", has(LibCommonTags.Items.LEATHER)).unlockedBy("has_item", has(input)).save(this.output, recipeKey(key(output.asItem())));
-        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, output).define('I', input).define('L', LibCommonTags.Items.LEATHER).pattern("LI").pattern("I ").unlockedBy("has_leather", has(LibCommonTags.Items.LEATHER)).unlockedBy("has_item", has(input)).save(this.output, recipeKey(Identifier.parse(key(output.asItem()) + "_alt")));
-    }
 
     private void bucketPattern(ItemLike output, TagKey<Item> input) {
-        this.addConditions(and(partEnabled(ToolsConditions.Parts.BETTER_BUCKETS), itemTagExists(input)), key(output.asItem()));
+        this.addConditions(itemTagExists(input), key(output.asItem()));
 
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, output).define('I', input).pattern("I I").pattern(" I ").unlockedBy("has_item", has(input)).save(this.output, recipeKey(key(output.asItem())));
     }
 
-    private void bucketPattern(ItemLike output, TagKey<Item> input, String condition) {
-        this.addConditions(and(partEnabled(ToolsConditions.Parts.BETTER_BUCKETS), itemTagExists(input), partEnabled(condition)), key(output.asItem()));
-
-        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, output).define('I', input).pattern("I I").pattern(" I ").unlockedBy("has_item", has(input)).save(this.output, recipeKey(key(output.asItem())));
-    }
 
     /**
      * A throwing spear: the shaft laid flat with the head at its end. That is the only pattern left
@@ -176,51 +147,36 @@ public class ToolsRecipes extends ConditionalRecipeProvider {
      * two sticks is vanilla's shovel, and shaped recipes match mirrored patterns too.
      */
     private void spearPattern(ItemLike output, TagKey<Item> input) {
-        this.addConditions(and(partEnabled(ToolsConditions.Parts.THROWING_SPEARS), itemTagExists(input)), key(output.asItem()));
+        this.addConditions(itemTagExists(input), key(output.asItem()));
 
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, output).define('S', LibCommonTags.Items.RODS_WOODEN).define('I', input).pattern("SSI").unlockedBy("has_item", has(input)).save(this.output, recipeKey(key(output.asItem())));
     }
 
-    private void spearPattern(ItemLike output, TagKey<Item> input, String condition) {
-        this.addConditions(and(partEnabled(ToolsConditions.Parts.THROWING_SPEARS), itemTagExists(input), partEnabled(condition)), key(output.asItem()));
 
-        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, output).define('S', LibCommonTags.Items.RODS_WOODEN).define('I', input).pattern("SSI").unlockedBy("has_item", has(input)).save(this.output, recipeKey(key(output.asItem())));
+
+    /** A blade two wide on the diagonal, above a handle. */
+    private void machetePattern(ItemLike output, TagKey<Item> input) {
+        this.addConditions(itemTagExists(input), key(output.asItem()));
+
+        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, output).define('S', LibCommonTags.Items.RODS_WOODEN).define('X', input).pattern(" XX").pattern("XX ").pattern("S  ").unlockedBy("has_item", has(input)).save(this.output, recipeKey(key(output.asItem())));
+    }
+
+
+    private void hammerPattern(ItemLike output, TagKey<Item> input) {
+        this.addConditions(itemTagExists(input), key(output.asItem()));
+
+        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, output).define('S', LibCommonTags.Items.RODS_WOODEN).define('I', input).pattern("III").pattern("ISI").pattern(" S ").unlockedBy("has_item", has(input)).save(this.output, recipeKey(key(output.asItem())));
     }
 
     /** Vanilla's own spear recipe, for a material vanilla has no spear of. */
-    private void lungeSpearPattern(ItemLike output, TagKey<Item> input, String condition) {
-        this.addConditions(and(partEnabled(ToolsConditions.Parts.SPEARS), itemTagExists(input), partEnabled(condition)), key(output.asItem()));
+    private void lungeSpearPattern(ItemLike output, TagKey<Item> input) {
+        this.addConditions(itemTagExists(input), key(output.asItem()));
 
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, output).define('S', LibCommonTags.Items.RODS_WOODEN).define('I', input).pattern("  I").pattern(" S ").pattern("S  ").unlockedBy("has_item", has(input)).save(this.output, recipeKey(key(output.asItem())));
     }
 
-    /** A blade two wide on the diagonal, above a handle. */
-    private void machetePattern(ItemLike output, TagKey<Item> input) {
-        this.addConditions(and(partEnabled(ToolsConditions.Parts.MACHETES), itemTagExists(input)), key(output.asItem()));
-
-        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, output).define('S', LibCommonTags.Items.RODS_WOODEN).define('X', input).pattern(" XX").pattern("XX ").pattern("S  ").unlockedBy("has_item", has(input)).save(this.output, recipeKey(key(output.asItem())));
-    }
-
-    private void machetePattern(ItemLike output, TagKey<Item> input, String condition) {
-        this.addConditions(and(partEnabled(ToolsConditions.Parts.MACHETES), itemTagExists(input), partEnabled(condition)), key(output.asItem()));
-
-        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, output).define('S', LibCommonTags.Items.RODS_WOODEN).define('X', input).pattern(" XX").pattern("XX ").pattern("S  ").unlockedBy("has_item", has(input)).save(this.output, recipeKey(key(output.asItem())));
-    }
-
-    private void hammerPattern(ItemLike output, TagKey<Item> input) {
-        this.addConditions(and(partEnabled(ToolsConditions.Parts.HAMMERS), itemTagExists(input)), key(output.asItem()));
-
-        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, output).define('S', LibCommonTags.Items.RODS_WOODEN).define('I', input).pattern("III").pattern("ISI").pattern(" S ").unlockedBy("has_item", has(input)).save(this.output, recipeKey(key(output.asItem())));
-    }
-
-    private void hammerPattern(ItemLike output, TagKey<Item> input, String condition) {
-        this.addConditions(and(partEnabled(ToolsConditions.Parts.HAMMERS), itemTagExists(input), partEnabled(condition)), key(output.asItem()));
-
-        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, output).define('S', LibCommonTags.Items.RODS_WOODEN).define('I', input).pattern("III").pattern("ISI").pattern(" S ").unlockedBy("has_item", has(input)).save(this.output, recipeKey(key(output.asItem())));
-    }
-
-    private void toolSet(ItemLike pickaxe, ItemLike shovel, ItemLike axe, ItemLike hoe, ItemLike sword, TagKey<Item> input, String condition) {
-        this.addConditions(and(partEnabled(condition), itemTagExists(input)), key(pickaxe.asItem()), key(shovel.asItem()), key(axe.asItem()), Identifier.fromNamespaceAndPath(Constants.MOD_ID, key(axe.asItem()).getPath() + "_alt"), key(hoe.asItem()), Identifier.fromNamespaceAndPath(Constants.MOD_ID, key(hoe.asItem()).getPath() + "_alt"), key(sword.asItem()));
+    private void toolSet(ItemLike pickaxe, ItemLike shovel, ItemLike axe, ItemLike hoe, ItemLike sword, TagKey<Item> input) {
+        this.addConditions(itemTagExists(input), key(pickaxe.asItem()), key(shovel.asItem()), key(axe.asItem()), Identifier.fromNamespaceAndPath(Constants.MOD_ID, key(axe.asItem()).getPath() + "_alt"), key(hoe.asItem()), Identifier.fromNamespaceAndPath(Constants.MOD_ID, key(hoe.asItem()).getPath() + "_alt"), key(sword.asItem()));
 
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, pickaxe).define('X', input).define('S', LibCommonTags.Items.RODS_WOODEN).pattern("XXX").pattern(" S ").pattern(" S ").unlockedBy("has_item", has(input)).save(this.output, recipeKey(key(pickaxe.asItem())));
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, shovel).define('X', input).define('S', LibCommonTags.Items.RODS_WOODEN).pattern("X").pattern("S").pattern("S").unlockedBy("has_item", has(input)).save(this.output, recipeKey(key(shovel.asItem())));
@@ -230,6 +186,8 @@ public class ToolsRecipes extends ConditionalRecipeProvider {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, hoe).define('X', input).define('S', LibCommonTags.Items.RODS_WOODEN).pattern("XX").pattern("S ").pattern("S ").unlockedBy("has_item", has(input)).save(this.output, recipeKey(Identifier.fromNamespaceAndPath(Constants.MOD_ID, key(hoe.asItem()).getPath() + "_alt")));
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, sword).define('X', input).define('S', LibCommonTags.Items.RODS_WOODEN).pattern("X").pattern("X").pattern("S").unlockedBy("has_item", has(input)).save(this.output, recipeKey(key(sword.asItem())));
     }
+
+
 
     /**
      * The scuba suit: a leather wetsuit with a glass visor in the mask and copper fittings on the
@@ -241,7 +199,7 @@ public class ToolsRecipes extends ConditionalRecipeProvider {
         ItemLike leggings = ToolsItems.SCUBA_LEGGINGS.get();
         ItemLike boots = ToolsItems.SCUBA_BOOTS.get();
 
-        this.addConditions(and(partEnabled(ToolsConditions.Parts.SCUBA_SUIT), itemTagExists(LibCommonTags.Items.INGOTS_COPPER)),
+        this.addConditions(itemTagExists(LibCommonTags.Items.INGOTS_COPPER),
                 key(helmet.asItem()), key(chestplate.asItem()), key(leggings.asItem()), key(boots.asItem()));
 
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, helmet).define('L', LibCommonTags.Items.LEATHER).define('G', LibCommonTags.Items.GLASS)
@@ -265,7 +223,7 @@ public class ToolsRecipes extends ConditionalRecipeProvider {
         ItemLike leggings = ToolsItems.LAVA_LEGGINGS.get();
         ItemLike boots = ToolsItems.LAVA_BOOTS.get();
 
-        this.addConditions(and(partEnabled(ToolsConditions.Parts.LAVA_SUIT), itemTagExists(LibCommonTags.Items.INGOTS_NETHERITE)),
+        this.addConditions(itemTagExists(LibCommonTags.Items.INGOTS_NETHERITE),
                 key(helmet.asItem()), key(chestplate.asItem()), key(leggings.asItem()), key(boots.asItem()));
 
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, helmet).define('M', Items.MAGMA_CREAM).define('O', Items.CRYING_OBSIDIAN)
@@ -278,8 +236,9 @@ public class ToolsRecipes extends ConditionalRecipeProvider {
                 .pattern("M M").pattern("MBM").unlockedBy("has_magma_cream", has(Items.MAGMA_CREAM)).save(this.output, recipeKey(key(boots.asItem())));
     }
 
-    private void armorSet(ItemLike helmet, ItemLike chestplate, ItemLike leggings, ItemLike boots, TagKey<Item> input, String condition) {
-        this.addConditions(and(partEnabled(condition), itemTagExists(input)), key(helmet.asItem()), key(chestplate.asItem()), key(leggings.asItem()), key(boots.asItem()));
+
+    private void armorSet(ItemLike helmet, ItemLike chestplate, ItemLike leggings, ItemLike boots, TagKey<Item> input) {
+        this.addConditions(itemTagExists(input), key(helmet.asItem()), key(chestplate.asItem()), key(leggings.asItem()), key(boots.asItem()));
 
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, helmet).define('X', input).pattern("XXX").pattern("X X").unlockedBy("has_item", has(input)).save(this.output, recipeKey(key(helmet.asItem())));
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, chestplate).define('X', input).pattern("X X").pattern("XXX").pattern("XXX").unlockedBy("has_item", has(input)).save(this.output, recipeKey(key(chestplate.asItem())));
@@ -288,7 +247,7 @@ public class ToolsRecipes extends ConditionalRecipeProvider {
     }
 
     private void multiTool(ItemLike output, ItemLike pickaxe, ItemLike shovel, ItemLike axe, ItemLike hoe, ItemLike sword, TagKey<Item> input) {
-        this.addConditions(and(partEnabled(ToolsConditions.Parts.MULTITOOL), itemTagExists(input)), key(output.asItem()));
+        this.addConditions(itemTagExists(input), key(output.asItem()));
 
         ShapelessRecipeBuilder.shapeless(this.items, RecipeCategory.TOOLS, output)
                 .requires(pickaxe)
@@ -303,21 +262,6 @@ public class ToolsRecipes extends ConditionalRecipeProvider {
                 .unlockedBy("has_item", has(input)).save(this.output, recipeKey(key(output.asItem())));
     }
 
-    private void multiTool(ItemLike output, ItemLike pickaxe, ItemLike shovel, ItemLike axe, ItemLike hoe, ItemLike sword, TagKey<Item> input, String condition) {
-        this.addConditions(and(partEnabled(ToolsConditions.Parts.MULTITOOL), itemTagExists(input), partEnabled(condition)), key(output.asItem()));
-
-        ShapelessRecipeBuilder.shapeless(this.items, RecipeCategory.TOOLS, output)
-                .requires(pickaxe)
-                .requires(shovel)
-                .requires(axe)
-                .requires(hoe)
-                .requires(sword)
-                .requires(input)
-                .requires(input)
-                .requires(input)
-                .requires(input)
-                .unlockedBy("has_item", has(input)).save(this.output, recipeKey(key(output.asItem())));
-    }
 
     /**
      * The item's registry id. The old body went through the platform registry service; the base

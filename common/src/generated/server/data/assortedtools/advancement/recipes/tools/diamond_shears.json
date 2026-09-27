@@ -1,17 +1,8 @@
 {
   "neoforge:conditions": [
     {
-      "type": "neoforge:and",
-      "values": [
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "moreshears"
-        },
-        {
-          "type": "assortedlib:item_tag_populated",
-          "tag": "c:gems/diamond"
-        }
-      ]
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:gems/diamond"
     }
   ],
   "parent": "minecraft:recipes/root",
@@ -45,19 +36,10 @@
   },
   "fabric:load_conditions": [
     {
-      "condition": "fabric:and",
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
       "values": [
-        {
-          "condition": "assortedlib:part_enabled",
-          "part": "moreshears"
-        },
-        {
-          "condition": "fabric:tags_populated",
-          "registry": "minecraft:item",
-          "values": [
-            "c:gems/diamond"
-          ]
-        }
+        "c:gems/diamond"
       ]
     }
   ],

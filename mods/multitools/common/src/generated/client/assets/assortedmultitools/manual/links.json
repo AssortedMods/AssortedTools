@@ -1,0 +1,32 @@
+{
+  "links": [
+    {
+      "items": [
+        "assortedmultitools:aluminum_multitool",
+        "assortedmultitools:amethyst_multitool",
+        "assortedmultitools:bronze_multitool",
+        "assortedmultitools:copper_multitool",
+        "assortedmultitools:diamond_multitool",
+        "assortedmultitools:electrum_multitool",
+        "assortedmultitools:emerald_multitool",
+        "assortedmultitools:golden_multitool",
+        "assortedmultitools:invar_multitool",
+        "assortedmultitools:iron_multitool",
+        "assortedmultitools:lead_multitool",
+        "assortedmultitools:netherite_multitool",
+        "assortedmultitools:nickel_multitool",
+        "assortedmultitools:peridot_multitool",
+        "assortedmultitools:platinum_multitool",
+        "assortedmultitools:ruby_multitool",
+        "assortedmultitools:sapphire_multitool",
+        "assortedmultitools:silver_multitool",
+        "assortedmultitools:steel_multitool",
+        "assortedmultitools:stone_multitool",
+        "assortedmultitools:tin_multitool",
+        "assortedmultitools:topaz_multitool",
+        "assortedmultitools:wooden_multitool"
+      ],
+      "page": "assortedtools:multitools/multitools"
+    }
+  ]
+}

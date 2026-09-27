@@ -48,7 +48,7 @@ public class SpearModel extends Model<Unit> {
         if (!this.cache.containsKey(key)) {
             if (item instanceof BetterSpearItem) {
                 BetterSpearItem spear = (BetterSpearItem) item;
-                this.cache.put(key(spear), Identifier.fromNamespaceAndPath(Constants.MOD_ID, "textures/entity/projectiles/" + spear.getTierHolder().getName() + "_throwing_spear.png"));
+                this.cache.put(key(spear), Identifier.fromNamespaceAndPath(Constants.MOD_ID, "textures/entity/projectiles/" + spear.getToolTier().getName() + "_throwing_spear.png"));
             } else {
                 Constants.LOG.error("Tried to get spear texture for non-spear item");
                 return DEFAULT_TEXTURE;

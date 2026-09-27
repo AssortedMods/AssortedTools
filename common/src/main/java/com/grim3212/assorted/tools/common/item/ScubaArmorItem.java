@@ -1,7 +1,7 @@
 package com.grim3212.assorted.tools.common.item;
 
-import com.grim3212.assorted.tools.api.item.ToolsArmorMaterials;
-import com.grim3212.assorted.tools.common.item.configurable.ConfigurableArmorItem;
+import com.grim3212.assorted.lib.core.tool.ConfigurableArmorItem;
+import com.grim3212.assorted.tools.ToolsCommonMod;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
@@ -25,7 +25,7 @@ public class ScubaArmorItem extends ConfigurableArmorItem {
     private static final int WEAR_INTERVAL = 100;
 
     public ScubaArmorItem(ArmorType type, Properties builderIn) {
-        super(ToolsArmorMaterials.SCUBA, type, builderIn);
+        super(ToolsCommonMod.COMMON_CONFIG.scubaSuitArmorMaterial, type, builderIn);
     }
 
     @Override

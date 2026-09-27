@@ -1,22 +1,22 @@
 package com.grim3212.assorted.tools.common.item;
 
 import com.grim3212.assorted.lib.core.item.IItemEnchantmentCondition;
+import com.grim3212.assorted.lib.core.tool.ITiered;
+import com.grim3212.assorted.lib.core.tool.ToolTier;
 import com.grim3212.assorted.tools.api.ToolsTags;
-import com.grim3212.assorted.tools.api.item.ITiered;
-import com.grim3212.assorted.tools.config.ItemTierConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ToolMaterial;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.component.Weapon;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -34,10 +34,10 @@ public class MultiToolItem extends Item implements ITiered, IItemEnchantmentCond
     private static final float ATTACK_SPEED = -2.8F;
     private static final List<Item> DELEGATE_TOOLS = List.of(Items.IRON_SWORD, Items.IRON_SHOVEL, Items.IRON_PICKAXE, Items.IRON_HOE, Items.IRON_AXE);
 
-    private final ItemTierConfig tierHolder;
+    private final ToolTier tierHolder;
 
-    public MultiToolItem(ItemTierConfig tier, Item.Properties builderIn) {
-        super(builderIn.tool(scaledMaterial(tier), ToolsTags.Blocks.MINEABLE_MULTITOOL, attackDamage(tier), ATTACK_SPEED, 0.0F)
+    public MultiToolItem(ToolTier tier, float durabilityModifier, Item.Properties builderIn) {
+        super(builderIn.tool(scaledMaterial(tier, durabilityModifier), ToolsTags.Blocks.MINEABLE_MULTITOOL, attackDamage(tier), ATTACK_SPEED, 0.0F)
                 // Properties#tool leaves a Weapon(2); the multitool has always cost one durability
                 // per swing rather than two, which used to be an overridden hurtEnemy.
                 .component(DataComponents.WEAPON, new Weapon(1)));
@@ -47,17 +47,17 @@ public class MultiToolItem extends Item implements ITiered, IItemEnchantmentCond
     /**
      * The tier's material with the multitool durability modifier already applied.
      */
-    private static ToolMaterial scaledMaterial(ItemTierConfig tier) {
+    private static ToolMaterial scaledMaterial(ToolTier tier, float durabilityModifier) {
         ToolMaterial material = tier.material();
-        return new ToolMaterial(material.incorrectBlocksForDrops(), Math.max(1, (int) (material.durability() * tier.getMultiToolModifier())), material.speed(), material.attackDamageBonus(), material.enchantmentValue(), material.repairItems());
+        return new ToolMaterial(material.incorrectBlocksForDrops(), Math.max(1, (int) (material.durability() * durabilityModifier)), material.speed(), material.attackDamageBonus(), material.enchantmentValue(), material.repairItems());
     }
 
-    private static float attackDamage(ItemTierConfig tier) {
+    private static float attackDamage(ToolTier tier) {
         return tier.getAxeDamage() > tier.getDamage() ? tier.getAxeDamage() : tier.getDamage() + tier.getDamage();
     }
 
     @Override
-    public ItemTierConfig getTierHolder() {
+    public ToolTier getToolTier() {
         return this.tierHolder;
     }
 
@@ -95,7 +95,7 @@ public class MultiToolItem extends Item implements ITiered, IItemEnchantmentCond
                 state.is(BlockTags.MINEABLE_WITH_AXE) ||
                 state.is(BlockTags.MINEABLE_WITH_HOE);
 
-        return validBlock ? this.getTierHolder().getEfficiency() : state.is(BlockTags.SWORD_EFFICIENT) ? 1.5F : super.getDestroySpeed(stack, state);
+        return validBlock ? this.getToolTier().getEfficiency() : state.is(BlockTags.SWORD_EFFICIENT) ? 1.5F : super.getDestroySpeed(stack, state);
     }
 
     /**

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedstaffs:ice_charge_chills_what_it_hits",
+  "structure": "assortedstaffs:test_box",
+  "max_ticks": 100,
+  "setup_ticks": 0,
+  "required": true
+}

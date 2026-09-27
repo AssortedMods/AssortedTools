@@ -1,18 +1,6 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "assortedlib:part_enabled",
-      "part": "powerstaff"
-    }
-  ],
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
-  "fabric:load_conditions": [
-    {
-      "condition": "assortedlib:part_enabled",
-      "part": "powerstaff"
-    }
-  ],
   "key": {
     "D": "#c:gems/diamond",
     "I": "#c:ingots/iron",

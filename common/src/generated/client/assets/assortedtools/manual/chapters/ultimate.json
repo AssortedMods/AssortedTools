@@ -1,10 +1,4 @@
 {
-  "conditions": [
-    {
-      "type": "assortedlib:part_enabled",
-      "part": "ultimatefist"
-    }
-  ],
   "pages": [
     {
       "type": "assortedlib:item",

@@ -1,0 +1,10 @@
+{
+  "icon": [
+    "assortedhammers:iron_hammer",
+    "assortedmultitools:diamond_multitool",
+    "assortedwands:building_wand",
+    "assortedboomerangs:diamond_boomerang",
+    "assortedextramaterials:steel_pickaxe"
+  ],
+  "sort_order": 120
+}

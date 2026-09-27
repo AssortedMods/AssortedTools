@@ -1,0 +1,98 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:and",
+      "values": [
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:ingots/nickel"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:pickaxes/nickel"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:shovels/nickel"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:axes/nickel"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:hoes/nickel"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:swords/nickel"
+        }
+      ]
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:and",
+      "values": [
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:ingots/nickel"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:pickaxes/nickel"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:shovels/nickel"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:axes/nickel"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:hoes/nickel"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:swords/nickel"
+          ]
+        }
+      ]
+    }
+  ],
+  "ingredients": [
+    "#c:pickaxes/nickel",
+    "#c:shovels/nickel",
+    "#c:axes/nickel",
+    "#c:hoes/nickel",
+    "#c:swords/nickel",
+    "#c:ingots/nickel",
+    "#c:ingots/nickel",
+    "#c:ingots/nickel",
+    "#c:ingots/nickel"
+  ],
+  "result": {
+    "id": "assortedmultitools:nickel_multitool"
+  }
+}

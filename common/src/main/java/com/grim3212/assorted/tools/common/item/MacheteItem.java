@@ -1,9 +1,9 @@
 package com.grim3212.assorted.tools.common.item;
 
+import com.grim3212.assorted.lib.core.tool.ITiered;
+import com.grim3212.assorted.lib.core.tool.ToolTier;
 import com.grim3212.assorted.tools.api.ToolsTags;
-import com.grim3212.assorted.tools.api.item.ITiered;
 import com.grim3212.assorted.tools.common.item.configurable.ConfigurableTools;
-import com.grim3212.assorted.tools.config.ItemTierConfig;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.component.DataComponents;
@@ -32,10 +32,10 @@ public class MacheteItem extends Item implements ITiered {
     public static final float ATTACK_DAMAGE = 2.2F;
     public static final float ATTACK_SPEED = -2.15F;
 
-    private final ItemTierConfig tierHolder;
+    private final ToolTier tierHolder;
 
-    public MacheteItem(ItemTierConfig tierHolder, Properties properties) {
-        super(machete(tierHolder.material(), ConfigurableTools.tiered(tierHolder, properties)));
+    public MacheteItem(ToolTier tierHolder, Properties properties) {
+        super(machete(tierHolder.material(), tierHolder.tiered(properties)));
         this.tierHolder = tierHolder;
     }
 
@@ -57,7 +57,7 @@ public class MacheteItem extends Item implements ITiered {
     }
 
     @Override
-    public ItemTierConfig getTierHolder() {
+    public ToolTier getToolTier() {
         return this.tierHolder;
     }
 }

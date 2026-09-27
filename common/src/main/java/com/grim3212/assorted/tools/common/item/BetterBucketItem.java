@@ -2,13 +2,14 @@ package com.grim3212.assorted.tools.common.item;
 
 import com.grim3212.assorted.lib.annotations.LoaderImplement;
 import com.grim3212.assorted.lib.core.fluid.FluidInformation;
+import com.grim3212.assorted.lib.core.tool.ITiered;
+import com.grim3212.assorted.lib.core.tool.ToolTier;
 import com.grim3212.assorted.lib.platform.Services;
 import com.grim3212.assorted.lib.util.NBTHelper;
 import com.grim3212.assorted.tools.ToolsCommonMod;
-import com.grim3212.assorted.tools.api.item.ITiered;
 import com.grim3212.assorted.tools.common.fluid.FluidHelper;
 import com.grim3212.assorted.tools.common.handlers.DispenseBucketHandler;
-import com.grim3212.assorted.tools.config.ItemTierConfig;
+import com.grim3212.assorted.tools.config.BucketConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -59,12 +60,14 @@ public class BetterBucketItem extends Item implements ITiered {
     /** What both loaders report for a fluid that declares no temperature of its own. */
     private static final int DEFAULT_TEMPERATURE = 300;
 
-    public final ItemTierConfig tierHolder;
+    public final ToolTier tierHolder;
+    public final BucketConfig bucketConfig;
 
-    public BetterBucketItem(Properties props, ItemTierConfig tierHolder) {
-        super(props.stacksTo(1).component(ToolsDataComponents.BUCKET_CONTENTS.get(), new BucketContents(tierHolder.getMaxBuckets())));
+    public BetterBucketItem(Properties props, ToolTier tierHolder, BucketConfig bucketConfig) {
+        super(props.stacksTo(1).component(ToolsDataComponents.BUCKET_CONTENTS.get(), new BucketContents(bucketConfig.getMaxBuckets())));
 
         this.tierHolder = tierHolder;
+        this.bucketConfig = bucketConfig;
 
         DispenserBlock.registerBehavior(this, DispenseBucketHandler.getInstance());
     }
@@ -76,7 +79,7 @@ public class BetterBucketItem extends Item implements ITiered {
     }
 
     @Override
-    public ItemTierConfig getTierHolder() {
+    public ToolTier getToolTier() {
         return tierHolder;
     }
 
@@ -86,7 +89,7 @@ public class BetterBucketItem extends Item implements ITiered {
     }
 
     public int getMaximumMillibuckets() {
-        return this.tierHolder.getMaxBuckets() * getBucketAmount();
+        return this.bucketConfig.getMaxBuckets() * getBucketAmount();
     }
 
     @Override
@@ -212,7 +215,7 @@ public class BetterBucketItem extends Item implements ITiered {
      * {@code maxPickupTemp} is for: a wooden bucket stands 1000K, so lava at 1300K stays where it is.
      */
     public boolean canHoldTemperatureOf(Fluid fluid) {
-        return fluidTemperature(fluid) <= this.tierHolder.getMaxPickupTemp();
+        return fluidTemperature(fluid) <= this.bucketConfig.getMaxPickupTemp();
     }
 
     /**
@@ -323,11 +326,11 @@ public class BetterBucketItem extends Item implements ITiered {
      * from its repair tag - {@link #materialToBreakInto(Iterable)} picks which member.
      */
     public ItemStack getBreakStack() {
-        if (!this.tierHolder.getBreaksAfterUse()) {
+        if (!this.bucketConfig.getBreaksAfterUse()) {
             return ItemStack.EMPTY;
         }
 
-        Holder<Item> material = materialToBreakInto(BuiltInRegistries.ITEM.getTagOrEmpty(this.tierHolder.material().repairItems()));
+        Holder<Item> material = materialToBreakInto(BuiltInRegistries.ITEM.getTagOrEmpty(this.tierHolder.getRepairItems()));
         return material == null ? ItemStack.EMPTY : new ItemStack(material, 2);
     }
 
@@ -362,7 +365,7 @@ public class BetterBucketItem extends Item implements ITiered {
 
     public ItemStack tryBreakBucket(ItemStack stack) {
         if (getAmount(stack) <= 0) {
-            if (this.tierHolder.getBreaksAfterUse()) {
+            if (this.bucketConfig.getBreaksAfterUse()) {
                 return this.getBreakStack();
             } else if (!this.getEmptyStack().isEmpty()) {
                 return this.getEmptyStack().copy();

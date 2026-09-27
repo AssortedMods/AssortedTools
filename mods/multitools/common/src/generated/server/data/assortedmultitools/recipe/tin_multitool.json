@@ -1,0 +1,98 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:and",
+      "values": [
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:ingots/tin"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:pickaxes/tin"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:shovels/tin"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:axes/tin"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:hoes/tin"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:swords/tin"
+        }
+      ]
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:and",
+      "values": [
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:ingots/tin"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:pickaxes/tin"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:shovels/tin"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:axes/tin"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:hoes/tin"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:swords/tin"
+          ]
+        }
+      ]
+    }
+  ],
+  "ingredients": [
+    "#c:pickaxes/tin",
+    "#c:shovels/tin",
+    "#c:axes/tin",
+    "#c:hoes/tin",
+    "#c:swords/tin",
+    "#c:ingots/tin",
+    "#c:ingots/tin",
+    "#c:ingots/tin",
+    "#c:ingots/tin"
+  ],
+  "result": {
+    "id": "assortedmultitools:tin_multitool"
+  }
+}

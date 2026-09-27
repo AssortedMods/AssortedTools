@@ -1,8 +1,8 @@
 package com.grim3212.assorted.tools.common.item;
 
-import com.grim3212.assorted.tools.api.item.ToolsArmorMaterials;
+import com.grim3212.assorted.lib.core.tool.ConfigurableArmorItem;
+import com.grim3212.assorted.tools.ToolsCommonMod;
 import com.grim3212.assorted.tools.common.effect.ToolsMobEffects;
-import com.grim3212.assorted.tools.common.item.configurable.ConfigurableArmorItem;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
@@ -32,7 +32,7 @@ public class LavaArmorItem extends ConfigurableArmorItem {
     private static final int WEAR_INTERVAL = 80;
 
     public LavaArmorItem(ArmorType type, Properties builderIn) {
-        super(ToolsArmorMaterials.LAVA, type, builderIn);
+        super(ToolsCommonMod.COMMON_CONFIG.lavaSuitArmorMaterial, type, builderIn);
     }
 
     @Override

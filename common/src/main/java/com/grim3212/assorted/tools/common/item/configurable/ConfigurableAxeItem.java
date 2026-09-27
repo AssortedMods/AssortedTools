@@ -1,7 +1,7 @@
 package com.grim3212.assorted.tools.common.item.configurable;
 
-import com.grim3212.assorted.tools.api.item.ITiered;
-import com.grim3212.assorted.tools.config.ItemTierConfig;
+import com.grim3212.assorted.lib.core.tool.ITiered;
+import com.grim3212.assorted.lib.core.tool.ToolTier;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 
@@ -11,15 +11,15 @@ import net.minecraft.world.item.Item;
  */
 public class ConfigurableAxeItem extends AxeItem implements ITiered {
 
-    private final ItemTierConfig tierHolder;
+    private final ToolTier tierHolder;
 
-    public ConfigurableAxeItem(ItemTierConfig tierHolder, Item.Properties builder) {
+    public ConfigurableAxeItem(ToolTier tierHolder, Item.Properties builder) {
         super(tierHolder.material(), tierHolder.getAxeDamage(), tierHolder.getAxeSpeed(), builder);
         this.tierHolder = tierHolder;
     }
 
     @Override
-    public ItemTierConfig getTierHolder() {
+    public ToolTier getToolTier() {
         return tierHolder;
     }
 }

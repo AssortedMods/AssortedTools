@@ -33,11 +33,9 @@ public class ChickenJumpHandler {
     private static final Holder<SoundEvent> CHICKEN_AMBIENT = SoundEvents.CHICKEN_SOUNDS.get(ChickenSoundVariants.SoundSet.CLASSIC).adultSounds().ambientSound();
 
     public static void tick(Minecraft mc) {
-        if (ToolsCommonMod.COMMON_CONFIG.chickenSuitEnabled.get()) {
-            Screen screen = mc.gui.screen();
-            if (screen == null) {
-                onTickInGame(mc);
-            }
+        Screen screen = mc.gui.screen();
+        if (screen == null) {
+            onTickInGame(mc);
         }
     }
 

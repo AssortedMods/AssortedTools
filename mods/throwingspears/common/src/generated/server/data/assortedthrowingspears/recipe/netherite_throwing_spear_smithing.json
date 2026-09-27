@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "#c:ingots/netherite",
+  "base": "assortedthrowingspears:diamond_throwing_spear",
+  "result": {
+    "id": "assortedthrowingspears:netherite_throwing_spear"
+  },
+  "template": "minecraft:netherite_upgrade_smithing_template"
+}

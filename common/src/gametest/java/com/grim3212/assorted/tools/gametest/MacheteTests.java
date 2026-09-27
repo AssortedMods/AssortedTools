@@ -1,7 +1,7 @@
 package com.grim3212.assorted.tools.gametest;
 
+import com.grim3212.assorted.lib.core.tool.ITiered;
 import com.grim3212.assorted.lib.util.LibCommonTags;
-import com.grim3212.assorted.tools.api.item.ITiered;
 import com.grim3212.assorted.tools.common.item.ToolsItems;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
@@ -43,7 +43,7 @@ final class MacheteTests {
     private static void macheteCutsPlantsAtItsMaterialSpeed(GameTestHelper helper) {
         List<String> wrong = new ArrayList<>();
         for (Item item : ToolsItems.machetes()) {
-            float speed = Math.max(((ITiered) item).getTierHolder().getEfficiency(), 1.5F);
+            float speed = Math.max(((ITiered) item).getToolTier().getEfficiency(), 1.5F);
             ItemStack stack = new ItemStack(item);
             for (var state : List.of(Blocks.OAK_LEAVES.defaultBlockState(), Blocks.WOOL.white().defaultBlockState(), Blocks.CACTUS.defaultBlockState(), Blocks.VINE.defaultBlockState())) {
                 if (stack.getDestroySpeed(state) != speed) {

@@ -1,0 +1,31 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:ingots/copper"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:ingots/copper"
+      ]
+    }
+  ],
+  "key": {
+    "C": "#c:ingots/copper",
+    "L": "#c:leathers"
+  },
+  "pattern": [
+    "L L",
+    "LCL",
+    "LLL"
+  ],
+  "result": {
+    "id": "assortedsuits:scuba_chestplate"
+  }
+}

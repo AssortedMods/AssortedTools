@@ -39,10 +39,7 @@ public class ChickenSuitConversionHandler {
             return;
         }
 
-        // Enchantments are data now, so what an enchantment may be applied to lives in its
-        // definition and has to be resolved through the registry rather than a canEnchant override.
-        // Absent entirely, not just unobtainable, while the chicken suit part is disabled - the
-        // definition is conditional on it.
+        // Enchantments are data, so it is looked up, and a datapack may have removed it.
         Optional<Holder.Reference<Enchantment>> chickenJumpHolder = event.getPlayer().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).get(ToolsEnchantments.CHICKEN_JUMP);
         if (chickenJumpHolder.isEmpty() || !IItemEnchantmentCondition.supportedByDefault(left, chickenJumpHolder.get())) {
             return;

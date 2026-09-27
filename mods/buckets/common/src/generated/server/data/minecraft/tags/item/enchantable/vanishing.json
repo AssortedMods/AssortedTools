@@ -1,0 +1,26 @@
+{
+  "values": [
+    "assortedbuckets:wood_bucket",
+    "assortedbuckets:stone_bucket",
+    "assortedbuckets:gold_bucket",
+    "assortedbuckets:diamond_bucket",
+    "assortedbuckets:netherite_bucket",
+    "assortedbuckets:tin_bucket",
+    "assortedbuckets:copper_bucket",
+    "assortedbuckets:silver_bucket",
+    "assortedbuckets:aluminum_bucket",
+    "assortedbuckets:nickel_bucket",
+    "assortedbuckets:platinum_bucket",
+    "assortedbuckets:lead_bucket",
+    "assortedbuckets:bronze_bucket",
+    "assortedbuckets:electrum_bucket",
+    "assortedbuckets:invar_bucket",
+    "assortedbuckets:steel_bucket",
+    "assortedbuckets:ruby_bucket",
+    "assortedbuckets:amethyst_bucket",
+    "assortedbuckets:sapphire_bucket",
+    "assortedbuckets:topaz_bucket",
+    "assortedbuckets:emerald_bucket",
+    "assortedbuckets:peridot_bucket"
+  ]
+}

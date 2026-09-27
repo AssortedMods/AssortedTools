@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "minecraft:fire_charge",
+    "D": "#c:gems/diamond",
+    "S": "#c:rods/blaze"
+  },
+  "pattern": [
+    "D",
+    "C",
+    "S"
+  ],
+  "result": {
+    "id": "assortedstaffs:phoenix_staff"
+  }
+}

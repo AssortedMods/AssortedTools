@@ -1,8 +1,8 @@
 package com.grim3212.assorted.tools.common.item;
 
+import com.grim3212.assorted.lib.core.item.ISwitchModes;
 import com.grim3212.assorted.lib.util.NBTHelper;
 import com.grim3212.assorted.tools.Constants;
-import com.grim3212.assorted.tools.api.item.ISwitchModes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;

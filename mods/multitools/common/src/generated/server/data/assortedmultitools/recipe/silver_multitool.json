@@ -1,0 +1,98 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:and",
+      "values": [
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:ingots/silver"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:pickaxes/silver"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:shovels/silver"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:axes/silver"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:hoes/silver"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:swords/silver"
+        }
+      ]
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:and",
+      "values": [
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:ingots/silver"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:pickaxes/silver"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:shovels/silver"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:axes/silver"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:hoes/silver"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:swords/silver"
+          ]
+        }
+      ]
+    }
+  ],
+  "ingredients": [
+    "#c:pickaxes/silver",
+    "#c:shovels/silver",
+    "#c:axes/silver",
+    "#c:hoes/silver",
+    "#c:swords/silver",
+    "#c:ingots/silver",
+    "#c:ingots/silver",
+    "#c:ingots/silver",
+    "#c:ingots/silver"
+  ],
+  "result": {
+    "id": "assortedmultitools:silver_multitool"
+  }
+}

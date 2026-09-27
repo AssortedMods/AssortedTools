@@ -1,0 +1,11 @@
+// 26.2	2026-09-26T15:45:39.0821205	Tags for minecraft:item mod id assortedmachetes
+206fffc2cc6f9aa87644e71a0529c738047a3ced data/assortedmachetes/tags/item/machetes.json
+b1253a91814d77d977f75757ff3645121a9a4bcc data/c/tags/item/tools/melee_weapon.json
+206fffc2cc6f9aa87644e71a0529c738047a3ced data/minecraft/tags/item/enchantable/durability.json
+206fffc2cc6f9aa87644e71a0529c738047a3ced data/minecraft/tags/item/enchantable/fire_aspect.json
+206fffc2cc6f9aa87644e71a0529c738047a3ced data/minecraft/tags/item/enchantable/melee_weapon.json
+206fffc2cc6f9aa87644e71a0529c738047a3ced data/minecraft/tags/item/enchantable/sharp_weapon.json
+206fffc2cc6f9aa87644e71a0529c738047a3ced data/minecraft/tags/item/enchantable/vanishing.json
+206fffc2cc6f9aa87644e71a0529c738047a3ced data/minecraft/tags/item/enchantable/weapon.json
+900c1de3b6741d4a7169aee607d10daad13813bf data/minecraft/tags/item/piglin_loved.json
+b1253a91814d77d977f75757ff3645121a9a4bcc data/minecraft/tags/item/swords.json

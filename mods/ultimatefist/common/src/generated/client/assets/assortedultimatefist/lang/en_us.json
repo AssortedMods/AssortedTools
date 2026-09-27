@@ -1,0 +1,21 @@
+{
+  "item.assortedultimatefist.a_fragment": "§8A§r Fragment",
+  "item.assortedultimatefist.e_fragment": "§dE§r Fragment",
+  "item.assortedultimatefist.i_fragment": "§5I§r Fragment",
+  "item.assortedultimatefist.l_fragment": "§2L§r Fragment",
+  "item.assortedultimatefist.m_fragment": "§6M§r Fragment",
+  "item.assortedultimatefist.missing_fragment": "§k???§r Fragment",
+  "item.assortedultimatefist.t_fragment": "§4T§r Fragment",
+  "item.assortedultimatefist.u_fragment": "§1U§r Fragment",
+  "item.assortedultimatefist.ultimate_fist": "Ultimate Fist",
+  "itemGroup.assortedtools": "Assorted Tools",
+  "manual.assortedtools.chapter.ultimate": "The Ultimate Fist",
+  "manual.assortedtools.chapter.ultimate.fist": "All eight fragments and a nether star make the ultimate fist. It is extremely powerful and out of the box it mines very fast and hits hard enough to kill most things in one hit.",
+  "manual.assortedtools.chapter.ultimate.fist.title": "The Ultimate Fist",
+  "manual.assortedtools.chapter.ultimate.fragments": "Eight fragments of something an older civilization built, found in chests across Minecraft.\n\nLaid out in order they spell out what they came from.",
+  "manual.assortedtools.chapter.ultimate.fragments.title": "Fragments",
+  "manual.assortedtools.description": "Tool and armor sets for every material, buckets that hold more than one, throwing weapons and the wands that do the digging for you.",
+  "manual.assortedtools.title": "Assorted Tools",
+  "tag.item.assortedultimatefist.ultimate_fragments": "Ultimate Fragments",
+  "tooltip.ultimate.fragment": "A fragment of a powerful tool from an ancient civilization"
+}

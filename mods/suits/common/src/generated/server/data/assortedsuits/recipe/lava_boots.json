@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:ingots/netherite"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:ingots/netherite"
+      ]
+    }
+  ],
+  "key": {
+    "B": "#c:rods/blaze",
+    "M": "minecraft:magma_cream"
+  },
+  "pattern": [
+    "M M",
+    "MBM"
+  ],
+  "result": {
+    "id": "assortedsuits:lava_boots"
+  }
+}

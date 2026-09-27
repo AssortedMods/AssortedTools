@@ -1,0 +1,17 @@
+{
+  "pages": [
+    {
+      "type": "assortedlib:recipe",
+      "id": "hammers",
+      "interval": 50,
+      "recipes": [
+        "assortedhammers:wood_hammer",
+        "assortedhammers:iron_hammer",
+        "assortedhammers:netherite_hammer"
+      ],
+      "text": "manual.assortedtools.chapter.hammers.hammers",
+      "title": "manual.assortedtools.chapter.hammers.hammers.title"
+    }
+  ],
+  "sort_order": 20
+}

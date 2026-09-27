@@ -1,7 +1,7 @@
 package com.grim3212.assorted.tools.common.item;
 
-import com.grim3212.assorted.tools.common.item.configurable.ConfigurableTieredItem;
-import com.grim3212.assorted.tools.config.ItemTierConfig;
+import com.grim3212.assorted.lib.core.tool.ConfigurableTieredItem;
+import com.grim3212.assorted.lib.core.tool.ToolTier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class HammerItem extends ConfigurableTieredItem {
 
-    public HammerItem(ItemTierConfig tierHolder, Properties properties) {
+    public HammerItem(ToolTier tierHolder, Properties properties) {
         super(tierHolder, properties);
     }
 

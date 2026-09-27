@@ -1,21 +1,8 @@
 {
   "neoforge:conditions": [
     {
-      "type": "neoforge:and",
-      "values": [
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "betterbuckets"
-        },
-        {
-          "type": "assortedlib:item_tag_populated",
-          "tag": "c:gems/amethyst"
-        },
-        {
-          "type": "assortedlib:part_enabled",
-          "part": "extramaterials"
-        }
-      ]
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:gems/amethyst"
     }
   ],
   "parent": "minecraft:recipes/root",
@@ -39,23 +26,10 @@
   },
   "fabric:load_conditions": [
     {
-      "condition": "fabric:and",
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
       "values": [
-        {
-          "condition": "assortedlib:part_enabled",
-          "part": "betterbuckets"
-        },
-        {
-          "condition": "fabric:tags_populated",
-          "registry": "minecraft:item",
-          "values": [
-            "c:gems/amethyst"
-          ]
-        },
-        {
-          "condition": "assortedlib:part_enabled",
-          "part": "extramaterials"
-        }
+        "c:gems/amethyst"
       ]
     }
   ],

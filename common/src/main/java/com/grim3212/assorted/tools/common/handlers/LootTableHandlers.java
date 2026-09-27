@@ -54,22 +54,16 @@ public class LootTableHandlers {
     }
 
     public static void init(LootTableModifyEvent event) {
-        if (ToolsCommonMod.COMMON_CONFIG.ultimateFistEnabled.get()) {
-            inject(event, OVERWORLD_UF_CHESTS, OVERWORLD_UF_LOOT);
-            inject(event, NETHER_UF_CHESTS, NETHER_UF_LOOT);
-            inject(event, END_UF_CHESTS, END_UF_LOOT);
-        }
+        inject(event, OVERWORLD_UF_CHESTS, OVERWORLD_UF_LOOT);
+        inject(event, NETHER_UF_CHESTS, NETHER_UF_LOOT);
+        inject(event, END_UF_CHESTS, END_UF_LOOT);
 
-        if (ToolsCommonMod.COMMON_CONFIG.staffsEnabled.get()) {
-            inject(event, NEPTUNE_STAFF_CHESTS, NEPTUNE_STAFF_LOOT);
-            inject(event, PHOENIX_STAFF_CHESTS, PHOENIX_STAFF_LOOT);
-            inject(event, EntityTypes.STRAY.getDefaultLootTable().map(ResourceKey::identifier).stream().toList(), FROST_ROD_STRAY_LOOT);
-            inject(event, monsterTables(), FROST_ROD_SNOWY_LOOT);
-        }
+        inject(event, NEPTUNE_STAFF_CHESTS, NEPTUNE_STAFF_LOOT);
+        inject(event, PHOENIX_STAFF_CHESTS, PHOENIX_STAFF_LOOT);
+        inject(event, EntityTypes.STRAY.getDefaultLootTable().map(ResourceKey::identifier).stream().toList(), FROST_ROD_STRAY_LOOT);
+        inject(event, monsterTables(), FROST_ROD_SNOWY_LOOT);
 
-        if (ToolsCommonMod.COMMON_CONFIG.powerStaffEnabled.get()) {
-            inject(event, POWER_STAFF_CHESTS, POWER_STAFF_LOOT);
-        }
+        inject(event, POWER_STAFF_CHESTS, POWER_STAFF_LOOT);
     }
 
     private static void inject(LootTableModifyEvent event, Collection<Identifier> tables, ResourceKey<LootTable> loot) {

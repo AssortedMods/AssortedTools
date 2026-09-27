@@ -1,7 +1,7 @@
 package com.grim3212.assorted.tools.common.item.configurable;
 
-import com.grim3212.assorted.tools.api.item.ITiered;
-import com.grim3212.assorted.tools.config.ItemTierConfig;
+import com.grim3212.assorted.lib.core.tool.ITiered;
+import com.grim3212.assorted.lib.core.tool.ToolTier;
 import net.minecraft.world.item.Item;
 
 /**
@@ -10,15 +10,15 @@ import net.minecraft.world.item.Item;
  */
 public class ConfigurablePickaxeItem extends Item implements ITiered {
 
-    private final ItemTierConfig tierHolder;
+    private final ToolTier tierHolder;
 
-    public ConfigurablePickaxeItem(ItemTierConfig tierHolder, Item.Properties builder) {
+    public ConfigurablePickaxeItem(ToolTier tierHolder, Item.Properties builder) {
         super(builder.pickaxe(tierHolder.material(), ConfigurableTools.PICKAXE_DAMAGE, ConfigurableTools.PICKAXE_SPEED));
         this.tierHolder = tierHolder;
     }
 
     @Override
-    public ItemTierConfig getTierHolder() {
+    public ToolTier getToolTier() {
         return tierHolder;
     }
 }

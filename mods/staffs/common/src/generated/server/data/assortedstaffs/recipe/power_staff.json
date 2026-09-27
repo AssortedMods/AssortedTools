@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "D": "#c:gems/diamond",
+    "I": "#c:ingots/iron",
+    "R": "#c:dusts/redstone"
+  },
+  "pattern": [
+    "IDI",
+    "IRI",
+    " I "
+  ],
+  "result": {
+    "id": "assortedstaffs:power_staff"
+  }
+}

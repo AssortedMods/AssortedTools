@@ -1,10 +1,4 @@
 {
-  "conditions": [
-    {
-      "type": "assortedlib:part_enabled",
-      "part": "wands"
-    }
-  ],
   "pages": [
     {
       "type": "assortedlib:text",

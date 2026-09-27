@@ -1,7 +1,7 @@
 package com.grim3212.assorted.tools.common.item.configurable;
 
-import com.grim3212.assorted.tools.api.item.ITiered;
-import com.grim3212.assorted.tools.config.ItemTierConfig;
+import com.grim3212.assorted.lib.core.tool.ITiered;
+import com.grim3212.assorted.lib.core.tool.ToolTier;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
 
@@ -11,15 +11,15 @@ import net.minecraft.world.item.Item;
  */
 public class ConfigurableHoeItem extends HoeItem implements ITiered {
 
-    private final ItemTierConfig tierHolder;
+    private final ToolTier tierHolder;
 
-    public ConfigurableHoeItem(ItemTierConfig tierHolder, Item.Properties properties) {
+    public ConfigurableHoeItem(ToolTier tierHolder, Item.Properties properties) {
         super(tierHolder.material(), -tierHolder.getHarvestLevel(), ConfigurableTools.HOE_SPEED, properties);
         this.tierHolder = tierHolder;
     }
 
     @Override
-    public ItemTierConfig getTierHolder() {
+    public ToolTier getToolTier() {
         return tierHolder;
     }
 }

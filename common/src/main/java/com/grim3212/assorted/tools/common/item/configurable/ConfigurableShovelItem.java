@@ -1,7 +1,7 @@
 package com.grim3212.assorted.tools.common.item.configurable;
 
-import com.grim3212.assorted.tools.api.item.ITiered;
-import com.grim3212.assorted.tools.config.ItemTierConfig;
+import com.grim3212.assorted.lib.core.tool.ITiered;
+import com.grim3212.assorted.lib.core.tool.ToolTier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ShovelItem;
 
@@ -11,15 +11,15 @@ import net.minecraft.world.item.ShovelItem;
  */
 public class ConfigurableShovelItem extends ShovelItem implements ITiered {
 
-    private final ItemTierConfig tierHolder;
+    private final ToolTier tierHolder;
 
-    public ConfigurableShovelItem(ItemTierConfig tierHolder, Item.Properties builder) {
+    public ConfigurableShovelItem(ToolTier tierHolder, Item.Properties builder) {
         super(tierHolder.material(), ConfigurableTools.SHOVEL_DAMAGE, ConfigurableTools.SHOVEL_SPEED, builder);
         this.tierHolder = tierHolder;
     }
 
     @Override
-    public ItemTierConfig getTierHolder() {
+    public ToolTier getToolTier() {
         return tierHolder;
     }
 }

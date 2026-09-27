@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:gems/ruby"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:gems/ruby"
+      ]
+    }
+  ],
+  "key": {
+    "I": "#c:gems/ruby",
+    "L": "#c:leathers"
+  },
+  "pattern": [
+    "LI",
+    "I "
+  ],
+  "result": {
+    "id": "assortedshears:ruby_shears"
+  }
+}

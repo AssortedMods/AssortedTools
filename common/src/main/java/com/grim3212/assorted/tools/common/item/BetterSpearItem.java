@@ -1,9 +1,9 @@
 package com.grim3212.assorted.tools.common.item;
 
 import com.grim3212.assorted.lib.core.item.IItemEnchantmentCondition;
-import com.grim3212.assorted.tools.api.item.ITiered;
+import com.grim3212.assorted.lib.core.tool.ITiered;
+import com.grim3212.assorted.lib.core.tool.ToolTier;
 import com.grim3212.assorted.tools.common.entity.BetterSpearEntity;
-import com.grim3212.assorted.tools.config.ItemTierConfig;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundEvents;
@@ -34,9 +34,9 @@ public class BetterSpearItem extends TridentItem implements ITiered, IItemEnchan
     private static final float ATTACK_DAMAGE_BASE = 2.0F;
     private static final float ATTACK_SPEED = -2.4F;
 
-    private final ItemTierConfig tierHolder;
+    private final ToolTier tierHolder;
 
-    public BetterSpearItem(Properties props, ItemTierConfig tierHolder) {
+    public BetterSpearItem(Properties props, ToolTier tierHolder) {
         super(props.durability(tierHolder.getMaxUses())
                 .repairable(tierHolder.material().repairItems())
                 .enchantable(tierHolder.getEnchantability())
@@ -46,7 +46,7 @@ public class BetterSpearItem extends TridentItem implements ITiered, IItemEnchan
         this.tierHolder = tierHolder;
     }
 
-    private static ItemAttributeModifiers attributes(ItemTierConfig tierHolder) {
+    private static ItemAttributeModifiers attributes(ToolTier tierHolder) {
         return ItemAttributeModifiers.builder()
                 .add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, ATTACK_DAMAGE_BASE + tierHolder.getDamage(), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
                 .add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, ATTACK_SPEED, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
@@ -105,7 +105,7 @@ public class BetterSpearItem extends TridentItem implements ITiered, IItemEnchan
     }
 
     @Override
-    public ItemTierConfig getTierHolder() {
+    public ToolTier getToolTier() {
         return tierHolder;
     }
 }

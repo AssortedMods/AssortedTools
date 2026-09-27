@@ -1,9 +1,10 @@
 package com.grim3212.assorted.tools.common.item;
 
 import com.grim3212.assorted.lib.annotations.LoaderImplement;
+import com.grim3212.assorted.lib.core.tool.ITiered;
+import com.grim3212.assorted.lib.core.tool.ToolTier;
 import com.grim3212.assorted.lib.platform.Services;
-import com.grim3212.assorted.tools.api.item.ITiered;
-import com.grim3212.assorted.tools.config.ItemTierConfig;
+import com.grim3212.assorted.tools.config.BucketConfig;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,13 +24,13 @@ public class BetterMilkBucketItem extends Item implements ITiered {
     private final Supplier<BetterBucketItem> parent;
 
     /**
-     * @param tier the parent's tier, for the capacity in its tooltip; passed in because the parent
-     *             is not read while items are still being registered
+     * @param bucket the parent's bucket settings, for the capacity in its tooltip; passed in because the
+     *               parent is not read while items are still being registered
      */
-    public BetterMilkBucketItem(Supplier<BetterBucketItem> parent, ItemTierConfig tier, Properties props) {
+    public BetterMilkBucketItem(Supplier<BetterBucketItem> parent, BucketConfig bucket, Properties props) {
         // The drink animation, its duration, the swallowing sounds and clearing the drinker's
         // effects are all the consumable component's job now; there is nothing left to override.
-        super(props.stacksTo(1).component(DataComponents.CONSUMABLE, Consumables.MILK_BUCKET).component(ToolsDataComponents.BUCKET_CONTENTS.get(), new BucketContents(tier.getMaxBuckets())));
+        super(props.stacksTo(1).component(DataComponents.CONSUMABLE, Consumables.MILK_BUCKET).component(ToolsDataComponents.BUCKET_CONTENTS.get(), new BucketContents(bucket.getMaxBuckets())));
         this.parent = parent;
     }
 
@@ -38,8 +39,8 @@ public class BetterMilkBucketItem extends Item implements ITiered {
     }
 
     @Override
-    public ItemTierConfig getTierHolder() {
-        return this.getParent().getTierHolder();
+    public ToolTier getToolTier() {
+        return this.getParent().getToolTier();
     }
 
     @Override

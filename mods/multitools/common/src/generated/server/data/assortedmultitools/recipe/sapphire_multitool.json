@@ -1,0 +1,98 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:and",
+      "values": [
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:gems/sapphire"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:pickaxes/sapphire"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:shovels/sapphire"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:axes/sapphire"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:hoes/sapphire"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:swords/sapphire"
+        }
+      ]
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:and",
+      "values": [
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:gems/sapphire"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:pickaxes/sapphire"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:shovels/sapphire"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:axes/sapphire"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:hoes/sapphire"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:swords/sapphire"
+          ]
+        }
+      ]
+    }
+  ],
+  "ingredients": [
+    "#c:pickaxes/sapphire",
+    "#c:shovels/sapphire",
+    "#c:axes/sapphire",
+    "#c:hoes/sapphire",
+    "#c:swords/sapphire",
+    "#c:gems/sapphire",
+    "#c:gems/sapphire",
+    "#c:gems/sapphire",
+    "#c:gems/sapphire"
+  ],
+  "result": {
+    "id": "assortedmultitools:sapphire_multitool"
+  }
+}

@@ -1,10 +1,9 @@
 package com.grim3212.assorted.tools.client;
 
+import com.grim3212.assorted.lib.client.key.ModeSwitchKey;
 import com.grim3212.assorted.lib.platform.ClientServices;
-import com.grim3212.assorted.tools.Constants;
 import com.grim3212.assorted.tools.client.color.FluidContainerTintSource;
 import com.grim3212.assorted.tools.client.handlers.ChickenJumpHandler;
-import com.grim3212.assorted.tools.client.handlers.KeyBindHandler;
 import com.grim3212.assorted.tools.client.model.fluidcontainer.FluidContainerItemModel;
 import com.grim3212.assorted.tools.client.render.entity.BetterSpearRenderer;
 import com.grim3212.assorted.tools.client.render.entity.BoomerangRenderer;
@@ -12,24 +11,12 @@ import com.grim3212.assorted.tools.client.render.item.SpearSpecialRenderer;
 import com.grim3212.assorted.tools.client.render.model.SpearModel;
 import com.grim3212.assorted.tools.client.render.model.ToolsModelLayers;
 import com.grim3212.assorted.tools.common.entity.ToolsEntities;
-import com.mojang.blaze3d.platform.InputConstants;
-import net.minecraft.client.KeyMapping;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.resources.Identifier;
 
 public class ToolsClient {
 
-    // A key mapping's group is a KeyMapping.Category id whose label is derived from the id itself, so
-    // this needs a "key.category.assortedtools.general" entry in the lang file.
-    public static final Identifier KEY_CATEGORY = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "general");
-
-    public static KeyMapping TOOL_SWITCH_MODES;
-
     public static void init() {
-        TOOL_SWITCH_MODES = ClientServices.KEYBINDS.createNew("key.assortedtools.tool_switch_modes", ClientServices.KEYBINDS.getInGameKeyConflictContext(), InputConstants.Type.KEYSYM, InputConstants.KEY_Z, KEY_CATEGORY);
-        ClientServices.CLIENT.registerKeyMapping(TOOL_SWITCH_MODES);
-
-        ClientServices.CLIENT.registerClientTickStart(KeyBindHandler::tick);
+        ModeSwitchKey.enable();
         ClientServices.CLIENT.registerClientTickEnd(ChickenJumpHandler::tick);
 
         ClientServices.CLIENT.registerEntityLayer(ToolsModelLayers.SPEAR, SpearModel::createLayer);

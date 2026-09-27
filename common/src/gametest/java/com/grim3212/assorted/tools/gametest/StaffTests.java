@@ -1,17 +1,18 @@
 package com.grim3212.assorted.tools.gametest;
 
+import com.grim3212.assorted.lib.core.network.CycleModePacket;
 import com.grim3212.assorted.lib.util.NBTHelper;
 import com.grim3212.assorted.tools.common.item.FrozenMobs;
 import com.grim3212.assorted.tools.common.item.PowerStaffItem;
 import com.grim3212.assorted.tools.common.item.StaffMode;
 import com.grim3212.assorted.tools.common.item.ToolsDataComponents;
 import com.grim3212.assorted.tools.common.item.ToolsItems;
-import com.grim3212.assorted.tools.common.network.ToolCycleModesPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityTypes;
@@ -23,7 +24,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.storage.TagValueInput;
 import net.minecraft.world.level.storage.TagValueOutput;
-import net.minecraft.util.ProblemReporter;
 
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -62,12 +62,12 @@ final class StaffTests {
         helper.assertTrue(tooltipKeys(helper, player.getMainHandItem(), ToolsDataComponents.STAFF_MODE_INFO.get()).contains("assortedtools.staff.current"), "the staff tooltip has no mode line");
 
         for (StaffMode expected : List.of(StaffMode.FREEZE_MOBS, StaffMode.FREEZE_WATER, StaffMode.PLACE_WATER)) {
-            ToolCycleModesPacket.handle(new ToolCycleModesPacket(InteractionHand.MAIN_HAND), player);
+            CycleModePacket.handle(new CycleModePacket(InteractionHand.MAIN_HAND), player);
             helper.assertValueEqual(NBTHelper.getString(player.getMainHandItem(), StaffMode.KEY), expected.getSerializedName(), "the Neptune staff's mode after a cycle");
         }
 
         player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(ToolsItems.POWER_STAFF.get()));
-        ToolCycleModesPacket.handle(new ToolCycleModesPacket(InteractionHand.MAIN_HAND), player);
+        CycleModePacket.handle(new CycleModePacket(InteractionHand.MAIN_HAND), player);
         helper.assertValueEqual(ToolsItems.POWER_STAFF.get().getMode(player.getMainHandItem()), StaffMode.FLOAT_PULL, "the power staff's mode after a cycle");
         helper.assertValueEqual(player.getMainHandItem().getOrDefault(DataComponents.CUSTOM_MODEL_DATA, CustomModelData.EMPTY).getString(0), PowerStaffItem.PULL_MODEL, "the pull model flag");
 

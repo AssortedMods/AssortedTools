@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedshears:shears_cut_coral_with_coral_cutter",
+  "structure": "assortedshears:test_box",
+  "max_ticks": 1,
+  "setup_ticks": 0,
+  "required": true
+}

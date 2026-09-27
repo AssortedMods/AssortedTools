@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "#c:gunpowders",
+    "assortedstaffs:frost_powder",
+    "minecraft:snowball"
+  ],
+  "result": {
+    "count": 3,
+    "id": "assortedstaffs:ice_charge"
+  }
+}

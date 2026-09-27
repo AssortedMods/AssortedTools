@@ -1,10 +1,4 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "assortedlib:part_enabled",
-      "part": "powerstaff"
-    }
-  ],
   "parent": "minecraft:recipes/root",
   "criteria": {
     "has_diamond": {
@@ -24,12 +18,6 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
-  "fabric:load_conditions": [
-    {
-      "condition": "assortedlib:part_enabled",
-      "part": "powerstaff"
-    }
-  ],
   "requirements": [
     [
       "has_the_recipe",

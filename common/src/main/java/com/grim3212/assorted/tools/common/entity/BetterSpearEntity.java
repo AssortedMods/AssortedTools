@@ -67,7 +67,7 @@ public class BetterSpearEntity extends AbstractArrow {
     private float getDamage(ItemStack stack) {
         Item item = stack.getItem();
         if (item instanceof BetterSpearItem) {
-            return 5.0F + ((BetterSpearItem) item).getTierHolder().getDamage();
+            return 5.0F + ((BetterSpearItem) item).getToolTier().getDamage();
         }
         return 5.0F;
     }

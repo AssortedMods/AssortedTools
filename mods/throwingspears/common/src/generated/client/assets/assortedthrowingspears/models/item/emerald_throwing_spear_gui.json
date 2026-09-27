@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "assortedthrowingspears:item/emerald_throwing_spear"
+  }
+}

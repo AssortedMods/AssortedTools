@@ -2,7 +2,6 @@ package com.grim3212.assorted.tools.gametest;
 
 import com.grim3212.assorted.tools.api.item.SpearStats;
 import com.grim3212.assorted.tools.common.item.ToolsItems;
-import net.minecraft.world.item.component.KineticWeapon;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.component.TypedDataComponent;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -12,6 +11,8 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.KineticWeapon;
+
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -47,7 +48,7 @@ final class SpearTests {
             helper.assertValueEqual(stack.getMaxDamage(), group.tier.getMaxUses(), name + " durability, against its material's");
 
             // The configured lunge values are what the components were built from.
-            SpearStats configured = group.tier.getSpearStats();
+            SpearStats configured = group.spear.getSpearStats();
             KineticWeapon lunge = stack.get(DataComponents.KINETIC_WEAPON);
             helper.assertValueEqual(lunge.damageMultiplier(), (float) configured.damageMultiplier(), name + " lunge damage multiplier, against its configuration");
             // Vanilla turns seconds into ticks in float arithmetic, so the expectation must too.

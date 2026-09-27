@@ -1,21 +1,9 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "assortedlib:part_enabled",
-      "part": "throwingspears"
-    }
-  ],
   "anvil_cost": 2,
   "description": {
     "translate": "enchantment.assortedtools.flammable"
   },
   "exclusive_set": "assortedtools:unstable",
-  "fabric:load_conditions": [
-    {
-      "condition": "assortedlib:part_enabled",
-      "part": "throwingspears"
-    }
-  ],
   "max_cost": {
     "base": 30,
     "per_level_above_first": 0
