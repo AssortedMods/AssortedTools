@@ -2,8 +2,8 @@ package com.grim3212.assorted.gearsets.common.handlers;
 
 import com.grim3212.assorted.gearsets.Constants;
 import com.grim3212.assorted.gearsets.common.item.GearSetsItems;
+import com.grim3212.assorted.lib.core.creative.CreativeTabItems;
 import com.grim3212.assorted.lib.core.creative.SharedCreativeTabs;
-import com.grim3212.assorted.lib.core.tool.ToolTiers;
 import com.grim3212.assorted.lib.family.Families;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
@@ -21,10 +21,8 @@ public class GearSetsCreativeItems {
     }
 
     private static List<ItemStack> items() {
-        return GearSetsItems.MATERIALS.values().stream()
-                .filter(set -> ToolTiers.get().shown(set.tier()))
-                .flatMap(set -> set.items().stream())
-                .map(ItemStack::new)
-                .toList();
+        CreativeTabItems items = new CreativeTabItems();
+        GearSetsItems.MATERIALS.values().forEach(set -> set.items().forEach(item -> items.addIfObtainable(item, set.tier().getRepairItems())));
+        return items.getItems();
     }
 }

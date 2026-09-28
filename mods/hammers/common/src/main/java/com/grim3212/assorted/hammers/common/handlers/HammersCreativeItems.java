@@ -1,10 +1,9 @@
 package com.grim3212.assorted.hammers.common.handlers;
 
 import com.grim3212.assorted.hammers.Constants;
-import com.grim3212.assorted.hammers.common.item.HammerItem;
 import com.grim3212.assorted.hammers.common.item.HammersItems;
+import com.grim3212.assorted.lib.core.creative.CreativeTabItems;
 import com.grim3212.assorted.lib.core.creative.SharedCreativeTabs;
-import com.grim3212.assorted.lib.core.tool.ToolTiers;
 import com.grim3212.assorted.lib.family.Families;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
@@ -22,10 +21,8 @@ public class HammersCreativeItems {
     }
 
     private static List<ItemStack> items() {
-        return HammersItems.hammers().stream().filter(HammersCreativeItems::shown).map(ItemStack::new).toList();
-    }
-
-    private static boolean shown(HammerItem hammer) {
-        return ToolTiers.get().shown(hammer.getToolTier());
+        CreativeTabItems items = new CreativeTabItems();
+        HammersItems.hammers().forEach(hammer -> items.addIfObtainable(hammer, hammer.getToolTier().getRepairItems()));
+        return items.getItems();
     }
 }

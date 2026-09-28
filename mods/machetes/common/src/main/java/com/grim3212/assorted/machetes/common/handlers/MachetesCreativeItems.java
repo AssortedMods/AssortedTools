@@ -1,7 +1,7 @@
 package com.grim3212.assorted.machetes.common.handlers;
 
+import com.grim3212.assorted.lib.core.creative.CreativeTabItems;
 import com.grim3212.assorted.lib.core.creative.SharedCreativeTabs;
-import com.grim3212.assorted.lib.core.tool.ToolTiers;
 import com.grim3212.assorted.lib.family.Families;
 import com.grim3212.assorted.machetes.Constants;
 import com.grim3212.assorted.machetes.common.item.MachetesItems;
@@ -21,6 +21,8 @@ public class MachetesCreativeItems {
     }
 
     private static List<ItemStack> items() {
-        return MachetesItems.machetes().stream().filter(machete -> ToolTiers.get().shown(machete.getToolTier())).map(ItemStack::new).toList();
+        CreativeTabItems items = new CreativeTabItems();
+        MachetesItems.machetes().forEach(machete -> items.addIfObtainable(machete, machete.getToolTier().getRepairItems()));
+        return items.getItems();
     }
 }

@@ -1,7 +1,7 @@
 package com.grim3212.assorted.throwingspears.common.handlers;
 
+import com.grim3212.assorted.lib.core.creative.CreativeTabItems;
 import com.grim3212.assorted.lib.core.creative.SharedCreativeTabs;
-import com.grim3212.assorted.lib.core.tool.ToolTiers;
 import com.grim3212.assorted.lib.family.Families;
 import com.grim3212.assorted.throwingspears.Constants;
 import com.grim3212.assorted.throwingspears.common.item.ThrowingSpearsItems;
@@ -21,6 +21,8 @@ public class ThrowingSpearsCreativeItems {
     }
 
     private static List<ItemStack> items() {
-        return ThrowingSpearsItems.spears().stream().filter(spear -> ToolTiers.get().shown(spear.getToolTier())).map(ItemStack::new).toList();
+        CreativeTabItems items = new CreativeTabItems();
+        ThrowingSpearsItems.spears().forEach(spear -> items.addIfObtainable(spear, spear.getToolTier().getRepairItems()));
+        return items.getItems();
     }
 }

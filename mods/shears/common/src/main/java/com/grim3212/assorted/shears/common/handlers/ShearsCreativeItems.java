@@ -1,7 +1,7 @@
 package com.grim3212.assorted.shears.common.handlers;
 
+import com.grim3212.assorted.lib.core.creative.CreativeTabItems;
 import com.grim3212.assorted.lib.core.creative.SharedCreativeTabs;
-import com.grim3212.assorted.lib.core.tool.ToolTiers;
 import com.grim3212.assorted.lib.family.Families;
 import com.grim3212.assorted.shears.Constants;
 import com.grim3212.assorted.shears.common.item.ShearsItems;
@@ -21,6 +21,8 @@ public class ShearsCreativeItems {
     }
 
     private static List<ItemStack> items() {
-        return ShearsItems.shears().stream().filter(shears -> ToolTiers.get().shown(shears.getToolTier())).map(ItemStack::new).toList();
+        CreativeTabItems items = new CreativeTabItems();
+        ShearsItems.shears().forEach(shears -> items.addIfObtainable(shears, shears.getToolTier().getRepairItems()));
+        return items.getItems();
     }
 }

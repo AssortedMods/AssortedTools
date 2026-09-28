@@ -1,7 +1,7 @@
 package com.grim3212.assorted.multitools.common.handlers;
 
+import com.grim3212.assorted.lib.core.creative.CreativeTabItems;
 import com.grim3212.assorted.lib.core.creative.SharedCreativeTabs;
-import com.grim3212.assorted.lib.core.tool.ToolTiers;
 import com.grim3212.assorted.lib.family.Families;
 import com.grim3212.assorted.multitools.Constants;
 import com.grim3212.assorted.multitools.common.item.MultitoolsItems;
@@ -21,6 +21,8 @@ public class MultitoolsCreativeItems {
     }
 
     private static List<ItemStack> items() {
-        return MultitoolsItems.multitools().stream().filter(multitool -> ToolTiers.get().shown(multitool.getToolTier())).map(ItemStack::new).toList();
+        CreativeTabItems items = new CreativeTabItems();
+        MultitoolsItems.multitools().forEach(multitool -> items.addIfObtainable(multitool, multitool.getToolTier().getRepairItems()));
+        return items.getItems();
     }
 }
