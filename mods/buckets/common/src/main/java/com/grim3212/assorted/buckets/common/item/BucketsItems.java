@@ -2,7 +2,6 @@ package com.grim3212.assorted.buckets.common.item;
 
 import com.grim3212.assorted.buckets.BucketsCommonMod;
 import com.grim3212.assorted.buckets.Constants;
-import com.grim3212.assorted.buckets.Family;
 import com.grim3212.assorted.lib.core.tool.ToolTier;
 import com.grim3212.assorted.lib.core.tool.ToolTiers;
 import com.grim3212.assorted.lib.registry.IRegistryObject;
@@ -18,7 +17,7 @@ import java.util.function.Function;
 
 public class BucketsItems {
 
-    public static final RegistryProvider<Item> ITEMS = RegistryProvider.create(Registries.ITEM, Constants.MOD_ID).aliasFrom(Family.ID);
+    public static final RegistryProvider<Item> ITEMS = RegistryProvider.create(Registries.ITEM, Constants.MOD_ID).aliasFrom(Constants.FAMILY_ID);
 
     private static final ToolTiers TIERS = ToolTiers.get();
 

@@ -1,7 +1,6 @@
 package com.grim3212.assorted.gearsets.client.data;
 
 import com.grim3212.assorted.gearsets.Constants;
-import com.grim3212.assorted.gearsets.Family;
 import com.grim3212.assorted.lib.data.LibManualProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
@@ -13,13 +12,11 @@ import net.minecraft.resources.Identifier;
 public class GearSetsManualProvider extends LibManualProvider {
 
     public GearSetsManualProvider(PackOutput output) {
-        super(output, Constants.MOD_ID, Family.ID);
+        super(output, Constants.MOD_ID, Constants.FAMILY_ID);
     }
 
     @Override
     protected void addChapters() {
-        this.section(Family.MANUAL_ORDER, Family.ICONS.toArray(Identifier[]::new));
-
         ChapterBuilder materials = this.chapter("materials", 0);
         materials.text("materials");
         materials.recipesById("basic", recipeId("steel_pickaxe"), recipeId("steel_axe"), recipeId("steel_shovel"), recipeId("steel_hoe"), recipeId("steel_sword"))

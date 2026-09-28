@@ -2,7 +2,7 @@ package com.grim3212.assorted.staffs.common.item;
 
 import com.grim3212.assorted.lib.core.item.ISwitchModes;
 import com.grim3212.assorted.lib.util.NBTHelper;
-import com.grim3212.assorted.staffs.Family;
+import com.grim3212.assorted.staffs.Constants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -55,7 +55,7 @@ public abstract class StaffItem extends Item implements ISwitchModes {
         StaffMode next = this.getMode(stack).next();
         this.setMode(stack, next);
         if (!player.level().isClientSide()) {
-            player.sendSystemMessage(Component.translatable(Family.ID + ".staff.switched", next.getTranslatedString()));
+            player.sendSystemMessage(Component.translatable(Constants.FAMILY_ID + ".staff.switched", next.getTranslatedString()));
         }
         return stack;
     }

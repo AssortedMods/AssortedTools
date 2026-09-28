@@ -2,7 +2,6 @@ package com.grim3212.assorted.throwingspears.client.data;
 
 import com.grim3212.assorted.lib.data.LibLanguageProvider;
 import com.grim3212.assorted.throwingspears.Constants;
-import com.grim3212.assorted.throwingspears.Family;
 import net.minecraft.data.PackOutput;
 
 /**
@@ -19,9 +18,9 @@ public class ThrowingSpearsLanguageProvider extends LibLanguageProvider {
 
     @Override
     protected void addNames() {
-        this.add("itemGroup." + Family.ID, "Assorted Tools");
-        this.add("manual." + Family.ID + ".title", "Assorted Tools");
-        this.add("manual." + Family.ID + ".description",
+        this.add("itemGroup." + Constants.FAMILY_ID, "Assorted Tools");
+        this.add("manual." + Constants.FAMILY_ID + ".title", "Assorted Tools");
+        this.add("manual." + Constants.FAMILY_ID + ".description",
                 "Tool and armor sets for every material, buckets that hold more than one, throwing weapons "
                         + "and the wands that do the digging for you.");
 
@@ -42,9 +41,9 @@ public class ThrowingSpearsLanguageProvider extends LibLanguageProvider {
 
         this.nameItems("(.+)_throwing_spear", m -> material(m.group(1)) + " Throwing Spear");
 
-        this.add("manual." + Family.ID + ".chapter.throwing_spears", "Throwing Spears");
-        this.add("manual." + Family.ID + ".chapter.throwing_spears.throwing_spears.title", "Throwing Spears");
-        this.add("manual." + Family.ID + ".chapter.throwing_spears.throwing_spears",
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.throwing_spears", "Throwing Spears");
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.throwing_spears.throwing_spears.title", "Throwing Spears");
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.throwing_spears.throwing_spears",
                 "A throwing spear is thrown with right click and sticks where it lands, ready to be picked "
                         + "back up." + BREAK
                         + "They come in every material and also make sure you checkout the enchantment table for some fun with these.");

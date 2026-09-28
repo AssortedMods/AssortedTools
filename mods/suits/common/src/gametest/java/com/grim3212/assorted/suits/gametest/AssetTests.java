@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.grim3212.assorted.lib.platform.Services;
 import com.grim3212.assorted.suits.Constants;
-import com.grim3212.assorted.suits.Family;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -68,8 +67,8 @@ final class AssetTests {
             }
         }
 
-        if (!lang.has("itemGroup." + Family.ID)) {
-            missing.add("lang key itemGroup." + Family.ID);
+        if (!lang.has("itemGroup." + Constants.FAMILY_ID)) {
+            missing.add("lang key itemGroup." + Constants.FAMILY_ID);
         }
 
         helper.assertTrue(items > 0, "no items are registered under " + Constants.MOD_ID + ", so nothing was checked");

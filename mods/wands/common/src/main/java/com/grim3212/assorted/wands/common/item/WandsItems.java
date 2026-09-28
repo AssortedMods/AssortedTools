@@ -3,7 +3,6 @@ package com.grim3212.assorted.wands.common.item;
 import com.grim3212.assorted.lib.registry.IRegistryObject;
 import com.grim3212.assorted.lib.registry.RegistryProvider;
 import com.grim3212.assorted.wands.Constants;
-import com.grim3212.assorted.wands.Family;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -14,7 +13,7 @@ import java.util.function.Function;
 
 public class WandsItems {
 
-    public static final RegistryProvider<Item> ITEMS = RegistryProvider.create(Registries.ITEM, Constants.MOD_ID).aliasFrom(Family.ID);
+    public static final RegistryProvider<Item> ITEMS = RegistryProvider.create(Registries.ITEM, Constants.MOD_ID).aliasFrom(Constants.FAMILY_ID);
 
     public static final IRegistryObject<WandBuildingItem> BUILDING_WAND = register("building_wand", props -> new WandBuildingItem(false, props.durability(30)));
     public static final IRegistryObject<WandBuildingItem> REINFORCED_BUILDING_WAND = register("reinforced_building_wand", props -> new WandBuildingItem(true, props.durability(200)));

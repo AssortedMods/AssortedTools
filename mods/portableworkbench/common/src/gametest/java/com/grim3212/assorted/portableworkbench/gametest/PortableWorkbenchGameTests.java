@@ -21,5 +21,6 @@ public final class PortableWorkbenchGameTests {
         AliasTests.register(out);
         MigrationTests.register(out);
         WorkbenchTests.register(out);
+        FamilyTests.register(out);
     }
 }

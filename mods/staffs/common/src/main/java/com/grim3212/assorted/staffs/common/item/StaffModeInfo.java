@@ -1,6 +1,6 @@
 package com.grim3212.assorted.staffs.common.item;
 
-import com.grim3212.assorted.staffs.Family;
+import com.grim3212.assorted.staffs.Constants;
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.component.DataComponentGetter;
@@ -28,7 +28,7 @@ public record StaffModeInfo(Kind kind) implements TooltipProvider {
     @Override
     public void addToTooltip(Item.TooltipContext context, Consumer<Component> tooltip, TooltipFlag flag, DataComponentGetter components) {
         String stored = components.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getStringOr(StaffMode.KEY, "");
-        tooltip.accept(Component.translatable(Family.ID + ".staff.current", StaffMode.fromString(this.kind, stored).getTranslatedString()));
+        tooltip.accept(Component.translatable(Constants.FAMILY_ID + ".staff.current", StaffMode.fromString(this.kind, stored).getTranslatedString()));
     }
 
     public enum Kind implements StringRepresentable {

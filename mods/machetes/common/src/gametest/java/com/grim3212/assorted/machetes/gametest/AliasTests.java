@@ -2,7 +2,6 @@ package com.grim3212.assorted.machetes.gametest;
 
 import com.google.gson.JsonParser;
 import com.grim3212.assorted.machetes.Constants;
-import com.grim3212.assorted.machetes.Family;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -46,6 +45,6 @@ final class AliasTests {
     }
 
     private static Identifier old(Identifier id) {
-        return Identifier.fromNamespaceAndPath(Family.ID, id.getPath());
+        return Identifier.fromNamespaceAndPath(Constants.FAMILY_ID, id.getPath());
     }
 }

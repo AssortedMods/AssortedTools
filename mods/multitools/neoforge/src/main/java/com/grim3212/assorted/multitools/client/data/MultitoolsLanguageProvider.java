@@ -2,7 +2,6 @@ package com.grim3212.assorted.multitools.client.data;
 
 import com.grim3212.assorted.lib.data.LibLanguageProvider;
 import com.grim3212.assorted.multitools.Constants;
-import com.grim3212.assorted.multitools.Family;
 import net.minecraft.data.PackOutput;
 
 /**
@@ -17,17 +16,17 @@ public class MultitoolsLanguageProvider extends LibLanguageProvider {
 
     @Override
     protected void addNames() {
-        this.add("itemGroup." + Family.ID, "Assorted Tools");
-        this.add("manual." + Family.ID + ".title", "Assorted Tools");
-        this.add("manual." + Family.ID + ".description",
+        this.add("itemGroup." + Constants.FAMILY_ID, "Assorted Tools");
+        this.add("manual." + Constants.FAMILY_ID + ".title", "Assorted Tools");
+        this.add("manual." + Constants.FAMILY_ID + ".description",
                 "Tool and armor sets for every material, buckets that hold more than one, throwing weapons "
                         + "and the wands that do the digging for you.");
 
         this.nameItems("(.+)_multitool", m -> titleCase(m.group(1)) + " MultiTool");
 
-        this.add("manual." + Family.ID + ".chapter.multitools", "Multitools");
-        this.add("manual." + Family.ID + ".chapter.multitools.multitools.title", "Multitools");
-        this.add("manual." + Family.ID + ".chapter.multitools.multitools",
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.multitools", "Multitools");
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.multitools.multitools.title", "Multitools");
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.multitools.multitools",
                 "A multitool is a sword, pickaxe, axe, shovel and hoe in one slot, and mines all of them at its "
                         + "material's speed.");
     }

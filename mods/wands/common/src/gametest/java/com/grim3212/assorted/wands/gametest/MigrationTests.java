@@ -2,7 +2,6 @@ package com.grim3212.assorted.wands.gametest;
 
 import com.grim3212.assorted.lib.test.TestSupport;
 import com.grim3212.assorted.wands.Constants;
-import com.grim3212.assorted.wands.Family;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.Identifier;
@@ -27,9 +26,9 @@ final class MigrationTests {
 
     private static void recipeBookCarriesOver(GameTestHelper helper) {
         ServerRecipeBook book = TestSupport.survivalPlayer(helper).getRecipeBook();
-        book.loadUntrusted(new ServerRecipeBook.Packed(new RecipeBookSettings(), List.of(recipe(Family.ID, "building_wand")), List.of()),
+        book.loadUntrusted(new ServerRecipeBook.Packed(new RecipeBookSettings(), List.of(recipe(Constants.FAMILY_ID, "building_wand")), List.of()),
                 key -> helper.getLevel().recipeAccess().byKey(key).isPresent());
-        helper.assertTrue(book.contains(recipe(Constants.MOD_ID, "building_wand")), "the recipe a player had unlocked as " + Family.ID + ":building_wand was not carried over");
+        helper.assertTrue(book.contains(recipe(Constants.MOD_ID, "building_wand")), "the recipe a player had unlocked as " + Constants.FAMILY_ID + ":building_wand was not carried over");
         helper.succeed();
     }
 

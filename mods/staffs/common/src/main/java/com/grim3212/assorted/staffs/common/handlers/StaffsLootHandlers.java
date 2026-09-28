@@ -1,5 +1,6 @@
 package com.grim3212.assorted.staffs.common.handlers;
 
+import com.grim3212.assorted.lib.conditions.LibParts;
 import com.grim3212.assorted.lib.events.LootTableModifyEvent;
 import com.grim3212.assorted.staffs.Constants;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -46,6 +47,10 @@ public class StaffsLootHandlers {
     }
 
     public static void init(LootTableModifyEvent event) {
+        if (!LibParts.isEnabled(Constants.MOD_ID)) {
+            return;
+        }
+
         inject(event, NEPTUNE_STAFF_CHESTS, NEPTUNE_STAFF_LOOT);
         inject(event, PHOENIX_STAFF_CHESTS, PHOENIX_STAFF_LOOT);
         inject(event, POWER_STAFF_CHESTS, POWER_STAFF_LOOT);

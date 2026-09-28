@@ -2,7 +2,6 @@ package com.grim3212.assorted.ultimatefist.client.data;
 
 import com.grim3212.assorted.lib.data.LibLanguageProvider;
 import com.grim3212.assorted.ultimatefist.Constants;
-import com.grim3212.assorted.ultimatefist.Family;
 import com.grim3212.assorted.ultimatefist.common.item.FragmentItem;
 import net.minecraft.data.PackOutput;
 
@@ -20,9 +19,9 @@ public class UltimateFistLanguageProvider extends LibLanguageProvider {
 
     @Override
     protected void addNames() {
-        this.add("itemGroup." + Family.ID, "Assorted Tools");
-        this.add("manual." + Family.ID + ".title", "Assorted Tools");
-        this.add("manual." + Family.ID + ".description",
+        this.add("itemGroup." + Constants.FAMILY_ID, "Assorted Tools");
+        this.add("manual." + Constants.FAMILY_ID + ".title", "Assorted Tools");
+        this.add("manual." + Constants.FAMILY_ID + ".description",
                 "Tool and armor sets for every material, buckets that hold more than one, throwing weapons "
                         + "and the wands that do the digging for you.");
 
@@ -38,13 +37,13 @@ public class UltimateFistLanguageProvider extends LibLanguageProvider {
         this.add(FragmentItem.DESCRIPTION_KEY, "A fragment of a powerful tool from an ancient civilization");
         this.add("tag.item." + Constants.MOD_ID + ".ultimate_fragments", "Ultimate Fragments");
 
-        this.add("manual." + Family.ID + ".chapter.ultimate", "The Ultimate Fist");
-        this.add("manual." + Family.ID + ".chapter.ultimate.fragments.title", "Fragments");
-        this.add("manual." + Family.ID + ".chapter.ultimate.fragments",
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.ultimate", "The Ultimate Fist");
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.ultimate.fragments.title", "Fragments");
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.ultimate.fragments",
                 "Eight fragments of something an older civilization built, found in chests across Minecraft." + BREAK
                         + "Laid out in order they spell out what they came from.");
-        this.add("manual." + Family.ID + ".chapter.ultimate.fist.title", "The Ultimate Fist");
-        this.add("manual." + Family.ID + ".chapter.ultimate.fist",
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.ultimate.fist.title", "The Ultimate Fist");
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.ultimate.fist",
                 "All eight fragments and a nether star make the ultimate fist. It is extremely powerful and out "
                         + "of the box it mines very fast and hits hard enough to kill most things in one hit.");
     }

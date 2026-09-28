@@ -1,6 +1,18 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedultimatefist"
+    }
+  ],
   "type": "minecraft:crafting_shapeless",
   "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedultimatefist"
+    }
+  ],
   "ingredients": [
     "assortedultimatefist:u_fragment",
     "assortedultimatefist:l_fragment",

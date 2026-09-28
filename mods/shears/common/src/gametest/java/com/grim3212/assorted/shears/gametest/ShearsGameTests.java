@@ -22,5 +22,6 @@ public final class ShearsGameTests {
         MigrationTests.register(out);
         ShearsTests.register(out);
         CoralCutterTests.register(out);
+        FamilyTests.register(out);
     }
 }

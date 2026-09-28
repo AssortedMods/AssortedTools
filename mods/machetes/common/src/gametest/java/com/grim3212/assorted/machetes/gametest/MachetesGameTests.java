@@ -21,5 +21,6 @@ public final class MachetesGameTests {
         AliasTests.register(out);
         MigrationTests.register(out);
         MacheteTests.register(out);
+        FamilyTests.register(out);
     }
 }

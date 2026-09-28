@@ -23,5 +23,6 @@ public final class BucketsGameTests {
         BucketTests.register(out);
         BucketTooltipTests.register(out);
         BucketTagTests.register(out);
+        FamilyTests.register(out);
     }
 }

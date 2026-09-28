@@ -1,6 +1,18 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedwands"
+    }
+  ],
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedwands"
+    }
+  ],
   "key": {
     "G": "#c:gems/diamond",
     "X": "#minecraft:planks"

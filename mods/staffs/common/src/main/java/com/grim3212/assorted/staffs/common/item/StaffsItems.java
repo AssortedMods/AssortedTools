@@ -3,7 +3,6 @@ package com.grim3212.assorted.staffs.common.item;
 import com.grim3212.assorted.lib.registry.IRegistryObject;
 import com.grim3212.assorted.lib.registry.RegistryProvider;
 import com.grim3212.assorted.staffs.Constants;
-import com.grim3212.assorted.staffs.Family;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -13,7 +12,7 @@ import java.util.function.Function;
 
 public class StaffsItems {
 
-    public static final RegistryProvider<Item> ITEMS = RegistryProvider.create(Registries.ITEM, Constants.MOD_ID).aliasFrom(Family.ID);
+    public static final RegistryProvider<Item> ITEMS = RegistryProvider.create(Registries.ITEM, Constants.MOD_ID).aliasFrom(Constants.FAMILY_ID);
 
     public static final IRegistryObject<NeptuneStaffItem> NEPTUNE_STAFF = register("neptune_staff", props -> new NeptuneStaffItem(props.durability(StaffItem.DURABILITY)));
     public static final IRegistryObject<PhoenixStaffItem> PHOENIX_STAFF = register("phoenix_staff", props -> new PhoenixStaffItem(props.durability(StaffItem.DURABILITY).fireResistant()));

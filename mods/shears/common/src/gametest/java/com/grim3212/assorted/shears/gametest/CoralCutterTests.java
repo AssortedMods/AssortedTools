@@ -1,7 +1,7 @@
 package com.grim3212.assorted.shears.gametest;
 
 import com.google.gson.JsonParser;
-import com.grim3212.assorted.shears.Family;
+import com.grim3212.assorted.shears.Constants;
 import com.grim3212.assorted.shears.api.ShearsTags;
 import com.grim3212.assorted.shears.common.enchantment.ShearsEnchantments;
 import com.grim3212.assorted.shears.common.item.MaterialShears;
@@ -71,7 +71,7 @@ final class CoralCutterTests {
     /** Shears saved with Coral Cutter under its old id, read the way a chest reads its items. */
     private static void assortedtoolsCoralCutterCarriesOver(GameTestHelper helper) {
         Holder<Enchantment> coralCutter = helper.getLevel().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ShearsEnchantments.CORAL_CUTTER);
-        String saved = "{\"id\": \"" + Family.ID + ":diamond_shears\", \"count\": 1, \"components\": {\"minecraft:enchantments\": {\"" + Family.ID + ":coral_cutter\": 1}}}";
+        String saved = "{\"id\": \"" + Constants.FAMILY_ID + ":diamond_shears\", \"count\": 1, \"components\": {\"minecraft:enchantments\": {\"" + Constants.FAMILY_ID + ":coral_cutter\": 1}}}";
         ItemStack stack = ItemStack.CODEC.parse(RegistryOps.create(JsonOps.INSTANCE, helper.getLevel().registryAccess()), JsonParser.parseString(saved)).resultOrPartial(error -> {
         }).orElse(ItemStack.EMPTY);
 

@@ -1,7 +1,6 @@
 package com.grim3212.assorted.staffs.gametest;
 
 import com.grim3212.assorted.staffs.Constants;
-import com.grim3212.assorted.staffs.Family;
 import com.grim3212.assorted.staffs.common.item.FrozenMobs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -43,7 +42,7 @@ final class FrozenMigrationTests {
             CompoundTag attachments = saved.getCompoundOrEmpty(key);
             Tag frozen = attachments.remove(Constants.MOD_ID + ":frozen");
             if (frozen != null) {
-                attachments.put(Family.ID + ":frozen", frozen);
+                attachments.put(Constants.FAMILY_ID + ":frozen", frozen);
                 saved.put(key, attachments);
                 renamed = true;
             }
@@ -53,7 +52,7 @@ final class FrozenMigrationTests {
         Cow reloaded = helper.spawn(EntityTypes.COW, new BlockPos(6, 1, 4));
         reloaded.load(TagValueInput.create(ProblemReporter.DISCARDING, helper.getLevel().registryAccess(), saved));
 
-        helper.assertTrue(FrozenMobs.isFrozen(reloaded), "a cow frozen under " + Family.ID + ":frozen thawed when it was loaded");
+        helper.assertTrue(FrozenMobs.isFrozen(reloaded), "a cow frozen under " + Constants.FAMILY_ID + ":frozen thawed when it was loaded");
         helper.assertTrue(FrozenMobs.thaw(reloaded) && !FrozenMobs.isFrozen(reloaded), "a cow frozen under the old id could not be thawed");
         helper.succeed();
     }

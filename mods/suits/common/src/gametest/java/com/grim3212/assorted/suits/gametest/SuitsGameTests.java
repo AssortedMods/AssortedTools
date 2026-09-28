@@ -23,5 +23,6 @@ public final class SuitsGameTests {
         ScubaSuitTests.register(out);
         LavaSuitTests.register(out);
         ChickenSuitTests.register(out);
+        FamilyTests.register(out);
     }
 }

@@ -2,7 +2,6 @@ package com.grim3212.assorted.shears.client.data;
 
 import com.grim3212.assorted.lib.data.LibLanguageProvider;
 import com.grim3212.assorted.shears.Constants;
-import com.grim3212.assorted.shears.Family;
 import net.minecraft.data.PackOutput;
 
 /**
@@ -17,9 +16,9 @@ public class ShearsLanguageProvider extends LibLanguageProvider {
 
     @Override
     protected void addNames() {
-        this.add("itemGroup." + Family.ID, "Assorted Tools");
-        this.add("manual." + Family.ID + ".title", "Assorted Tools");
-        this.add("manual." + Family.ID + ".description",
+        this.add("itemGroup." + Constants.FAMILY_ID, "Assorted Tools");
+        this.add("manual." + Constants.FAMILY_ID + ".title", "Assorted Tools");
+        this.add("manual." + Constants.FAMILY_ID + ".description",
                 "Tool and armor sets for every material, buckets that hold more than one, throwing weapons "
                         + "and the wands that do the digging for you.");
 
@@ -30,9 +29,9 @@ public class ShearsLanguageProvider extends LibLanguageProvider {
         this.add("enchantment." + Constants.MOD_ID + ".coral_cutter.desc", "Lets you harvest Coral with this enchantment instead of needing a tool with Silk Touch.");
         this.add("tag.item." + Constants.MOD_ID + ".enchantable.shears", "Enchantable Shears");
 
-        this.add("manual." + Family.ID + ".chapter.shears", "Shears");
-        this.add("manual." + Family.ID + ".chapter.shears.shears.title", "Shears");
-        this.add("manual." + Family.ID + ".chapter.shears.shears",
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.shears", "Shears");
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.shears.shears.title", "Shears");
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.shears.shears",
                 "Shears in every material, from wood up to netherite. Also lookout for a new Shears enchantment that lets you harvest coral without needing Silk Touch.");
     }
 }

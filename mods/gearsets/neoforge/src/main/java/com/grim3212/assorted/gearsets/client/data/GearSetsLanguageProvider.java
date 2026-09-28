@@ -1,7 +1,6 @@
 package com.grim3212.assorted.gearsets.client.data;
 
 import com.grim3212.assorted.gearsets.Constants;
-import com.grim3212.assorted.gearsets.Family;
 import com.grim3212.assorted.gearsets.api.GearSetsTags;
 import com.grim3212.assorted.gearsets.data.GearSetsItemTagProvider;
 import com.grim3212.assorted.lib.data.LibLanguageProvider;
@@ -21,9 +20,9 @@ public class GearSetsLanguageProvider extends LibLanguageProvider {
 
     @Override
     protected void addNames() {
-        this.add("itemGroup." + Family.ID, "Assorted Tools");
-        this.add("manual." + Family.ID + ".title", "Assorted Tools");
-        this.add("manual." + Family.ID + ".description",
+        this.add("itemGroup." + Constants.FAMILY_ID, "Assorted Tools");
+        this.add("manual." + Constants.FAMILY_ID + ".title", "Assorted Tools");
+        this.add("manual." + Constants.FAMILY_ID + ".description",
                 "Tool and armor sets for every material, buckets that hold more than one, throwing weapons "
                         + "and the wands that do the digging for you.");
 
@@ -33,7 +32,7 @@ public class GearSetsLanguageProvider extends LibLanguageProvider {
             }
         }
 
-        String chapter = "manual." + Family.ID + ".chapter.";
+        String chapter = "manual." + Constants.FAMILY_ID + ".chapter.";
         this.add(chapter + "materials", "Gear Sets");
         this.add(chapter + "materials.materials.title", "Materials");
         this.add(chapter + "materials.materials",

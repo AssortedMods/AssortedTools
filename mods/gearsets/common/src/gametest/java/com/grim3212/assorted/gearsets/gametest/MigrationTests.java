@@ -1,7 +1,6 @@
 package com.grim3212.assorted.gearsets.gametest;
 
 import com.grim3212.assorted.gearsets.Constants;
-import com.grim3212.assorted.gearsets.Family;
 import com.grim3212.assorted.lib.test.TestSupport;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -27,9 +26,9 @@ final class MigrationTests {
 
     private static void recipeBookCarriesOver(GameTestHelper helper) {
         ServerRecipeBook book = TestSupport.survivalPlayer(helper).getRecipeBook();
-        book.loadUntrusted(new ServerRecipeBook.Packed(new RecipeBookSettings(), List.of(recipe(Family.ID, "copper_pickaxe")), List.of()),
+        book.loadUntrusted(new ServerRecipeBook.Packed(new RecipeBookSettings(), List.of(recipe(Constants.FAMILY_ID, "copper_pickaxe")), List.of()),
                 key -> helper.getLevel().recipeAccess().byKey(key).isPresent());
-        helper.assertTrue(book.contains(recipe(Constants.MOD_ID, "copper_pickaxe")), "the recipe a player had unlocked as " + Family.ID + ":copper_pickaxe was not carried over");
+        helper.assertTrue(book.contains(recipe(Constants.MOD_ID, "copper_pickaxe")), "the recipe a player had unlocked as " + Constants.FAMILY_ID + ":copper_pickaxe was not carried over");
         helper.succeed();
     }
 

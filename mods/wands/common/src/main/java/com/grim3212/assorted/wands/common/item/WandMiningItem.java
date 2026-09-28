@@ -3,7 +3,7 @@ package com.grim3212.assorted.wands.common.item;
 import com.google.common.collect.Lists;
 import com.grim3212.assorted.lib.util.ItemUtil;
 import com.grim3212.assorted.lib.util.NBTHelper;
-import com.grim3212.assorted.wands.Family;
+import com.grim3212.assorted.wands.Constants;
 import com.grim3212.assorted.wands.WandsCommonMod;
 import com.grim3212.assorted.wands.api.WandsTags;
 import com.grim3212.assorted.wands.api.util.WandCoord3D;
@@ -207,7 +207,7 @@ public class WandMiningItem extends WandItem {
         MiningMode mode = MiningMode.fromString(NBTHelper.getString(stack, "Mode"));
         MiningMode next = MiningMode.getNext(mode, stack, reinforced);
         NBTHelper.putString(stack, "Mode", next.getSerializedName());
-        this.sendMessage(player, Component.translatable(Family.ID + ".wand.switched", next.getTranslatedString()));
+        this.sendMessage(player, Component.translatable(Constants.FAMILY_ID + ".wand.switched", next.getTranslatedString()));
         return stack;
     }
 
@@ -215,8 +215,8 @@ public class WandMiningItem extends WandItem {
     static Component describeMode(String stored) {
         MiningMode mode = MiningMode.fromString(stored);
         if (mode != null)
-            return Component.translatable(Family.ID + ".wand.current", mode.getTranslatedString());
-        return Component.translatable(Family.ID + ".wand.broken");
+            return Component.translatable(Constants.FAMILY_ID + ".wand.current", mode.getTranslatedString());
+        return Component.translatable(Constants.FAMILY_ID + ".wand.broken");
     }
 
     @Override
@@ -282,7 +282,7 @@ public class WandMiningItem extends WandItem {
         }
 
         public Component getTranslatedString() {
-            return Component.translatable(Family.ID + ".wand.mode." + this.name);
+            return Component.translatable(Constants.FAMILY_ID + ".wand.mode." + this.name);
         }
     }
 }

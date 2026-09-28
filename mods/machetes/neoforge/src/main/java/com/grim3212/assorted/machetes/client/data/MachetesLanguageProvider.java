@@ -2,7 +2,6 @@ package com.grim3212.assorted.machetes.client.data;
 
 import com.grim3212.assorted.lib.data.LibLanguageProvider;
 import com.grim3212.assorted.machetes.Constants;
-import com.grim3212.assorted.machetes.Family;
 import net.minecraft.data.PackOutput;
 
 /**
@@ -19,9 +18,9 @@ public class MachetesLanguageProvider extends LibLanguageProvider {
 
     @Override
     protected void addNames() {
-        this.add("itemGroup." + Family.ID, "Assorted Tools");
-        this.add("manual." + Family.ID + ".title", "Assorted Tools");
-        this.add("manual." + Family.ID + ".description",
+        this.add("itemGroup." + Constants.FAMILY_ID, "Assorted Tools");
+        this.add("manual." + Constants.FAMILY_ID + ".title", "Assorted Tools");
+        this.add("manual." + Constants.FAMILY_ID + ".description",
                 "Tool and armor sets for every material, buckets that hold more than one, throwing weapons "
                         + "and the wands that do the digging for you.");
 
@@ -30,9 +29,9 @@ public class MachetesLanguageProvider extends LibLanguageProvider {
         this.nameItems("wood_(.+)", m -> "Wooden " + titleCase(m.group(1)));
         this.nameItems("gold_(.+)", m -> "Golden " + titleCase(m.group(1)));
 
-        this.add("manual." + Family.ID + ".chapter.machetes", "Machetes");
-        this.add("manual." + Family.ID + ".chapter.machetes.machetes.title", "Machetes");
-        this.add("manual." + Family.ID + ".chapter.machetes.machetes",
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.machetes", "Machetes");
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.machetes.machetes.title", "Machetes");
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.machetes.machetes",
                 "A machete is a lighter, quicker sword that cuts through leaves, vines, wool, cactus and the "
                         + "rest of the undergrowth." + BREAK
                         + "They come in every material, from wood up to netherite.");

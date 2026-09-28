@@ -21,5 +21,6 @@ public final class MultitoolsGameTests {
         AliasTests.register(out);
         MigrationTests.register(out);
         MultitoolTests.register(out);
+        FamilyTests.register(out);
     }
 }

@@ -2,7 +2,6 @@ package com.grim3212.assorted.wands.client.data;
 
 import com.grim3212.assorted.lib.data.LibLanguageProvider;
 import com.grim3212.assorted.wands.Constants;
-import com.grim3212.assorted.wands.Family;
 import net.minecraft.data.PackOutput;
 
 /**
@@ -19,9 +18,9 @@ public class WandsLanguageProvider extends LibLanguageProvider {
 
     @Override
     protected void addNames() {
-        this.add("itemGroup." + Family.ID, "Assorted Tools");
-        this.add("manual." + Family.ID + ".title", "Assorted Tools");
-        this.add("manual." + Family.ID + ".description",
+        this.add("itemGroup." + Constants.FAMILY_ID, "Assorted Tools");
+        this.add("manual." + Constants.FAMILY_ID + ".title", "Assorted Tools");
+        this.add("manual." + Constants.FAMILY_ID + ".description",
                 "Tool and armor sets for every material, buckets that hold more than one, throwing weapons "
                         + "and the wands that do the digging for you.");
 
@@ -59,19 +58,19 @@ public class WandsLanguageProvider extends LibLanguageProvider {
         this.add("error.wand.toofewlava", "You don't have enough lava buckets.");
         this.add("error.wand.toofewwater", "You need two buckets of water.");
 
-        this.add("manual." + Family.ID + ".chapter.wands", "Wands");
-        this.add("manual." + Family.ID + ".chapter.wands.modes.title", "How Wands Work");
-        this.add("manual." + Family.ID + ".chapter.wands.modes",
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.wands", "Wands");
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.wands.modes.title", "How Wands Work");
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.wands.modes",
                 "Each wand has several modes and you switch between them with the mode keybind, Z by default." + BREAK
                         + "A wand works on a region rather than a block, so it will tell you when you have picked too much, when the corners do not match, "
                         + "or when you do not have the blocks to finish the job. Nothing happens until it can be done properly." + BREAK
                         + "Wands have a limited number of uses.");
-        this.add("manual." + Family.ID + ".chapter.wands.basic.title", "Basic Wands");
-        this.add("manual." + Family.ID + ".chapter.wands.basic",
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.wands.basic.title", "Basic Wands");
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.wands.basic",
                 "Three wands. The building wand puts up boxes, frames, rooms and lines of torches. The mining wand clears wood, dirt or ore. "
                         + "The breaking wand takes everything out, or leaves the ores where they are if you ask it to.");
-        this.add("manual." + Family.ID + ".chapter.wands.reinforced.title", "Reinforced Wands");
-        this.add("manual." + Family.ID + ".chapter.wands.reinforced",
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.wands.reinforced.title", "Reinforced Wands");
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.wands.reinforced",
                 "The reinforced version of each wand lasts far longer and unlocks the modes the basic one refuses." + BREAK
                         + "Filling a cave, flooding a space with water, or pouring lava into one, and surface mining, all need a reinforced wand.");
     }

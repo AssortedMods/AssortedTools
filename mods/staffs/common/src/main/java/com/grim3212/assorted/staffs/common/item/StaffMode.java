@@ -1,6 +1,6 @@
 package com.grim3212.assorted.staffs.common.item;
 
-import com.grim3212.assorted.staffs.Family;
+import com.grim3212.assorted.staffs.Constants;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringRepresentable;
@@ -63,7 +63,7 @@ public enum StaffMode implements StringRepresentable {
     }
 
     public Component getTranslatedString() {
-        return Component.translatable(Family.ID + ".staff.mode." + this.name).withStyle(this.color);
+        return Component.translatable(Constants.FAMILY_ID + ".staff.mode." + this.name).withStyle(this.color);
     }
 
     @Override

@@ -22,5 +22,6 @@ public final class ThrowingSpearsGameTests {
         MigrationTests.register(out);
         ThrowingSpearTests.register(out);
         SpearEnchantmentTests.register(out);
+        FamilyTests.register(out);
     }
 }

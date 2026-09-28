@@ -5,7 +5,7 @@
 - Split into fourteen mods that can also be installed on their own
 - Assorted Tools still includes all of them
 - Worlds from 11.x keep all your items, recipes and enchantments
-- Removed the config options for turning parts off. Install only the mods you want instead
+- Each part can be turned off again in config/assortedtools-parts.toml
 - Tool material settings moved to assortedlib-tool-tiers.toml, which the other Assorted mods share. Settings you changed in the old file will need setting again
 - The switch mode key now comes from Assorted Lib and sits under Assorted Mods in Controls. If you rebound it, bind it again
 - Requires Assorted Lib 4.3.0

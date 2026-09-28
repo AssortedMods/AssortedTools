@@ -28,6 +28,10 @@
           "tag": "c:swords/peridot"
         }
       ]
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedmultitools"
     }
   ],
   "parent": "minecraft:recipes/root",
@@ -96,6 +100,10 @@
           ]
         }
       ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedmultitools"
     }
   ],
   "requirements": [

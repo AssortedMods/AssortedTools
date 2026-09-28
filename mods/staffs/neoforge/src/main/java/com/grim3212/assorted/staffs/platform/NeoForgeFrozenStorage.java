@@ -1,7 +1,6 @@
 package com.grim3212.assorted.staffs.platform;
 
 import com.grim3212.assorted.staffs.Constants;
-import com.grim3212.assorted.staffs.Family;
 import com.mojang.serialization.Codec;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.Identifier;
@@ -27,7 +26,7 @@ public class NeoForgeFrozenStorage implements IFrozenStorage {
     public static void aliasOldId() {
         // Mods are constructed in parallel, and the registry keeps its aliases in a plain map.
         synchronized (NeoForgeRegistries.ATTACHMENT_TYPES) {
-            NeoForgeRegistries.ATTACHMENT_TYPES.addAlias(Identifier.fromNamespaceAndPath(Family.ID, "frozen"), Identifier.fromNamespaceAndPath(Constants.MOD_ID, "frozen"));
+            NeoForgeRegistries.ATTACHMENT_TYPES.addAlias(Identifier.fromNamespaceAndPath(Constants.FAMILY_ID, "frozen"), Identifier.fromNamespaceAndPath(Constants.MOD_ID, "frozen"));
         }
     }
 

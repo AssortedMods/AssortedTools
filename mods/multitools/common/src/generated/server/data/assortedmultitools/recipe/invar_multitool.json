@@ -28,6 +28,10 @@
           "tag": "c:swords/invar"
         }
       ]
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedmultitools"
     }
   ],
   "type": "minecraft:crafting_shapeless",
@@ -79,6 +83,10 @@
           ]
         }
       ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedmultitools"
     }
   ],
   "ingredients": [

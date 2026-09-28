@@ -1,5 +1,17 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedstaffs"
+    }
+  ],
   "type": "minecraft:crafting_shapeless",
+  "fabric:load_conditions": [
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedstaffs"
+    }
+  ],
   "ingredients": [
     "#c:gunpowders",
     "assortedstaffs:frost_powder",

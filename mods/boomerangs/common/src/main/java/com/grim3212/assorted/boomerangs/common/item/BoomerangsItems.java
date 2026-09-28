@@ -1,7 +1,6 @@
 package com.grim3212.assorted.boomerangs.common.item;
 
 import com.grim3212.assorted.boomerangs.Constants;
-import com.grim3212.assorted.boomerangs.Family;
 import com.grim3212.assorted.lib.registry.IRegistryObject;
 import com.grim3212.assorted.lib.registry.RegistryProvider;
 import net.minecraft.core.registries.Registries;
@@ -13,7 +12,7 @@ import java.util.function.Function;
 
 public class BoomerangsItems {
 
-    public static final RegistryProvider<Item> ITEMS = RegistryProvider.create(Registries.ITEM, Constants.MOD_ID).aliasFrom(Family.ID);
+    public static final RegistryProvider<Item> ITEMS = RegistryProvider.create(Registries.ITEM, Constants.MOD_ID).aliasFrom(Constants.FAMILY_ID);
 
     public static final IRegistryObject<BoomerangItem> WOOD_BOOMERANG = register("wood_boomerang", props -> new BoomerangItem(true, props.stacksTo(1)));
     public static final IRegistryObject<BoomerangItem> DIAMOND_BOOMERANG = register("diamond_boomerang", props -> new BoomerangItem(false, props.stacksTo(1)));

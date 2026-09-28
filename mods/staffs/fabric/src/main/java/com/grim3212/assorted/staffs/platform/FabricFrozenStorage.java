@@ -1,7 +1,6 @@
 package com.grim3212.assorted.staffs.platform;
 
 import com.grim3212.assorted.staffs.Constants;
-import com.grim3212.assorted.staffs.Family;
 import com.mojang.serialization.Codec;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentSyncPredicate;
@@ -20,7 +19,7 @@ public class FabricFrozenStorage implements IFrozenStorage {
             builder -> builder.persistent(Codec.BOOL).syncWith(ByteBufCodecs.BOOL, AttachmentSyncPredicate.all()));
 
     // A mob frozen when this was all one mod carries this; Fabric has no attachment aliases, so it is moved over when read.
-    private static final AttachmentType<Boolean> OLD_FROZEN = AttachmentRegistry.create(Identifier.fromNamespaceAndPath(Family.ID, "frozen"), builder -> builder.persistent(Codec.BOOL));
+    private static final AttachmentType<Boolean> OLD_FROZEN = AttachmentRegistry.create(Identifier.fromNamespaceAndPath(Constants.FAMILY_ID, "frozen"), builder -> builder.persistent(Codec.BOOL));
 
     /**
      * Registers {@link #FROZEN} from mod init. A client only accepts synced attachment types it had

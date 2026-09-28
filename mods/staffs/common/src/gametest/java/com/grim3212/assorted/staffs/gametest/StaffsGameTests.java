@@ -23,5 +23,6 @@ public final class StaffsGameTests {
         StaffTests.register(out);
         FrostTests.register(out);
         FrozenMigrationTests.register(out);
+        FamilyTests.register(out);
     }
 }

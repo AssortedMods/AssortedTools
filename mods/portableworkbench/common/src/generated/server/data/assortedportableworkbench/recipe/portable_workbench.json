@@ -1,6 +1,18 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedportableworkbench"
+    }
+  ],
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedportableworkbench"
+    }
+  ],
   "key": {
     "I": "#c:ingots/iron",
     "W": "minecraft:crafting_table"

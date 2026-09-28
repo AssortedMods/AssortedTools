@@ -1,6 +1,18 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedpokeball"
+    }
+  ],
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedpokeball"
+    }
+  ],
   "key": {
     "B": "minecraft:stone_button",
     "C": "#minecraft:coals",

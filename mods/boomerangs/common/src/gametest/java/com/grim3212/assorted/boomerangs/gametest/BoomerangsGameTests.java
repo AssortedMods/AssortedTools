@@ -21,5 +21,6 @@ public final class BoomerangsGameTests {
         AliasTests.register(out);
         MigrationTests.register(out);
         BoomerangTests.register(out);
+        FamilyTests.register(out);
     }
 }

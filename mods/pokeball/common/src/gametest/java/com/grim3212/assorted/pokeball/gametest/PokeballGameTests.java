@@ -21,5 +21,6 @@ public final class PokeballGameTests {
         AliasTests.register(out);
         MigrationTests.register(out);
         PokeballTests.register(out);
+        FamilyTests.register(out);
     }
 }

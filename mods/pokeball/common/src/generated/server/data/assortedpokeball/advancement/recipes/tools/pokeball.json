@@ -1,4 +1,10 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedpokeball"
+    }
+  ],
   "parent": "minecraft:recipes/root",
   "criteria": {
     "has_iron": {
@@ -28,6 +34,12 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
+  "fabric:load_conditions": [
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedpokeball"
+    }
+  ],
   "requirements": [
     [
       "has_the_recipe",

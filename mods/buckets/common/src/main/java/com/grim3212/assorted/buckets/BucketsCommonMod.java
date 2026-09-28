@@ -6,8 +6,10 @@ import com.grim3212.assorted.buckets.common.item.BucketsDataComponents;
 import com.grim3212.assorted.buckets.common.item.BucketsItems;
 import com.grim3212.assorted.buckets.config.BucketsConfig;
 import com.grim3212.assorted.lib.events.EntityInteractEvent;
+import com.grim3212.assorted.lib.family.Families;
 import com.grim3212.assorted.lib.migration.MovedIds;
 import com.grim3212.assorted.lib.platform.Services;
+import net.minecraft.resources.Identifier;
 
 /**
  * Loader-agnostic startup. Both loader entry points call {@link #init()} and nothing else; anything
@@ -19,6 +21,9 @@ public class BucketsCommonMod {
 
     public static void init() {
         Constants.LOG.info(Constants.MOD_NAME + " starting up...");
+        Families.join(Constants.MOD_ID, Constants.FAMILY_ID)
+                .icon(Identifier.fromNamespaceAndPath(Constants.MOD_ID, "gold_bucket"), 50)
+                .manualOrder(120);
 
         BucketsDataComponents.init();
         BucketsItems.init();
@@ -27,6 +32,6 @@ public class BucketsCommonMod {
         Services.EVENTS.registerEvent(EntityInteractEvent.class, (final EntityInteractEvent event) -> MilkingHandler.interact(event));
 
         // Recipes from when this was all one mod carry over to their new ids.
-        MovedIds.inherit(Family.ID, Constants.MOD_ID);
+        MovedIds.inherit(Constants.FAMILY_ID, Constants.MOD_ID);
     }
 }

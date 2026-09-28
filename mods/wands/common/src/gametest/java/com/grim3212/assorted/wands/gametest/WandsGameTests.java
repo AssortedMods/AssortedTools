@@ -22,5 +22,6 @@ public final class WandsGameTests {
         MigrationTests.register(out);
         WandTests.register(out);
         WandTooltipTests.register(out);
+        FamilyTests.register(out);
     }
 }

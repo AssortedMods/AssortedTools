@@ -3,6 +3,10 @@
     {
       "type": "assortedlib:item_tag_populated",
       "tag": "c:feathers"
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedsuits"
     }
   ],
   "parent": "minecraft:recipes/root",
@@ -31,6 +35,10 @@
       "values": [
         "c:feathers"
       ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedsuits"
     }
   ],
   "requirements": [

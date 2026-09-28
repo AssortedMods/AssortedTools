@@ -1,7 +1,6 @@
 package com.grim3212.assorted.boomerangs.client.data;
 
 import com.grim3212.assorted.boomerangs.Constants;
-import com.grim3212.assorted.boomerangs.Family;
 import com.grim3212.assorted.lib.data.LibLanguageProvider;
 import net.minecraft.data.PackOutput;
 
@@ -19,9 +18,9 @@ public class BoomerangsLanguageProvider extends LibLanguageProvider {
 
     @Override
     protected void addNames() {
-        this.add("itemGroup." + Family.ID, "Assorted Tools");
-        this.add("manual." + Family.ID + ".title", "Assorted Tools");
-        this.add("manual." + Family.ID + ".description",
+        this.add("itemGroup." + Constants.FAMILY_ID, "Assorted Tools");
+        this.add("manual." + Constants.FAMILY_ID + ".title", "Assorted Tools");
+        this.add("manual." + Constants.FAMILY_ID + ".description",
                 "Tool and armor sets for every material, buckets that hold more than one, throwing weapons "
                         + "and the wands that do the digging for you.");
 
@@ -30,9 +29,9 @@ public class BoomerangsLanguageProvider extends LibLanguageProvider {
 
         this.nameItems("wood_(.+)", m -> "Wooden " + titleCase(m.group(1)));
 
-        this.add("manual." + Family.ID + ".chapter.boomerangs", "Boomerangs");
-        this.add("manual." + Family.ID + ".chapter.boomerangs.boomerangs.title", "Boomerangs");
-        this.add("manual." + Family.ID + ".chapter.boomerangs.boomerangs",
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.boomerangs", "Boomerangs");
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.boomerangs.boomerangs.title", "Boomerangs");
+        this.add("manual." + Constants.FAMILY_ID + ".chapter.boomerangs.boomerangs",
                 "A boomerang is thrown with right click, flies out to its limit and comes back to you. It hurts "
                         + "what it passes through on the way." + BREAK
                         + "The diamond one goes further and hits harder, and can be set to follow where you are "

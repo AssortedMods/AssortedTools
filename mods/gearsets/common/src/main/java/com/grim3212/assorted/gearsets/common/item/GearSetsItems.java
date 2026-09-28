@@ -2,7 +2,6 @@ package com.grim3212.assorted.gearsets.common.item;
 
 import com.grim3212.assorted.gearsets.Constants;
 import com.grim3212.assorted.gearsets.GearSetsCommonMod;
-import com.grim3212.assorted.gearsets.Family;
 import com.grim3212.assorted.gearsets.config.SpearConfig;
 import com.grim3212.assorted.lib.core.tool.ArmorMaterialConfig;
 import com.grim3212.assorted.lib.core.tool.ToolTier;
@@ -21,7 +20,7 @@ import java.util.function.Function;
 
 public class GearSetsItems {
 
-    public static final RegistryProvider<Item> ITEMS = RegistryProvider.create(Registries.ITEM, Constants.MOD_ID).aliasFrom(Family.ID);
+    public static final RegistryProvider<Item> ITEMS = RegistryProvider.create(Registries.ITEM, Constants.MOD_ID).aliasFrom(Constants.FAMILY_ID);
 
     /** Every extra material's set, keyed by the material's name, in the shared tiers' order. */
     public static final Map<String, MaterialSet> MATERIALS = new LinkedHashMap<>();

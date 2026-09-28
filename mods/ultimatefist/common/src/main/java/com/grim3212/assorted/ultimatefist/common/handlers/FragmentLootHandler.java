@@ -1,5 +1,6 @@
 package com.grim3212.assorted.ultimatefist.common.handlers;
 
+import com.grim3212.assorted.lib.conditions.LibParts;
 import com.grim3212.assorted.lib.events.LootTableModifyEvent;
 import com.grim3212.assorted.ultimatefist.Constants;
 import net.minecraft.core.registries.Registries;
@@ -33,6 +34,10 @@ public class FragmentLootHandler {
     }
 
     public static void init(LootTableModifyEvent event) {
+        if (!LibParts.isEnabled(Constants.MOD_ID)) {
+            return;
+        }
+
         inject(event, OVERWORLD_UF_CHESTS, OVERWORLD_UF_LOOT);
         inject(event, NETHER_UF_CHESTS, NETHER_UF_LOOT);
         inject(event, END_UF_CHESTS, END_UF_LOOT);

@@ -21,5 +21,6 @@ public final class HammersGameTests {
         AliasTests.register(out);
         MigrationTests.register(out);
         HammerTests.register(out);
+        FamilyTests.register(out);
     }
 }

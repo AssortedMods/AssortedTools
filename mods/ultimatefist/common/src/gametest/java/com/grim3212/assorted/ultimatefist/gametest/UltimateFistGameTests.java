@@ -21,5 +21,6 @@ public final class UltimateFistGameTests {
         AliasTests.register(out);
         MigrationTests.register(out);
         UltimateFistTests.register(out);
+        FamilyTests.register(out);
     }
 }

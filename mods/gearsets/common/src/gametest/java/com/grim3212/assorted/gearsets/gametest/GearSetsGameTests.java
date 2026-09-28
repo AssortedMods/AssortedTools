@@ -23,5 +23,6 @@ public final class GearSetsGameTests {
         MaterialSetTests.register(out);
         SpearTests.register(out);
         MiningToolTests.register(out);
+        FamilyTests.register(out);
     }
 }
