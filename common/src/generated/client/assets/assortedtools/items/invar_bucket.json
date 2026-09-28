@@ -1,7 +1,0 @@
-{
-  "model": {
-    "type": "assortedtools:fluid_container",
-    "flip_gas": true,
-    "model": "assortedtools:item/invar_bucket"
-  }
-}
