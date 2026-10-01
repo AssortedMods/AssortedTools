@@ -84,8 +84,6 @@ public class PokeballEntity extends ThrowableItemProjectile {
                             entity.putString("pokeball_name", livingEntity.getType().getDescriptionId());
 
                             currentPokeball.set(PokeballDataComponents.CAPTURED_ENTITY.get(), new CapturedEntity(entity));
-                            currentPokeball.hurtAndBreak(1, serverLevel, null, item -> {
-                            });
                             currentPokeball.setCount(1);
 
                             hitEntity.discard();

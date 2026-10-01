@@ -48,6 +48,9 @@ final class PokeballTests {
                     ItemStack captured = filledPokeballs(helper).get(0).copy();
                     CompoundTag stored = CapturedEntity.of(captured).entity();
                     helper.assertValueEqual(stored.getStringOr("id", ""), "minecraft:cow", "the captured entity id");
+                    // A ball that could wear out could break on a catch and lose the mob inside it.
+                    helper.assertTrue(!captured.isDamageableItem(), "the pokeball wears out with use");
+                    helper.assertValueEqual(captured.getMaxStackSize(), 1, "pokeballs to a stack");
 
                     helper.killAllEntitiesOfClass(ItemEntity.class);
                     // Aimed at the floor: a block hit is what releases, an entity hit is what captures.

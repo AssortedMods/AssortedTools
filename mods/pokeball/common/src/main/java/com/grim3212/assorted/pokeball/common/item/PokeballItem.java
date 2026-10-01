@@ -3,6 +3,7 @@ package com.grim3212.assorted.pokeball.common.item;
 import com.grim3212.assorted.pokeball.common.entity.PokeballEntity;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -18,7 +19,8 @@ import net.minecraft.world.level.Level;
 public class PokeballItem extends Item {
 
     public PokeballItem(Properties properties) {
-        super(properties.durability(10).component(PokeballDataComponents.CAPTURED_ENTITY.get(), CapturedEntity.EMPTY));
+        // One to a stack, since throwing empties the hand. No durability: a ball that broke mid catch lost the mob.
+        super(properties.stacksTo(1).component(PokeballDataComponents.CAPTURED_ENTITY.get(), CapturedEntity.EMPTY));
     }
 
     @Override
@@ -39,5 +41,21 @@ public class PokeballItem extends Item {
         }
 
         return InteractionResult.SUCCESS;
+    }
+
+    /** A full bar shows a mob is inside, the way the old durability bar did after a catch. */
+    @Override
+    public boolean isBarVisible(ItemStack stack) {
+        return !CapturedEntity.of(stack).isEmpty();
+    }
+
+    @Override
+    public int getBarWidth(ItemStack stack) {
+        return 13;
+    }
+
+    @Override
+    public int getBarColor(ItemStack stack) {
+        return Mth.hsvToRgb(1.0F / 3.0F, 1.0F, 1.0F);
     }
 }
