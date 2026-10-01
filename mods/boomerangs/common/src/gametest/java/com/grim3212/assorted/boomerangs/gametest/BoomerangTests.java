@@ -1,5 +1,6 @@
 package com.grim3212.assorted.boomerangs.gametest;
 
+import com.grim3212.assorted.boomerangs.BoomerangsCommonMod;
 import com.grim3212.assorted.boomerangs.api.BoomerangsDamageSources;
 import com.grim3212.assorted.boomerangs.common.entity.BoomerangEntity;
 import com.grim3212.assorted.boomerangs.common.item.BoomerangItem;
@@ -33,12 +34,12 @@ final class BoomerangTests {
     }
 
     /**
-     * Both boomerangs fly out and come back, ending up in the thrower's inventory. Thrown straight up on purpose: the
-     * flight is longer than the test box, and up is the one direction with nothing in it whichever way the box turns.
+     * Both boomerangs fly out their range in blocks and come back to the thrower's inventory. Thrown straight up on
+     * purpose: the flight is longer than the test box, and up is the one direction with nothing in it.
      */
     private static void boomerangsFlyOutAndReturn(GameTestHelper helper) {
-        assertBoomerangReturns(helper, BoomerangsItems.WOOD_BOOMERANG.get());
-        assertBoomerangReturns(helper, BoomerangsItems.DIAMOND_BOOMERANG.get());
+        assertBoomerangReturns(helper, BoomerangsItems.WOOD_BOOMERANG.get(), BoomerangsCommonMod.COMMON_CONFIG.woodBoomerangRange.get());
+        assertBoomerangReturns(helper, BoomerangsItems.DIAMOND_BOOMERANG.get(), BoomerangsCommonMod.COMMON_CONFIG.diamondBoomerangRange.get());
         helper.succeed();
     }
 
@@ -48,7 +49,7 @@ final class BoomerangTests {
         helper.succeed();
     }
 
-    private static void assertBoomerangReturns(GameTestHelper helper, BoomerangItem item) {
+    private static void assertBoomerangReturns(GameTestHelper helper, BoomerangItem item, int range) {
         Identifier id = BuiltInRegistries.ITEM.getKey(item);
         ServerPlayer player = survivalPlayer(helper, new ItemStack(item));
         hover(helper, player, new Vec3(4.5D, 2.0D, 4.5D), -90.0F);
@@ -60,12 +61,17 @@ final class BoomerangTests {
         helper.assertValueEqual(flying.size(), 1, "boomerang entities in the world after throwing " + id);
 
         BoomerangEntity boomerang = flying.get(0);
-        // Out for its configured range and back at half a block a tick; two hundred is generous and bounded.
+        Vec3 start = boomerang.position();
+        double farthest = 0.0D;
+        // Out for its range and back at half a block a tick; four hundred is generous and bounded.
         boolean returned = false;
-        for (int tick = 0; tick < 200 && !returned; tick++) {
+        for (int tick = 0; tick < 400 && !returned; tick++) {
             boomerang.tick();
+            farthest = Math.max(farthest, boomerang.position().distanceTo(start));
             returned = boomerang.isRemoved();
         }
+
+        helper.assertTrue(Math.abs(farthest - range) <= 1.0D, id + " flew " + farthest + " blocks out, not its range of " + range);
 
         helper.assertTrue(returned, id + " never came back to the thrower");
         helper.assertValueEqual(countInInventory(player, item), 1, id + " in the thrower's inventory after it returned");

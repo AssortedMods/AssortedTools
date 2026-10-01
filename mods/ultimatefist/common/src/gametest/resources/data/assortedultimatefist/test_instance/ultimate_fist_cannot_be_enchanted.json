@@ -1,7 +1,7 @@
 {
   "type": "minecraft:function",
   "environment": "minecraft:default",
-  "function": "assortedultimatefist:ultimate_fist_takes_weapon_enchantments",
+  "function": "assortedultimatefist:ultimate_fist_cannot_be_enchanted",
   "structure": "assortedultimatefist:test_box",
   "max_ticks": 1,
   "setup_ticks": 0,

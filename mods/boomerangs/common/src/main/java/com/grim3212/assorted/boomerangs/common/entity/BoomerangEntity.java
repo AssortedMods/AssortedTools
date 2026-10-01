@@ -54,6 +54,9 @@ public abstract class BoomerangEntity extends Entity {
      */
     private static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> RETURN_TO = SynchedEntityData.defineId(BoomerangEntity.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
 
+    /** A thrown boomerang flies out at half a block a tick. */
+    private static final double SPEED = 0.5D;
+
     public BoomerangEntity(EntityType<BoomerangEntity> type, Level world) {
         super(type, world);
         this.bounceFactor = 0.84999999999999998D;
@@ -70,9 +73,9 @@ public abstract class BoomerangEntity extends Entity {
         double x = -Mth.sin((entity.getYRot() * 3.141593F) / 180F);
         double z = Mth.cos((entity.getYRot() * 3.141593F) / 180F);
 
-        double motionX = 0.5D * x * (double) Mth.cos((entity.getXRot() / 180F) * 3.141593F);
-        double motionY = -0.5D * (double) Mth.sin((entity.getXRot() / 180F) * 3.141593F);
-        double motionZ = 0.5D * z * (double) Mth.cos((entity.getXRot() / 180F) * 3.141593F);
+        double motionX = SPEED * x * (double) Mth.cos((entity.getXRot() / 180F) * 3.141593F);
+        double motionY = -SPEED * (double) Mth.sin((entity.getXRot() / 180F) * 3.141593F);
+        double motionZ = SPEED * z * (double) Mth.cos((entity.getXRot() / 180F) * 3.141593F);
         this.setDeltaMovement(new Vec3(motionX, motionY, motionZ));
         setPos(entity.getX(), this.getReturnEntityY(entity), entity.getZ());
         xo = getX();
@@ -82,6 +85,11 @@ public abstract class BoomerangEntity extends Entity {
         this.turningAround = false;
         this.hand = hand;
         this.setReturnTo(entity);
+    }
+
+    /** How many ticks a boomerang flies out to cover its range in blocks. */
+    protected static int ticksForRange(int blocks) {
+        return (int) Math.round(blocks / SPEED);
     }
 
     public double getReturnEntityY(Player entity) {

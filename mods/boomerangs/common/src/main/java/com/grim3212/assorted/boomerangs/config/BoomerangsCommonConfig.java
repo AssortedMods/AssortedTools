@@ -29,9 +29,9 @@ public class BoomerangsCommonConfig {
         breaksPlants = builder.defineBoolean("boomerangs.breaksPlants", false, "Set this to true if you would like boomerangs to be able to break plants and any other weak blocks.");
         hitsButtons = builder.defineBoolean("boomerangs.hitsButtons", true, "Set this to false if you would like boomerangs to not be able to hit buttons or levers.");
         turnAroundButton = builder.defineBoolean("boomerangs.turnAroundButton", true, "Set this to false if you would like boomerangs to not turn around after they have hit a button or a lever.");
-        woodBoomerangRange = builder.defineInteger("boomerangs.woodBoomerangRange", 20, 1, 200, "The maximum range away from the player the wood boomerang will travel before turning around.");
+        woodBoomerangRange = builder.defineInteger("boomerangs.woodBoomerangRange", 10, 1, 100, "How many blocks the wood boomerang flies out before it turns around.");
         woodBoomerangDamage = builder.defineInteger("boomerangs.woodBoomerangDamage", 1, 1, 500, "The amount of damage the wood boomerang does to mobs.");
-        diamondBoomerangRange = builder.defineInteger("boomerangs.diamondBoomerangRange", 30, 1, 200, "The maximum range away from the player the diamond boomerang will travel before turning around.");
+        diamondBoomerangRange = builder.defineInteger("boomerangs.diamondBoomerangRange", 15, 1, 100, "How many blocks the diamond boomerang flies out before it turns around.");
         diamondBoomerangDamage = builder.defineInteger("boomerangs.diamondBoomerangDamage", 5, 1, 200, "The amount of damage the diamond boomerang does to mobs.");
         diamondBoomerangFollows = builder.defineBoolean("boomerangs.diamondBoomerangFollows", false, "Set to true if you would like the diamond boomerang to follow where the player is looking.");
 

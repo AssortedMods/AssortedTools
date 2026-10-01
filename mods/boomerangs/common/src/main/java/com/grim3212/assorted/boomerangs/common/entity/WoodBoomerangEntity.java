@@ -14,12 +14,12 @@ public class WoodBoomerangEntity extends BoomerangEntity {
 
     public WoodBoomerangEntity(EntityType<BoomerangEntity> type, Level world) {
         super(type, world);
-        this.timeBeforeTurnAround = BoomerangsCommonMod.COMMON_CONFIG.woodBoomerangRange.get() <= 0 ? 20 : BoomerangsCommonMod.COMMON_CONFIG.woodBoomerangRange.get();
+        this.timeBeforeTurnAround = ticksForRange(BoomerangsCommonMod.COMMON_CONFIG.woodBoomerangRange.get());
     }
 
     public WoodBoomerangEntity(Level worldIn, Player entity, ItemStack itemstack, InteractionHand hand) {
         super(BoomerangsEntities.WOOD_BOOMERANG.get(), worldIn, entity, itemstack, hand);
-        this.timeBeforeTurnAround = BoomerangsCommonMod.COMMON_CONFIG.woodBoomerangRange.get() <= 0 ? 20 : BoomerangsCommonMod.COMMON_CONFIG.woodBoomerangRange.get();
+        this.timeBeforeTurnAround = ticksForRange(BoomerangsCommonMod.COMMON_CONFIG.woodBoomerangRange.get());
     }
 
     @Override

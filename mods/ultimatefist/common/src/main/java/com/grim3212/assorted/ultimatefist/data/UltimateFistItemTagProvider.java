@@ -33,9 +33,8 @@ public class UltimateFistItemTagProvider extends LibItemTagProvider {
         for (FragmentItem fragment : UltimateFistItems.fragments()) {
             add(appender, fragment, ULTIMATE_FRAGMENTS);
         }
-        // Opt-in: without these the fist takes no weapon enchantment, and other mods do not know it for a weapon.
-        add(appender, UltimateFistItems.ULTIMATE_FIST.get(), ItemTags.WEAPON_ENCHANTABLE, ItemTags.MELEE_WEAPON_ENCHANTABLE, ItemTags.SHARP_WEAPON_ENCHANTABLE,
-                ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.VANISHING_ENCHANTABLE, LibCommonTags.Items.TOOLS_MELEE_WEAPONS);
+        // Other mods know it for a weapon, but it stays out of every enchantable tag so books on an anvil can't enchant it.
+        add(appender, UltimateFistItems.ULTIMATE_FIST.get(), LibCommonTags.Items.TOOLS_MELEE_WEAPONS);
     }
 
     @SafeVarargs

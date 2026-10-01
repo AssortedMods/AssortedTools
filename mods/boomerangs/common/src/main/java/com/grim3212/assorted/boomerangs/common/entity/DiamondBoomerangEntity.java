@@ -15,12 +15,12 @@ public class DiamondBoomerangEntity extends BoomerangEntity {
 
     public DiamondBoomerangEntity(EntityType<BoomerangEntity> type, Level world) {
         super(type, world);
-        this.timeBeforeTurnAround = BoomerangsCommonMod.COMMON_CONFIG.diamondBoomerangRange.get() <= 0 ? 20 : BoomerangsCommonMod.COMMON_CONFIG.diamondBoomerangRange.get();
+        this.timeBeforeTurnAround = ticksForRange(BoomerangsCommonMod.COMMON_CONFIG.diamondBoomerangRange.get());
     }
 
     public DiamondBoomerangEntity(Level worldIn, Player entity, ItemStack itemstack, InteractionHand hand) {
         super(BoomerangsEntities.DIAMOND_BOOMERANG.get(), worldIn, entity, itemstack, hand);
-        this.timeBeforeTurnAround = BoomerangsCommonMod.COMMON_CONFIG.diamondBoomerangRange.get() <= 0 ? 20 : BoomerangsCommonMod.COMMON_CONFIG.diamondBoomerangRange.get();
+        this.timeBeforeTurnAround = ticksForRange(BoomerangsCommonMod.COMMON_CONFIG.diamondBoomerangRange.get());
     }
 
     @Override
