@@ -34,8 +34,8 @@ final class BoomerangTests {
     }
 
     /**
-     * Both boomerangs fly out their range in blocks and come back to the thrower's inventory. Thrown straight up on
-     * purpose: the flight is longer than the test box, and up is the one direction with nothing in it.
+     * Both boomerangs fly out their range in blocks and come back to the thrower's inventory. Thrown straight up from
+     * above the test box: the flight is longer than the box, and up is the one direction with nothing in it.
      */
     private static void boomerangsFlyOutAndReturn(GameTestHelper helper) {
         assertBoomerangReturns(helper, BoomerangsItems.WOOD_BOOMERANG.get(), BoomerangsCommonMod.COMMON_CONFIG.woodBoomerangRange.get());
@@ -52,7 +52,8 @@ final class BoomerangTests {
     private static void assertBoomerangReturns(GameTestHelper helper, BoomerangItem item, int range) {
         Identifier id = BuiltInRegistries.ITEM.getKey(item);
         ServerPlayer player = survivalPlayer(helper, new ItemStack(item));
-        hover(helper, player, new Vec3(4.5D, 2.0D, 4.5D), -90.0F);
+        // Above the test box's roof, so nothing overhead stops it short of its range.
+        hover(helper, player, new Vec3(4.5D, 10.0D, 4.5D), -90.0F);
 
         helper.assertTrue(player.getItemInHand(InteractionHand.MAIN_HAND).use(helper.getLevel(), player, InteractionHand.MAIN_HAND).consumesAction(), id + " refused to be thrown");
         helper.assertTrue(player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty(), id + " stayed in the hand after being thrown");
