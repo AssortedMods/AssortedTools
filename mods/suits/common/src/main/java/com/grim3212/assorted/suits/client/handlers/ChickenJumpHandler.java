@@ -47,7 +47,9 @@ public class ChickenJumpHandler {
         }
 
 
-        if (!mc.player.isInWater() && !mc.player.isInLava() && mc.player.needsSync) {
+        // needsSync only turns true on the client at a jump, so a player who hasn't jumped since joining or respawning
+        // would never glide; being off the ground counts as well.
+        if (!mc.player.isInWater() && !mc.player.isInLava() && (mc.player.needsSync || !mc.player.onGround())) {
             int jumpsAllowed = getMaxJumps(mc.player);
 
             // Must at least have 1 piece of the suit
