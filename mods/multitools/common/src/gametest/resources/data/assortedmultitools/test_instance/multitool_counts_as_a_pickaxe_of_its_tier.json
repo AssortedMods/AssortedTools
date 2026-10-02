@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedmultitools:multitool_counts_as_a_pickaxe_of_its_tier",
+  "structure": "assortedmultitools:test_box",
+  "max_ticks": 1,
+  "setup_ticks": 0,
+  "required": true
+}

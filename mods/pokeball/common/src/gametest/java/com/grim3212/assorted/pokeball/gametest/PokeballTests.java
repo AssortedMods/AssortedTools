@@ -4,10 +4,13 @@ import com.grim3212.assorted.pokeball.common.entity.PokeballEntity;
 import com.grim3212.assorted.pokeball.common.item.CapturedEntity;
 import com.grim3212.assorted.pokeball.common.item.PokeballDataComponents;
 import com.grim3212.assorted.pokeball.common.item.PokeballItems;
+import com.grim3212.assorted.pokeball.data.PokeballDataComponentTagProvider;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.animal.cow.Cow;
@@ -51,6 +54,11 @@ final class PokeballTests {
                     // A ball that could wear out could break on a catch and lose the mob inside it.
                     helper.assertTrue(!captured.isDamageableItem(), "the pokeball wears out with use");
                     helper.assertValueEqual(captured.getMaxStackSize(), 1, "pokeballs to a stack");
+                    // Assorted Displays' cage shows the mob saved in any component it finds in this tag.
+                    helper.assertTrue(BuiltInRegistries.DATA_COMPONENT_TYPE.wrapAsHolder(PokeballDataComponents.CAPTURED_ENTITY.get()).is(PokeballDataComponentTagProvider.CAGE_ENTITY_DATA),
+                            "the captured mob's component is not tagged for cages");
+                    CompoundTag forCage = (CompoundTag) CapturedEntity.CODEC.encodeStart(NbtOps.INSTANCE, CapturedEntity.of(captured)).getOrThrow();
+                    helper.assertValueEqual(forCage.getStringOr("id", ""), "minecraft:cow", "the mob a cage would show");
 
                     helper.killAllEntitiesOfClass(ItemEntity.class);
                     // Aimed at the floor: a block hit is what releases, an entity hit is what captures.

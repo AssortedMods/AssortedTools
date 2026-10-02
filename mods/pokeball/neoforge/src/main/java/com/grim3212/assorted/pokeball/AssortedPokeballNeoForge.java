@@ -4,6 +4,7 @@ import com.grim3212.assorted.lib.data.ForgeItemTagProvider;
 import com.grim3212.assorted.pokeball.client.data.PokeballItemModelProvider;
 import com.grim3212.assorted.pokeball.client.data.PokeballLanguageProvider;
 import com.grim3212.assorted.pokeball.client.data.PokeballManualProvider;
+import com.grim3212.assorted.pokeball.data.PokeballDataComponentTagProvider;
 import com.grim3212.assorted.pokeball.data.PokeballItemTagProvider;
 import com.grim3212.assorted.pokeball.data.PokeballRecipes;
 import net.minecraft.core.HolderLookup;
@@ -37,6 +38,7 @@ public class AssortedPokeballNeoForge {
         // No blocks, so no block tags for the item tags to copy.
         CompletableFuture<TagsProvider.TagLookup<Block>> noBlockTags = CompletableFuture.completedFuture(TagsProvider.TagLookup.empty());
         event.addProvider(new ForgeItemTagProvider(packOutput, lookupProvider, noBlockTags, Constants.MOD_ID, new PokeballItemTagProvider(packOutput, lookupProvider, noBlockTags)));
+        event.addProvider(new PokeballDataComponentTagProvider(packOutput, lookupProvider));
     }
 
     /** Client datagen: models, the language file and the manual, written into common for both loaders. */

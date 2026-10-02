@@ -29,6 +29,9 @@ public class MultitoolsItemTagProvider extends LibItemTagProvider {
             add(appender, multitool, ItemTags.MINING_ENCHANTABLE, ItemTags.MINING_LOOT_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.MELEE_WEAPON_ENCHANTABLE,
                     ItemTags.SHARP_WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.VANISHING_ENCHANTABLE,
                     LibCommonTags.Items.TOOLS_MELEE_WEAPONS, LibCommonTags.Items.TOOLS_MINING_TOOLS);
+            // In every tool tag, so anything asking for a sword, pickaxe, axe, shovel or hoe takes a multitool. Vanilla, and
+            // so Fabric, sweeps only with #swords, and the grinding mill's tool slot asks for a #pickaxes of a tier.
+            add(appender, multitool, ItemTags.SWORDS, ItemTags.PICKAXES, ItemTags.AXES, ItemTags.SHOVELS, ItemTags.HOES);
         }
         add(appender, MultitoolsItems.GOLDEN_MULTITOOL.get(), ItemTags.PIGLIN_LOVED);
     }
