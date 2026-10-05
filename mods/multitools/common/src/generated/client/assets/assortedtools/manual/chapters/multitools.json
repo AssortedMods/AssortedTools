@@ -1,0 +1,23 @@
+{
+  "conditions": [
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedmultitools"
+    }
+  ],
+  "pages": [
+    {
+      "type": "assortedlib:recipe",
+      "id": "multitools",
+      "interval": 50,
+      "recipes": [
+        "assortedmultitools:iron_multitool",
+        "assortedmultitools:diamond_multitool",
+        "assortedmultitools:netherite_multitool"
+      ],
+      "text": "manual.assortedtools.chapter.multitools.multitools",
+      "title": "manual.assortedtools.chapter.multitools.multitools.title"
+    }
+  ],
+  "sort_order": 30
+}

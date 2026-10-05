@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedpokeball:pokeball_tooltip_names_what_it_holds",
+  "structure": "assortedpokeball:test_box",
+  "max_ticks": 1,
+  "setup_ticks": 0,
+  "required": true
+}

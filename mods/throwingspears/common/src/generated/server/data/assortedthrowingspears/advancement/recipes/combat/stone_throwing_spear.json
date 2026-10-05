@@ -1,0 +1,55 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "minecraft:stone_tool_materials"
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedthrowingspears"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_item": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#minecraft:stone_tool_materials"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "assortedthrowingspears:stone_throwing_spear"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "minecraft:stone_tool_materials"
+      ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedthrowingspears"
+    }
+  ],
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_item"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "assortedthrowingspears:stone_throwing_spear"
+    ]
+  }
+}

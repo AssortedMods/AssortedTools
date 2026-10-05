@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedbuckets:fluid_ingredient_draws_a_filled_bucket",
+  "structure": "assortedbuckets:test_box",
+  "max_ticks": 1,
+  "setup_ticks": 0,
+  "required": true
+}

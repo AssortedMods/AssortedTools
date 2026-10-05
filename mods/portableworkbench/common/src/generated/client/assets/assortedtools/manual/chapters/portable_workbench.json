@@ -1,0 +1,20 @@
+{
+  "conditions": [
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedportableworkbench"
+    }
+  ],
+  "pages": [
+    {
+      "type": "assortedlib:recipe",
+      "id": "portable_workbench",
+      "recipes": [
+        "assortedportableworkbench:portable_workbench"
+      ],
+      "text": "manual.assortedtools.chapter.portable_workbench.portable_workbench",
+      "title": "manual.assortedtools.chapter.portable_workbench.portable_workbench.title"
+    }
+  ],
+  "sort_order": 60
+}

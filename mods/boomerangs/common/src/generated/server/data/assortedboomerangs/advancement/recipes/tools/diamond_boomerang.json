@@ -1,0 +1,44 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedboomerangs"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_diamonds": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:gems/diamond"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "assortedboomerangs:diamond_boomerang"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedboomerangs"
+    }
+  ],
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_diamonds"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "assortedboomerangs:diamond_boomerang"
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:ingots/invar"
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedgearsets"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:ingots/invar"
+      ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedgearsets"
+    }
+  ],
+  "key": {
+    "X": "#c:ingots/invar"
+  },
+  "pattern": [
+    "X X",
+    "X X"
+  ],
+  "result": {
+    "id": "assortedgearsets:invar_boots"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "links": [
+    {
+      "items": [
+        "assortedsuits:chicken_suit_boots",
+        "assortedsuits:chicken_suit_chestplate",
+        "assortedsuits:chicken_suit_helmet",
+        "assortedsuits:chicken_suit_leggings"
+      ],
+      "page": "assortedtools:suits/chicken_suit"
+    },
+    {
+      "items": [
+        "assortedsuits:scuba_boots",
+        "assortedsuits:scuba_chestplate",
+        "assortedsuits:scuba_helmet",
+        "assortedsuits:scuba_leggings"
+      ],
+      "page": "assortedtools:suits/scuba_suit"
+    },
+    {
+      "items": [
+        "assortedsuits:lava_boots",
+        "assortedsuits:lava_chestplate",
+        "assortedsuits:lava_helmet",
+        "assortedsuits:lava_leggings"
+      ],
+      "page": "assortedtools:suits/lava_suit"
+    }
+  ]
+}

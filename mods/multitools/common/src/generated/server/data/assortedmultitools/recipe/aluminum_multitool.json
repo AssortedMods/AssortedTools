@@ -1,0 +1,106 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:and",
+      "values": [
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:ingots/aluminum"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:pickaxes/aluminum"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:shovels/aluminum"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:axes/aluminum"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:hoes/aluminum"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:swords/aluminum"
+        }
+      ]
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedmultitools"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:and",
+      "values": [
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:ingots/aluminum"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:pickaxes/aluminum"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:shovels/aluminum"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:axes/aluminum"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:hoes/aluminum"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:swords/aluminum"
+          ]
+        }
+      ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedmultitools"
+    }
+  ],
+  "ingredients": [
+    "#c:pickaxes/aluminum",
+    "#c:shovels/aluminum",
+    "#c:axes/aluminum",
+    "#c:hoes/aluminum",
+    "#c:swords/aluminum",
+    "#c:ingots/aluminum",
+    "#c:ingots/aluminum",
+    "#c:ingots/aluminum",
+    "#c:ingots/aluminum"
+  ],
+  "result": {
+    "id": "assortedmultitools:aluminum_multitool"
+  }
+}

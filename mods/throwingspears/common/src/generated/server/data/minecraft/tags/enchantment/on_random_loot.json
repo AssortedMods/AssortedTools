@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "assortedthrowingspears:bounciness",
+      "required": false
+    },
+    {
+      "id": "assortedthrowingspears:conductive",
+      "required": false
+    },
+    {
+      "id": "assortedthrowingspears:flammable",
+      "required": false
+    },
+    {
+      "id": "assortedthrowingspears:unstable",
+      "required": false
+    }
+  ]
+}

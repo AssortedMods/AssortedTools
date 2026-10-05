@@ -1,0 +1,39 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "minecraft:planks"
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedhammers"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "minecraft:planks"
+      ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedhammers"
+    }
+  ],
+  "key": {
+    "I": "#minecraft:planks",
+    "S": "#c:rods/wooden"
+  },
+  "pattern": [
+    "III",
+    "ISI",
+    " S "
+  ],
+  "result": {
+    "id": "assortedhammers:wood_hammer"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "minecraft:stone_tool_materials"
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedbuckets"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "minecraft:stone_tool_materials"
+      ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedbuckets"
+    }
+  ],
+  "key": {
+    "I": "#minecraft:stone_tool_materials"
+  },
+  "pattern": [
+    "I I",
+    " I "
+  ],
+  "result": {
+    "id": "assortedbuckets:stone_bucket"
+  }
+}

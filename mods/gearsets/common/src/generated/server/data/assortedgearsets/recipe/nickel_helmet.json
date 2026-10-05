@@ -1,0 +1,37 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:ingots/nickel"
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedgearsets"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:ingots/nickel"
+      ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedgearsets"
+    }
+  ],
+  "key": {
+    "X": "#c:ingots/nickel"
+  },
+  "pattern": [
+    "XXX",
+    "X X"
+  ],
+  "result": {
+    "id": "assortedgearsets:nickel_helmet"
+  }
+}

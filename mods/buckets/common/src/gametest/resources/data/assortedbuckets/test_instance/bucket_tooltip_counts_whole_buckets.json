@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedbuckets:bucket_tooltip_counts_whole_buckets",
+  "structure": "assortedbuckets:test_box",
+  "max_ticks": 1,
+  "setup_ticks": 0,
+  "required": true
+}

@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_21",
+  "package": "com.grim3212.assorted.shears.mixin",
+  "mixins": [
+    "block.BeehiveBlockMixin",
+    "block.PumpkinBlockMixin",
+    "block.TripWireBlockMixin",
+    "loot.ItemPredicateMixin"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

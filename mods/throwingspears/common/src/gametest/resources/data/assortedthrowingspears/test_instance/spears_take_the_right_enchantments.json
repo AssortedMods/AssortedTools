@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedthrowingspears:spears_take_the_right_enchantments",
+  "structure": "assortedthrowingspears:test_box",
+  "max_ticks": 1,
+  "setup_ticks": 0,
+  "required": true
+}

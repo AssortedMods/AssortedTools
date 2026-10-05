@@ -1,0 +1,14 @@
+{
+  "entity.assortedpokeball.pokeball": "Pokeball",
+  "item.assortedpokeball.pokeball": "Pokeball",
+  "itemGroup.assortedtools": "Assorted Tools",
+  "manual.assortedtools.chapter.pokeball": "Pokeball",
+  "manual.assortedtools.chapter.pokeball.pokeball": "Throw a pokeball at a mob and it goes inside, exactly as it was. So health, name, anything it was carrying. Throw it again and the mob comes back out.\n\nA hostile mob let out of a pokeball is still hostile, and still remembers you so be careful.",
+  "manual.assortedtools.chapter.pokeball.pokeball.title": "Pokeball",
+  "manual.assortedtools.description": "Tool and armor sets for every material, buckets that hold more than one, throwing weapons and the wands that do the digging for you.",
+  "manual.assortedtools.title": "Assorted Tools",
+  "tag.item.assorteddecor.cage_supported": "Cage Supported Items",
+  "tooltip.pokeball.empty": "Empty",
+  "tooltip.pokeball.stored": "Stored: %s",
+  "tooltip.pokeball.stored_custom_name": "Stored: %s (%s)"
+}

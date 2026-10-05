@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "assortedultimatefist:item/ultimate_fist"
+  }
+}

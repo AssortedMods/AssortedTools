@@ -1,0 +1,106 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:and",
+      "values": [
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:gems/amethyst"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:pickaxes/amethyst"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:shovels/amethyst"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:axes/amethyst"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:hoes/amethyst"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:swords/amethyst"
+        }
+      ]
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedmultitools"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:and",
+      "values": [
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:gems/amethyst"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:pickaxes/amethyst"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:shovels/amethyst"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:axes/amethyst"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:hoes/amethyst"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:swords/amethyst"
+          ]
+        }
+      ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedmultitools"
+    }
+  ],
+  "ingredients": [
+    "#c:pickaxes/amethyst",
+    "#c:shovels/amethyst",
+    "#c:axes/amethyst",
+    "#c:hoes/amethyst",
+    "#c:swords/amethyst",
+    "#c:gems/amethyst",
+    "#c:gems/amethyst",
+    "#c:gems/amethyst",
+    "#c:gems/amethyst"
+  ],
+  "result": {
+    "id": "assortedmultitools:amethyst_multitool"
+  }
+}

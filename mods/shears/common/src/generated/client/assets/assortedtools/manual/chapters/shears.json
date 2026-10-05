@@ -1,0 +1,23 @@
+{
+  "conditions": [
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedshears"
+    }
+  ],
+  "pages": [
+    {
+      "type": "assortedlib:recipe",
+      "id": "shears",
+      "interval": 50,
+      "recipes": [
+        "assortedshears:wood_shears",
+        "assortedshears:steel_shears",
+        "assortedshears:netherite_shears"
+      ],
+      "text": "manual.assortedtools.chapter.shears.shears",
+      "title": "manual.assortedtools.chapter.shears.shears.title"
+    }
+  ],
+  "sort_order": 50
+}

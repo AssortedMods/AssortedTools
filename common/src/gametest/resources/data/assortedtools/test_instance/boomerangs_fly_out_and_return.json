@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:function",
-  "environment": "minecraft:default",
-  "function": "assortedtools:boomerangs_fly_out_and_return",
-  "structure": "assortedtools:test_box",
-  "max_ticks": 1,
-  "setup_ticks": 0,
-  "required": true
-}

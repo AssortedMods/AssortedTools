@@ -1,0 +1,30 @@
+{
+  "links": [
+    {
+      "items": [
+        "assortedstaffs:neptune_staff"
+      ],
+      "page": "assortedtools:staffs/neptune"
+    },
+    {
+      "items": [
+        "assortedstaffs:phoenix_staff"
+      ],
+      "page": "assortedtools:staffs/phoenix"
+    },
+    {
+      "items": [
+        "assortedstaffs:frost_rod",
+        "assortedstaffs:frost_powder",
+        "assortedstaffs:ice_charge"
+      ],
+      "page": "assortedtools:staffs/frost"
+    },
+    {
+      "items": [
+        "assortedstaffs:power_staff"
+      ],
+      "page": "assortedtools:staffs/power"
+    }
+  ]
+}

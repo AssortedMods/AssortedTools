@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedwands:breaking_wands_clear_their_modes",
+  "structure": "assortedwands:test_box",
+  "max_ticks": 1,
+  "setup_ticks": 0,
+  "required": true
+}

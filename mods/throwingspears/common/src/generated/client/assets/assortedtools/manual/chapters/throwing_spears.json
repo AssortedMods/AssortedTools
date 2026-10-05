@@ -1,0 +1,23 @@
+{
+  "conditions": [
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedthrowingspears"
+    }
+  ],
+  "pages": [
+    {
+      "type": "assortedlib:recipe",
+      "id": "throwing_spears",
+      "interval": 50,
+      "recipes": [
+        "assortedthrowingspears:wood_throwing_spear",
+        "assortedthrowingspears:iron_throwing_spear",
+        "assortedthrowingspears:diamond_throwing_spear"
+      ],
+      "text": "manual.assortedtools.chapter.throwing_spears.throwing_spears",
+      "title": "manual.assortedtools.chapter.throwing_spears.throwing_spears.title"
+    }
+  ],
+  "sort_order": 70
+}

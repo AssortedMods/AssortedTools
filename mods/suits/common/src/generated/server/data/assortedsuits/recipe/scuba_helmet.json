@@ -1,0 +1,38 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:ingots/copper"
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedsuits"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:ingots/copper"
+      ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedsuits"
+    }
+  ],
+  "key": {
+    "G": "#c:glass_blocks",
+    "L": "#c:leathers"
+  },
+  "pattern": [
+    "LLL",
+    "LGL"
+  ],
+  "result": {
+    "id": "assortedsuits:scuba_helmet"
+  }
+}

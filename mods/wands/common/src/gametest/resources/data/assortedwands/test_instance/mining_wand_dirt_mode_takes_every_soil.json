@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedwands:mining_wand_dirt_mode_takes_every_soil",
+  "structure": "assortedwands:test_box",
+  "max_ticks": 1,
+  "setup_ticks": 0,
+  "required": true
+}

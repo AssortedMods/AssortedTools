@@ -1,0 +1,37 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:ingots/iron"
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedthrowingspears"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:ingots/iron"
+      ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedthrowingspears"
+    }
+  ],
+  "key": {
+    "I": "#c:ingots/iron",
+    "S": "#c:rods/wooden"
+  },
+  "pattern": [
+    "SSI"
+  ],
+  "result": {
+    "id": "assortedthrowingspears:iron_throwing_spear"
+  }
+}

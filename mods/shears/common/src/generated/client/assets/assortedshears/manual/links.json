@@ -1,0 +1,31 @@
+{
+  "links": [
+    {
+      "items": [
+        "assortedshears:aluminum_shears",
+        "assortedshears:amethyst_shears",
+        "assortedshears:bronze_shears",
+        "assortedshears:copper_shears",
+        "assortedshears:diamond_shears",
+        "assortedshears:electrum_shears",
+        "assortedshears:emerald_shears",
+        "assortedshears:gold_shears",
+        "assortedshears:invar_shears",
+        "assortedshears:lead_shears",
+        "assortedshears:netherite_shears",
+        "assortedshears:nickel_shears",
+        "assortedshears:peridot_shears",
+        "assortedshears:platinum_shears",
+        "assortedshears:ruby_shears",
+        "assortedshears:sapphire_shears",
+        "assortedshears:silver_shears",
+        "assortedshears:steel_shears",
+        "assortedshears:stone_shears",
+        "assortedshears:tin_shears",
+        "assortedshears:topaz_shears",
+        "assortedshears:wood_shears"
+      ],
+      "page": "assortedtools:shears/shears"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:gems/ruby"
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedgearsets"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:gems/ruby"
+      ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedgearsets"
+    }
+  ],
+  "key": {
+    "S": "#c:rods/wooden",
+    "X": "#c:gems/ruby"
+  },
+  "pattern": [
+    "XXX",
+    " S ",
+    " S "
+  ],
+  "result": {
+    "id": "assortedgearsets:ruby_pickaxe"
+  }
+}

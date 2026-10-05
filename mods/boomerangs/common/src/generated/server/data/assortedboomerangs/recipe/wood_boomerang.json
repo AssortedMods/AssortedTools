@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedboomerangs"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedboomerangs"
+    }
+  ],
+  "key": {
+    "X": "#minecraft:planks"
+  },
+  "pattern": [
+    "XX",
+    "X ",
+    "XX"
+  ],
+  "result": {
+    "id": "assortedboomerangs:wood_boomerang"
+  }
+}

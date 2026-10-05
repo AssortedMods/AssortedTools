@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "assortedbuckets:fluid_container",
+    "flip_gas": true,
+    "model": "assortedbuckets:item/amethyst_bucket"
+  }
+}

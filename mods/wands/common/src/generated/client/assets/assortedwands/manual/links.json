@@ -1,0 +1,20 @@
+{
+  "links": [
+    {
+      "items": [
+        "assortedwands:breaking_wand",
+        "assortedwands:building_wand",
+        "assortedwands:mining_wand"
+      ],
+      "page": "assortedtools:wands/basic"
+    },
+    {
+      "items": [
+        "assortedwands:reinforced_breaking_wand",
+        "assortedwands:reinforced_building_wand",
+        "assortedwands:reinforced_mining_wand"
+      ],
+      "page": "assortedtools:wands/reinforced"
+    }
+  ]
+}

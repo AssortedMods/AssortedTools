@@ -1,0 +1,32 @@
+{
+  "links": [
+    {
+      "items": [
+        "assortedhammers:aluminum_hammer",
+        "assortedhammers:amethyst_hammer",
+        "assortedhammers:bronze_hammer",
+        "assortedhammers:copper_hammer",
+        "assortedhammers:diamond_hammer",
+        "assortedhammers:electrum_hammer",
+        "assortedhammers:emerald_hammer",
+        "assortedhammers:gold_hammer",
+        "assortedhammers:invar_hammer",
+        "assortedhammers:iron_hammer",
+        "assortedhammers:lead_hammer",
+        "assortedhammers:netherite_hammer",
+        "assortedhammers:nickel_hammer",
+        "assortedhammers:peridot_hammer",
+        "assortedhammers:platinum_hammer",
+        "assortedhammers:ruby_hammer",
+        "assortedhammers:sapphire_hammer",
+        "assortedhammers:silver_hammer",
+        "assortedhammers:steel_hammer",
+        "assortedhammers:stone_hammer",
+        "assortedhammers:tin_hammer",
+        "assortedhammers:topaz_hammer",
+        "assortedhammers:wood_hammer"
+      ],
+      "page": "assortedtools:hammers/hammers"
+    }
+  ]
+}

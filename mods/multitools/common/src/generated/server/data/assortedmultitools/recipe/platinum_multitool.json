@@ -1,0 +1,106 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:and",
+      "values": [
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:ingots/platinum"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:pickaxes/platinum"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:shovels/platinum"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:axes/platinum"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:hoes/platinum"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:swords/platinum"
+        }
+      ]
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedmultitools"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:and",
+      "values": [
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:ingots/platinum"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:pickaxes/platinum"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:shovels/platinum"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:axes/platinum"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:hoes/platinum"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:swords/platinum"
+          ]
+        }
+      ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedmultitools"
+    }
+  ],
+  "ingredients": [
+    "#c:pickaxes/platinum",
+    "#c:shovels/platinum",
+    "#c:axes/platinum",
+    "#c:hoes/platinum",
+    "#c:swords/platinum",
+    "#c:ingots/platinum",
+    "#c:ingots/platinum",
+    "#c:ingots/platinum",
+    "#c:ingots/platinum"
+  ],
+  "result": {
+    "id": "assortedmultitools:platinum_multitool"
+  }
+}

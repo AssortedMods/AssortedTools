@@ -1,0 +1,39 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:ingots/tin"
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedgearsets"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:ingots/tin"
+      ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedgearsets"
+    }
+  ],
+  "key": {
+    "I": "#c:ingots/tin",
+    "S": "#c:rods/wooden"
+  },
+  "pattern": [
+    "  I",
+    " S ",
+    "S  "
+  ],
+  "result": {
+    "id": "assortedgearsets:tin_spear"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "links": [
+    {
+      "items": [
+        "assortedthrowingspears:aluminum_throwing_spear",
+        "assortedthrowingspears:amethyst_throwing_spear",
+        "assortedthrowingspears:bronze_throwing_spear",
+        "assortedthrowingspears:copper_throwing_spear",
+        "assortedthrowingspears:diamond_throwing_spear",
+        "assortedthrowingspears:electrum_throwing_spear",
+        "assortedthrowingspears:emerald_throwing_spear",
+        "assortedthrowingspears:gold_throwing_spear",
+        "assortedthrowingspears:invar_throwing_spear",
+        "assortedthrowingspears:iron_throwing_spear",
+        "assortedthrowingspears:lead_throwing_spear",
+        "assortedthrowingspears:netherite_throwing_spear",
+        "assortedthrowingspears:nickel_throwing_spear",
+        "assortedthrowingspears:peridot_throwing_spear",
+        "assortedthrowingspears:platinum_throwing_spear",
+        "assortedthrowingspears:ruby_throwing_spear",
+        "assortedthrowingspears:sapphire_throwing_spear",
+        "assortedthrowingspears:silver_throwing_spear",
+        "assortedthrowingspears:steel_throwing_spear",
+        "assortedthrowingspears:stone_throwing_spear",
+        "assortedthrowingspears:tin_throwing_spear",
+        "assortedthrowingspears:topaz_throwing_spear",
+        "assortedthrowingspears:wood_throwing_spear"
+      ],
+      "page": "assortedtools:throwing_spears/throwing_spears"
+    }
+  ]
+}

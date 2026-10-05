@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedsuits:chicken_suit_converts_armor_in_an_anvil",
+  "structure": "assortedsuits:test_box",
+  "max_ticks": 1,
+  "setup_ticks": 0,
+  "required": true
+}

@@ -1,0 +1,39 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:gems/amethyst"
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedmachetes"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:gems/amethyst"
+      ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedmachetes"
+    }
+  ],
+  "key": {
+    "S": "#c:rods/wooden",
+    "X": "#c:gems/amethyst"
+  },
+  "pattern": [
+    " XX",
+    "XX ",
+    "S  "
+  ],
+  "result": {
+    "id": "assortedmachetes:amethyst_machete"
+  }
+}

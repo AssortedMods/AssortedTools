@@ -1,0 +1,38 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:feathers"
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedsuits"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:feathers"
+      ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedsuits"
+    }
+  ],
+  "key": {
+    "X": "#c:feathers"
+  },
+  "pattern": [
+    "X X",
+    "XXX",
+    "XXX"
+  ],
+  "result": {
+    "id": "assortedsuits:chicken_suit_chestplate"
+  }
+}

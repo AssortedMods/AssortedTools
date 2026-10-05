@@ -1,0 +1,61 @@
+package com.grim3212.assorted.pokeball.common.item;
+
+import com.grim3212.assorted.pokeball.common.entity.PokeballEntity;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+
+
+/**
+ * Throws itself: an empty ball catches the first mob it hits, and a full one lets it out where it
+ * lands. What it holds, and so its tooltip, is its {@link CapturedEntity} component.
+ */
+public class PokeballItem extends Item {
+
+    public PokeballItem(Properties properties) {
+        // One to a stack, since throwing empties the hand. No durability: a ball that broke mid catch lost the mob.
+        super(properties.stacksTo(1).component(PokeballDataComponents.CAPTURED_ENTITY.get(), CapturedEntity.EMPTY));
+    }
+
+    @Override
+    public InteractionResult use(Level worldIn, Player playerIn, InteractionHand hand) {
+        ItemStack itemStackIn = playerIn.getItemInHand(hand);
+
+        if (!worldIn.isClientSide()) {
+            PokeballEntity pokeball = new PokeballEntity(playerIn, worldIn, itemStackIn.copy());
+            pokeball.shoot(playerIn.getLookAngle().x, playerIn.getLookAngle().y, playerIn.getLookAngle().z, 1.5F, 1.0F);
+            worldIn.addFreshEntity(pokeball);
+        }
+
+        worldIn.playSound(playerIn, playerIn.blockPosition(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 0.5F, 0.4F / (worldIn.getRandom().nextFloat() * 0.4F + 0.8F));
+
+        if (!playerIn.isCreative() || !CapturedEntity.of(itemStackIn).isEmpty()) {
+            // The ball itself becomes the thrown entity, so the hand is emptied.
+            return InteractionResult.SUCCESS.heldItemTransformedTo(ItemStack.EMPTY);
+        }
+
+        return InteractionResult.SUCCESS;
+    }
+
+    /** A full bar shows a mob is inside, the way the old durability bar did after a catch. */
+    @Override
+    public boolean isBarVisible(ItemStack stack) {
+        return !CapturedEntity.of(stack).isEmpty();
+    }
+
+    @Override
+    public int getBarWidth(ItemStack stack) {
+        return 13;
+    }
+
+    @Override
+    public int getBarColor(ItemStack stack) {
+        return Mth.hsvToRgb(1.0F / 3.0F, 1.0F, 1.0F);
+    }
+}

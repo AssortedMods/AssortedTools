@@ -1,0 +1,37 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:gems/emerald"
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedbuckets"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:gems/emerald"
+      ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedbuckets"
+    }
+  ],
+  "key": {
+    "I": "#c:gems/emerald"
+  },
+  "pattern": [
+    "I I",
+    " I "
+  ],
+  "result": {
+    "id": "assortedbuckets:emerald_bucket"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "links": [
+    {
+      "items": [
+        "assortedbuckets:aluminum_bucket",
+        "assortedbuckets:amethyst_bucket",
+        "assortedbuckets:bronze_bucket",
+        "assortedbuckets:copper_bucket",
+        "assortedbuckets:diamond_bucket",
+        "assortedbuckets:electrum_bucket",
+        "assortedbuckets:emerald_bucket",
+        "assortedbuckets:gold_bucket",
+        "assortedbuckets:invar_bucket",
+        "assortedbuckets:lead_bucket",
+        "assortedbuckets:netherite_bucket",
+        "assortedbuckets:nickel_bucket",
+        "assortedbuckets:peridot_bucket",
+        "assortedbuckets:platinum_bucket",
+        "assortedbuckets:ruby_bucket",
+        "assortedbuckets:sapphire_bucket",
+        "assortedbuckets:silver_bucket",
+        "assortedbuckets:steel_bucket",
+        "assortedbuckets:stone_bucket",
+        "assortedbuckets:tin_bucket",
+        "assortedbuckets:topaz_bucket",
+        "assortedbuckets:wood_bucket"
+      ],
+      "page": "assortedtools:buckets/buckets"
+    },
+    {
+      "items": [
+        "assortedbuckets:aluminum_milk_bucket",
+        "assortedbuckets:amethyst_milk_bucket",
+        "assortedbuckets:bronze_milk_bucket",
+        "assortedbuckets:copper_milk_bucket",
+        "assortedbuckets:diamond_milk_bucket",
+        "assortedbuckets:electrum_milk_bucket",
+        "assortedbuckets:emerald_milk_bucket",
+        "assortedbuckets:gold_milk_bucket",
+        "assortedbuckets:invar_milk_bucket",
+        "assortedbuckets:lead_milk_bucket",
+        "assortedbuckets:netherite_milk_bucket",
+        "assortedbuckets:nickel_milk_bucket",
+        "assortedbuckets:peridot_milk_bucket",
+        "assortedbuckets:platinum_milk_bucket",
+        "assortedbuckets:ruby_milk_bucket",
+        "assortedbuckets:sapphire_milk_bucket",
+        "assortedbuckets:silver_milk_bucket",
+        "assortedbuckets:steel_milk_bucket",
+        "assortedbuckets:stone_milk_bucket",
+        "assortedbuckets:tin_milk_bucket",
+        "assortedbuckets:topaz_milk_bucket",
+        "assortedbuckets:wood_milk_bucket"
+      ],
+      "page": "assortedtools:buckets/milk"
+    }
+  ]
+}

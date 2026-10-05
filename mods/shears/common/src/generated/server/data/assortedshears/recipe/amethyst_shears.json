@@ -1,0 +1,38 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:gems/amethyst"
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedshears"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:gems/amethyst"
+      ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedshears"
+    }
+  ],
+  "key": {
+    "I": "#c:gems/amethyst",
+    "L": "#c:leathers"
+  },
+  "pattern": [
+    " I",
+    "IL"
+  ],
+  "result": {
+    "id": "assortedshears:amethyst_shears"
+  }
+}

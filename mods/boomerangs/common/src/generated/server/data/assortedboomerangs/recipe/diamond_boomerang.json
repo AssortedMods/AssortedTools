@@ -1,0 +1,28 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedboomerangs"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedboomerangs"
+    }
+  ],
+  "key": {
+    "X": "#c:gems/diamond",
+    "Y": "assortedboomerangs:wood_boomerang"
+  },
+  "pattern": [
+    "XX",
+    "XY",
+    "XX"
+  ],
+  "result": {
+    "id": "assortedboomerangs:diamond_boomerang"
+  }
+}

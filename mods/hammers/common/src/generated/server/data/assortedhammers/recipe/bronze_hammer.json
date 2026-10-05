@@ -1,0 +1,39 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:ingots/bronze"
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedhammers"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:ingots/bronze"
+      ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedhammers"
+    }
+  ],
+  "key": {
+    "I": "#c:ingots/bronze",
+    "S": "#c:rods/wooden"
+  },
+  "pattern": [
+    "III",
+    "ISI",
+    " S "
+  ],
+  "result": {
+    "id": "assortedhammers:bronze_hammer"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedbuckets"
+    }
+  ],
+  "type": "minecraft:smithing_transform",
+  "addition": "#c:ingots/netherite",
+  "base": "assortedbuckets:diamond_bucket",
+  "fabric:load_conditions": [
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedbuckets"
+    }
+  ],
+  "result": {
+    "id": "assortedbuckets:netherite_bucket"
+  },
+  "template": "minecraft:netherite_upgrade_smithing_template"
+}

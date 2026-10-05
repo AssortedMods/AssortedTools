@@ -1,0 +1,9 @@
+{
+  "parent": "assortedlib:item/default",
+  "textures": {
+    "base": "assortedbuckets:item/buckets/wood_bucket",
+    "cover": "assortedbuckets:item/buckets/bucket_covered",
+    "fluid": "assortedbuckets:item/buckets/bucket_fluid",
+    "particle": "assortedbuckets:item/buckets/wood_bucket"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedstaffs"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_frost_powder": {
+      "conditions": {
+        "items": [
+          {
+            "items": "assortedstaffs:frost_powder"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "assortedstaffs:ice_charge"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedstaffs"
+    }
+  ],
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_frost_powder"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "assortedstaffs:ice_charge"
+    ]
+  }
+}

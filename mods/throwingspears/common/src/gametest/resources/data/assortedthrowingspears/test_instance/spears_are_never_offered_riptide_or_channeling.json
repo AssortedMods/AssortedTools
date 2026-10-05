@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedthrowingspears:spears_are_never_offered_riptide_or_channeling",
+  "structure": "assortedthrowingspears:test_box",
+  "max_ticks": 1,
+  "setup_ticks": 0,
+  "required": true
+}

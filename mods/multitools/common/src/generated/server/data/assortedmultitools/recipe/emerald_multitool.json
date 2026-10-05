@@ -1,0 +1,106 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:and",
+      "values": [
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:gems/emerald"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:pickaxes/emerald"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:shovels/emerald"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:axes/emerald"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:hoes/emerald"
+        },
+        {
+          "type": "assortedlib:item_tag_populated",
+          "tag": "c:swords/emerald"
+        }
+      ]
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedmultitools"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:and",
+      "values": [
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:gems/emerald"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:pickaxes/emerald"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:shovels/emerald"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:axes/emerald"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:hoes/emerald"
+          ]
+        },
+        {
+          "condition": "fabric:tags_populated",
+          "registry": "minecraft:item",
+          "values": [
+            "c:swords/emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedmultitools"
+    }
+  ],
+  "ingredients": [
+    "#c:pickaxes/emerald",
+    "#c:shovels/emerald",
+    "#c:axes/emerald",
+    "#c:hoes/emerald",
+    "#c:swords/emerald",
+    "#c:gems/emerald",
+    "#c:gems/emerald",
+    "#c:gems/emerald",
+    "#c:gems/emerald"
+  ],
+  "result": {
+    "id": "assortedmultitools:emerald_multitool"
+  }
+}

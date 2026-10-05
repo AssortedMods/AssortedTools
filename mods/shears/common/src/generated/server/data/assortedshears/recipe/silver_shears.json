@@ -1,0 +1,38 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:ingots/silver"
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedshears"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:ingots/silver"
+      ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedshears"
+    }
+  ],
+  "key": {
+    "I": "#c:ingots/silver",
+    "L": "#c:leathers"
+  },
+  "pattern": [
+    " I",
+    "IL"
+  ],
+  "result": {
+    "id": "assortedshears:silver_shears"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:ingots/lead"
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedmachetes"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:ingots/lead"
+      ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedmachetes"
+    }
+  ],
+  "key": {
+    "S": "#c:rods/wooden",
+    "X": "#c:ingots/lead"
+  },
+  "pattern": [
+    " XX",
+    "XX ",
+    "S  "
+  ],
+  "result": {
+    "id": "assortedmachetes:lead_machete"
+  }
+}

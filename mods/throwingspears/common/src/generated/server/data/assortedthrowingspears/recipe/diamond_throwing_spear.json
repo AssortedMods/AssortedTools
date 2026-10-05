@@ -1,0 +1,37 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:gems/diamond"
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedthrowingspears"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:gems/diamond"
+      ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedthrowingspears"
+    }
+  ],
+  "key": {
+    "I": "#c:gems/diamond",
+    "S": "#c:rods/wooden"
+  },
+  "pattern": [
+    "SSI"
+  ],
+  "result": {
+    "id": "assortedthrowingspears:diamond_throwing_spear"
+  }
+}

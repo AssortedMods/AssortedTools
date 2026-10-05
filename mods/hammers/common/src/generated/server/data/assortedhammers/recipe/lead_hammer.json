@@ -1,0 +1,39 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:ingots/lead"
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedhammers"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:ingots/lead"
+      ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedhammers"
+    }
+  ],
+  "key": {
+    "I": "#c:ingots/lead",
+    "S": "#c:rods/wooden"
+  },
+  "pattern": [
+    "III",
+    "ISI",
+    " S "
+  ],
+  "result": {
+    "id": "assortedhammers:lead_hammer"
+  }
+}

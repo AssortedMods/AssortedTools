@@ -1,0 +1,37 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "minecraft:stone_tool_materials"
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedthrowingspears"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "minecraft:stone_tool_materials"
+      ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedthrowingspears"
+    }
+  ],
+  "key": {
+    "I": "#minecraft:stone_tool_materials",
+    "S": "#c:rods/wooden"
+  },
+  "pattern": [
+    "SSI"
+  ],
+  "result": {
+    "id": "assortedthrowingspears:stone_throwing_spear"
+  }
+}

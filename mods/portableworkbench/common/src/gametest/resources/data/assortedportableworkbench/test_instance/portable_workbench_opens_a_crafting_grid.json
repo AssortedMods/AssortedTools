@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedportableworkbench:portable_workbench_opens_a_crafting_grid",
+  "structure": "assortedportableworkbench:test_box",
+  "max_ticks": 1,
+  "setup_ticks": 0,
+  "required": true
+}

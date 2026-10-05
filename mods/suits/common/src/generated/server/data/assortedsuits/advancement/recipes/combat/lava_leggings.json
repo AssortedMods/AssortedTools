@@ -1,0 +1,55 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:item_tag_populated",
+      "tag": "c:ingots/netherite"
+    },
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedsuits"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_netherite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:ingots/netherite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "assortedsuits:lava_leggings"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:ingots/netherite"
+      ]
+    },
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedsuits"
+    }
+  ],
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_netherite"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "assortedsuits:lava_leggings"
+    ]
+  }
+}

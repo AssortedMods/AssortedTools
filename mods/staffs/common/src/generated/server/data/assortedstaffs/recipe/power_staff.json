@@ -1,0 +1,29 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedstaffs"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "assortedlib:part_enabled",
+      "part": "assortedstaffs"
+    }
+  ],
+  "key": {
+    "D": "#c:gems/diamond",
+    "I": "#c:ingots/iron",
+    "R": "#c:dusts/redstone"
+  },
+  "pattern": [
+    "IDI",
+    "IRI",
+    " I "
+  ],
+  "result": {
+    "id": "assortedstaffs:power_staff"
+  }
+}

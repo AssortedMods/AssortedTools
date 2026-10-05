@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedshears:every_item_has_a_model_and_a_name",
+  "structure": "assortedshears:test_box",
+  "max_ticks": 1,
+  "setup_ticks": 0,
+  "required": true
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedsuits:lava_legs_and_boots_let_you_swim",
+  "structure": "assortedsuits:test_box",
+  "max_ticks": 120,
+  "setup_ticks": 0,
+  "required": true
+}

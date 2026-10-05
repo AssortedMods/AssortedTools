@@ -1,0 +1,32 @@
+{
+  "links": [
+    {
+      "items": [
+        "assortedmachetes:aluminum_machete",
+        "assortedmachetes:amethyst_machete",
+        "assortedmachetes:bronze_machete",
+        "assortedmachetes:copper_machete",
+        "assortedmachetes:diamond_machete",
+        "assortedmachetes:electrum_machete",
+        "assortedmachetes:emerald_machete",
+        "assortedmachetes:gold_machete",
+        "assortedmachetes:invar_machete",
+        "assortedmachetes:iron_machete",
+        "assortedmachetes:lead_machete",
+        "assortedmachetes:netherite_machete",
+        "assortedmachetes:nickel_machete",
+        "assortedmachetes:peridot_machete",
+        "assortedmachetes:platinum_machete",
+        "assortedmachetes:ruby_machete",
+        "assortedmachetes:sapphire_machete",
+        "assortedmachetes:silver_machete",
+        "assortedmachetes:steel_machete",
+        "assortedmachetes:stone_machete",
+        "assortedmachetes:tin_machete",
+        "assortedmachetes:topaz_machete",
+        "assortedmachetes:wood_machete"
+      ],
+      "page": "assortedtools:machetes/machetes"
+    }
+  ]
+}

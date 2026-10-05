@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "assortedgearsets:nickel"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "assortedgearsets:nickel"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "assortedgearsets:nickel"
+      }
+    ]
+  }
+}

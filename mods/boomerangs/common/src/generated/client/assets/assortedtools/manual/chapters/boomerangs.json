@@ -1,0 +1,22 @@
+{
+  "conditions": [
+    {
+      "type": "assortedlib:part_enabled",
+      "part": "assortedboomerangs"
+    }
+  ],
+  "pages": [
+    {
+      "type": "assortedlib:recipe",
+      "id": "boomerangs",
+      "interval": 50,
+      "recipes": [
+        "assortedboomerangs:wood_boomerang",
+        "assortedboomerangs:diamond_boomerang"
+      ],
+      "text": "manual.assortedtools.chapter.boomerangs.boomerangs",
+      "title": "manual.assortedtools.chapter.boomerangs.boomerangs.title"
+    }
+  ],
+  "sort_order": 80
+}
