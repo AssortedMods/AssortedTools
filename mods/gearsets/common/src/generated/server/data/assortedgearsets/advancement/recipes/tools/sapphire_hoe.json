@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:sapphire_hoe"
+        "recipes": "assortedgearsets:sapphire_hoe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

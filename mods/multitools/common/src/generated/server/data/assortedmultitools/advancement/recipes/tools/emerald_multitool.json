@@ -48,7 +48,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedmultitools:emerald_multitool"
+        "recipes": "assortedmultitools:emerald_multitool"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

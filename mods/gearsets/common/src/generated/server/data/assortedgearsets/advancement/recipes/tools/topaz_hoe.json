@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:topaz_hoe"
+        "recipes": "assortedgearsets:topaz_hoe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -19,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedstaffs:phoenix_staff"
+        "recipes": "assortedstaffs:phoenix_staff"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

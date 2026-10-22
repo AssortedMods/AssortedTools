@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:peridot_boots"
+        "recipes": "assortedgearsets:peridot_boots"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

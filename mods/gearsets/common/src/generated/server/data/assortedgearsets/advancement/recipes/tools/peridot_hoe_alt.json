@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:peridot_hoe_alt"
+        "recipes": "assortedgearsets:peridot_hoe_alt"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:tin_helmet"
+        "recipes": "assortedgearsets:tin_helmet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

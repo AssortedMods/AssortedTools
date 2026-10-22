@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:topaz_pickaxe"
+        "recipes": "assortedgearsets:topaz_pickaxe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

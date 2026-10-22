@@ -32,6 +32,7 @@ import net.minecraft.client.resources.model.cuboid.CuboidFace;
 import net.minecraft.client.resources.model.cuboid.CuboidModelElement;
 import net.minecraft.client.resources.model.cuboid.ItemModelGenerator;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
+import net.minecraft.client.resources.model.geometry.ItemQuads;
 import net.minecraft.client.resources.model.geometry.QuadCollection;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.client.resources.model.sprite.MaterialBaker;
@@ -115,7 +116,7 @@ public class FluidContainerItemModel implements ItemModel {
                 output.appendModelIdentityElement(color);
             }
 
-            layer.prepareQuadList().addAll(baked.quads().getAll());
+            layer.setQuads(baked.itemQuads());
 
             // A render state is reused between frames unless marked animated, and a fluid's still texture usually is.
             if (baked.quads().hasMaterialFlag(BakedQuad.FLAG_ANIMATED)) {
@@ -187,9 +188,10 @@ public class FluidContainerItemModel implements ItemModel {
      * One drawn layer. {@code CuboidItemModelWrapper}'s constructor is private in the vanilla jar,
      * so this holds its two fields and {@link #update} does the render state work.
      */
-    private record Layer(QuadCollection quads, List<ItemTintSource> tints, Supplier<Vector3fc[]> extents) {
+    /** {@code itemQuads} is the same quads split by blending, which is how 26.3 item layers take them. */
+    private record Layer(QuadCollection quads, ItemQuads itemQuads, List<ItemTintSource> tints, Supplier<Vector3fc[]> extents) {
         private static Layer of(QuadCollection quads, List<ItemTintSource> tints) {
-            return new Layer(quads, tints, Suppliers.memoize(() -> CuboidItemModelWrapper.computeExtents(quads.getAll()))::get);
+            return new Layer(quads, ItemQuads.split(quads.getAll()), tints, Suppliers.memoize(() -> CuboidItemModelWrapper.computeExtents(quads.getAll()))::get);
         }
     }
 

@@ -6,6 +6,7 @@ import com.grim3212.assorted.hammers.client.data.HammersManualProvider;
 import com.grim3212.assorted.hammers.data.HammersItemTagProvider;
 import com.grim3212.assorted.hammers.data.HammersRecipes;
 import com.grim3212.assorted.lib.data.ForgeItemTagProvider;
+import com.grim3212.assorted.lib.data.ForgeRegistryEntries;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagsProvider;
@@ -31,9 +32,9 @@ public class AssortedHammersNeoForge {
     /** Server datagen. If the client half runs instead, the build still succeeds, with "All providers took: 0 ms". */
     private void gatherServerData(final GatherDataEvent.Server event) {
         PackOutput packOutput = event.getGenerator().getPackOutput();
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getWorldLookupProvider();
 
-        event.addProvider(new HammersRecipes.Runner(packOutput, lookupProvider));
+        ForgeRegistryEntries.of(Constants.MOD_ID).recipes(HammersRecipes::new).addTo(event);
         // No blocks, so no block tags for the item tags to copy.
         CompletableFuture<TagsProvider.TagLookup<Block>> noBlockTags = CompletableFuture.completedFuture(TagsProvider.TagLookup.empty());
         event.addProvider(new ForgeItemTagProvider(packOutput, lookupProvider, noBlockTags, Constants.MOD_ID, new HammersItemTagProvider(packOutput, lookupProvider, noBlockTags)));

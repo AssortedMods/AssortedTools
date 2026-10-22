@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:topaz_shovel"
+        "recipes": "assortedgearsets:topaz_shovel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

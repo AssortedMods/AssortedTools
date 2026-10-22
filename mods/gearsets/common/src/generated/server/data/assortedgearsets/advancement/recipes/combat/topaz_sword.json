@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:topaz_sword"
+        "recipes": "assortedgearsets:topaz_sword"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

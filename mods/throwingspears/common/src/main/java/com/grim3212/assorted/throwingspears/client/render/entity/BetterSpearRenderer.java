@@ -47,12 +47,14 @@ public class BetterSpearRenderer extends EntityRenderer<BetterSpearEntity, Bette
     public void submit(SpearRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera) {
         poseStack.pushPose();
 
-        poseStack.mulPose(Axis.YP.rotationDegrees(state.yRot - 90.0F));
-        poseStack.mulPose(Axis.ZP.rotationDegrees(state.xRot + 90.0F));
+        poseStack.rotate(Axis.YP.rotationDegrees(state.yRot - 90.0F));
+        poseStack.rotate(Axis.ZP.rotationDegrees(state.xRot + 90.0F));
 
-        submitNodeCollector.order(0).submitModel(this.spearModel, Unit.INSTANCE, poseStack, state.texture, state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+        // 26.3's glint types draw the texture too, so a glinting spear is one pass, as vanilla's trident is.
         if (state.isFoil) {
-            submitNodeCollector.order(1).submitModel(this.spearModel, Unit.INSTANCE, poseStack, RenderTypes.entityGlint(), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+            submitNodeCollector.submitModel(this.spearModel, Unit.INSTANCE, poseStack, RenderTypes.entitySolidGlint(state.texture), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor);
+        } else {
+            submitNodeCollector.submitModel(this.spearModel, Unit.INSTANCE, poseStack, state.texture, state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor);
         }
 
         poseStack.popPose();

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedbuckets:ruby_bucket"
+        "recipes": "assortedbuckets:ruby_bucket"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

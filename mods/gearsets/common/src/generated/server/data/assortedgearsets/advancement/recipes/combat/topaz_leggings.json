@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:topaz_leggings"
+        "recipes": "assortedgearsets:topaz_leggings"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

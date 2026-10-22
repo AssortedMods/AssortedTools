@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:ruby_helmet"
+        "recipes": "assortedgearsets:ruby_helmet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

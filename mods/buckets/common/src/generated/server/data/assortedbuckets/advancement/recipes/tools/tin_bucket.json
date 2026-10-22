@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedbuckets:tin_bucket"
+        "recipes": "assortedbuckets:tin_bucket"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

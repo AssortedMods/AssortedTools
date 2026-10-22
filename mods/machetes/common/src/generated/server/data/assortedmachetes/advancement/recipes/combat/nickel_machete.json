@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedmachetes:nickel_machete"
+        "recipes": "assortedmachetes:nickel_machete"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

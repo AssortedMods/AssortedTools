@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedbuckets:diamond_bucket"
+        "recipes": "assortedbuckets:diamond_bucket"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

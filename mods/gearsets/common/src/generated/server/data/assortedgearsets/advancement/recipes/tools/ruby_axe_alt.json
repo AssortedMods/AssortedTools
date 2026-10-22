@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:ruby_axe_alt"
+        "recipes": "assortedgearsets:ruby_axe_alt"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

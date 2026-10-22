@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:amethyst_shovel"
+        "recipes": "assortedgearsets:amethyst_shovel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

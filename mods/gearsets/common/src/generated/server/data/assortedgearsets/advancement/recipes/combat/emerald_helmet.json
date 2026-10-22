@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:emerald_helmet"
+        "recipes": "assortedgearsets:emerald_helmet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -19,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedstaffs:frost_powder"
+        "recipes": "assortedstaffs:frost_powder"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

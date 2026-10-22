@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:sapphire_leggings"
+        "recipes": "assortedgearsets:sapphire_leggings"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

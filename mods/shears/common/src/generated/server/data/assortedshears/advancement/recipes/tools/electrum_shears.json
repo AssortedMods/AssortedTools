@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedshears:electrum_shears"
+        "recipes": "assortedshears:electrum_shears"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

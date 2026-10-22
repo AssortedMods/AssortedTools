@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:nickel_hoe"
+        "recipes": "assortedgearsets:nickel_hoe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

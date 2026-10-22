@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:topaz_boots"
+        "recipes": "assortedgearsets:topaz_boots"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

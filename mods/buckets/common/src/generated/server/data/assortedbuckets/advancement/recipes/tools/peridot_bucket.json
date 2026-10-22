@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedbuckets:peridot_bucket"
+        "recipes": "assortedbuckets:peridot_bucket"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

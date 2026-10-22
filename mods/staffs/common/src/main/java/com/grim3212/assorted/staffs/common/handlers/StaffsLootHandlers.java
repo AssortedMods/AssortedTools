@@ -60,7 +60,7 @@ public class StaffsLootHandlers {
 
     private static void inject(LootTableModifyEvent event, Collection<Identifier> tables, ResourceKey<LootTable> loot) {
         if (tables.contains(event.getId())) {
-            event.getContext().addPool(LootPool.lootPool().add(NestedLootTable.lootTableReference(loot).setWeight(1)));
+            event.getContext().addPool(LootPool.lootPool().add(NestedLootTable.lootTableReference(event.getContext().lootTable(loot)).setWeight(1)));
         }
     }
 

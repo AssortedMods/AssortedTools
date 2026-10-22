@@ -48,7 +48,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedmultitools:lead_multitool"
+        "recipes": "assortedmultitools:lead_multitool"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

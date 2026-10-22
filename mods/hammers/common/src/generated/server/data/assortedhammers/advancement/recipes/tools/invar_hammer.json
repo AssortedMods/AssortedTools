@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedhammers:invar_hammer"
+        "recipes": "assortedhammers:invar_hammer"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

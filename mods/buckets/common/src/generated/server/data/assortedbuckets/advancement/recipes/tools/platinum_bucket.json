@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedbuckets:platinum_bucket"
+        "recipes": "assortedbuckets:platinum_bucket"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

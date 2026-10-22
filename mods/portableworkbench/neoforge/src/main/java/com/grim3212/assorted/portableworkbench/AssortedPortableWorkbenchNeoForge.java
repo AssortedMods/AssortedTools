@@ -1,5 +1,6 @@
 package com.grim3212.assorted.portableworkbench;
 
+import com.grim3212.assorted.lib.data.ForgeRegistryEntries;
 import com.grim3212.assorted.portableworkbench.client.data.PortableWorkbenchItemModelProvider;
 import com.grim3212.assorted.portableworkbench.client.data.PortableWorkbenchLanguageProvider;
 import com.grim3212.assorted.portableworkbench.client.data.PortableWorkbenchManualProvider;
@@ -23,7 +24,7 @@ public class AssortedPortableWorkbenchNeoForge {
 
     /** Server datagen. If the client half runs instead, the build still succeeds, with "All providers took: 0 ms". */
     private void gatherServerData(final GatherDataEvent.Server event) {
-        event.addProvider(new PortableWorkbenchRecipes.Runner(event.getGenerator().getPackOutput(), event.getLookupProvider()));
+        ForgeRegistryEntries.of(Constants.MOD_ID).recipes(PortableWorkbenchRecipes::new).addTo(event);
     }
 
     /** Client datagen: models, the language file and the manual, written into common for both loaders. */

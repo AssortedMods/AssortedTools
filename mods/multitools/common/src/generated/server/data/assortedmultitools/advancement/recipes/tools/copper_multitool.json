@@ -48,7 +48,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedmultitools:copper_multitool"
+        "recipes": "assortedmultitools:copper_multitool"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

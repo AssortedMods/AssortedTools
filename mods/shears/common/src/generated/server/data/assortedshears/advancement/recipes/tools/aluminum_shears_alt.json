@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedshears:aluminum_shears_alt"
+        "recipes": "assortedshears:aluminum_shears_alt"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

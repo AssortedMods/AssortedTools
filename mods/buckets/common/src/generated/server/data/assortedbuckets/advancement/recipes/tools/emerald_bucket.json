@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedbuckets:emerald_bucket"
+        "recipes": "assortedbuckets:emerald_bucket"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

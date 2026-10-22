@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedmachetes:lead_machete"
+        "recipes": "assortedmachetes:lead_machete"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

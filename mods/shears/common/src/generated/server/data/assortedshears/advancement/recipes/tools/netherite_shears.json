@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedshears:netherite_shears"
+        "recipes": "assortedshears:netherite_shears"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

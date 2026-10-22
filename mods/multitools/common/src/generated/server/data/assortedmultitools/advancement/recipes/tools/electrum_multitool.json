@@ -48,7 +48,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedmultitools:electrum_multitool"
+        "recipes": "assortedmultitools:electrum_multitool"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedbuckets:lead_bucket"
+        "recipes": "assortedbuckets:lead_bucket"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

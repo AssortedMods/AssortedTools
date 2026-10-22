@@ -34,9 +34,11 @@ public class SpearSpecialRenderer implements NoDataSpecialModelRenderer {
 
     @Override
     public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int lightCoords, int overlayCoords, boolean hasFoil, int outlineColor) {
-        submitNodeCollector.order(0).submitModel(this.model, Unit.INSTANCE, poseStack, this.texture, lightCoords, overlayCoords, outlineColor, null);
+        // 26.3's glint types draw the texture too, so a glinting spear is one pass, as vanilla's trident is.
         if (hasFoil) {
-            submitNodeCollector.order(1).submitModel(this.model, Unit.INSTANCE, poseStack, RenderTypes.entityGlint(), lightCoords, overlayCoords, outlineColor, null);
+            submitNodeCollector.submitModel(this.model, Unit.INSTANCE, poseStack, RenderTypes.entitySolidGlint(this.texture), lightCoords, overlayCoords, outlineColor);
+        } else {
+            submitNodeCollector.submitModel(this.model, Unit.INSTANCE, poseStack, this.texture, lightCoords, overlayCoords, outlineColor);
         }
     }
 

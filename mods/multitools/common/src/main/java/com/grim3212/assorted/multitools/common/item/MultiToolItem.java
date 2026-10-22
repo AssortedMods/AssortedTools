@@ -6,7 +6,11 @@ import com.grim3212.assorted.lib.core.tool.ToolTier;
 import com.grim3212.assorted.multitools.api.MultitoolsTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.component.BlockTransformer;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -15,6 +19,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ToolMaterial;
+import net.minecraft.world.item.component.BlockTransformers;
 import net.minecraft.world.item.component.Weapon;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -97,13 +102,14 @@ public class MultiToolItem extends Item implements ITiered, IItemEnchantmentCond
     }
 
     /**
-     * Vanilla's tool {@code useOn} reads only the context, never the item, so each delegate tool
-     * (axe, shovel, hoe) is simply asked in turn to strip, scrape, wax, path, douse or till.
+     * Tries the axe's, shovel's and hoe's block transformers in turn, to strip, scrape, wax off, path or till;
+     * an item holds only one, and dousing campfires comes from the shovel tag instead.
      */
     @Override
     public InteractionResult useOn(UseOnContext context) {
-        for (Item tool : List.of(Items.IRON_AXE, Items.IRON_SHOVEL, Items.IRON_HOE)) {
-            InteractionResult result = tool.useOn(context);
+        Registry<BlockTransformer> transformers = context.getLevel().registryAccess().lookupOrThrow(Registries.BLOCK_TRANSFORMER);
+        for (ResourceKey<BlockTransformer> key : List.of(BlockTransformers.AXE, BlockTransformers.SHOVEL, BlockTransformers.HOE)) {
+            InteractionResult result = transformers.get(key).map(transformer -> transformer.value().transformBlock(context)).orElse(InteractionResult.PASS);
             if (result != InteractionResult.PASS) {
                 return result;
             }

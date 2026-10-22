@@ -5,15 +5,12 @@ import com.grim3212.assorted.lib.core.tool.ToolTiers;
 import com.grim3212.assorted.lib.util.LibCommonTags;
 import com.grim3212.assorted.throwingspears.Constants;
 import com.grim3212.assorted.throwingspears.common.item.ThrowingSpearsItems;
-import net.minecraft.core.HolderGetter;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.SmithingTransformRecipeBuilder;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.ItemTags;
@@ -24,15 +21,10 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 
-import java.util.concurrent.CompletableFuture;
-
 public class ThrowingSpearsRecipes extends ConditionalRecipeProvider {
 
-    private final HolderGetter<Item> items;
-
-    public ThrowingSpearsRecipes(HolderLookup.Provider registries, RecipeOutput output) {
-        super(registries, output, Constants.MOD_ID);
-        this.items = registries.lookupOrThrow(Registries.ITEM);
+    public ThrowingSpearsRecipes(BootstrapContext<Recipe<?>> recipes, BootstrapContext<Advancement> advancements) {
+        super(recipes, advancements, Constants.MOD_ID);
     }
 
     @Override
@@ -70,23 +62,5 @@ public class ThrowingSpearsRecipes extends ConditionalRecipeProvider {
 
     private static ResourceKey<Recipe<?>> recipeKey(Identifier id) {
         return ResourceKey.create(Registries.RECIPE, id);
-    }
-
-    /** What the loader datagen entry points register; it builds a fresh provider around each output. */
-    public static class Runner extends ConditionalRecipeProvider.Runner {
-
-        public Runner(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-            super(output, registries, Constants.MOD_ID);
-        }
-
-        @Override
-        protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
-            return new ThrowingSpearsRecipes(registries, output);
-        }
-
-        @Override
-        public String getName() {
-            return "Recipes: " + Constants.MOD_ID;
-        }
     }
 }

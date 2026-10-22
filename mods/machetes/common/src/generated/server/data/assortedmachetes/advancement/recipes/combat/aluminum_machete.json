@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedmachetes:aluminum_machete"
+        "recipes": "assortedmachetes:aluminum_machete"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

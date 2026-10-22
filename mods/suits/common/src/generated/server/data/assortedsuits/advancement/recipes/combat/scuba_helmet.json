@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedsuits:scuba_helmet"
+        "recipes": "assortedsuits:scuba_helmet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

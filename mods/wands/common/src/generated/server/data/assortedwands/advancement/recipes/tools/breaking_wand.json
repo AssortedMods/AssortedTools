@@ -19,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedwands:breaking_wand"
+        "recipes": "assortedwands:breaking_wand"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

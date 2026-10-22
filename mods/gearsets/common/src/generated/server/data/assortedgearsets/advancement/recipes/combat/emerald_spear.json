@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:emerald_spear"
+        "recipes": "assortedgearsets:emerald_spear"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

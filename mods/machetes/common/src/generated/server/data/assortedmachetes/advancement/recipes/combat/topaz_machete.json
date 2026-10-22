@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedmachetes:topaz_machete"
+        "recipes": "assortedmachetes:topaz_machete"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

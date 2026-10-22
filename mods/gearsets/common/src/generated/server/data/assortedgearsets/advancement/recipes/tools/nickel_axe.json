@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:nickel_axe"
+        "recipes": "assortedgearsets:nickel_axe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

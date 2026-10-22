@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:steel_shovel"
+        "recipes": "assortedgearsets:steel_shovel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

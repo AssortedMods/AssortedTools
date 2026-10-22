@@ -19,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedstaffs:neptune_staff"
+        "recipes": "assortedstaffs:neptune_staff"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

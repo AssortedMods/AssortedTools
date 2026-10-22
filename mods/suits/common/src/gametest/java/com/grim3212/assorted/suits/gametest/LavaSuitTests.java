@@ -207,7 +207,7 @@ final class LavaSuitTests {
         }
 
         pig.setDeltaMovement(0.0D, 0.0D, 0.45D);
-        pig.hurtMarked = true;
+        pig.needsSync = true;
         return pig;
     }
 

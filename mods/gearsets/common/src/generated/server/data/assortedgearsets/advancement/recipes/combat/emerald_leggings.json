@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:emerald_leggings"
+        "recipes": "assortedgearsets:emerald_leggings"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

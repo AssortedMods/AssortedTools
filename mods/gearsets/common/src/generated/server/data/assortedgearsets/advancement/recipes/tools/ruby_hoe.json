@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:ruby_hoe"
+        "recipes": "assortedgearsets:ruby_hoe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

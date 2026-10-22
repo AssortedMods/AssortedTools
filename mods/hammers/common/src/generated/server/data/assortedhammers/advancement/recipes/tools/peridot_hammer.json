@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedhammers:peridot_hammer"
+        "recipes": "assortedhammers:peridot_hammer"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

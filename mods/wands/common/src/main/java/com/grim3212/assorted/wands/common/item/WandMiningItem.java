@@ -9,6 +9,8 @@ import com.grim3212.assorted.wands.api.WandsTags;
 import com.grim3212.assorted.wands.api.util.WandCoord3D;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
@@ -93,7 +95,9 @@ public class WandMiningItem extends WandItem {
             BlockState state = world.getBlockState(startPos);
             if (state.getBlock() == Blocks.OBSIDIAN) {
                 state.getBlock().playerWillDestroy(world, startPos, state, entityplayer);
-                state.getBlock().playerDestroy(world, entityplayer, startPos, state, world.getBlockEntity(startPos), entityplayer.getUseItem());
+                if (world instanceof ServerLevel serverLevel && entityplayer instanceof ServerPlayer serverPlayer) {
+                    state.getBlock().playerDestroy(serverLevel, serverPlayer, startPos, state, world.getBlockEntity(startPos), entityplayer.getUseItem());
+                }
                 particles(world, startPos, 1);
                 return true;
             }
@@ -150,7 +154,9 @@ public class WandMiningItem extends WandItem {
                             if (world.setBlockAndUpdate(pos, Blocks.STONE.defaultBlockState())) {
                                 pos = new BlockPos(X, surface, Z);
                                 stateAt.getBlock().playerWillDestroy(world, pos, stateAt, entityplayer);
-                                stateAt.getBlock().playerDestroy(world, entityplayer, pos, stateAt, tile, entityplayer.getUseItem());
+                                if (world instanceof ServerLevel serverLevel && entityplayer instanceof ServerPlayer serverPlayer) {
+                                    stateAt.getBlock().playerDestroy(serverLevel, serverPlayer, pos, stateAt, tile, entityplayer.getUseItem());
+                                }
                                 cnt++;
                             }
                         }
@@ -193,7 +199,9 @@ public class WandMiningItem extends WandItem {
             if (canBreak(world, newPos, stack)) {
                 if (ItemUtil.destroyBlock(newPos, world, entityplayer)) {
                     BlockEntity tile = world.getBlockEntity(newPos);
-                    stateAt.getBlock().playerDestroy(world, entityplayer, newPos, stateAt, tile, entityplayer.getUseItem());
+                    if (world instanceof ServerLevel serverLevel && entityplayer instanceof ServerPlayer serverPlayer) {
+                        stateAt.getBlock().playerDestroy(serverLevel, serverPlayer, newPos, stateAt, tile, entityplayer.getUseItem());
+                    }
                     if (rand.nextInt(blocks2Dig / 50 + 1) == 0)
                         particles(world, newPos, 1);
                 }

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedhammers:amethyst_hammer"
+        "recipes": "assortedhammers:amethyst_hammer"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

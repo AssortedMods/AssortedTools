@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedsuits:chicken_suit_helmet"
+        "recipes": "assortedsuits:chicken_suit_helmet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

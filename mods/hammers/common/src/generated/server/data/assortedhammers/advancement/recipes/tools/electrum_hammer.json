@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedhammers:electrum_hammer"
+        "recipes": "assortedhammers:electrum_hammer"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

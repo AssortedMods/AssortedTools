@@ -2,6 +2,7 @@ package com.grim3212.assorted.machetes;
 
 import com.grim3212.assorted.lib.data.ForgeBlockTagProvider;
 import com.grim3212.assorted.lib.data.ForgeItemTagProvider;
+import com.grim3212.assorted.lib.data.ForgeRegistryEntries;
 import com.grim3212.assorted.machetes.client.data.MachetesItemModelProvider;
 import com.grim3212.assorted.machetes.client.data.MachetesLanguageProvider;
 import com.grim3212.assorted.machetes.client.data.MachetesManualProvider;
@@ -31,9 +32,9 @@ public class AssortedMachetesNeoForge {
     /** Server datagen. If the client half runs instead, the build still succeeds, with "All providers took: 0 ms". */
     private void gatherServerData(final GatherDataEvent.Server event) {
         PackOutput packOutput = event.getGenerator().getPackOutput();
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getWorldLookupProvider();
 
-        event.addProvider(new MachetesRecipes.Runner(packOutput, lookupProvider));
+        ForgeRegistryEntries.of(Constants.MOD_ID).recipes(MachetesRecipes::new).addTo(event);
         ForgeBlockTagProvider blockTagProvider = event.addProvider(new ForgeBlockTagProvider(packOutput, lookupProvider, Constants.MOD_ID, new MachetesBlockTagProvider(packOutput, lookupProvider)));
         event.addProvider(new ForgeItemTagProvider(packOutput, lookupProvider, blockTagProvider.contentsGetter(), Constants.MOD_ID, new MachetesItemTagProvider(packOutput, lookupProvider, blockTagProvider.contentsGetter())));
     }

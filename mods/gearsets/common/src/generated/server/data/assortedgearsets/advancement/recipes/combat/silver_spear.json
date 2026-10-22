@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:silver_spear"
+        "recipes": "assortedgearsets:silver_spear"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

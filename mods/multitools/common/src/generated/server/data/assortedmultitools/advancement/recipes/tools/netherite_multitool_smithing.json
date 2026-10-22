@@ -19,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedmultitools:netherite_multitool_smithing"
+        "recipes": "assortedmultitools:netherite_multitool_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

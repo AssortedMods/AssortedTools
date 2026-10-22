@@ -2,6 +2,7 @@ package com.grim3212.assorted.staffs;
 
 import com.grim3212.assorted.lib.data.ForgeBlockTagProvider;
 import com.grim3212.assorted.lib.data.ForgeItemTagProvider;
+import com.grim3212.assorted.lib.data.ForgeRegistryEntries;
 import com.grim3212.assorted.staffs.client.data.StaffsItemModelProvider;
 import com.grim3212.assorted.staffs.client.data.StaffsLanguageProvider;
 import com.grim3212.assorted.staffs.client.data.StaffsManualProvider;
@@ -14,7 +15,6 @@ import com.grim3212.assorted.staffs.data.StaffsRecipes;
 import com.grim3212.assorted.staffs.platform.NeoForgeFrozenStorage;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -23,8 +23,6 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @Mod(Constants.MOD_ID)
@@ -49,13 +47,11 @@ public class AssortedStaffsNeoForge {
     /** Server datagen. If the client half runs instead, the build still succeeds, with "All providers took: 0 ms". */
     private void gatherServerData(final GatherDataEvent.Server event) {
         PackOutput packOutput = event.getGenerator().getPackOutput();
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getWorldLookupProvider();
 
-        event.addProvider(new StaffsRecipes.Runner(packOutput, lookupProvider));
+        ForgeRegistryEntries.of(Constants.MOD_ID).recipes(StaffsRecipes::new).loot(StaffsChestLoot::new, LootContextParamSets.CHEST).loot(StaffsEntityLoot::new, LootContextParamSets.ENTITY).addTo(event);
         ForgeBlockTagProvider blockTagProvider = event.addProvider(new ForgeBlockTagProvider(packOutput, lookupProvider, Constants.MOD_ID, new StaffsBlockTagProvider(packOutput, lookupProvider)));
         event.addProvider(new ForgeItemTagProvider(packOutput, lookupProvider, blockTagProvider.contentsGetter(), Constants.MOD_ID, new StaffsItemTagProvider(packOutput, lookupProvider, blockTagProvider.contentsGetter())));
-        event.addProvider(new LootTableProvider(packOutput, Collections.emptySet(), List.of(new LootTableProvider.SubProviderEntry(registries -> new StaffsChestLoot(), LootContextParamSets.CHEST),
-                new LootTableProvider.SubProviderEntry(StaffsEntityLoot::new, LootContextParamSets.ENTITY)), lookupProvider));
     }
 
     /** Client datagen: models, the language file and the manual, written into common for both loaders. */

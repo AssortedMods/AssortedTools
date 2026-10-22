@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:nickel_chestplate"
+        "recipes": "assortedgearsets:nickel_chestplate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

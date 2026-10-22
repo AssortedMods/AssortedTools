@@ -19,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedbuckets:netherite_bucket_smithing"
+        "recipes": "assortedbuckets:netherite_bucket_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

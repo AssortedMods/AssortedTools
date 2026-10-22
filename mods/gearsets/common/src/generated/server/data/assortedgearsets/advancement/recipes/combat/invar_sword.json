@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:invar_sword"
+        "recipes": "assortedgearsets:invar_sword"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

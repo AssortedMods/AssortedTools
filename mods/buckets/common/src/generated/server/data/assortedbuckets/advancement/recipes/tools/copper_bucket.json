@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedbuckets:copper_bucket"
+        "recipes": "assortedbuckets:copper_bucket"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

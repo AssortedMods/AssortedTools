@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:aluminum_sword"
+        "recipes": "assortedgearsets:aluminum_sword"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

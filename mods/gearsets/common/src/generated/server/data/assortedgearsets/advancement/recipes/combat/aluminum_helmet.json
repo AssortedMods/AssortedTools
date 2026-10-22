@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:aluminum_helmet"
+        "recipes": "assortedgearsets:aluminum_helmet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

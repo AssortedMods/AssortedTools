@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:topaz_axe_alt"
+        "recipes": "assortedgearsets:topaz_axe_alt"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

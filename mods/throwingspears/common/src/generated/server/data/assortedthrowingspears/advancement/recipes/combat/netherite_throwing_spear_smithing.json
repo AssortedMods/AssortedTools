@@ -19,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedthrowingspears:netherite_throwing_spear_smithing"
+        "recipes": "assortedthrowingspears:netherite_throwing_spear_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

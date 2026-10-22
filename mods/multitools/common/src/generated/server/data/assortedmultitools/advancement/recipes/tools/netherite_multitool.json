@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedmultitools:netherite_multitool"
+        "recipes": "assortedmultitools:netherite_multitool"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

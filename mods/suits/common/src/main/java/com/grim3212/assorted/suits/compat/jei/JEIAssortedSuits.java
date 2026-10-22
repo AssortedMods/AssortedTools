@@ -22,7 +22,7 @@ public class JEIAssortedSuits implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         // Building an enchanted display stack needs a registry lookup, which JEI hands over under the vanilla slot-display key.
-        HolderLookup.Provider registries = registration.getContextMap().getOptional(SlotDisplayContext.REGISTRIES);
+        HolderLookup.Provider registries = registration.getContextMap().get(SlotDisplayContext.REGISTRIES);
         if (registries == null) {
             return;
         }

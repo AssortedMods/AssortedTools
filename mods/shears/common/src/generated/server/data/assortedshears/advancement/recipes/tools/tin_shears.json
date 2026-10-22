@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedshears:tin_shears"
+        "recipes": "assortedshears:tin_shears"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

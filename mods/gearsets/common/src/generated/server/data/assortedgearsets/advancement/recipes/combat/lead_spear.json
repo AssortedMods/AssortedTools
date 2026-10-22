@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:lead_spear"
+        "recipes": "assortedgearsets:lead_spear"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

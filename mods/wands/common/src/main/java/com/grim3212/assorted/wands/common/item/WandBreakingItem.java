@@ -41,7 +41,7 @@ public class WandBreakingItem extends WandItem {
 
         switch (BreakingMode.fromString(NBTHelper.getString(stack, "Mode"))) {
             case BREAK_WEAK:
-                return (state.canBeReplaced() || state.getPistonPushReaction() == PushReaction.DESTROY || state.liquid());
+                return (state.canBeReplaced() || state.getPistonPushReaction() == PushReaction.POPPED || state.liquid());
             case BREAK_ALL:
                 return (state.getBlock() != Blocks.BEDROCK || WandsCommonMod.COMMON_CONFIG.bedrockBreaking.get());
             case BREAK_XORES:

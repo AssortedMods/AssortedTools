@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:ruby_spear"
+        "recipes": "assortedgearsets:ruby_spear"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

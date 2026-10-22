@@ -50,10 +50,10 @@ public class BoomerangRenderer extends EntityRenderer<BoomerangEntity, Boomerang
     @Override
     public void submit(BoomerangRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera) {
         poseStack.pushPose();
-        poseStack.mulPose(Axis.YP.rotationDegrees(-state.yRot + 90.0F));
-        poseStack.mulPose(Axis.ZP.rotationDegrees(state.xRot + 90.0F));
-        poseStack.mulPose(Axis.YN.rotationDegrees(90.0F));
-        poseStack.mulPose(Axis.ZN.rotationDegrees(state.boomerangRotation));
+        poseStack.rotate(Axis.YP.rotationDegrees(-state.yRot + 90.0F));
+        poseStack.rotate(Axis.ZP.rotationDegrees(state.xRot + 90.0F));
+        poseStack.rotate(Axis.YN.rotationDegrees(90.0F));
+        poseStack.rotate(Axis.ZN.rotationDegrees(state.boomerangRotation));
         state.item.submit(poseStack, submitNodeCollector, state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor);
         poseStack.popPose();
 

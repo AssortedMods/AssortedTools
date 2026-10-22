@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:tin_shovel"
+        "recipes": "assortedgearsets:tin_shovel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedbuckets:aluminum_bucket"
+        "recipes": "assortedbuckets:aluminum_bucket"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

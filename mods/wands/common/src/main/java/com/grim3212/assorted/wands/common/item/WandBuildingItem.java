@@ -36,7 +36,7 @@ public class WandBuildingItem extends WandItem {
     protected boolean canBreak(Level worldIn, BlockPos pos, ItemStack stack) {
         BlockState state = worldIn.getBlockState(pos);
 
-        if (state.canBeReplaced() || state.getPistonPushReaction() == PushReaction.DESTROY || state.liquid())
+        if (state.canBeReplaced() || state.getPistonPushReaction() == PushReaction.POPPED || state.liquid())
             return true;
 
         switch (BuildingMode.fromString(NBTHelper.getString(stack, "Mode"))) {

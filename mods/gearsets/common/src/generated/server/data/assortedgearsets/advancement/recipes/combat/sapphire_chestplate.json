@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:sapphire_chestplate"
+        "recipes": "assortedgearsets:sapphire_chestplate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

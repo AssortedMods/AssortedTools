@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:platinum_boots"
+        "recipes": "assortedgearsets:platinum_boots"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

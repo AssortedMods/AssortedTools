@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedmachetes:sapphire_machete"
+        "recipes": "assortedmachetes:sapphire_machete"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

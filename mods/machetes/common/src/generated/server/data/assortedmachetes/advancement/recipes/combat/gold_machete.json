@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedmachetes:gold_machete"
+        "recipes": "assortedmachetes:gold_machete"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

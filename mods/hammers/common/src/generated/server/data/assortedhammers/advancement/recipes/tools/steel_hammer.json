@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedhammers:steel_hammer"
+        "recipes": "assortedhammers:steel_hammer"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:silver_helmet"
+        "recipes": "assortedgearsets:silver_helmet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

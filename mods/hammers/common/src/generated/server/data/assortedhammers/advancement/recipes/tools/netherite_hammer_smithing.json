@@ -19,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedhammers:netherite_hammer_smithing"
+        "recipes": "assortedhammers:netherite_hammer_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

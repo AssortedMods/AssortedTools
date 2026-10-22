@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:tin_hoe"
+        "recipes": "assortedgearsets:tin_hoe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

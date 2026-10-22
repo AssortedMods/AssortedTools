@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedmachetes:invar_machete"
+        "recipes": "assortedmachetes:invar_machete"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:bronze_pickaxe"
+        "recipes": "assortedgearsets:bronze_pickaxe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

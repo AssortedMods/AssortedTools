@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:peridot_pickaxe"
+        "recipes": "assortedgearsets:peridot_pickaxe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

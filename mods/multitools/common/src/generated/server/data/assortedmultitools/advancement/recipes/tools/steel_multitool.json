@@ -48,7 +48,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedmultitools:steel_multitool"
+        "recipes": "assortedmultitools:steel_multitool"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

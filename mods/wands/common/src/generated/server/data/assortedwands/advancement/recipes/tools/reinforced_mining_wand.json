@@ -19,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedwands:reinforced_mining_wand"
+        "recipes": "assortedwands:reinforced_mining_wand"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

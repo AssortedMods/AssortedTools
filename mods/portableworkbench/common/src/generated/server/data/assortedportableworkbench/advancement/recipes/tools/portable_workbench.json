@@ -19,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedportableworkbench:portable_workbench"
+        "recipes": "assortedportableworkbench:portable_workbench"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

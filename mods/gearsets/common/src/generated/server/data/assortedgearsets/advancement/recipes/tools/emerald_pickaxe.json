@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:emerald_pickaxe"
+        "recipes": "assortedgearsets:emerald_pickaxe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

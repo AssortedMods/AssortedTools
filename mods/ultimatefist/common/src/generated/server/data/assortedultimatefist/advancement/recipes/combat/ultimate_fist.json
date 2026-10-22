@@ -29,7 +29,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedultimatefist:ultimate_fist"
+        "recipes": "assortedultimatefist:ultimate_fist"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

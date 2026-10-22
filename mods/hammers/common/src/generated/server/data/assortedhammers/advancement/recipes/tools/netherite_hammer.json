@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedhammers:netherite_hammer"
+        "recipes": "assortedhammers:netherite_hammer"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

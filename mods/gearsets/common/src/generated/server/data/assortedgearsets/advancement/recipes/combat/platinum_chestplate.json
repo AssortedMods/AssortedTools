@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:platinum_chestplate"
+        "recipes": "assortedgearsets:platinum_chestplate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

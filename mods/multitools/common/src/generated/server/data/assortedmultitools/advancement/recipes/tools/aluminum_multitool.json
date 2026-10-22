@@ -48,7 +48,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedmultitools:aluminum_multitool"
+        "recipes": "assortedmultitools:aluminum_multitool"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

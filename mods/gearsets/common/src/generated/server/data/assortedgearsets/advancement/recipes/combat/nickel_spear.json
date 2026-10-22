@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:nickel_spear"
+        "recipes": "assortedgearsets:nickel_spear"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

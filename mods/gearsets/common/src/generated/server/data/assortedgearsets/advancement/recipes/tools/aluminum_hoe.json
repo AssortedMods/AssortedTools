@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:aluminum_hoe"
+        "recipes": "assortedgearsets:aluminum_hoe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

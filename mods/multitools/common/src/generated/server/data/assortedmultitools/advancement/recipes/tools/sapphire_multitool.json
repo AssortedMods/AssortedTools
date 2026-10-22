@@ -48,7 +48,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedmultitools:sapphire_multitool"
+        "recipes": "assortedmultitools:sapphire_multitool"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

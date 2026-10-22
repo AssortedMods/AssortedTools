@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedshears:amethyst_shears"
+        "recipes": "assortedshears:amethyst_shears"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

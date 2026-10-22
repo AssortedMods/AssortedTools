@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:electrum_helmet"
+        "recipes": "assortedgearsets:electrum_helmet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedthrowingspears:emerald_throwing_spear"
+        "recipes": "assortedthrowingspears:emerald_throwing_spear"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

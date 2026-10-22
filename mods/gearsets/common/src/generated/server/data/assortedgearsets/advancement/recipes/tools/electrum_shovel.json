@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:electrum_shovel"
+        "recipes": "assortedgearsets:electrum_shovel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

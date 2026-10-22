@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:ruby_chestplate"
+        "recipes": "assortedgearsets:ruby_chestplate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

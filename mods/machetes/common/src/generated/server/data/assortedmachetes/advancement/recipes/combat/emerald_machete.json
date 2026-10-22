@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedmachetes:emerald_machete"
+        "recipes": "assortedmachetes:emerald_machete"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

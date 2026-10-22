@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:peridot_leggings"
+        "recipes": "assortedgearsets:peridot_leggings"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:sapphire_pickaxe"
+        "recipes": "assortedgearsets:sapphire_pickaxe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

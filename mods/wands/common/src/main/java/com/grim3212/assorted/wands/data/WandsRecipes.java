@@ -5,28 +5,21 @@ import com.grim3212.assorted.lib.registry.IRegistryObject;
 import com.grim3212.assorted.lib.util.LibCommonTags;
 import com.grim3212.assorted.wands.Constants;
 import com.grim3212.assorted.wands.common.item.WandsItems;
-import net.minecraft.core.HolderGetter;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-
-import java.util.concurrent.CompletableFuture;
+import net.minecraft.world.item.crafting.Recipe;
 
 public class WandsRecipes extends ConditionalRecipeProvider {
 
-    private final HolderGetter<Item> items;
-
-    public WandsRecipes(HolderLookup.Provider registries, RecipeOutput output) {
-        super(registries, output, Constants.MOD_ID);
-        this.items = registries.lookupOrThrow(Registries.ITEM);
+    public WandsRecipes(BootstrapContext<Recipe<?>> recipes, BootstrapContext<Advancement> advancements) {
+        super(recipes, advancements, Constants.MOD_ID);
     }
 
     @Override
@@ -50,23 +43,5 @@ public class WandsRecipes extends ConditionalRecipeProvider {
         TagKey<Item> unlockedBy = unlock.equals("has_obsidian") ? shaft : core;
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, wand.get()).define('X', shaft).define('G', core).pattern("XGX").pattern("XGX").pattern("XGX")
                 .unlockedBy(unlock, has(unlockedBy)).save(this.output, ResourceKey.create(Registries.RECIPE, wand.getId()));
-    }
-
-    /** What the loader datagen entry points register; it builds a fresh provider around each output. */
-    public static class Runner extends ConditionalRecipeProvider.Runner {
-
-        public Runner(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-            super(output, registries, Constants.MOD_ID);
-        }
-
-        @Override
-        protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
-            return new WandsRecipes(registries, output);
-        }
-
-        @Override
-        public String getName() {
-            return "Recipes: " + Constants.MOD_ID;
-        }
     }
 }

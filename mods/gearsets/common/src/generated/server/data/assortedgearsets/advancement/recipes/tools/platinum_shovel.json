@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:platinum_shovel"
+        "recipes": "assortedgearsets:platinum_shovel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -1,7 +1,7 @@
 package com.grim3212.assorted.suits;
 
-import com.grim3212.assorted.lib.data.ForgeDatapackRegistryProvider;
 import com.grim3212.assorted.lib.data.ForgeItemTagProvider;
+import com.grim3212.assorted.lib.data.ForgeRegistryEntries;
 import com.grim3212.assorted.suits.client.data.SuitsEquipmentAssetProvider;
 import com.grim3212.assorted.suits.client.data.SuitsItemModelProvider;
 import com.grim3212.assorted.suits.client.data.SuitsLanguageProvider;
@@ -35,14 +35,13 @@ public class AssortedSuitsNeoForge {
     /** Server datagen. If the client half runs instead, the build still succeeds, with "All providers took: 0 ms". */
     private void gatherServerData(final GatherDataEvent.Server event) {
         PackOutput packOutput = event.getGenerator().getPackOutput();
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getWorldLookupProvider();
 
-        event.addProvider(new SuitsRecipes.Runner(packOutput, lookupProvider));
+        ForgeRegistryEntries.of(Constants.MOD_ID).world(new SuitsEnchantmentData()).recipes(SuitsRecipes::new).addTo(event);
         // No blocks, so no block tags for the item tags to copy.
         CompletableFuture<TagsProvider.TagLookup<Block>> noBlockTags = CompletableFuture.completedFuture(TagsProvider.TagLookup.empty());
         event.addProvider(new ForgeItemTagProvider(packOutput, lookupProvider, noBlockTags, Constants.MOD_ID, new SuitsItemTagProvider(packOutput, lookupProvider, noBlockTags)));
         // Enchantments are datapack registry content, not registered from code.
-        event.addProvider(new ForgeDatapackRegistryProvider(Constants.MOD_ID, new SuitsEnchantmentData()).datpackEntriesProvider(packOutput, lookupProvider));
         event.addProvider(new SuitsEnchantmentTagProvider(packOutput, lookupProvider));
     }
 

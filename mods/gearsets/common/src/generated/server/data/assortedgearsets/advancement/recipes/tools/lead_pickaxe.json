@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:lead_pickaxe"
+        "recipes": "assortedgearsets:lead_pickaxe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

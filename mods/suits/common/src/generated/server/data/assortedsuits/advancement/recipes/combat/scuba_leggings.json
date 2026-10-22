@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedsuits:scuba_leggings"
+        "recipes": "assortedsuits:scuba_leggings"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

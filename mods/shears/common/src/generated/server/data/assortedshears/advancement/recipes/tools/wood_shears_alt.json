@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedshears:wood_shears_alt"
+        "recipes": "assortedshears:wood_shears_alt"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

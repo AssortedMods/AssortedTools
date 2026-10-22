@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:peridot_shovel"
+        "recipes": "assortedgearsets:peridot_shovel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

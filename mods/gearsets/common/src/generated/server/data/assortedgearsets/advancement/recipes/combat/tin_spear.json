@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:tin_spear"
+        "recipes": "assortedgearsets:tin_spear"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

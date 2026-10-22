@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:peridot_spear"
+        "recipes": "assortedgearsets:peridot_spear"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

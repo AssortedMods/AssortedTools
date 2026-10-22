@@ -48,7 +48,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedmultitools:nickel_multitool"
+        "recipes": "assortedmultitools:nickel_multitool"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

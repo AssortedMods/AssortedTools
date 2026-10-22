@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedmachetes:peridot_machete"
+        "recipes": "assortedmachetes:peridot_machete"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

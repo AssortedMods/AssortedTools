@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedmultitools:iron_multitool"
+        "recipes": "assortedmultitools:iron_multitool"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

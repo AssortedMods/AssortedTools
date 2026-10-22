@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:amethyst_boots"
+        "recipes": "assortedgearsets:amethyst_boots"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

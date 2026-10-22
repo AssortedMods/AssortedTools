@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedthrowingspears:amethyst_throwing_spear"
+        "recipes": "assortedthrowingspears:amethyst_throwing_spear"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

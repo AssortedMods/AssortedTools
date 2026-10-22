@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "assortedgearsets:bronze_boots"
+        "recipes": "assortedgearsets:bronze_boots"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
