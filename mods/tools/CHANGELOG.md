@@ -1,5 +1,11 @@
 # Changelog
 
+## 13.0.0
+
+Updated to Minecraft 26.3, for NeoForge and Fabric.
+
+- Requires Assorted Lib 5.0.0
+
 ## 12.0.0
 
 - Split into fourteen mods that can also be installed on their own
