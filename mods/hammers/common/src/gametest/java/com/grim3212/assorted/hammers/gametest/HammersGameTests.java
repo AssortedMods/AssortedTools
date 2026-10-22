@@ -1,5 +1,7 @@
 package com.grim3212.assorted.hammers.gametest;
 
+import com.grim3212.assorted.hammers.Constants;
+import com.grim3212.assorted.lib.test.CommonTests;
 import net.minecraft.gametest.framework.GameTestHelper;
 
 import java.util.function.BiConsumer;
@@ -22,5 +24,6 @@ public final class HammersGameTests {
         MigrationTests.register(out);
         HammerTests.register(out);
         FamilyTests.register(out);
+        CommonTests.register(out, Constants.MOD_ID);
     }
 }

@@ -14,7 +14,11 @@
         "assortedgearsets:steel_helmet",
         "assortedgearsets:steel_chestplate",
         "assortedgearsets:steel_leggings",
-        "assortedgearsets:steel_boots"
+        "assortedgearsets:steel_boots",
+        "assortedgearsets:emerald_helmet",
+        "assortedgearsets:emerald_chestplate",
+        "assortedgearsets:emerald_leggings",
+        "assortedgearsets:emerald_boots"
       ],
       "text": "manual.assortedtools.chapter.armor.armor",
       "title": "manual.assortedtools.chapter.armor.armor.title"

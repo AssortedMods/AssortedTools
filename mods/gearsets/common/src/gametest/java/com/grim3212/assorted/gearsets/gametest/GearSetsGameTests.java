@@ -1,5 +1,7 @@
 package com.grim3212.assorted.gearsets.gametest;
 
+import com.grim3212.assorted.gearsets.Constants;
+import com.grim3212.assorted.lib.test.CommonTests;
 import net.minecraft.gametest.framework.GameTestHelper;
 
 import java.util.function.BiConsumer;
@@ -24,5 +26,6 @@ public final class GearSetsGameTests {
         SpearTests.register(out);
         MiningToolTests.register(out);
         FamilyTests.register(out);
+        CommonTests.register(out, Constants.MOD_ID);
     }
 }

@@ -1,5 +1,7 @@
 package com.grim3212.assorted.ultimatefist.gametest;
 
+import com.grim3212.assorted.ultimatefist.Constants;
+import com.grim3212.assorted.lib.test.ClientChecks;
 import com.grim3212.assorted.ultimatefist.common.item.FragmentItem;
 import com.grim3212.assorted.ultimatefist.common.item.UltimateFistItems;
 import net.fabricmc.fabric.api.client.gametest.v1.FabricClientGameTest;
@@ -24,6 +26,7 @@ public class UltimateFistClientGameTests implements FabricClientGameTest {
     public void runTest(ClientGameTestContext context) {
         // An ItemStack cannot be made on the title screen: default components only bind once a world's registries load.
         try (TestSingleplayerContext world = context.worldBuilder().create()) {
+            ClientChecks.assertDrawsRight(context, Constants.MOD_ID);
             context.runOnClient(client -> {
                 // Under its key, or as the pieces AssortedLib wraps its line into.
                 List<String> fragment = tooltipKeys(client, new ItemStack(UltimateFistItems.U_FRAGMENT.get()));

@@ -1,5 +1,7 @@
 package com.grim3212.assorted.staffs.gametest;
 
+import com.grim3212.assorted.staffs.Constants;
+import com.grim3212.assorted.lib.test.CommonTests;
 import net.minecraft.gametest.framework.GameTestHelper;
 
 import java.util.function.BiConsumer;
@@ -24,5 +26,6 @@ public final class StaffsGameTests {
         FrostTests.register(out);
         FrozenMigrationTests.register(out);
         FamilyTests.register(out);
+        CommonTests.register(out, Constants.MOD_ID);
     }
 }

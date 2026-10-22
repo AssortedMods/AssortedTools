@@ -5,6 +5,7 @@
 Updated to Minecraft 26.3, for NeoForge and Fabric.
 
 - Requires Assorted Lib 5.0.0
+- The manual's tool and armor pages show emerald gear when no mod adds steel, instead of saying the recipes are missing
 
 ## 1.0.0
 

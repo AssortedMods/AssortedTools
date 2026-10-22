@@ -1,5 +1,7 @@
 package com.grim3212.assorted.pokeball.gametest;
 
+import com.grim3212.assorted.pokeball.Constants;
+import com.grim3212.assorted.lib.test.ClientChecks;
 import com.grim3212.assorted.pokeball.common.item.CapturedEntity;
 import com.grim3212.assorted.pokeball.common.item.PokeballDataComponents;
 import com.grim3212.assorted.pokeball.common.item.PokeballItems;
@@ -25,6 +27,7 @@ public class PokeballClientGameTests implements FabricClientGameTest {
     public void runTest(ClientGameTestContext context) {
         // An ItemStack cannot be made on the title screen: default components only bind once a world's registries load.
         try (TestSingleplayerContext world = context.worldBuilder().create()) {
+            ClientChecks.assertDrawsRight(context, Constants.MOD_ID);
             context.runOnClient(client -> {
                 List<String> empty = tooltipKeys(client, new ItemStack(PokeballItems.POKEBALL.get()));
                 if (!empty.contains("tooltip.pokeball.empty")) {

@@ -12,6 +12,9 @@
   "entrypoints": {
     "main": [
       "com.grim3212.assorted.throwingspears.gametest.ThrowingSpearsFabricGameTests"
+    ],
+    "fabric-client-gametest": [
+      "com.grim3212.assorted.throwingspears.gametest.ThrowingSpearsClientGameTests"
     ]
   },
   "depends": {

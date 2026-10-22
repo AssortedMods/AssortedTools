@@ -1,5 +1,7 @@
 package com.grim3212.assorted.wands.gametest;
 
+import com.grim3212.assorted.wands.Constants;
+import com.grim3212.assorted.lib.test.ClientChecks;
 import com.grim3212.assorted.lib.client.key.ModeSwitchKey;
 import com.grim3212.assorted.lib.util.NBTHelper;
 import com.grim3212.assorted.wands.common.item.WandsItems;
@@ -24,6 +26,7 @@ public class WandsClientGameTests implements FabricClientGameTest {
     @Override
     public void runTest(ClientGameTestContext context) {
         try (TestSingleplayerContext world = context.worldBuilder().create()) {
+            ClientChecks.assertDrawsRight(context, Constants.MOD_ID);
             context.runOnClient(client -> {
                 ItemStack wandStack = new ItemStack(WandsItems.MINING_WAND.get());
                 NBTHelper.putString(wandStack, "Mode", "mineall");

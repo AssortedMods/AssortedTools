@@ -21,7 +21,12 @@
         "assortedgearsets:steel_axe",
         "assortedgearsets:steel_shovel",
         "assortedgearsets:steel_hoe",
-        "assortedgearsets:steel_sword"
+        "assortedgearsets:steel_sword",
+        "assortedgearsets:emerald_pickaxe",
+        "assortedgearsets:emerald_axe",
+        "assortedgearsets:emerald_shovel",
+        "assortedgearsets:emerald_hoe",
+        "assortedgearsets:emerald_sword"
       ],
       "text": "manual.assortedtools.chapter.materials.basic",
       "title": "manual.assortedtools.chapter.materials.basic.title"

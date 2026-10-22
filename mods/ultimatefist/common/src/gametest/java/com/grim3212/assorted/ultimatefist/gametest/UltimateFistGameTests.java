@@ -1,5 +1,7 @@
 package com.grim3212.assorted.ultimatefist.gametest;
 
+import com.grim3212.assorted.ultimatefist.Constants;
+import com.grim3212.assorted.lib.test.CommonTests;
 import net.minecraft.gametest.framework.GameTestHelper;
 
 import java.util.function.BiConsumer;
@@ -22,5 +24,7 @@ public final class UltimateFistGameTests {
         MigrationTests.register(out);
         UltimateFistTests.register(out);
         FamilyTests.register(out);
+        FragmentLootTests.register(out);
+        CommonTests.register(out, Constants.MOD_ID);
     }
 }

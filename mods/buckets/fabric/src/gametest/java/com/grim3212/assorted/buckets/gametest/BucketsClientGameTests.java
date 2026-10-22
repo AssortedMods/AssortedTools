@@ -1,5 +1,7 @@
 package com.grim3212.assorted.buckets.gametest;
 
+import com.grim3212.assorted.buckets.Constants;
+import com.grim3212.assorted.lib.test.ClientChecks;
 import com.grim3212.assorted.buckets.common.item.BucketsItems;
 import com.grim3212.assorted.lib.core.fluid.FluidInformation;
 import com.grim3212.assorted.lib.core.fluid.IFluidVariantHandler;
@@ -31,6 +33,7 @@ public class BucketsClientGameTests implements FabricClientGameTest {
     public void runTest(ClientGameTestContext context) {
         // Inside a world: an item's default components are only bound once a world's registries have loaded.
         try (TestSingleplayerContext world = context.worldBuilder().create()) {
+            ClientChecks.assertDrawsRight(context, Constants.MOD_ID);
             context.runOnClient(client -> {
                 List<String> bucket = tooltipKeys(client, BucketsItems.WOOD.bucket().get().getEmptyStack());
                 if (!bucket.contains("tooltip.buckets.empty")) {

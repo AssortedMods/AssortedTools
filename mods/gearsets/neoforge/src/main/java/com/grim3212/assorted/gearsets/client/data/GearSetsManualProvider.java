@@ -19,15 +19,25 @@ public class GearSetsManualProvider extends LibManualProvider {
     protected void addChapters() {
         ChapterBuilder materials = this.chapter("materials", 0);
         materials.text("materials");
-        materials.recipesById("basic", recipeId("steel_pickaxe"), recipeId("steel_axe"), recipeId("steel_shovel"), recipeId("steel_hoe"), recipeId("steel_sword"))
+        // Emerald follows steel, as steel needs a mod that adds it and the page shows only what is loaded.
+        materials.recipesById("basic", set("pickaxe", "axe", "shovel", "hoe", "sword"))
                 .every(50)
                 .opensEveryItem(id -> endsWithAny(id, "_pickaxe", "_axe", "_shovel", "_hoe", "_sword"));
         materials.recipesById("spears", recipeId("steel_spear"), recipeId("ruby_spear"), recipeId("emerald_spear")).every(50)
                 .opensEveryItem(id -> id.getPath().endsWith("_spear"));
 
-        this.chapter("armor", 90).recipesById("armor", recipeId("steel_helmet"), recipeId("steel_chestplate"), recipeId("steel_leggings"), recipeId("steel_boots"))
+        this.chapter("armor", 90).recipesById("armor", set("helmet", "chestplate", "leggings", "boots"))
                 .every(50)
                 .opensEveryItem(id -> endsWithAny(id, "_helmet", "_chestplate", "_leggings", "_boots"));
+    }
+
+    private Identifier[] set(String... pieces) {
+        Identifier[] ids = new Identifier[pieces.length * 2];
+        for (int i = 0; i < pieces.length; i++) {
+            ids[i] = recipeId("steel_" + pieces[i]);
+            ids[pieces.length + i] = recipeId("emerald_" + pieces[i]);
+        }
+        return ids;
     }
 
     private static boolean endsWithAny(Identifier id, String... suffixes) {
