@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.1
+
+- Added a client setting to turn off the chicken cluck when jumping in the chicken suit
+
 ## 2.0.0
 
 Updated to Minecraft 26.3, for NeoForge and Fabric.
