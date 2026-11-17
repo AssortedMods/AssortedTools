@@ -1,5 +1,10 @@
 # Changelog
 
+## 13.0.1
+
+- Includes Assorted Suits 2.0.1, which adds a client setting to turn off the chicken cluck when jumping in
+  the chicken suit
+
 ## 13.0.0
 
 Updated to Minecraft 26.3, for NeoForge and Fabric.

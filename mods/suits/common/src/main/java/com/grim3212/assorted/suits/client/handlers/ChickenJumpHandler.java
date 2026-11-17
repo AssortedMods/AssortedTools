@@ -1,6 +1,7 @@
 package com.grim3212.assorted.suits.client.handlers;
 
 import com.grim3212.assorted.lib.platform.Services;
+import com.grim3212.assorted.suits.client.SuitsClient;
 import com.grim3212.assorted.suits.common.enchantment.SuitsEnchantments;
 import com.grim3212.assorted.suits.common.item.ChickenSuitArmor;
 import com.grim3212.assorted.suits.common.network.ChickenSuitUpdatePacket;
@@ -61,8 +62,7 @@ public class ChickenJumpHandler {
                         mc.player.jumpFromGround();
                         mc.player.fallDistance = 0.0f;
 
-                        // Only play sound to client player
-                        mc.level.playSound(mc.player, mc.player.blockPosition(), CHICKEN_AMBIENT.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                        cluck(mc);
 
                         // Double jump on server
                         Services.NETWORK.sendToServer(new ChickenSuitUpdatePacket());
@@ -75,8 +75,7 @@ public class ChickenJumpHandler {
                             mc.player.jumpFromGround();
                             mc.player.fallDistance = -numJumps;
 
-                            // Only play sound to client player
-                            mc.level.playSound(mc.player, mc.player.blockPosition(), CHICKEN_AMBIENT.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                            cluck(mc);
 
                             // Double jump on server
                             Services.NETWORK.sendToServer(new ChickenSuitUpdatePacket());
@@ -101,6 +100,13 @@ public class ChickenJumpHandler {
                 }
 
             }
+        }
+    }
+
+    /** Only the jumping player hears it, and only while their own client config leaves it on. */
+    private static void cluck(Minecraft mc) {
+        if (SuitsClient.CLIENT_CONFIG.chickenSuitCluck.get()) {
+            mc.level.playSound(mc.player, mc.player.blockPosition(), CHICKEN_AMBIENT.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
         }
     }
 
