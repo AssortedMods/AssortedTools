@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/nickel"
+    "I": {
+      "tag": "c:ingots/nickel"
+    }
   },
   "pattern": [
     "I I",
     " I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedbuckets:nickel_bucket"
   }
 }

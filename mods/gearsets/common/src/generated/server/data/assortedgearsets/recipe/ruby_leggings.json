@@ -25,7 +25,9 @@
     }
   ],
   "key": {
-    "X": "#c:gems/ruby"
+    "X": {
+      "tag": "c:gems/ruby"
+    }
   },
   "pattern": [
     "XXX",
@@ -33,6 +35,7 @@
     "X X"
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:ruby_leggings"
   }
 }

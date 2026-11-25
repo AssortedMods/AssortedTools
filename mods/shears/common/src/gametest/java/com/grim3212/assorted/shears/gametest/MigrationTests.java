@@ -2,15 +2,13 @@ package com.grim3212.assorted.shears.gametest;
 
 import com.grim3212.assorted.lib.test.TestSupport;
 import com.grim3212.assorted.shears.Constants;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTestHelper;
-import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.stats.RecipeBookSettings;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.ServerRecipeBook;
-import net.minecraft.world.item.crafting.Recipe;
 
-import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -26,13 +24,17 @@ final class MigrationTests {
 
     private static void recipeBookCarriesOver(GameTestHelper helper) {
         ServerRecipeBook book = TestSupport.survivalPlayer(helper).getRecipeBook();
-        book.loadUntrusted(new ServerRecipeBook.Packed(new RecipeBookSettings(), List.of(recipe(Constants.FAMILY_ID, "wood_shears")), List.of()),
-                key -> helper.getLevel().recipeAccess().byKey(key).isPresent());
+        // Laid out the way a player's saved recipe book is.
+        ListTag known = new ListTag();
+        known.add(StringTag.valueOf(recipe(Constants.FAMILY_ID, "wood_shears").toString()));
+        CompoundTag saved = new CompoundTag();
+        saved.put("recipes", known);
+        book.fromNbt(saved, helper.getLevel().getRecipeManager());
         helper.assertTrue(book.contains(recipe(Constants.MOD_ID, "wood_shears")), "the recipe a player had unlocked as " + Constants.FAMILY_ID + ":wood_shears was not carried over");
         helper.succeed();
     }
 
-    private static ResourceKey<Recipe<?>> recipe(String namespace, String path) {
-        return ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath(namespace, path));
+    private static ResourceLocation recipe(String namespace, String path) {
+        return ResourceLocation.fromNamespaceAndPath(namespace, path);
     }
 }

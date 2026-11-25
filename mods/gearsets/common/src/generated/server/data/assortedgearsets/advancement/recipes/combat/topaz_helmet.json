@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedgearsets:topaz_helmet"
+        "recipe": "assortedgearsets:topaz_helmet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

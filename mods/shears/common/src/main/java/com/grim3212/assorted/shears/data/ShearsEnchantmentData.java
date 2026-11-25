@@ -36,6 +36,6 @@ public class ShearsEnchantmentData extends LibDatapackRegistryProvider {
                         Enchantment.constantCost(12),
                         Enchantment.constantCost(52),
                         4,
-                        EquipmentSlotGroup.MAINHAND)).build(ShearsEnchantments.CORAL_CUTTER.identifier()));
+                        EquipmentSlotGroup.MAINHAND)).build(ShearsEnchantments.CORAL_CUTTER.location()));
     }
 }

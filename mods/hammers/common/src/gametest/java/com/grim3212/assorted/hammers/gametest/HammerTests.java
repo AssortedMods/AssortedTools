@@ -58,7 +58,7 @@ final class HammerTests {
 
     private static void hammersTakeTheirEnchantments(GameTestHelper helper) {
         List<String> missing = new ArrayList<>();
-        List<TagKey<Item>> tags = List.of(ItemTags.MINING_ENCHANTABLE, ItemTags.MINING_LOOT_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.MELEE_WEAPON_ENCHANTABLE,
+        List<TagKey<Item>> tags = List.of(ItemTags.MINING_ENCHANTABLE, ItemTags.MINING_LOOT_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.SWORD_ENCHANTABLE,
                 ItemTags.SHARP_WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.VANISHING_ENCHANTABLE);
         for (HammerItem hammer : HammersItems.hammers()) {
             for (TagKey<Item> tag : tags) {

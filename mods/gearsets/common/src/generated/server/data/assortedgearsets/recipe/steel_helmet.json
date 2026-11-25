@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "X": "#c:ingots/steel"
+    "X": {
+      "tag": "c:ingots/steel"
+    }
   },
   "pattern": [
     "XXX",
     "X X"
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:steel_helmet"
   }
 }

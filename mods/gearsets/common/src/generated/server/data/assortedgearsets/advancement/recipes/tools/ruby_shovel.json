@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedgearsets:ruby_shovel"
+        "recipe": "assortedgearsets:ruby_shovel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

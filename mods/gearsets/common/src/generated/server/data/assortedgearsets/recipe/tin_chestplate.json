@@ -25,7 +25,9 @@
     }
   ],
   "key": {
-    "X": "#c:ingots/tin"
+    "X": {
+      "tag": "c:ingots/tin"
+    }
   },
   "pattern": [
     "X X",
@@ -33,6 +35,7 @@
     "XXX"
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:tin_chestplate"
   }
 }

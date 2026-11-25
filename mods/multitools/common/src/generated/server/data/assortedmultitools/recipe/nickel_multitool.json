@@ -90,17 +90,36 @@
     }
   ],
   "ingredients": [
-    "#c:pickaxes/nickel",
-    "#c:shovels/nickel",
-    "#c:axes/nickel",
-    "#c:hoes/nickel",
-    "#c:swords/nickel",
-    "#c:ingots/nickel",
-    "#c:ingots/nickel",
-    "#c:ingots/nickel",
-    "#c:ingots/nickel"
+    {
+      "tag": "c:pickaxes/nickel"
+    },
+    {
+      "tag": "c:shovels/nickel"
+    },
+    {
+      "tag": "c:axes/nickel"
+    },
+    {
+      "tag": "c:hoes/nickel"
+    },
+    {
+      "tag": "c:swords/nickel"
+    },
+    {
+      "tag": "c:ingots/nickel"
+    },
+    {
+      "tag": "c:ingots/nickel"
+    },
+    {
+      "tag": "c:ingots/nickel"
+    },
+    {
+      "tag": "c:ingots/nickel"
+    }
   ],
   "result": {
+    "count": 1,
     "id": "assortedmultitools:nickel_multitool"
   }
 }

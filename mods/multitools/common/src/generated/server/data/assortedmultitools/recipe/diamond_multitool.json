@@ -25,17 +25,36 @@
     }
   ],
   "ingredients": [
-    "minecraft:diamond_pickaxe",
-    "minecraft:diamond_shovel",
-    "minecraft:diamond_axe",
-    "minecraft:diamond_hoe",
-    "minecraft:diamond_sword",
-    "#c:gems/diamond",
-    "#c:gems/diamond",
-    "#c:gems/diamond",
-    "#c:gems/diamond"
+    {
+      "item": "minecraft:diamond_pickaxe"
+    },
+    {
+      "item": "minecraft:diamond_shovel"
+    },
+    {
+      "item": "minecraft:diamond_axe"
+    },
+    {
+      "item": "minecraft:diamond_hoe"
+    },
+    {
+      "item": "minecraft:diamond_sword"
+    },
+    {
+      "tag": "c:gems/diamond"
+    },
+    {
+      "tag": "c:gems/diamond"
+    },
+    {
+      "tag": "c:gems/diamond"
+    },
+    {
+      "tag": "c:gems/diamond"
+    }
   ],
   "result": {
+    "count": 1,
     "id": "assortedmultitools:diamond_multitool"
   }
 }

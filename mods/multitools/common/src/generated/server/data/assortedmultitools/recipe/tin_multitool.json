@@ -90,17 +90,36 @@
     }
   ],
   "ingredients": [
-    "#c:pickaxes/tin",
-    "#c:shovels/tin",
-    "#c:axes/tin",
-    "#c:hoes/tin",
-    "#c:swords/tin",
-    "#c:ingots/tin",
-    "#c:ingots/tin",
-    "#c:ingots/tin",
-    "#c:ingots/tin"
+    {
+      "tag": "c:pickaxes/tin"
+    },
+    {
+      "tag": "c:shovels/tin"
+    },
+    {
+      "tag": "c:axes/tin"
+    },
+    {
+      "tag": "c:hoes/tin"
+    },
+    {
+      "tag": "c:swords/tin"
+    },
+    {
+      "tag": "c:ingots/tin"
+    },
+    {
+      "tag": "c:ingots/tin"
+    },
+    {
+      "tag": "c:ingots/tin"
+    },
+    {
+      "tag": "c:ingots/tin"
+    }
   ],
   "result": {
+    "count": 1,
     "id": "assortedmultitools:tin_multitool"
   }
 }

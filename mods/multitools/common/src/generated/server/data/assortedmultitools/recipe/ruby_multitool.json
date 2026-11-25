@@ -90,17 +90,36 @@
     }
   ],
   "ingredients": [
-    "#c:pickaxes/ruby",
-    "#c:shovels/ruby",
-    "#c:axes/ruby",
-    "#c:hoes/ruby",
-    "#c:swords/ruby",
-    "#c:gems/ruby",
-    "#c:gems/ruby",
-    "#c:gems/ruby",
-    "#c:gems/ruby"
+    {
+      "tag": "c:pickaxes/ruby"
+    },
+    {
+      "tag": "c:shovels/ruby"
+    },
+    {
+      "tag": "c:axes/ruby"
+    },
+    {
+      "tag": "c:hoes/ruby"
+    },
+    {
+      "tag": "c:swords/ruby"
+    },
+    {
+      "tag": "c:gems/ruby"
+    },
+    {
+      "tag": "c:gems/ruby"
+    },
+    {
+      "tag": "c:gems/ruby"
+    },
+    {
+      "tag": "c:gems/ruby"
+    }
   ],
   "result": {
+    "count": 1,
     "id": "assortedmultitools:ruby_multitool"
   }
 }

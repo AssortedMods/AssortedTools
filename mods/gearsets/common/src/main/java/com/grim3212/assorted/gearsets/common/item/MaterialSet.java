@@ -8,11 +8,11 @@ import net.minecraft.world.item.Item;
 
 import java.util.List;
 
-/** One extra material's tools, spear and armor, and the tag of what they are made from. */
+/** One extra material's tools and armor, and the tag of what they are made from. */
 public record MaterialSet(ToolTier tier, ArmorMaterialConfig armor, TagKey<Item> material,
                           IRegistryObject<MaterialSwordItem> sword, IRegistryObject<MaterialPickaxeItem> pickaxe,
                           IRegistryObject<MaterialAxeItem> axe, IRegistryObject<MaterialShovelItem> shovel,
-                          IRegistryObject<MaterialHoeItem> hoe, IRegistryObject<MaterialSpearItem> spear,
+                          IRegistryObject<MaterialHoeItem> hoe,
                           IRegistryObject<MaterialArmorItem> helmet, IRegistryObject<MaterialArmorItem> chestplate,
                           IRegistryObject<MaterialArmorItem> leggings, IRegistryObject<MaterialArmorItem> boots) {
 
@@ -22,7 +22,7 @@ public record MaterialSet(ToolTier tier, ArmorMaterialConfig armor, TagKey<Item>
 
     /** In the creative tab's order. */
     public List<Item> items() {
-        return List.of(this.sword.get(), this.pickaxe.get(), this.axe.get(), this.shovel.get(), this.hoe.get(), this.spear.get(),
+        return List.of(this.sword.get(), this.pickaxe.get(), this.axe.get(), this.shovel.get(), this.hoe.get(),
                 this.helmet.get(), this.chestplate.get(), this.leggings.get(), this.boots.get());
     }
 }

@@ -25,14 +25,19 @@
     }
   ],
   "key": {
-    "I": "#c:gems/topaz",
-    "L": "#c:leathers"
+    "I": {
+      "tag": "c:gems/topaz"
+    },
+    "L": {
+      "tag": "c:leathers"
+    }
   },
   "pattern": [
     " I",
     "IL"
   ],
   "result": {
+    "count": 1,
     "id": "assortedshears:topaz_shears"
   }
 }

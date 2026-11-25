@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedthrowingspears:electrum_throwing_spear"
+        "recipe": "assortedthrowingspears:electrum_throwing_spear"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

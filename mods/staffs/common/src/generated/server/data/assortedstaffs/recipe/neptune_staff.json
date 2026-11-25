@@ -14,9 +14,15 @@
     }
   ],
   "key": {
-    "C": "assortedstaffs:ice_charge",
-    "D": "#c:gems/diamond",
-    "S": "#c:rods/frost"
+    "C": {
+      "item": "assortedstaffs:ice_charge"
+    },
+    "D": {
+      "tag": "c:gems/diamond"
+    },
+    "S": {
+      "tag": "c:rods/frost"
+    }
   },
   "pattern": [
     "D",
@@ -24,6 +30,7 @@
     "S"
   ],
   "result": {
+    "count": 1,
     "id": "assortedstaffs:neptune_staff"
   }
 }

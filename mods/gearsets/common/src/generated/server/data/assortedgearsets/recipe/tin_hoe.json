@@ -25,8 +25,12 @@
     }
   ],
   "key": {
-    "S": "#c:rods/wooden",
-    "X": "#c:ingots/tin"
+    "S": {
+      "tag": "c:rods/wooden"
+    },
+    "X": {
+      "tag": "c:ingots/tin"
+    }
   },
   "pattern": [
     "XX",
@@ -34,6 +38,7 @@
     " S"
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:tin_hoe"
   }
 }

@@ -48,7 +48,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedmultitools:amethyst_multitool"
+        "recipe": "assortedmultitools:amethyst_multitool"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

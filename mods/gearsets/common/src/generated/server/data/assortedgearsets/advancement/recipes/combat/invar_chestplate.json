@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedgearsets:invar_chestplate"
+        "recipe": "assortedgearsets:invar_chestplate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

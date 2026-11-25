@@ -25,14 +25,19 @@
     }
   ],
   "key": {
-    "C": "#c:ingots/copper",
-    "L": "#c:leathers"
+    "C": {
+      "tag": "c:ingots/copper"
+    },
+    "L": {
+      "tag": "c:leathers"
+    }
   },
   "pattern": [
     "L L",
     "LCL"
   ],
   "result": {
+    "count": 1,
     "id": "assortedsuits:scuba_boots"
   }
 }

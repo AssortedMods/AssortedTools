@@ -25,13 +25,18 @@
     }
   ],
   "key": {
-    "I": "#c:gems/topaz",
-    "S": "#c:rods/wooden"
+    "I": {
+      "tag": "c:gems/topaz"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
   },
   "pattern": [
     "SSI"
   ],
   "result": {
+    "count": 1,
     "id": "assortedthrowingspears:topaz_throwing_spear"
   }
 }

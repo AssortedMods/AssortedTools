@@ -25,7 +25,9 @@
     }
   ],
   "key": {
-    "X": "#c:ingots/nickel"
+    "X": {
+      "tag": "c:ingots/nickel"
+    }
   },
   "pattern": [
     "XXX",
@@ -33,6 +35,7 @@
     "X X"
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:nickel_leggings"
   }
 }

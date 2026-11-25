@@ -4,18 +4,17 @@ import com.grim3212.assorted.lib.core.conditions.ConditionalRecipeProvider;
 import com.grim3212.assorted.lib.util.LibCommonTags;
 import com.grim3212.assorted.ultimatefist.Constants;
 import com.grim3212.assorted.ultimatefist.common.item.UltimateFistItems;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
-import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.crafting.Recipe;
+
+import java.util.concurrent.CompletableFuture;
 
 public class UltimateFistRecipes extends ConditionalRecipeProvider {
 
-    public UltimateFistRecipes(BootstrapContext<Recipe<?>> recipes, BootstrapContext<Advancement> advancements) {
-        super(recipes, advancements, Constants.MOD_ID);
+    public UltimateFistRecipes(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, registries, Constants.MOD_ID);
     }
 
     @Override
@@ -27,10 +26,10 @@ public class UltimateFistRecipes extends ConditionalRecipeProvider {
     public void buildRecipes() {
         super.buildRecipes();
 
-        ShapelessRecipeBuilder.shapeless(this.items, RecipeCategory.COMBAT, UltimateFistItems.ULTIMATE_FIST.get()).requires(UltimateFistItems.U_FRAGMENT.get()).requires(UltimateFistItems.L_FRAGMENT.get())
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, UltimateFistItems.ULTIMATE_FIST.get()).requires(UltimateFistItems.U_FRAGMENT.get()).requires(UltimateFistItems.L_FRAGMENT.get())
                 .requires(UltimateFistItems.T_FRAGMENT.get()).requires(UltimateFistItems.I_FRAGMENT.get()).requires(UltimateFistItems.M_FRAGMENT.get()).requires(UltimateFistItems.A_FRAGMENT.get())
                 .requires(UltimateFistItems.MISSING_FRAGMENT.get()).requires(UltimateFistItems.E_FRAGMENT.get()).requires(LibCommonTags.Items.NETHER_STARS)
                 .unlockedBy("has_nether_star", has(LibCommonTags.Items.NETHER_STARS)).unlockedBy("has_fragment", has(UltimateFistItemTagProvider.ULTIMATE_FRAGMENTS))
-                .save(this.output, ResourceKey.create(Registries.RECIPE, id(UltimateFistItems.ULTIMATE_FIST.get())));
+                .save(this.output, id(UltimateFistItems.ULTIMATE_FIST.get()));
     }
 }

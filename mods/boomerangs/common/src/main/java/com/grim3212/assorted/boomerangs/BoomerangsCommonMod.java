@@ -6,7 +6,7 @@ import com.grim3212.assorted.boomerangs.common.item.BoomerangsItems;
 import com.grim3212.assorted.boomerangs.config.BoomerangsCommonConfig;
 import com.grim3212.assorted.lib.family.Families;
 import com.grim3212.assorted.lib.migration.MovedIds;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * Loader-agnostic startup. Both loader entry points call {@link #init()} and nothing else; anything
@@ -19,7 +19,7 @@ public class BoomerangsCommonMod {
     public static void init() {
         Constants.LOG.info(Constants.MOD_NAME + " starting up...");
         Families.join(Constants.MOD_ID, Constants.FAMILY_ID)
-                .icon(Identifier.fromNamespaceAndPath(Constants.MOD_ID, "diamond_boomerang"), 110)
+                .icon(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "diamond_boomerang"), 110)
                 .manualOrder(120);
 
         BoomerangsEntities.init();

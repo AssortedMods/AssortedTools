@@ -25,13 +25,18 @@
     }
   ],
   "key": {
-    "I": "#c:gems/peridot",
-    "S": "#c:rods/wooden"
+    "I": {
+      "tag": "c:gems/peridot"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
   },
   "pattern": [
     "SSI"
   ],
   "result": {
+    "count": 1,
     "id": "assortedthrowingspears:peridot_throwing_spear"
   }
 }

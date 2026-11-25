@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/aluminum"
+    "I": {
+      "tag": "c:ingots/aluminum"
+    }
   },
   "pattern": [
     "I I",
     " I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedbuckets:aluminum_bucket"
   }
 }

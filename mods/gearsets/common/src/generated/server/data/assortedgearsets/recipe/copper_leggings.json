@@ -25,7 +25,9 @@
     }
   ],
   "key": {
-    "X": "#c:ingots/copper"
+    "X": {
+      "tag": "c:ingots/copper"
+    }
   },
   "pattern": [
     "XXX",
@@ -33,6 +35,7 @@
     "X X"
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:copper_leggings"
   }
 }

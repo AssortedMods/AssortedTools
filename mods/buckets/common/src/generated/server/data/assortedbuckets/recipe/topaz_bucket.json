@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "I": "#c:gems/topaz"
+    "I": {
+      "tag": "c:gems/topaz"
+    }
   },
   "pattern": [
     "I I",
     " I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedbuckets:topaz_bucket"
   }
 }

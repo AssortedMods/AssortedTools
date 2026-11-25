@@ -8,7 +8,6 @@ import com.grim3212.assorted.lib.util.LibCommonTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.TagAppender;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -25,21 +24,23 @@ import java.util.function.Function;
 
 public class GearSetsItemTagProvider extends LibItemTagProvider {
 
-    /** Vanilla's tools by material, named as the convention tags name materials: wood, not wooden. */
+    /**
+     * Vanilla's tools by material, named as the convention tags name materials: wood, not wooden. 1.21.1 has no
+     * copper tools and no spears, so copper's tags hold this mod's copper set alone.
+     */
     private static final Map<String, Item[]> VANILLA_TOOLS = Map.of(
-            "wood", new Item[]{Items.WOODEN_SWORD, Items.WOODEN_PICKAXE, Items.WOODEN_SHOVEL, Items.WOODEN_AXE, Items.WOODEN_HOE, Items.WOODEN_SPEAR},
-            "stone", new Item[]{Items.STONE_SWORD, Items.STONE_PICKAXE, Items.STONE_SHOVEL, Items.STONE_AXE, Items.STONE_HOE, Items.STONE_SPEAR},
-            "copper", new Item[]{Items.COPPER_SWORD, Items.COPPER_PICKAXE, Items.COPPER_SHOVEL, Items.COPPER_AXE, Items.COPPER_HOE, Items.COPPER_SPEAR},
-            "iron", new Item[]{Items.IRON_SWORD, Items.IRON_PICKAXE, Items.IRON_SHOVEL, Items.IRON_AXE, Items.IRON_HOE, Items.IRON_SPEAR},
-            "gold", new Item[]{Items.GOLDEN_SWORD, Items.GOLDEN_PICKAXE, Items.GOLDEN_SHOVEL, Items.GOLDEN_AXE, Items.GOLDEN_HOE, Items.GOLDEN_SPEAR},
-            "diamond", new Item[]{Items.DIAMOND_SWORD, Items.DIAMOND_PICKAXE, Items.DIAMOND_SHOVEL, Items.DIAMOND_AXE, Items.DIAMOND_HOE, Items.DIAMOND_SPEAR},
-            "netherite", new Item[]{Items.NETHERITE_SWORD, Items.NETHERITE_PICKAXE, Items.NETHERITE_SHOVEL, Items.NETHERITE_AXE, Items.NETHERITE_HOE, Items.NETHERITE_SPEAR});
+            "wood", new Item[]{Items.WOODEN_SWORD, Items.WOODEN_PICKAXE, Items.WOODEN_SHOVEL, Items.WOODEN_AXE, Items.WOODEN_HOE},
+            "stone", new Item[]{Items.STONE_SWORD, Items.STONE_PICKAXE, Items.STONE_SHOVEL, Items.STONE_AXE, Items.STONE_HOE},
+            "iron", new Item[]{Items.IRON_SWORD, Items.IRON_PICKAXE, Items.IRON_SHOVEL, Items.IRON_AXE, Items.IRON_HOE},
+            "gold", new Item[]{Items.GOLDEN_SWORD, Items.GOLDEN_PICKAXE, Items.GOLDEN_SHOVEL, Items.GOLDEN_AXE, Items.GOLDEN_HOE},
+            "diamond", new Item[]{Items.DIAMOND_SWORD, Items.DIAMOND_PICKAXE, Items.DIAMOND_SHOVEL, Items.DIAMOND_AXE, Items.DIAMOND_HOE},
+            "netherite", new Item[]{Items.NETHERITE_SWORD, Items.NETHERITE_PICKAXE, Items.NETHERITE_SHOVEL, Items.NETHERITE_AXE, Items.NETHERITE_HOE});
 
     public GearSetsItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookup, CompletableFuture<TagLookup<Block>> blockTags) {
         super(output, lookup, blockTags);
     }
 
-    /** Every material given a c:<kind>/<material> tag here, once each, for the language provider to name; copper is both vanilla's and one of ours. */
+    /** Every material given a c:<kind>/<material> tag here, once each, for the language provider to name. */
     public static Set<String> materialToolNames() {
         Set<String> materials = new TreeSet<>(VANILLA_TOOLS.keySet());
         materials.addAll(GearSetsItems.MATERIALS.keySet());
@@ -52,19 +53,15 @@ public class GearSetsItemTagProvider extends LibItemTagProvider {
         VANILLA_TOOLS.forEach((material, tools) -> materialTools(appender, material, tools));
 
         for (MaterialSet set : GearSetsItems.MATERIALS.values()) {
-            materialTools(appender, set.name(), set.sword().get(), set.pickaxe().get(), set.shovel().get(), set.axe().get(), set.hoe().get(), set.spear().get());
+            materialTools(appender, set.name(), set.sword().get(), set.pickaxe().get(), set.shovel().get(), set.axe().get(), set.hoe().get());
 
             add(appender, ItemTags.SWORDS, set.sword().get());
             add(appender, ItemTags.PICKAXES, set.pickaxe().get());
             add(appender, ItemTags.SHOVELS, set.shovel().get());
             add(appender, ItemTags.AXES, set.axe().get());
             add(appender, ItemTags.HOES, set.hoe().get());
-            // Where vanilla puts its own spears: the spear tag, piglins' preferred weapons, and the lunge enchantment.
-            add(appender, ItemTags.SPEARS, set.spear().get());
-            add(appender, ItemTags.PIGLIN_PREFERRED_WEAPONS, set.spear().get());
-            add(appender, ItemTags.LUNGE_ENCHANTABLE, set.spear().get());
             // Other mods recognise a weapon or a mining tool by these, which both loaders fill with vanilla items only.
-            add(appender, LibCommonTags.Items.TOOLS_MELEE_WEAPONS, set.sword().get(), set.axe().get(), set.spear().get());
+            add(appender, LibCommonTags.Items.TOOLS_MELEE_WEAPONS, set.sword().get(), set.axe().get());
             add(appender, LibCommonTags.Items.TOOLS_MINING_TOOLS, set.pickaxe().get());
             add(appender, ItemTags.HEAD_ARMOR, set.helmet().get());
             add(appender, ItemTags.CHEST_ARMOR, set.chestplate().get());
@@ -74,8 +71,9 @@ public class GearSetsItemTagProvider extends LibItemTagProvider {
             // Opt-in: without these a tool, weapon or armor piece takes no enchantment at a table.
             add(appender, ItemTags.MINING_ENCHANTABLE, set.pickaxe().get(), set.shovel().get(), set.axe().get(), set.hoe().get());
             add(appender, ItemTags.MINING_LOOT_ENCHANTABLE, set.pickaxe().get(), set.shovel().get(), set.axe().get(), set.hoe().get());
-            for (TagKey<Item> tag : List.of(ItemTags.WEAPON_ENCHANTABLE, ItemTags.MELEE_WEAPON_ENCHANTABLE, ItemTags.SHARP_WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE)) {
-                add(appender, tag, set.sword().get(), set.axe().get(), set.spear().get());
+            // 1.21.1's sword_enchantable is what 26.x splits into melee_weapon and sweeping: knockback, looting and sweeping edge.
+            for (TagKey<Item> tag : List.of(ItemTags.WEAPON_ENCHANTABLE, ItemTags.SWORD_ENCHANTABLE, ItemTags.SHARP_WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE)) {
+                add(appender, tag, set.sword().get(), set.axe().get());
             }
             armor(appender, ItemTags.HEAD_ARMOR_ENCHANTABLE, set.helmet().get());
             armor(appender, ItemTags.CHEST_ARMOR_ENCHANTABLE, set.chestplate().get());

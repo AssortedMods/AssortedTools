@@ -25,14 +25,19 @@
     }
   ],
   "key": {
-    "G": "#c:glass_blocks",
-    "L": "#c:leathers"
+    "G": {
+      "tag": "c:glass_blocks"
+    },
+    "L": {
+      "tag": "c:leathers"
+    }
   },
   "pattern": [
     "LLL",
     "LGL"
   ],
   "result": {
+    "count": 1,
     "id": "assortedsuits:scuba_helmet"
   }
 }

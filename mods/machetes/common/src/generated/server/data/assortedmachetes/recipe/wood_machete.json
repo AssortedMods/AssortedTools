@@ -25,8 +25,12 @@
     }
   ],
   "key": {
-    "S": "#c:rods/wooden",
-    "X": "#minecraft:planks"
+    "S": {
+      "tag": "c:rods/wooden"
+    },
+    "X": {
+      "tag": "minecraft:planks"
+    }
   },
   "pattern": [
     " XX",
@@ -34,6 +38,7 @@
     "S  "
   ],
   "result": {
+    "count": 1,
     "id": "assortedmachetes:wood_machete"
   }
 }

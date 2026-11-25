@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "X": "#c:ingots/invar"
+    "X": {
+      "tag": "c:ingots/invar"
+    }
   },
   "pattern": [
     "X X",
     "X X"
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:invar_boots"
   }
 }

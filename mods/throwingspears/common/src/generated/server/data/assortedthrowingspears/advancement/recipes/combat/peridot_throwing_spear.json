@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedthrowingspears:peridot_throwing_spear"
+        "recipe": "assortedthrowingspears:peridot_throwing_spear"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

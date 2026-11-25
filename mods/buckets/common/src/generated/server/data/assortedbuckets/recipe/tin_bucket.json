@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/tin"
+    "I": {
+      "tag": "c:ingots/tin"
+    }
   },
   "pattern": [
     "I I",
     " I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedbuckets:tin_bucket"
   }
 }

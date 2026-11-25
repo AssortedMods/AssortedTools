@@ -14,8 +14,12 @@
     }
   ],
   "key": {
-    "G": "#c:storage_blocks/gold",
-    "X": "#c:obsidians"
+    "G": {
+      "tag": "c:storage_blocks/gold"
+    },
+    "X": {
+      "tag": "c:obsidians"
+    }
   },
   "pattern": [
     "XGX",
@@ -23,6 +27,7 @@
     "XGX"
   ],
   "result": {
+    "count": 1,
     "id": "assortedwands:reinforced_building_wand"
   }
 }

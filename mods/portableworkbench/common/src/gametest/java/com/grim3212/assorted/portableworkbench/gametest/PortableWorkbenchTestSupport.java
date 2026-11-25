@@ -3,6 +3,7 @@ package com.grim3212.assorted.portableworkbench.gametest;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.grim3212.assorted.portableworkbench.Constants;
+import net.minecraft.gametest.framework.GameTestAssertException;
 import net.minecraft.gametest.framework.GameTestHelper;
 
 import java.io.IOException;
@@ -33,7 +34,7 @@ final class PortableWorkbenchTestSupport {
             helper.assertTrue(in != null, path + " is not on the classpath");
             return JsonParser.parseReader(new InputStreamReader(in, StandardCharsets.UTF_8)).getAsJsonObject();
         } catch (IOException e) {
-            throw helper.assertionException("could not read " + path + ": " + e);
+            throw new GameTestAssertException("could not read " + path + ": " + e);
         }
     }
 

@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "X": "#c:ingots/copper"
+    "X": {
+      "tag": "c:ingots/copper"
+    }
   },
   "pattern": [
     "X X",
     "X X"
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:copper_boots"
   }
 }

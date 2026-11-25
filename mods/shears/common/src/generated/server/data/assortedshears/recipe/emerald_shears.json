@@ -25,14 +25,19 @@
     }
   ],
   "key": {
-    "I": "#c:gems/emerald",
-    "L": "#c:leathers"
+    "I": {
+      "tag": "c:gems/emerald"
+    },
+    "L": {
+      "tag": "c:leathers"
+    }
   },
   "pattern": [
     " I",
     "IL"
   ],
   "result": {
+    "count": 1,
     "id": "assortedshears:emerald_shears"
   }
 }

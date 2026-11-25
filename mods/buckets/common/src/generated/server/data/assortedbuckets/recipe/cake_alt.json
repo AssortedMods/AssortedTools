@@ -6,6 +6,7 @@
     }
   ],
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "fabric:load_conditions": [
     {
       "condition": "assortedlib:part_enabled",
@@ -13,10 +14,18 @@
     }
   ],
   "key": {
-    "A": "#c:buckets/milk",
-    "B": "minecraft:sugar",
-    "C": "#c:crops/wheat",
-    "E": "#c:eggs"
+    "A": {
+      "tag": "c:buckets/milk"
+    },
+    "B": {
+      "item": "minecraft:sugar"
+    },
+    "C": {
+      "tag": "c:crops/wheat"
+    },
+    "E": {
+      "tag": "c:eggs"
+    }
   },
   "pattern": [
     "AAA",
@@ -24,6 +33,7 @@
     "CCC"
   ],
   "result": {
+    "count": 1,
     "id": "minecraft:cake"
   }
 }

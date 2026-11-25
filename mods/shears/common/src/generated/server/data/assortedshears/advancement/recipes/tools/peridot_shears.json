@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedshears:peridot_shears"
+        "recipe": "assortedshears:peridot_shears"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

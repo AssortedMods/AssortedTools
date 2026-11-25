@@ -14,9 +14,15 @@
     }
   ],
   "key": {
-    "D": "#c:gems/diamond",
-    "I": "#c:ingots/iron",
-    "R": "#c:dusts/redstone"
+    "D": {
+      "tag": "c:gems/diamond"
+    },
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "R": {
+      "tag": "c:dusts/redstone"
+    }
   },
   "pattern": [
     "IDI",
@@ -24,6 +30,7 @@
     " I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedstaffs:power_staff"
   }
 }

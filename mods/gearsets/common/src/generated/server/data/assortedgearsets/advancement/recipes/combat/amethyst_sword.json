@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedgearsets:amethyst_sword"
+        "recipe": "assortedgearsets:amethyst_sword"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

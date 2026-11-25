@@ -14,8 +14,12 @@
     }
   ],
   "key": {
-    "G": "#c:ingots/iron",
-    "X": "#minecraft:planks"
+    "G": {
+      "tag": "c:ingots/iron"
+    },
+    "X": {
+      "tag": "minecraft:planks"
+    }
   },
   "pattern": [
     "XGX",
@@ -23,6 +27,7 @@
     "XGX"
   ],
   "result": {
+    "count": 1,
     "id": "assortedwands:breaking_wand"
   }
 }

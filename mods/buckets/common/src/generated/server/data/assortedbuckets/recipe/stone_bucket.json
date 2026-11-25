@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "I": "#minecraft:stone_tool_materials"
+    "I": {
+      "tag": "minecraft:stone_tool_materials"
+    }
   },
   "pattern": [
     "I I",
     " I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedbuckets:stone_bucket"
   }
 }

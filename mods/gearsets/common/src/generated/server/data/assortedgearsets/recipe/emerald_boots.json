@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "X": "#c:gems/emerald"
+    "X": {
+      "tag": "c:gems/emerald"
+    }
   },
   "pattern": [
     "X X",
     "X X"
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:emerald_boots"
   }
 }

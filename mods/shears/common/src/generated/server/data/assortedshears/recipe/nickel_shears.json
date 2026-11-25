@@ -25,14 +25,19 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/nickel",
-    "L": "#c:leathers"
+    "I": {
+      "tag": "c:ingots/nickel"
+    },
+    "L": {
+      "tag": "c:leathers"
+    }
   },
   "pattern": [
     " I",
     "IL"
   ],
   "result": {
+    "count": 1,
     "id": "assortedshears:nickel_shears"
   }
 }

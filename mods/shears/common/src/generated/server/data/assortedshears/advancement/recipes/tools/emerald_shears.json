@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedshears:emerald_shears"
+        "recipe": "assortedshears:emerald_shears"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

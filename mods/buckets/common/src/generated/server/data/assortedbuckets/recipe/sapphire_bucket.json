@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "I": "#c:gems/sapphire"
+    "I": {
+      "tag": "c:gems/sapphire"
+    }
   },
   "pattern": [
     "I I",
     " I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedbuckets:sapphire_bucket"
   }
 }

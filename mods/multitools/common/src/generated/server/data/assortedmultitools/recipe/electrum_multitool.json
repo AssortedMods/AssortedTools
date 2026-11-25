@@ -90,17 +90,36 @@
     }
   ],
   "ingredients": [
-    "#c:pickaxes/electrum",
-    "#c:shovels/electrum",
-    "#c:axes/electrum",
-    "#c:hoes/electrum",
-    "#c:swords/electrum",
-    "#c:ingots/electrum",
-    "#c:ingots/electrum",
-    "#c:ingots/electrum",
-    "#c:ingots/electrum"
+    {
+      "tag": "c:pickaxes/electrum"
+    },
+    {
+      "tag": "c:shovels/electrum"
+    },
+    {
+      "tag": "c:axes/electrum"
+    },
+    {
+      "tag": "c:hoes/electrum"
+    },
+    {
+      "tag": "c:swords/electrum"
+    },
+    {
+      "tag": "c:ingots/electrum"
+    },
+    {
+      "tag": "c:ingots/electrum"
+    },
+    {
+      "tag": "c:ingots/electrum"
+    },
+    {
+      "tag": "c:ingots/electrum"
+    }
   ],
   "result": {
+    "count": 1,
     "id": "assortedmultitools:electrum_multitool"
   }
 }

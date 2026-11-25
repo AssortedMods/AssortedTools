@@ -48,7 +48,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedmultitools:tin_multitool"
+        "recipe": "assortedmultitools:tin_multitool"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

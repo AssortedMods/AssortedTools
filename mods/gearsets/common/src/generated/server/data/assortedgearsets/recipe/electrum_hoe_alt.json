@@ -25,8 +25,12 @@
     }
   ],
   "key": {
-    "S": "#c:rods/wooden",
-    "X": "#c:ingots/electrum"
+    "S": {
+      "tag": "c:rods/wooden"
+    },
+    "X": {
+      "tag": "c:ingots/electrum"
+    }
   },
   "pattern": [
     "XX",
@@ -34,6 +38,7 @@
     "S "
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:electrum_hoe"
   }
 }

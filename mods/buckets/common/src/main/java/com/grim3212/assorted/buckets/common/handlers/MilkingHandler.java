@@ -6,15 +6,15 @@ import com.grim3212.assorted.lib.platform.Services;
 import com.grim3212.assorted.buckets.common.item.BetterBucketItem;
 import com.grim3212.assorted.buckets.common.item.BetterMilkBucketItem;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.cow.Cow;
-import net.minecraft.world.entity.animal.pig.Pig;
-import net.minecraft.world.entity.animal.sheep.Sheep;
+import net.minecraft.world.entity.animal.Cow;
+import net.minecraft.world.entity.animal.Pig;
+import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
@@ -67,7 +67,8 @@ public class MilkingHandler {
                     int milkingLevel = bucket.getParent().bucketConfig.getMilkingLevel();
 
                     if (bucket != null) {
-                        for (int i = 0; i <= milkingLevel; i++) {
+                        // The config allows levels past the last one anything is milkable at, which have nothing more to add.
+                        for (int i = 0; i <= milkingLevel && i < levels.size(); i++) {
                             for (int j = 0; j < levels.get(i).size(); j++) {
                                 if (levels.get(i).contains(entity.getClass())) {
                                     if (BetterBucketItem.getAmount(stack) < bucket.getParent().getMaximumMillibuckets()) {
@@ -86,11 +87,12 @@ public class MilkingHandler {
                     }
                 } else if (stack.getItem() instanceof BetterBucketItem) {
                     BetterBucketItem bucket = (BetterBucketItem) stack.getItem();
-                    Identifier bucketName = Services.PLATFORM.getRegistry(Registries.ITEM).getRegistryName(bucket);
+                    ResourceLocation bucketName = Services.PLATFORM.getRegistry(Registries.ITEM).getRegistryName(bucket);
                     int milkingLevel = bucket.bucketConfig.getMilkingLevel();
 
                     if (bucket != null) {
-                        for (int i = 0; i <= milkingLevel; i++) {
+                        // The config allows levels past the last one anything is milkable at, which have nothing more to add.
+                        for (int i = 0; i <= milkingLevel && i < levels.size(); i++) {
                             for (int j = 0; j < levels.get(i).size(); j++) {
                                 if (levels.get(i).contains(entity.getClass())) {
                                     if (BetterBucketItem.isEmptyOrContains(stack, "milk")) {
@@ -98,11 +100,11 @@ public class MilkingHandler {
                                         if (BetterBucketItem.getAmount(stack) < bucket.getMaximumMillibuckets()) {
                                             player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
 
-                                            ItemStack milkBucket = new ItemStack(Services.PLATFORM.getRegistry(Registries.ITEM).getValue(Identifier.parse(bucketName.toString().replace("_bucket", "_milk_bucket"))).orElseThrow());
+                                            ItemStack milkBucket = new ItemStack(Services.PLATFORM.getRegistry(Registries.ITEM).getValue(ResourceLocation.parse(bucketName.toString().replace("_bucket", "_milk_bucket"))).orElseThrow());
                                             BetterBucketItem.store(milkBucket, "milk", (int) Services.FLUIDS.getBucketAmount());
 
                                             if (event.getHand() == InteractionHand.MAIN_HAND)
-                                                player.getInventory().setItem(player.getInventory().getSelectedSlot(), milkBucket);
+                                                player.getInventory().setItem(player.getInventory().selected, milkBucket);
                                             else
                                                 player.getInventory().setItem(40, milkBucket);
 

@@ -5,7 +5,6 @@ import com.grim3212.assorted.shears.api.ShearsTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.TagAppender;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
@@ -32,9 +31,9 @@ public class ShearsBlockTagProvider extends LibBlockTagProvider {
 
         appender.apply(ShearsTags.ALL_CORALS)
                 .addTag(ShearsTags.DEAD_CORALS)
-                .addOptionalTag(BlockTags.CORAL_BLOCKS)
-                .addOptionalTag(BlockTags.CORAL_PLANTS)
-                .addOptionalTag(BlockTags.WALL_CORALS)
-                .addOptionalTag(BlockTags.CORALS);
+                .addOptionalTag(BlockTags.CORAL_BLOCKS.location())
+                .addOptionalTag(BlockTags.CORAL_PLANTS.location())
+                .addOptionalTag(BlockTags.WALL_CORALS.location())
+                .addOptionalTag(BlockTags.CORALS.location());
     }
 }

@@ -10,7 +10,7 @@ import com.grim3212.assorted.staffs.common.handlers.StaffsCreativeItems;
 import com.grim3212.assorted.staffs.common.handlers.StaffsLootHandlers;
 import com.grim3212.assorted.staffs.common.item.StaffsDataComponents;
 import com.grim3212.assorted.staffs.common.item.StaffsItems;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * Loader-agnostic startup. Both loader entry points call {@link #init()}; the frozen-mob storage and the
@@ -21,7 +21,7 @@ public class StaffsCommonMod {
     public static void init() {
         Constants.LOG.info(Constants.MOD_NAME + " starting up...");
         Families.join(Constants.MOD_ID, Constants.FAMILY_ID)
-                .icon(Identifier.fromNamespaceAndPath(Constants.MOD_ID, "phoenix_staff"), 30)
+                .icon(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "phoenix_staff"), 30)
                 .manualOrder(120);
 
         StaffsDataComponents.init();

@@ -135,10 +135,9 @@ final class MiningToolTests {
     private static void toolsAreInTheConventionToolTags(GameTestHelper helper) {
         List<String> missing = new ArrayList<>();
         for (MaterialSet set : GearSetsItems.MATERIALS.values()) {
-            expect(missing, LibCommonTags.Items.TOOLS_MELEE_WEAPONS, set.sword().get(), set.axe().get(), set.spear().get());
+            expect(missing, LibCommonTags.Items.TOOLS_MELEE_WEAPONS, set.sword().get(), set.axe().get());
             expect(missing, LibCommonTags.Items.TOOLS_MINING_TOOLS, set.pickaxe().get());
             expect(missing, GearSetsTags.materialTools("pickaxes", set.name()), set.pickaxe().get());
-            expect(missing, GearSetsTags.materialTools("spears", set.name()), set.spear().get());
         }
         // Vanilla's own materials are filled in too, for mods that ask by material.
         expect(missing, GearSetsTags.materialTools("pickaxes", "iron"), Items.IRON_PICKAXE);
@@ -154,9 +153,10 @@ final class MiningToolTests {
                 expect(missing, ItemTags.MINING_ENCHANTABLE, tool);
                 expect(missing, ItemTags.MINING_LOOT_ENCHANTABLE, tool);
             }
-            for (Item weapon : List.of(set.sword().get(), set.axe().get(), set.spear().get())) {
+            for (Item weapon : List.of(set.sword().get(), set.axe().get())) {
                 expect(missing, ItemTags.WEAPON_ENCHANTABLE, weapon);
-                expect(missing, ItemTags.MELEE_WEAPON_ENCHANTABLE, weapon);
+                // 1.21.1's knockback, looting and sweeping edge all ask for sword_enchantable; 26.x splits it into melee_weapon and sweeping.
+                expect(missing, ItemTags.SWORD_ENCHANTABLE, weapon);
                 expect(missing, ItemTags.SHARP_WEAPON_ENCHANTABLE, weapon);
                 expect(missing, ItemTags.FIRE_ASPECT_ENCHANTABLE, weapon);
             }

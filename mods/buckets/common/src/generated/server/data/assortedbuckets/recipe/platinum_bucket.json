@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/platinum"
+    "I": {
+      "tag": "c:ingots/platinum"
+    }
   },
   "pattern": [
     "I I",
     " I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedbuckets:platinum_bucket"
   }
 }

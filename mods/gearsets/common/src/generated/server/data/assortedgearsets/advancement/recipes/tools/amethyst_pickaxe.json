@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedgearsets:amethyst_pickaxe"
+        "recipe": "assortedgearsets:amethyst_pickaxe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

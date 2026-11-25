@@ -14,8 +14,12 @@
     }
   ],
   "key": {
-    "G": "#c:storage_blocks/diamond",
-    "X": "#c:obsidians"
+    "G": {
+      "tag": "c:storage_blocks/diamond"
+    },
+    "X": {
+      "tag": "c:obsidians"
+    }
   },
   "pattern": [
     "XGX",
@@ -23,6 +27,7 @@
     "XGX"
   ],
   "result": {
+    "count": 1,
     "id": "assortedwands:reinforced_mining_wand"
   }
 }

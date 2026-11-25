@@ -12,9 +12,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.pig.Pig;
+import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -94,8 +94,8 @@ final class MultitoolTests {
 
     /** A full strength hit sweeps the mob beside the target, on both loaders, as a sword's does. */
     private static void multitoolSweepsLikeASword(GameTestHelper helper) {
-        Pig target = helper.spawnWithNoFreeWill(EntityTypes.PIG, new BlockPos(4, 1, 4));
-        Pig beside = helper.spawnWithNoFreeWill(EntityTypes.PIG, new BlockPos(5, 1, 4));
+        Pig target = helper.spawnWithNoFreeWill(EntityType.PIG, new BlockPos(4, 1, 4));
+        Pig beside = helper.spawnWithNoFreeWill(EntityType.PIG, new BlockPos(5, 1, 4));
 
         ServerPlayer player = survivalPlayer(helper, new ItemStack(MultitoolsItems.WOODEN_MULTITOOL.get()));
         stand(helper, player, new BlockPos(4, 1, 2));
@@ -173,7 +173,7 @@ final class MultitoolTests {
 
     private static void multitoolsTakeTheirEnchantments(GameTestHelper helper) {
         List<String> missing = new ArrayList<>();
-        List<TagKey<Item>> tags = List.of(ItemTags.MINING_ENCHANTABLE, ItemTags.MINING_LOOT_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.MELEE_WEAPON_ENCHANTABLE,
+        List<TagKey<Item>> tags = List.of(ItemTags.MINING_ENCHANTABLE, ItemTags.MINING_LOOT_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.SWORD_ENCHANTABLE,
                 ItemTags.SHARP_WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.VANISHING_ENCHANTABLE,
                 LibCommonTags.Items.TOOLS_MELEE_WEAPONS, LibCommonTags.Items.TOOLS_MINING_TOOLS);
         for (MultiToolItem multitool : MultitoolsItems.multitools()) {

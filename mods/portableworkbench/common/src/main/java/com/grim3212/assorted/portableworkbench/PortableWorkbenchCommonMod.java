@@ -4,7 +4,7 @@ import com.grim3212.assorted.lib.family.Families;
 import com.grim3212.assorted.lib.migration.MovedIds;
 import com.grim3212.assorted.portableworkbench.common.handlers.PortableWorkbenchCreativeItems;
 import com.grim3212.assorted.portableworkbench.common.item.PortableWorkbenchItems;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * Loader-agnostic startup. Both loader entry points call {@link #init()} and nothing else; anything
@@ -15,7 +15,7 @@ public class PortableWorkbenchCommonMod {
     public static void init() {
         Constants.LOG.info(Constants.MOD_NAME + " starting up...");
         Families.join(Constants.MOD_ID, Constants.FAMILY_ID)
-                .icon(Identifier.fromNamespaceAndPath(Constants.MOD_ID, "portable_workbench"), 70)
+                .icon(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "portable_workbench"), 70)
                 .manualOrder(120);
 
         PortableWorkbenchItems.init();

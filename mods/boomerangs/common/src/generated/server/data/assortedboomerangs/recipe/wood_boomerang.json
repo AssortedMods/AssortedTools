@@ -14,7 +14,9 @@
     }
   ],
   "key": {
-    "X": "#minecraft:planks"
+    "X": {
+      "tag": "minecraft:planks"
+    }
   },
   "pattern": [
     "XX",
@@ -22,6 +24,7 @@
     "XX"
   ],
   "result": {
+    "count": 1,
     "id": "assortedboomerangs:wood_boomerang"
   }
 }

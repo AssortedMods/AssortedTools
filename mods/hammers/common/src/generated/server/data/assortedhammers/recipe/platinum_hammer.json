@@ -25,8 +25,12 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/platinum",
-    "S": "#c:rods/wooden"
+    "I": {
+      "tag": "c:ingots/platinum"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
   },
   "pattern": [
     "III",
@@ -34,6 +38,7 @@
     " S "
   ],
   "result": {
+    "count": 1,
     "id": "assortedhammers:platinum_hammer"
   }
 }

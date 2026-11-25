@@ -14,10 +14,18 @@
     }
   ],
   "key": {
-    "B": "minecraft:stone_button",
-    "C": "#minecraft:coals",
-    "I": "#c:ingots/iron",
-    "R": "#c:dusts/redstone"
+    "B": {
+      "item": "minecraft:stone_button"
+    },
+    "C": {
+      "tag": "minecraft:coals"
+    },
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "R": {
+      "tag": "c:dusts/redstone"
+    }
   },
   "pattern": [
     "RRR",
@@ -25,6 +33,7 @@
     "III"
   ],
   "result": {
+    "count": 1,
     "id": "assortedpokeball:pokeball"
   }
 }

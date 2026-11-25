@@ -25,14 +25,19 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/gold",
-    "L": "#c:leathers"
+    "I": {
+      "tag": "c:ingots/gold"
+    },
+    "L": {
+      "tag": "c:leathers"
+    }
   },
   "pattern": [
     " I",
     "IL"
   ],
   "result": {
+    "count": 1,
     "id": "assortedshears:gold_shears"
   }
 }

@@ -6,8 +6,12 @@
     }
   ],
   "type": "minecraft:smithing_transform",
-  "addition": "#c:ingots/netherite",
-  "base": "assortedmachetes:diamond_machete",
+  "addition": {
+    "tag": "c:ingots/netherite"
+  },
+  "base": {
+    "item": "assortedmachetes:diamond_machete"
+  },
   "fabric:load_conditions": [
     {
       "condition": "assortedlib:part_enabled",
@@ -15,7 +19,10 @@
     }
   ],
   "result": {
+    "count": 1,
     "id": "assortedmachetes:netherite_machete"
   },
-  "template": "minecraft:netherite_upgrade_smithing_template"
+  "template": {
+    "item": "minecraft:netherite_upgrade_smithing_template"
+  }
 }

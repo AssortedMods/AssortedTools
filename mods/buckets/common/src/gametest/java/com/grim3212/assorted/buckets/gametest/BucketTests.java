@@ -11,7 +11,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.Direction;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -20,15 +19,14 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EntityTypes;
-import net.minecraft.world.entity.animal.cow.Cow;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.ItemUseAnimation;
-import net.minecraft.world.item.component.Consumable;
+import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.display.SlotDisplayContext;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.entity.DispenserBlockEntity;
@@ -52,6 +50,7 @@ final class BucketTests {
     static void register(BiConsumer<String, Consumer<GameTestHelper>> out) {
         out.accept("better_bucket_fills_and_empties", BucketTests::betterBucketFillsAndEmpties);
         out.accept("better_bucket_milks_a_cow", BucketTests::betterBucketMilksACow);
+        out.accept("milking_level_past_the_last_level_still_milks", BucketTests::milkingLevelPastTheLastLevelStillMilks);
         out.accept("uncrafted_better_bucket_milks_and_fills", BucketTests::uncraftedBetterBucketMilksAndFills);
         out.accept("better_bucket_picks_up_and_places_lava", BucketTests::betterBucketPicksUpAndPlacesLava);
         out.accept("better_bucket_refuses_a_fluid_too_hot_for_it", BucketTests::betterBucketRefusesAFluidTooHotForIt);
@@ -126,13 +125,13 @@ final class BucketTests {
                 // A powered dispenser schedules itself four ticks out.
                 .thenExecuteAfter(10, () -> {
                     helper.assertBlockPresent(Blocks.AIR, fills.above());
-                    ItemStack filled = helper.getBlockEntity(fills, DispenserBlockEntity.class).getItem(0);
+                    ItemStack filled = ((DispenserBlockEntity) helper.getBlockEntity(fills)).getItem(0);
                     helper.assertTrue(filled.is(bucket), "the dispenser threw the bucket instead of filling it");
                     helper.assertValueEqual(BetterBucketItem.getAmount(filled), oneBucket, "water in the bucket after one pickup");
                     helper.assertValueEqual(BetterBucketItem.getFluid(filled), "minecraft:water", "fluid stored by the dispenser");
 
                     helper.assertBlockPresent(Blocks.WATER, refuses.above());
-                    ItemStack left = helper.getBlockEntity(refuses, DispenserBlockEntity.class).getItem(0);
+                    ItemStack left = ((DispenserBlockEntity) helper.getBlockEntity(refuses)).getItem(0);
                     helper.assertTrue(left.is(bucket), "the dispenser threw out a bucket that had no room");
                     helper.assertValueEqual(BetterBucketItem.getAmount(left), capacity - oneBucket, "water in a bucket that had no room and poured instead");
                 })
@@ -153,7 +152,7 @@ final class BucketTests {
         }
         helper.setBlock(front, Blocks.WATER);
 
-        helper.getBlockEntity(dispenser, DispenserBlockEntity.class).setItem(0, held);
+        ((DispenserBlockEntity) helper.getBlockEntity(dispenser)).setItem(0, held);
         helper.setBlock(dispenser.north(), Blocks.REDSTONE_BLOCK);
     }
 
@@ -229,7 +228,7 @@ final class BucketTests {
      * called directly because the two loaders raise the event from different call sites.
      */
     private static void betterBucketMilksACow(GameTestHelper helper) {
-        Cow cow = helper.spawn(EntityTypes.COW, new BlockPos(4, 1, 4));
+        Cow cow = helper.spawn(EntityType.COW, new BlockPos(4, 1, 4));
 
         // The gold tier holds four buckets and milks at level 0, which is where cows sit.
         BetterBucketItem bucket = BucketsItems.GOLD.bucket().get();
@@ -254,6 +253,33 @@ final class BucketTests {
     }
 
     /**
+     * A bucket whose milking level is past the last level anything is milkable at still milks what is below it. The
+     * config allows levels up to 5 while only 0 to 2 are registered, and the handler once read a level for every
+     * number up to the bucket's, running off the end of the list. The netherite tier milks at level 2, so dropping
+     * the top level for the length of the test puts it past the end without changing the config.
+     */
+    private static void milkingLevelPastTheLastLevelStillMilks(GameTestHelper helper) {
+        Cow cow = helper.spawn(EntityType.COW, new BlockPos(4, 1, 4));
+        BetterBucketItem bucket = BucketsItems.NETHERITE.bucket().get();
+        helper.assertTrue(bucket.bucketConfig.getMilkingLevel() == MilkingHandler.levels.size() - 1, "the netherite bucket no longer milks at the top level, so this test sets nothing up");
+        ServerPlayer player = survivalPlayer(helper, bucket.getEmptyStack());
+
+        List<Class<? extends Entity>> top = MilkingHandler.levels.remove(MilkingHandler.levels.size() - 1);
+        EntityInteractEvent event = new EntityInteractEvent(player, InteractionHand.MAIN_HAND, cow);
+        try {
+            MilkingHandler.interact(event);
+        } finally {
+            MilkingHandler.levels.add(top);
+        }
+
+        helper.assertTrue(event.isCanceled(), "milking a cow with a bucket past the last milking level was not handled");
+        ItemStack milk = player.getItemInHand(InteractionHand.MAIN_HAND);
+        helper.assertTrue(milk.is(BucketsItems.NETHERITE.milk().get()), "the bucket did not turn into its milk bucket");
+        helper.assertValueEqual(BetterBucketItem.getAmount(milk), BetterBucketItem.getBucketAmount(), "milk held after one milking");
+        helper.succeed();
+    }
+
+    /**
      * A bucket that never went through {@code onCraftedBy} (creative tab, command) still fills and
      * milks, since milking goes through {@code Player#interactOn}, where each loader raises the entity interact event.
      */
@@ -269,9 +295,9 @@ final class BucketTests {
         helper.assertValueEqual(BetterBucketItem.getFluid(filled), "minecraft:water", "fluid in a never-crafted bucket after filling");
         helper.assertValueEqual(BetterBucketItem.getAmount(filled), oneBucket, "water in a never-crafted bucket after filling");
 
-        Cow cow = helper.spawn(EntityTypes.COW, new BlockPos(4, 1, 4));
+        Cow cow = helper.spawn(EntityType.COW, new BlockPos(4, 1, 4));
         ServerPlayer player = survivalPlayer(helper, new ItemStack(bucket));
-        player.interactOn(cow, InteractionHand.MAIN_HAND, Vec3.ZERO);
+        player.interactOn(cow, InteractionHand.MAIN_HAND);
         ItemStack milk = player.getItemInHand(InteractionHand.MAIN_HAND);
         helper.assertTrue(milk.is(BucketsItems.GOLD.milk().get()), "milking a cow with a never-crafted bucket left " + milk);
         helper.assertValueEqual(BetterBucketItem.getAmount(milk), oneBucket, "milk held after milking with a never-crafted bucket");
@@ -342,21 +368,20 @@ final class BucketTests {
 
         ServerPlayer player = survivalPlayer(helper, milk);
         stand(helper, player, new BlockPos(4, 1, 4));
-        player.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 200));
-        helper.assertTrue(player.hasEffect(MobEffects.SLOWNESS), "the test player never got the effect it is meant to drink away");
+        player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 200));
+        helper.assertTrue(player.hasEffect(MobEffects.MOVEMENT_SLOWDOWN), "the test player never got the effect it is meant to drink away");
 
-        Consumable consumable = milk.get(DataComponents.CONSUMABLE);
-        helper.assertTrue(consumable != null, "a milk bucket carries no consumable component, so nothing plays a drinking sound for it");
-        helper.assertTrue(consumable.animation() == ItemUseAnimation.DRINK, "a milk bucket should be drunk, not eaten");
-        helper.assertValueEqual(consumable.sound().value(), SoundEvents.GENERIC_DRINK.value(), "the sound a milk bucket is drunk with");
-        helper.assertTrue(milkBucket.getUseAnimation(milk) == ItemUseAnimation.DRINK, "a milk bucket should be drunk, not eaten");
-        helper.assertValueEqual(milk.getUseDuration(player), consumable.consumeTicks(), "how long a milk bucket takes to drink");
-        helper.assertTrue(milk.use(helper.getLevel(), player, InteractionHand.MAIN_HAND).consumesAction(), "the milk bucket refused to be used");
+        // Vanilla's milk bucket is the yardstick: the same animation, sound and time to drink.
+        ItemStack vanillaMilk = new ItemStack(Items.MILK_BUCKET);
+        helper.assertTrue(milkBucket.getUseAnimation(milk) == UseAnim.DRINK, "a milk bucket should be drunk, not eaten");
+        helper.assertValueEqual(milk.getDrinkingSound(), SoundEvents.GENERIC_DRINK, "the sound a milk bucket is drunk with");
+        helper.assertValueEqual(milk.getUseDuration(player), vanillaMilk.getUseDuration(player), "how long a milk bucket takes to drink");
+        helper.assertTrue(milk.use(helper.getLevel(), player, InteractionHand.MAIN_HAND).getResult().consumesAction(), "the milk bucket refused to be used");
         helper.assertTrue(player.isUsingItem(), "using a milk bucket did not start the drink");
 
         ItemStack left = milk.finishUsingItem(helper.getLevel(), player);
 
-        helper.assertFalse(player.hasEffect(MobEffects.SLOWNESS), "drinking milk did not clear the effect");
+        helper.assertFalse(player.hasEffect(MobEffects.MOVEMENT_SLOWDOWN), "drinking milk did not clear the effect");
         helper.assertTrue(left.is(milkBucket), "drinking one bucket of milk should leave the milk bucket behind");
         helper.assertValueEqual(BetterBucketItem.getAmount(left), oneBucket, "milk left after one drink");
 
@@ -387,12 +412,12 @@ final class BucketTests {
 
     /**
      * A better bucket keeps its fluid in components, so the ingredient must collect and draw the
-     * <em>filled</em> stack: a default display would name the bare, empty item, which the ingredient does not accept.
+     * <em>filled</em> stack: the bare, empty item, which the ingredient does not accept, would be no use in a recipe viewer.
      */
     private static void fluidIngredientDrawsAFilledBucket(GameTestHelper helper) {
         Ingredient water = Services.INGREDIENTS.fluid(null, FluidTags.WATER, Services.FLUIDS.getBucketAmount());
 
-        List<ItemStack> drawn = water.display().resolveForStacks(SlotDisplayContext.fromLevel(helper.getLevel()));
+        List<ItemStack> drawn = List.of(water.getItems());
         List<ItemStack> buckets = drawn.stream().filter(stack -> stack.getItem() instanceof BetterBucketItem).toList();
         helper.assertFalse(buckets.isEmpty(), "a water fluid ingredient draws " + drawn + ", with no better bucket among them");
 
@@ -423,7 +448,7 @@ final class BucketTests {
 
                     ItemStack filled = bucket.getEmptyStack();
                     BetterBucketItem.storeFluid(filled, Fluids.WATER, 2 * oneBucket);
-                    helper.getBlockEntity(dispenser, DispenserBlockEntity.class).setItem(0, filled);
+                    ((DispenserBlockEntity) helper.getBlockEntity(dispenser)).setItem(0, filled);
 
                     helper.setBlock(power, Blocks.REDSTONE_BLOCK);
                 })
@@ -431,7 +456,7 @@ final class BucketTests {
                 .thenExecuteAfter(10, () -> {
                     helper.assertBlockPresent(Blocks.WATER, front);
 
-                    ItemStack left = helper.getBlockEntity(dispenser, DispenserBlockEntity.class).getItem(0);
+                    ItemStack left = ((DispenserBlockEntity) helper.getBlockEntity(dispenser)).getItem(0);
                     helper.assertTrue(left.is(bucket), "the dispenser threw the bucket instead of keeping it");
                     // One bucket poured, one left: a dispenser that places without draining pours forever.
                     helper.assertValueEqual(BetterBucketItem.getAmount(left), oneBucket, "water left in the bucket after one dispense");

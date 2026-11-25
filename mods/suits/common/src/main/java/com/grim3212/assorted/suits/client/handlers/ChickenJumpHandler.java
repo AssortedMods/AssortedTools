@@ -7,13 +7,9 @@ import com.grim3212.assorted.suits.common.item.ChickenSuitArmor;
 import com.grim3212.assorted.suits.common.network.ChickenSuitUpdatePacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.core.Holder;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.EquipmentSlotGroup;
-import net.minecraft.world.entity.animal.chicken.ChickenSoundVariants;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
@@ -25,14 +21,8 @@ public class ChickenJumpHandler {
     private static int cooldown = 0;
     private static final int MAX_COOLDOWN = 6;
 
-    /**
-     * No single {@code SoundEvents.CHICKEN_AMBIENT} constant exists; sounds are data driven, so this
-     * looks up the classic variant's adult ambient sound directly.
-     */
-    private static final Holder<SoundEvent> CHICKEN_AMBIENT = SoundEvents.CHICKEN_SOUNDS.get(ChickenSoundVariants.SoundSet.CLASSIC).adultSounds().ambientSound();
-
     public static void tick(Minecraft mc) {
-        Screen screen = mc.gui.screen();
+        Screen screen = mc.screen;
         if (screen == null) {
             onTickInGame(mc);
         }
@@ -48,9 +38,9 @@ public class ChickenJumpHandler {
         }
 
 
-        // needsSync only turns true on the client at a jump, so a player who hasn't jumped since joining or respawning
+        // hasImpulse only turns true on the client at a jump, so a player who hasn't jumped since joining or respawning
         // would never glide; being off the ground counts as well.
-        if (!mc.player.isInWater() && !mc.player.isInLava() && (mc.player.needsSync || !mc.player.onGround())) {
+        if (!mc.player.isInWater() && !mc.player.isInLava() && (mc.player.hasImpulse || !mc.player.onGround())) {
             int jumpsAllowed = getMaxJumps(mc.player);
 
             // Must at least have 1 piece of the suit
@@ -106,15 +96,14 @@ public class ChickenJumpHandler {
     /** Only the jumping player hears it, and only while their own client config leaves it on. */
     private static void cluck(Minecraft mc) {
         if (SuitsClient.CLIENT_CONFIG.chickenSuitCluck.get()) {
-            mc.level.playSound(mc.player, mc.player.blockPosition(), CHICKEN_AMBIENT.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
+            mc.level.playSound(mc.player, mc.player.blockPosition(), SoundEvents.CHICKEN_AMBIENT, SoundSource.PLAYERS, 1.0F, 1.0F);
         }
     }
 
     private static int getMaxJumps(Player player) {
         // Start at one for original jump
         int maxJumps = 1;
-        // getArmorSlots() is gone; the humanoid armor slots are walked through EquipmentSlotGroup.
-        for (EquipmentSlot slot : EquipmentSlotGroup.ARMOR) {
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
             if (slot.getType() != EquipmentSlot.Type.HUMANOID_ARMOR)
                 continue;
 

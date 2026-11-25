@@ -2,17 +2,21 @@
   "type": "minecraft:chest",
   "pools": [
     {
+      "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
-          "modifier": {
-            "type": "minecraft:set_count",
-            "count": {
-              "type": "minecraft:uniform",
-              "max": 1,
-              "min": 1
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 1.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
             }
-          },
+          ],
           "name": "assortedstaffs:phoenix_staff"
         },
         {
@@ -20,7 +24,7 @@
           "weight": 49
         }
       ],
-      "rolls": 1
+      "rolls": 1.0
     }
   ],
   "random_sequence": "assortedstaffs:staffs_phoenix_loot"

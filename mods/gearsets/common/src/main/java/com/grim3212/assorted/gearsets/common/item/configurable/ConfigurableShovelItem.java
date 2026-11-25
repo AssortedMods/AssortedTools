@@ -2,18 +2,18 @@ package com.grim3212.assorted.gearsets.common.item.configurable;
 
 import com.grim3212.assorted.lib.core.tool.ITiered;
 import com.grim3212.assorted.lib.core.tool.ToolTier;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.DiggerItem;
+import net.minecraft.world.item.ShovelItem;
 
 /**
- * A shovel built from a configured tool material. {@code Properties#shovel} adds the path-making
- * right click; everything numeric comes from the material record.
+ * A shovel built from a configured tool material; {@code ShovelItem} adds the path-making right click.
  */
-public class ConfigurableShovelItem extends Item implements ITiered {
+public class ConfigurableShovelItem extends ShovelItem implements ITiered {
 
     private final ToolTier tierHolder;
 
-    public ConfigurableShovelItem(ToolTier tierHolder, Item.Properties builder) {
-        super(builder.shovel(tierHolder.material(), ConfigurableTools.SHOVEL_DAMAGE, ConfigurableTools.SHOVEL_SPEED));
+    public ConfigurableShovelItem(ToolTier tierHolder, Properties properties) {
+        super(tierHolder, properties.attributes(DiggerItem.createAttributes(tierHolder, ConfigurableTools.SHOVEL_DAMAGE, ConfigurableTools.SHOVEL_SPEED)));
         this.tierHolder = tierHolder;
     }
 

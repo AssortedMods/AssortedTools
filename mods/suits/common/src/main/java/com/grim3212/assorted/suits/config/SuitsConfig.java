@@ -8,14 +8,11 @@ import com.grim3212.assorted.lib.util.LibCommonTags;
 import com.grim3212.assorted.suits.Constants;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.equipment.EquipmentAsset;
-import net.minecraft.world.item.equipment.EquipmentAssets;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -42,7 +39,8 @@ public class SuitsConfig {
     }
 
     private static ArmorMaterialConfig armor(IConfigurationBuilder builder, String name, int durability, int enchantability, int[] reductionAmounts, Supplier<Holder<SoundEvent>> equipSound, TagKey<Item> repairItems, String asset) {
-        ResourceKey<EquipmentAsset> assetId = ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath(Constants.MOD_ID, asset));
-        return new ArmorMaterialConfig(builder, name, name, durability, enchantability, 0.0F, 0.0F, reductionAmounts, equipSound, repairItems, assetId);
+        // Worn as textures/models/armor/<asset>_layer_1.png, and _layer_2.png for the leggings.
+        ResourceLocation assetName = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, asset);
+        return new ArmorMaterialConfig(builder, name, name, durability, enchantability, 0.0F, 0.0F, reductionAmounts, equipSound, repairItems, assetName);
     }
 }

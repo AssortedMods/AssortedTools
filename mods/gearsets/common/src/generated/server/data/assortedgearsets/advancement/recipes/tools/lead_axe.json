@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedgearsets:lead_axe"
+        "recipe": "assortedgearsets:lead_axe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

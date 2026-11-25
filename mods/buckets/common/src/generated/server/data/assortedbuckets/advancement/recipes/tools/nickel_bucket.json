@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedbuckets:nickel_bucket"
+        "recipe": "assortedbuckets:nickel_bucket"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

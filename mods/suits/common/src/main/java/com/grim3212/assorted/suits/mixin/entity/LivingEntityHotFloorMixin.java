@@ -1,7 +1,6 @@
 package com.grim3212.assorted.suits.mixin.entity;
 
 import com.grim3212.assorted.suits.common.item.LavaArmorItem;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class LivingEntityHotFloorMixin {
 
     @Inject(method = "isInvulnerableTo", at = @At("HEAD"), cancellable = true)
-    private void assortedtools_lavaBootsTakeTheHeat(ServerLevel level, DamageSource source, CallbackInfoReturnable<Boolean> callback) {
+    private void assortedtools_lavaBootsTakeTheHeat(DamageSource source, CallbackInfoReturnable<Boolean> callback) {
         if (!source.is(DamageTypes.HOT_FLOOR) && !source.is(DamageTypes.CAMPFIRE)) {
             return;
         }

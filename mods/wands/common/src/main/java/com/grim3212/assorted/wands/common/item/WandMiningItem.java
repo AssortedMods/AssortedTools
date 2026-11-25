@@ -47,8 +47,8 @@ public class WandMiningItem extends WandItem {
             case MINE_ALL:
                 return (state.getBlock() != Blocks.BEDROCK || WandsCommonMod.COMMON_CONFIG.bedrockBreaking.get()) && (state.getBlock() != Blocks.OBSIDIAN || WandsCommonMod.COMMON_CONFIG.easyMiningObsidian.get());
             case MINE_DIRT:
-                // #substrate_overworld covers all soil since #minecraft:dirt narrowed; #minecraft:replaceable_by_trees clears ground plants, and the fluid guard keeps it from draining water/seagrass.
-                return state.is(BlockTags.SUBSTRATE_OVERWORLD) || (state.is(BlockTags.REPLACEABLE_BY_TREES) && state.getFluidState().isEmpty()) || state.getBlock() == Blocks.SAND || state.getBlock() == Blocks.GRAVEL || state.getBlock() instanceof LeavesBlock || state.getBlock() == Blocks.FARMLAND || state.getBlock() == Blocks.SNOW || state.getBlock() == Blocks.SOUL_SAND || state.getBlock() == Blocks.VINE || state.getBlock() instanceof FlowerBlock;
+                // #minecraft:dirt covers all soil; #minecraft:replaceable_by_trees clears ground plants, and the fluid guard keeps it from draining water/seagrass.
+                return state.is(BlockTags.DIRT) || (state.is(BlockTags.REPLACEABLE_BY_TREES) && state.getFluidState().isEmpty()) || state.getBlock() == Blocks.SAND || state.getBlock() == Blocks.GRAVEL || state.getBlock() instanceof LeavesBlock || state.getBlock() == Blocks.FARMLAND || state.getBlock() == Blocks.SNOW || state.getBlock() == Blocks.SOUL_SAND || state.getBlock() == Blocks.VINE || state.getBlock() instanceof FlowerBlock;
             case MINE_WOOD:
                 return state.is(BlockTags.LOGS) || state.is(BlockTags.LEAVES);
             case MINE_ORES:
@@ -77,7 +77,7 @@ public class WandMiningItem extends WandItem {
     }
 
     @Override
-    protected boolean doEffect(Level world, Player entityplayer, InteractionHand hand, WandCoord3D start, WandCoord3D end, BlockState state) {
+    protected boolean doEffect(Level world, Player entityplayer, InteractionHand hand, WandCoord3D start, WandCoord3D end, BlockState state, BlockState clicked) {
         boolean damage = doMining(world, start, end, entityplayer, hand);
         if (damage)
             world.playSound((Player) null, end.pos, SoundEvents.GENERIC_EXPLODE.value(), SoundSource.BLOCKS, 2.5F, 0.5F + world.getRandom().nextFloat() * 0.3F);
@@ -228,7 +228,7 @@ public class WandMiningItem extends WandItem {
     }
 
     @Override
-    public void onCraftedBy(ItemStack stack, Player playerIn) {
+    public void onCraftedBy(ItemStack stack, Level level, Player playerIn) {
         NBTHelper.putString(stack, "Mode", MiningMode.MINE_ALL.getSerializedName());
     }
 

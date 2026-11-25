@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/electrum"
+    "I": {
+      "tag": "c:ingots/electrum"
+    }
   },
   "pattern": [
     "I I",
     " I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedbuckets:electrum_bucket"
   }
 }

@@ -9,8 +9,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.locale.Language;
 import net.minecraft.resources.FileToIdConverter;
-import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
@@ -44,14 +44,15 @@ final class AssetTests {
         int items = 0;
 
         for (Map.Entry<ResourceKey<Item>, Item> entry : BuiltInRegistries.ITEM.entrySet()) {
-            Identifier id = entry.getKey().identifier();
+            ResourceLocation id = entry.getKey().location();
             if (!Constants.MOD_ID.equals(id.getNamespace())) {
                 continue;
             }
 
             items++;
-            if (!resourceExists("/assets/" + id.getNamespace() + "/items/" + id.getPath() + ".json")) {
-                missing.add("items/" + id.getPath() + ".json");
+            // 1.21.1 reads an item's model straight from models/item; the items/ definitions came with 1.21.4.
+            if (!resourceExists("/assets/" + id.getNamespace() + "/models/item/" + id.getPath() + ".json")) {
+                missing.add("models/item/" + id.getPath() + ".json");
             }
             if (!lang.has(entry.getValue().getDescriptionId())) {
                 missing.add("lang key " + entry.getValue().getDescriptionId());
@@ -59,7 +60,7 @@ final class AssetTests {
         }
 
         for (Map.Entry<ResourceKey<EntityType<?>>, EntityType<?>> entry : BuiltInRegistries.ENTITY_TYPE.entrySet()) {
-            if (Constants.MOD_ID.equals(entry.getKey().identifier().getNamespace()) && !lang.has(entry.getValue().getDescriptionId())) {
+            if (Constants.MOD_ID.equals(entry.getKey().location().getNamespace()) && !lang.has(entry.getValue().getDescriptionId())) {
                 missing.add("lang key " + entry.getValue().getDescriptionId());
             }
         }
@@ -79,8 +80,8 @@ final class AssetTests {
      */
     private static void everyItemTagHasAName(GameTestHelper helper) {
         Language language = Language.getInstance();
-        List<String> missing = helper.getLevel().registryAccess().lookupOrThrow(Registries.ITEM).getTags()
-                .map(tag -> tag.key().location())
+        List<String> missing = helper.getLevel().registryAccess().registryOrThrow(Registries.ITEM).getTagNames()
+                .map(tag -> tag.location())
                 .filter(id -> !"minecraft".equals(id.getNamespace()))
                 .map(id -> "tag.item." + id.getNamespace() + "." + id.getPath().replace('/', '.'))
                 .filter(key -> !language.has(key))
@@ -97,8 +98,8 @@ final class AssetTests {
         List<String> failed = new ArrayList<>();
 
         recipes.listMatchingResources(server.getResourceManager()).forEach((file, resource) -> {
-            Identifier id = recipes.fileToId(file);
-            if (!id.getNamespace().equals(Constants.MOD_ID) || server.getRecipeManager().byKey(ResourceKey.create(Registries.RECIPE, id)).isPresent()) {
+            ResourceLocation id = recipes.fileToId(file);
+            if (!id.getNamespace().equals(Constants.MOD_ID) || server.getRecipeManager().byKey(id).isPresent()) {
                 return;
             }
 

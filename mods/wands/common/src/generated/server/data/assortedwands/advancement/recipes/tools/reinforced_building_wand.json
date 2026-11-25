@@ -19,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedwands:reinforced_building_wand"
+        "recipe": "assortedwands:reinforced_building_wand"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

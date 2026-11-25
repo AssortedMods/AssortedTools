@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/copper"
+    "I": {
+      "tag": "c:ingots/copper"
+    }
   },
   "pattern": [
     "I I",
     " I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedbuckets:copper_bucket"
   }
 }

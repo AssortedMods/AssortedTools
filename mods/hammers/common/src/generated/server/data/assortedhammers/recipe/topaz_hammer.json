@@ -25,8 +25,12 @@
     }
   ],
   "key": {
-    "I": "#c:gems/topaz",
-    "S": "#c:rods/wooden"
+    "I": {
+      "tag": "c:gems/topaz"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
   },
   "pattern": [
     "III",
@@ -34,6 +38,7 @@
     " S "
   ],
   "result": {
+    "count": 1,
     "id": "assortedhammers:topaz_hammer"
   }
 }

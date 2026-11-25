@@ -25,8 +25,12 @@
     }
   ],
   "key": {
-    "S": "#c:rods/wooden",
-    "X": "#c:gems/ruby"
+    "S": {
+      "tag": "c:rods/wooden"
+    },
+    "X": {
+      "tag": "c:gems/ruby"
+    }
   },
   "pattern": [
     "X",
@@ -34,6 +38,7 @@
     "S"
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:ruby_shovel"
   }
 }

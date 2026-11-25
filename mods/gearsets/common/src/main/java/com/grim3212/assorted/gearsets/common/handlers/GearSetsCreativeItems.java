@@ -22,7 +22,7 @@ public class GearSetsCreativeItems {
 
     private static List<ItemStack> items() {
         CreativeTabItems items = new CreativeTabItems();
-        GearSetsItems.MATERIALS.values().forEach(set -> set.items().forEach(item -> items.addIfObtainable(item, set.tier().getRepairItems())));
+        GearSetsItems.MATERIALS.values().forEach(set -> set.items().forEach(item -> items.addIfObtainable(item, set.material())));
         return items.getItems();
     }
 }

@@ -8,7 +8,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.attribute.EnvironmentAttributes;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -31,8 +31,9 @@ public class PhoenixStaffItem extends StaffItem {
     }
 
     @Override
-    public void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         FrozenMobs.thaw(target);
+        return true;
     }
 
     @Override
@@ -61,28 +62,28 @@ public class PhoenixStaffItem extends StaffItem {
         level.playSound(player, firePos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
         level.setBlock(firePos, BaseFireBlock.getState(level, firePos), 11);
         if (!level.isClientSide()) {
-            stack.hurtAndBreak(1, player, context.getHand());
+            stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(context.getHand()));
         }
         return InteractionResult.SUCCESS;
     }
 
     @Override
-    public InteractionResult use(Level level, Player player, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         StaffMode mode = this.getMode(stack);
         if (mode != StaffMode.THAW_MOBS && mode != StaffMode.MELT_ICE) {
-            return InteractionResult.PASS;
+            return InteractionResultHolder.pass(stack);
         }
 
         if (level instanceof ServerLevel serverLevel) {
             int affected = mode == StaffMode.THAW_MOBS ? thawMobs(level, player) : meltIce(serverLevel, player);
             if (affected == 0) {
-                return InteractionResult.FAIL;
+                return InteractionResultHolder.fail(stack);
             }
-            stack.hurtAndBreak(affected, player, hand);
+            stack.hurtAndBreak(affected, player, LivingEntity.getSlotForHand(hand));
         }
 
-        return InteractionResult.SUCCESS;
+        return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
     }
 
     private static int thawMobs(Level level, Player player) {
@@ -100,7 +101,7 @@ public class PhoenixStaffItem extends StaffItem {
         int melted = 0;
         for (BlockPos pos : sphere(player)) {
             if (level.getBlockState(pos).is(BlockTags.ICE)) {
-                boolean evaporates = level.environmentAttributes().getValue(EnvironmentAttributes.WATER_EVAPORATES, pos);
+                boolean evaporates = level.dimensionType().ultraWarm();
                 level.setBlockAndUpdate(pos, evaporates ? Blocks.AIR.defaultBlockState() : Blocks.WATER.defaultBlockState());
                 level.sendParticles(ParticleTypes.LARGE_SMOKE, pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ() + 0.5D, 1, 0.3D, 0.1D, 0.3D, 0.0D);
                 melted++;

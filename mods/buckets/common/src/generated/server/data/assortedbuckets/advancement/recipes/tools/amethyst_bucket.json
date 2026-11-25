@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedbuckets:amethyst_bucket"
+        "recipe": "assortedbuckets:amethyst_bucket"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

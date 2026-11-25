@@ -7,6 +7,7 @@ import com.grim3212.assorted.throwingspears.common.item.BetterSpearItem;
 import com.grim3212.assorted.throwingspears.common.item.ThrowingSpearsItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -18,20 +19,16 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -117,8 +114,8 @@ public class BetterSpearEntity extends AbstractArrow {
         if ((this.dealtDamage || this.isNoPhysics()) && entity != null) {
             int i = this.entityData.get(ID_LOYALTY);
             if (i > 0 && !this.isAcceptibleReturnOwner()) {
-                if (this.level() instanceof ServerLevel serverLevel && this.pickup == AbstractArrow.Pickup.ALLOWED) {
-                    this.spawnAtLocation(serverLevel, this.getPickupItem(), 0.1F);
+                if (!this.level().isClientSide() && this.pickup == AbstractArrow.Pickup.ALLOWED) {
+                    this.spawnAtLocation(this.getPickupItem(), 0.1F);
                 }
 
                 this.discard();
@@ -200,10 +197,8 @@ public class BetterSpearEntity extends AbstractArrow {
 
         this.dealtDamage = true;
         SoundEvent soundevent = SoundEvents.TRIDENT_HIT;
-        // Entity#hurtOrSimulate is @Deprecated; this is its body, split over the two sides.
-        boolean hurt = this.level() instanceof ServerLevel hurtLevel ? hitEntity.hurtServer(hurtLevel, damageSource, f) : hitEntity.hurtClient(damageSource);
-        if (hurt) {
-            if (hitEntity.is(EntityTypes.ENDERMAN)) {
+        if (hitEntity.hurt(damageSource, f)) {
+            if (hitEntity.getType() == EntityType.ENDERMAN) {
                 return;
             }
 
@@ -263,9 +258,9 @@ public class BetterSpearEntity extends AbstractArrow {
         if (this.level() instanceof ServerLevel serverLevel && flag) {
             if (serverLevel.canSeeSky(pos)) {
                 Entity owner = this.getOwner();
-                LightningBolt lightningboltentity = EntityTypes.LIGHTNING_BOLT.create(serverLevel, EntitySpawnReason.TRIGGERED);
+                LightningBolt lightningboltentity = EntityType.LIGHTNING_BOLT.create(serverLevel);
                 if (lightningboltentity != null) {
-                    lightningboltentity.snapTo(Vec3.atBottomCenterOf(pos));
+                    lightningboltentity.moveTo(Vec3.atBottomCenterOf(pos));
                     lightningboltentity.setCause(owner instanceof ServerPlayer ? (ServerPlayer) owner : null);
                     serverLevel.addFreshEntity(lightningboltentity);
                 }
@@ -316,19 +311,19 @@ public class BetterSpearEntity extends AbstractArrow {
     }
 
     @Override
-    protected void addAdditionalSaveData(ValueOutput output) {
-        super.addAdditionalSaveData(output);
-        output.putBoolean("DealtDamage", this.dealtDamage);
-        output.putBoolean("EffectTriggered", this.effectTriggered);
-        output.putInt("BounceCount", this.bounceCount);
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putBoolean("DealtDamage", this.dealtDamage);
+        tag.putBoolean("EffectTriggered", this.effectTriggered);
+        tag.putInt("BounceCount", this.bounceCount);
     }
 
     @Override
-    protected void readAdditionalSaveData(ValueInput input) {
-        super.readAdditionalSaveData(input);
-        this.dealtDamage = input.getBooleanOr("DealtDamage", false);
-        this.effectTriggered = input.getBooleanOr("EffectTriggered", false);
-        this.bounceCount = input.getIntOr("BounceCount", 0);
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        this.dealtDamage = tag.getBoolean("DealtDamage");
+        this.effectTriggered = tag.getBoolean("EffectTriggered");
+        this.bounceCount = tag.getInt("BounceCount");
         // The synched copy is refreshed from the pickup stack the superclass just read back.
         ItemStack stack = this.getPickupItemStackOrigin();
         this.entityData.set(SPEAR_STACK, stack.copy());

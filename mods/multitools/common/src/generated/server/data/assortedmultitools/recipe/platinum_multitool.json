@@ -90,17 +90,36 @@
     }
   ],
   "ingredients": [
-    "#c:pickaxes/platinum",
-    "#c:shovels/platinum",
-    "#c:axes/platinum",
-    "#c:hoes/platinum",
-    "#c:swords/platinum",
-    "#c:ingots/platinum",
-    "#c:ingots/platinum",
-    "#c:ingots/platinum",
-    "#c:ingots/platinum"
+    {
+      "tag": "c:pickaxes/platinum"
+    },
+    {
+      "tag": "c:shovels/platinum"
+    },
+    {
+      "tag": "c:axes/platinum"
+    },
+    {
+      "tag": "c:hoes/platinum"
+    },
+    {
+      "tag": "c:swords/platinum"
+    },
+    {
+      "tag": "c:ingots/platinum"
+    },
+    {
+      "tag": "c:ingots/platinum"
+    },
+    {
+      "tag": "c:ingots/platinum"
+    },
+    {
+      "tag": "c:ingots/platinum"
+    }
   ],
   "result": {
+    "count": 1,
     "id": "assortedmultitools:platinum_multitool"
   }
 }

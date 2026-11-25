@@ -1,9 +1,9 @@
 package com.grim3212.assorted.staffs.common.item;
 
+import com.grim3212.assorted.lib.core.item.IStackTooltipProvider;
 import com.grim3212.assorted.staffs.Constants;
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -12,7 +12,7 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
-import net.minecraft.world.item.component.TooltipProvider;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.function.Consumer;
 
@@ -20,14 +20,14 @@ import java.util.function.Consumer;
  * The mode line a staff shows in its tooltip, as a wand has one. The mode itself
  * stays in {@code custom_data}; this only says which staff's modes to read it as.
  */
-public record StaffModeInfo(Kind kind) implements TooltipProvider {
+public record StaffModeInfo(Kind kind) implements IStackTooltipProvider {
 
     public static final Codec<StaffModeInfo> CODEC = Kind.CODEC.xmap(StaffModeInfo::new, StaffModeInfo::kind);
     public static final StreamCodec<ByteBuf, StaffModeInfo> STREAM_CODEC = Kind.STREAM_CODEC.map(StaffModeInfo::new, StaffModeInfo::kind);
 
     @Override
-    public void addToTooltip(Item.TooltipContext context, Consumer<Component> tooltip, TooltipFlag flag, DataComponentGetter components) {
-        String stored = components.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getStringOr(StaffMode.KEY, "");
+    public void addToTooltip(Item.TooltipContext context, Consumer<Component> tooltip, TooltipFlag flag, ItemStack stack) {
+        String stored = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getString(StaffMode.KEY);
         tooltip.accept(Component.translatable(Constants.FAMILY_ID + ".staff.current", StaffMode.fromString(this.kind, stored).getTranslatedString()));
     }
 

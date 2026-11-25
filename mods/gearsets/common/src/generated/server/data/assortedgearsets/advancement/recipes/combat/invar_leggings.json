@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedgearsets:invar_leggings"
+        "recipe": "assortedgearsets:invar_leggings"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

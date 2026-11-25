@@ -19,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedstaffs:ice_charge"
+        "recipe": "assortedstaffs:ice_charge"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

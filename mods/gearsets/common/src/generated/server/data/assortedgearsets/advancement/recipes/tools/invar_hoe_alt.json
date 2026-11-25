@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedgearsets:invar_hoe_alt"
+        "recipe": "assortedgearsets:invar_hoe_alt"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

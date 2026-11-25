@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/invar"
+    "I": {
+      "tag": "c:ingots/invar"
+    }
   },
   "pattern": [
     "I I",
     " I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedbuckets:invar_bucket"
   }
 }

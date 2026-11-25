@@ -32,6 +32,7 @@ final class WandTests {
     static void register(BiConsumer<String, Consumer<GameTestHelper>> out) {
         out.accept("mining_wand_cycles_and_mines", WandTests::miningWandCyclesAndMines);
         out.accept("building_wand_builds_and_consumes_blocks", WandTests::buildingWandBuildsAndConsumesBlocks);
+        out.accept("building_wand_keeps_each_players_first_corner", WandTests::buildingWandKeepsEachPlayersFirstCorner);
         out.accept("mining_wand_dirt_mode_clears_grass_plants", WandTests::miningWandDirtModeClearsGrassPlants);
         out.accept("mining_wand_dirt_mode_takes_every_soil", WandTests::miningWandDirtModeTakesEverySoil);
         out.accept("breaking_wands_clear_their_modes", WandTests::breakingWandsClearTheirModes);
@@ -47,7 +48,7 @@ final class WandTests {
 
         ServerPlayer player = survivalPlayer(helper, stack);
         stand(helper, player, new BlockPos(3, 1, 2));
-        wand.onCraftedBy(stack, player);
+        wand.onCraftedBy(stack, player.level(), player);
         helper.assertValueEqual(NBTHelper.getString(stack, "Mode"), "mineall", "the mode a freshly crafted mining wand starts in");
 
         CycleModePacket.handle(new CycleModePacket(InteractionHand.MAIN_HAND), player);
@@ -100,7 +101,7 @@ final class WandTests {
         ItemStack stack = new ItemStack(wand);
         ServerPlayer player = survivalPlayer(helper, stack);
         stand(helper, player, new BlockPos(4, 1, 3));
-        wand.onCraftedBy(stack, player);
+        wand.onCraftedBy(stack, player.level(), player);
         helper.assertValueEqual(NBTHelper.getString(stack, "Mode"), "buildbox", "the mode a freshly crafted building wand starts in");
 
         player.getInventory().add(new ItemStack(Blocks.STONE, 8));
@@ -125,6 +126,48 @@ final class WandTests {
     }
 
     /**
+     * Two players' selections overlap: each wand checks the second corner against the first corner saved on its own
+     * stack. The first corner's block was once kept on the item, which every wand shares, so whoever clicked last
+     * decided it and the other player was told the corners did not match.
+     */
+    private static void buildingWandKeepsEachPlayersFirstCorner(GameTestHelper helper) {
+        final BlockPos stoneStart = new BlockPos(2, 1, 2);
+        final BlockPos stoneGap = new BlockPos(2, 1, 3);
+        final BlockPos stoneEnd = new BlockPos(2, 1, 4);
+        final BlockPos planksStart = new BlockPos(6, 1, 2);
+        final BlockPos planksGap = new BlockPos(6, 1, 3);
+        final BlockPos planksEnd = new BlockPos(6, 1, 4);
+        helper.setBlock(stoneStart, Blocks.STONE);
+        helper.setBlock(stoneEnd, Blocks.STONE);
+        helper.setBlock(planksStart, Blocks.OAK_PLANKS);
+        helper.setBlock(planksEnd, Blocks.OAK_PLANKS);
+
+        WandBuildingItem wand = WandsItems.BUILDING_WAND.get();
+        ItemStack stoneStack = new ItemStack(wand);
+        ServerPlayer stoneBuilder = survivalPlayer(helper, stoneStack);
+        stand(helper, stoneBuilder, new BlockPos(3, 1, 3));
+        wand.onCraftedBy(stoneStack, stoneBuilder.level(), stoneBuilder);
+        stoneBuilder.getInventory().add(new ItemStack(Blocks.STONE, 4));
+
+        ItemStack planksStack = new ItemStack(wand);
+        ServerPlayer planksBuilder = survivalPlayer(helper, planksStack);
+        stand(helper, planksBuilder, new BlockPos(5, 1, 3));
+        wand.onCraftedBy(planksStack, planksBuilder.level(), planksBuilder);
+        planksBuilder.getInventory().add(new ItemStack(Blocks.OAK_PLANKS, 4));
+
+        useOnTopOf(helper, stoneBuilder, stoneStart);
+        useOnTopOf(helper, planksBuilder, planksStart);
+        useOnTopOf(helper, stoneBuilder, stoneEnd);
+        useOnTopOf(helper, planksBuilder, planksEnd);
+
+        helper.assertBlockPresent(Blocks.STONE, stoneGap);
+        helper.assertBlockPresent(Blocks.OAK_PLANKS, planksGap);
+        helper.assertValueEqual(countInInventory(stoneBuilder, Blocks.STONE.asItem()), 3, "stone left after the first player's wand filled its gap");
+        helper.assertValueEqual(countInInventory(planksBuilder, Blocks.OAK_PLANKS.asItem()), 3, "planks left after the second player's wand filled its gap");
+        helper.succeed();
+    }
+
+    /**
      * The mining wand's dirt mode takes ground plants along with the soil but leaves underwater ones
      * alone. Grass and ferns only fall under {@code #minecraft:replaceable_by_trees}, which also holds water plants, so a fluid guard keeps those out.
      */
@@ -144,7 +187,7 @@ final class WandTests {
         ItemStack stack = new ItemStack(wand);
         ServerPlayer player = survivalPlayer(helper, stack);
         stand(helper, player, new BlockPos(4, 1, 3));
-        wand.onCraftedBy(stack, player);
+        wand.onCraftedBy(stack, player.level(), player);
 
         CycleModePacket.handle(new CycleModePacket(InteractionHand.MAIN_HAND), player);
         helper.assertValueEqual(NBTHelper.getString(player.getItemInHand(InteractionHand.MAIN_HAND), "Mode"), "minedirt", "the mode the plants are cleared in");
@@ -164,8 +207,8 @@ final class WandTests {
     }
 
     /**
-     * The mining wand's dirt mode takes every kind of soil, not just what 26.2's narrowed
-     * {@code #minecraft:dirt} still holds, and leaves stone in the same sweep alone.
+     * The mining wand's dirt mode takes every kind of soil in {@code #minecraft:dirt}, not just dirt
+     * itself, and leaves stone in the same sweep alone.
      */
     private static void miningWandDirtModeTakesEverySoil(GameTestHelper helper) {
         final List<BlockPos> soil = List.of(new BlockPos(1, 1, 5), new BlockPos(2, 1, 5), new BlockPos(4, 1, 5), new BlockPos(5, 1, 5));
@@ -180,7 +223,7 @@ final class WandTests {
         ItemStack stack = new ItemStack(wand);
         ServerPlayer player = survivalPlayer(helper, stack);
         stand(helper, player, new BlockPos(3, 1, 3));
-        wand.onCraftedBy(stack, player);
+        wand.onCraftedBy(stack, player.level(), player);
 
         CycleModePacket.handle(new CycleModePacket(InteractionHand.MAIN_HAND), player);
         helper.assertValueEqual(NBTHelper.getString(player.getItemInHand(InteractionHand.MAIN_HAND), "Mode"), "minedirt", "the mode the soil is dug in");
@@ -219,7 +262,7 @@ final class WandTests {
         ItemStack stack = new ItemStack(wand);
         ServerPlayer player = survivalPlayer(helper, stack);
         stand(helper, player, new BlockPos(4, 1, 3));
-        wand.onCraftedBy(stack, player);
+        wand.onCraftedBy(stack, player.level(), player);
         helper.assertValueEqual(NBTHelper.getString(stack, "Mode"), "breakweak", "the mode a freshly crafted breaking wand starts in");
 
         useOnTopOf(helper, player, torchStart);
@@ -234,7 +277,7 @@ final class WandTests {
 
         WandBreakingItem reinforced = WandsItems.REINFORCED_BREAKING_WAND.get();
         ItemStack reinforcedStack = new ItemStack(reinforced);
-        reinforced.onCraftedBy(reinforcedStack, player);
+        reinforced.onCraftedBy(reinforcedStack, player.level(), player);
         player.setItemInHand(InteractionHand.MAIN_HAND, reinforcedStack);
 
         CycleModePacket.handle(new CycleModePacket(InteractionHand.MAIN_HAND), player);

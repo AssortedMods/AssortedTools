@@ -4,22 +4,18 @@ import com.grim3212.assorted.throwingspears.client.render.model.SpearModel;
 import com.grim3212.assorted.throwingspears.client.render.model.ThrowingSpearsModelLayers;
 import com.grim3212.assorted.throwingspears.common.entity.BetterSpearEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.state.EntityRenderState;
-import net.minecraft.client.renderer.rendertype.RenderTypes;
-import net.minecraft.client.renderer.state.level.CameraRenderState;
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.Identifier;
-import net.minecraft.util.Unit;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 
-/**
- * The spear's texture depends on its item, so it is resolved into the render state at extract time;
- * the glint is a second submit against {@link RenderTypes#entityGlint()}, as vanilla's trident does.
- */
-public class BetterSpearRenderer extends EntityRenderer<BetterSpearEntity, BetterSpearRenderer.SpearRenderState> {
+/** A thrown spear, drawn as vanilla draws a thrown trident, with the texture of the spear's material. */
+public class BetterSpearRenderer extends EntityRenderer<BetterSpearEntity> {
 
     private final SpearModel spearModel;
 
@@ -29,42 +25,19 @@ public class BetterSpearRenderer extends EntityRenderer<BetterSpearEntity, Bette
     }
 
     @Override
-    public SpearRenderState createRenderState() {
-        return new SpearRenderState();
-    }
-
-    @Override
-    public void extractRenderState(BetterSpearEntity entity, SpearRenderState state, float partialTicks) {
-        super.extractRenderState(entity, state, partialTicks);
-
-        state.yRot = entity.getYRot(partialTicks);
-        state.xRot = entity.getXRot(partialTicks);
-        state.isFoil = entity.isFoil();
-        state.texture = this.spearModel.getTexture(entity.getSpearStack().getItem());
-    }
-
-    @Override
-    public void submit(SpearRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera) {
+    public void render(BetterSpearEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffers, int packedLight) {
         poseStack.pushPose();
-
-        poseStack.rotate(Axis.YP.rotationDegrees(state.yRot - 90.0F));
-        poseStack.rotate(Axis.ZP.rotationDegrees(state.xRot + 90.0F));
-
-        // 26.3's glint types draw the texture too, so a glinting spear is one pass, as vanilla's trident is.
-        if (state.isFoil) {
-            submitNodeCollector.submitModel(this.spearModel, Unit.INSTANCE, poseStack, RenderTypes.entitySolidGlint(state.texture), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor);
-        } else {
-            submitNodeCollector.submitModel(this.spearModel, Unit.INSTANCE, poseStack, state.texture, state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor);
-        }
-
+        poseStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTicks, entity.yRotO, entity.getYRot()) - 90.0F));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(partialTicks, entity.xRotO, entity.getXRot()) + 90.0F));
+        VertexConsumer consumer = ItemRenderer.getFoilBufferDirect(buffers, this.spearModel.renderType(this.getTextureLocation(entity)), false, entity.isFoil());
+        this.spearModel.renderToBuffer(poseStack, consumer, packedLight, OverlayTexture.NO_OVERLAY);
         poseStack.popPose();
-        super.submit(state, poseStack, submitNodeCollector, camera);
+
+        super.render(entity, entityYaw, partialTicks, poseStack, buffers, packedLight);
     }
 
-    public static class SpearRenderState extends EntityRenderState {
-        public float yRot;
-        public float xRot;
-        public boolean isFoil;
-        public Identifier texture = SpearModel.DEFAULT_TEXTURE;
+    @Override
+    public ResourceLocation getTextureLocation(BetterSpearEntity entity) {
+        return this.spearModel.getTexture(entity.getSpearStack().getItem());
     }
 }

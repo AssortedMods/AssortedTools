@@ -36,6 +36,6 @@ public class SuitsEnchantmentData extends LibDatapackRegistryProvider {
                         Enchantment.constantCost(10),
                         Enchantment.constantCost(35),
                         2,
-                        EquipmentSlotGroup.ARMOR)).build(SuitsEnchantments.CHICKEN_JUMP.identifier()));
+                        EquipmentSlotGroup.ARMOR)).build(SuitsEnchantments.CHICKEN_JUMP.location()));
     }
 }

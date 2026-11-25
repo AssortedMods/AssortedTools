@@ -19,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedbuckets:cake_alt"
+        "recipe": "assortedbuckets:cake_alt"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

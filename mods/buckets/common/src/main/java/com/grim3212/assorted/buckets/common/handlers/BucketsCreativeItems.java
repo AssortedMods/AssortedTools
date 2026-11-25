@@ -9,7 +9,9 @@ import com.grim3212.assorted.lib.core.creative.CreativeTabItems;
 import com.grim3212.assorted.lib.core.creative.SharedCreativeTabs;
 import com.grim3212.assorted.lib.family.Families;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
@@ -27,8 +29,9 @@ public class BucketsCreativeItems {
     private static List<ItemStack> items() {
         CreativeTabItems items = new CreativeTabItems();
         for (BucketPair pair : BucketsItems.pairs()) {
-            items.addIfObtainable(pair.bucket().get(), pair.tier().getRepairItems());
-            items.addIfObtainable(fullMilkBucket(pair.milk().get()), pair.tier().getRepairItems());
+            TagKey<Item> material = pair.tier().getRepairItems();
+            items.addIfObtainable(pair.bucket().get(), material);
+            items.addIfObtainable(fullMilkBucket(pair.milk().get()), material);
         }
         return items.getItems();
     }

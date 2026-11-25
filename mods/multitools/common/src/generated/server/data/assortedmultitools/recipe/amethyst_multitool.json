@@ -90,17 +90,36 @@
     }
   ],
   "ingredients": [
-    "#c:pickaxes/amethyst",
-    "#c:shovels/amethyst",
-    "#c:axes/amethyst",
-    "#c:hoes/amethyst",
-    "#c:swords/amethyst",
-    "#c:gems/amethyst",
-    "#c:gems/amethyst",
-    "#c:gems/amethyst",
-    "#c:gems/amethyst"
+    {
+      "tag": "c:pickaxes/amethyst"
+    },
+    {
+      "tag": "c:shovels/amethyst"
+    },
+    {
+      "tag": "c:axes/amethyst"
+    },
+    {
+      "tag": "c:hoes/amethyst"
+    },
+    {
+      "tag": "c:swords/amethyst"
+    },
+    {
+      "tag": "c:gems/amethyst"
+    },
+    {
+      "tag": "c:gems/amethyst"
+    },
+    {
+      "tag": "c:gems/amethyst"
+    },
+    {
+      "tag": "c:gems/amethyst"
+    }
   ],
   "result": {
+    "count": 1,
     "id": "assortedmultitools:amethyst_multitool"
   }
 }

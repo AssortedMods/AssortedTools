@@ -25,8 +25,12 @@
     }
   ],
   "key": {
-    "S": "#c:rods/wooden",
-    "X": "#c:ingots/steel"
+    "S": {
+      "tag": "c:rods/wooden"
+    },
+    "X": {
+      "tag": "c:ingots/steel"
+    }
   },
   "pattern": [
     "XXX",
@@ -34,6 +38,7 @@
     " S "
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:steel_pickaxe"
   }
 }

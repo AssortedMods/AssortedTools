@@ -7,7 +7,7 @@ import com.grim3212.assorted.wands.common.handlers.WandsCreativeItems;
 import com.grim3212.assorted.wands.common.item.WandsDataComponents;
 import com.grim3212.assorted.wands.common.item.WandsItems;
 import com.grim3212.assorted.wands.config.WandsCommonConfig;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * Loader-agnostic startup. Both loader entry points call {@link #init()} and nothing else; anything
@@ -20,7 +20,7 @@ public class WandsCommonMod {
     public static void init() {
         Constants.LOG.info(Constants.MOD_NAME + " starting up...");
         Families.join(Constants.MOD_ID, Constants.FAMILY_ID)
-                .icon(Identifier.fromNamespaceAndPath(Constants.MOD_ID, "building_wand"), 120)
+                .icon(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "building_wand"), 120)
                 .manualOrder(120);
 
         WandsDataComponents.init();

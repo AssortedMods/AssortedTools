@@ -25,13 +25,18 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/lead",
-    "S": "#c:rods/wooden"
+    "I": {
+      "tag": "c:ingots/lead"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
   },
   "pattern": [
     "SSI"
   ],
   "result": {
+    "count": 1,
     "id": "assortedthrowingspears:lead_throwing_spear"
   }
 }

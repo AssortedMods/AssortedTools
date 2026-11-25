@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/gold"
+    "I": {
+      "tag": "c:ingots/gold"
+    }
   },
   "pattern": [
     "I I",
     " I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedbuckets:gold_bucket"
   }
 }

@@ -14,8 +14,12 @@
     }
   ],
   "key": {
-    "X": "#c:gems/diamond",
-    "Y": "assortedboomerangs:wood_boomerang"
+    "X": {
+      "tag": "c:gems/diamond"
+    },
+    "Y": {
+      "item": "assortedboomerangs:wood_boomerang"
+    }
   },
   "pattern": [
     "XX",
@@ -23,6 +27,7 @@
     "XX"
   ],
   "result": {
+    "count": 1,
     "id": "assortedboomerangs:diamond_boomerang"
   }
 }

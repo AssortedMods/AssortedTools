@@ -61,7 +61,10 @@ final class MaterialSetTests {
     }
 
     private static double swing(ItemStack stack, Holder<Attribute> attribute) {
-        return stack.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY).compute(attribute, 0.0D, EquipmentSlot.MAINHAND);
+        // 1.21.1's compute sums every attribute's modifiers together, so keep only the one asked for.
+        ItemAttributeModifiers modifiers = stack.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
+        return new ItemAttributeModifiers(modifiers.modifiers().stream().filter(entry -> entry.attribute().equals(attribute)).toList(), false)
+                .compute(0.0D, EquipmentSlot.MAINHAND);
     }
 
     /** A material whose tag is empty is skipped, since its recipes are conditioned on {@code item_tag_populated}. */
@@ -83,7 +86,6 @@ final class MaterialSetTests {
             assertCrafts(helper, 2, 3, List.of(x, x, x, rod, no, rod), set.axe().get());
             assertCrafts(helper, 2, 3, List.of(x, x, no, rod, no, rod), set.hoe().get());
             assertCrafts(helper, 1, 3, List.of(x, x, rod), set.sword().get());
-            assertCrafts(helper, 3, 3, List.of(no, no, x, no, rod, no, rod, no, no), set.spear().get());
             families++;
         }
 
@@ -112,7 +114,7 @@ final class MaterialSetTests {
         helper.succeed();
     }
 
-    /** Armor grants its configured defense, which is baked into the {@code equippable} and {@code attribute_modifiers} components. */
+    /** Armor grants its configured defense, which its registered armor material carries. */
     private static void armorEquipsAndProtects(GameTestHelper helper) {
         ServerPlayer player = survivalPlayer(helper, ItemStack.EMPTY);
         stand(helper, player, new BlockPos(4, 1, 4));

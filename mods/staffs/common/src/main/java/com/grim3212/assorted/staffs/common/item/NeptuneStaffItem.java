@@ -7,6 +7,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -29,8 +30,9 @@ public class NeptuneStaffItem extends StaffItem {
     }
 
     @Override
-    public void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         FrozenMobs.freeze(target);
+        return true;
     }
 
     @Override
@@ -44,22 +46,22 @@ public class NeptuneStaffItem extends StaffItem {
     }
 
     @Override
-    public InteractionResult use(Level level, Player player, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         StaffMode mode = this.getMode(stack);
         if (mode == StaffMode.PLACE_WATER) {
-            return InteractionResult.PASS;
+            return InteractionResultHolder.pass(stack);
         }
 
         if (level instanceof ServerLevel serverLevel) {
             int affected = mode == StaffMode.FREEZE_MOBS ? freezeMobs(level, player) : freezeWater(serverLevel, player);
             if (affected == 0) {
-                return InteractionResult.FAIL;
+                return InteractionResultHolder.fail(stack);
             }
-            stack.hurtAndBreak(affected, player, hand);
+            stack.hurtAndBreak(affected, player, LivingEntity.getSlotForHand(hand));
         }
 
-        return InteractionResult.SUCCESS;
+        return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
     }
 
     private static int freezeMobs(Level level, Player player) {

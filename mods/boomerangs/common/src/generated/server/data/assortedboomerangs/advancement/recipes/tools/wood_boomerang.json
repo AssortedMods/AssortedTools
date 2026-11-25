@@ -19,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedboomerangs:wood_boomerang"
+        "recipe": "assortedboomerangs:wood_boomerang"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

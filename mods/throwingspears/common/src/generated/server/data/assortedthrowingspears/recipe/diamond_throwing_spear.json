@@ -25,13 +25,18 @@
     }
   ],
   "key": {
-    "I": "#c:gems/diamond",
-    "S": "#c:rods/wooden"
+    "I": {
+      "tag": "c:gems/diamond"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
   },
   "pattern": [
     "SSI"
   ],
   "result": {
+    "count": 1,
     "id": "assortedthrowingspears:diamond_throwing_spear"
   }
 }

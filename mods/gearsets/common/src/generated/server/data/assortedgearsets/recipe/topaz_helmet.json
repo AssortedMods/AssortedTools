@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "X": "#c:gems/topaz"
+    "X": {
+      "tag": "c:gems/topaz"
+    }
   },
   "pattern": [
     "XXX",
     "X X"
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:topaz_helmet"
   }
 }

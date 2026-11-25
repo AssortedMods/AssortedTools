@@ -9,7 +9,7 @@ import com.grim3212.assorted.lib.events.EntityInteractEvent;
 import com.grim3212.assorted.lib.family.Families;
 import com.grim3212.assorted.lib.migration.MovedIds;
 import com.grim3212.assorted.lib.platform.Services;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * Loader-agnostic startup. Both loader entry points call {@link #init()} and nothing else; anything
@@ -22,7 +22,7 @@ public class BucketsCommonMod {
     public static void init() {
         Constants.LOG.info(Constants.MOD_NAME + " starting up...");
         Families.join(Constants.MOD_ID, Constants.FAMILY_ID)
-                .icon(Identifier.fromNamespaceAndPath(Constants.MOD_ID, "gold_bucket"), 50)
+                .icon(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "gold_bucket"), 50)
                 .manualOrder(120);
 
         BucketsDataComponents.init();

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedgearsets:lead_hoe_alt"
+        "recipe": "assortedgearsets:lead_hoe_alt"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

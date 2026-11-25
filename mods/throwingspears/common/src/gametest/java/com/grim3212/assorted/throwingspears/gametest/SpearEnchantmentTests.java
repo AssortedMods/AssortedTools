@@ -5,7 +5,7 @@ import com.grim3212.assorted.throwingspears.common.enchantment.ThrowingSpearsEnc
 import com.grim3212.assorted.throwingspears.common.item.BetterSpearItem;
 import com.grim3212.assorted.throwingspears.common.item.ThrowingSpearsItems;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -64,19 +64,19 @@ final class SpearEnchantmentTests {
     }
 
     private static void spearEnchantmentsAreObtainable(GameTestHelper helper) {
-        Registry<Enchantment> registry = helper.getLevel().registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
+        HolderLookup.RegistryLookup<Enchantment> registry = helper.getLevel().registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
         List<String> missing = new ArrayList<>();
 
         for (ResourceKey<Enchantment> key : SPEAR_ENCHANTMENTS) {
             Optional<Holder.Reference<Enchantment>> enchantment = registry.get(key);
             if (enchantment.isEmpty()) {
-                missing.add(key.identifier() + " (not registered)");
+                missing.add(key.location() + " (not registered)");
                 continue;
             }
 
             for (TagKey<Enchantment> tag : List.of(EnchantmentTags.IN_ENCHANTING_TABLE, EnchantmentTags.TRADEABLE, EnchantmentTags.ON_RANDOM_LOOT)) {
                 if (!enchantment.get().is(tag)) {
-                    missing.add(key.identifier() + " not in #" + tag.location());
+                    missing.add(key.location() + " not in #" + tag.location());
                 }
             }
         }
@@ -90,7 +90,7 @@ final class SpearEnchantmentTests {
      * trident and spear enchantment's window; the vanilla trident is checked so the veto cannot leak onto it.
      */
     private static void spearsAreNeverOfferedRiptideOrChanneling(GameTestHelper helper) {
-        Registry<Enchantment> registry = helper.getLevel().registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
+        HolderLookup.RegistryLookup<Enchantment> registry = helper.getLevel().registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
         Set<ResourceKey<Enchantment>> spear = offeredAtTable(registry, new ItemStack(ThrowingSpearsItems.IRON_THROWING_SPEAR.get()));
         Set<ResourceKey<Enchantment>> trident = offeredAtTable(registry, new ItemStack(Items.TRIDENT));
 
@@ -104,7 +104,7 @@ final class SpearEnchantmentTests {
     /** Through a real {@link AnvilMenu} so each loader's hook runs; a vanilla trident still takes Riptide. */
     private static void spearAnvilRejectsRiptideAndChanneling(GameTestHelper helper) {
         ServerPlayer player = survivalPlayer(helper, ItemStack.EMPTY);
-        Registry<Enchantment> registry = helper.getLevel().registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
+        HolderLookup.RegistryLookup<Enchantment> registry = helper.getLevel().registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
         Holder<Enchantment> riptide = registry.getOrThrow(Enchantments.RIPTIDE);
         Holder<Enchantment> loyalty = registry.getOrThrow(Enchantments.LOYALTY);
 
@@ -135,9 +135,9 @@ final class SpearEnchantmentTests {
         helper.succeed();
     }
 
-    private static Set<ResourceKey<Enchantment>> offeredAtTable(Registry<Enchantment> registry, ItemStack stack) {
+    private static Set<ResourceKey<Enchantment>> offeredAtTable(HolderLookup.RegistryLookup<Enchantment> registry, ItemStack stack) {
         return EnchantmentHelper.getAvailableEnchantmentResults(30, stack, registry.getOrThrow(EnchantmentTags.IN_ENCHANTING_TABLE).stream())
-                .stream().map(instance -> instance.enchantment().unwrapKey().orElseThrow()).collect(Collectors.toSet());
+                .stream().map(instance -> instance.enchantment.unwrapKey().orElseThrow()).collect(Collectors.toSet());
     }
 
     private static ItemStack combine(ServerPlayer player, ItemStack left, Holder<Enchantment> enchantment) {

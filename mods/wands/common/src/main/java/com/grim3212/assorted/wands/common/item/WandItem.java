@@ -14,6 +14,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -39,9 +40,6 @@ public abstract class WandItem extends Item implements ISwitchModes {
     protected final boolean reinforced;
     protected Random rand;
 
-    protected BlockState stateOrig = Blocks.AIR.defaultBlockState();
-    protected BlockState stateClicked = Blocks.AIR.defaultBlockState();
-
     public WandItem(boolean reinforced, Properties properties) {
         super(properties);
         this.reinforced = reinforced;
@@ -49,7 +47,7 @@ public abstract class WandItem extends Item implements ISwitchModes {
     }
 
     @Override
-    public abstract void onCraftedBy(ItemStack stack, Player playerIn);
+    public abstract void onCraftedBy(ItemStack stack, Level level, Player playerIn);
 
     protected abstract boolean canBreak(Level worldIn, BlockPos pos, ItemStack stack);
 
@@ -77,7 +75,11 @@ public abstract class WandItem extends Item implements ISwitchModes {
         return this.isTooFar((int) a.getDistance(b), 10, (int) a.getDistanceFlat(b), stack);
     }
 
-    protected abstract boolean doEffect(Level world, Player entityplayer, InteractionHand hand, WandCoord3D start, WandCoord3D end, BlockState state);
+    /**
+     * @param state   the block the wand works with, dirt where grass was clicked
+     * @param clicked the block that was clicked, as it stands in the world
+     */
+    protected abstract boolean doEffect(Level world, Player entityplayer, InteractionHand hand, WandCoord3D start, WandCoord3D end, BlockState state, BlockState clicked);
 
     protected void sendMessage(Player player, Component message) {
         if (!player.level().isClientSide()) {
@@ -127,23 +129,22 @@ public abstract class WandItem extends Item implements ISwitchModes {
             double d2 = pos.getY() + this.rand.nextFloat();
             double d3 = pos.getZ() + this.rand.nextFloat();
 
-            // isSolidRender is position independent now, it is a property of the state alone.
-            if ((l == 0) && (!world.getBlockState(pos.above()).isSolidRender())) {
+            if ((l == 0) && (!world.getBlockState(pos.above()).isSolidRender(world, pos.above()))) {
                 d2 = pos.getY() + 1 + d;
             }
-            if ((l == 1) && (!world.getBlockState(pos.below()).isSolidRender())) {
+            if ((l == 1) && (!world.getBlockState(pos.below()).isSolidRender(world, pos.below()))) {
                 d2 = pos.getY() + 0 - d;
             }
-            if ((l == 2) && (!world.getBlockState(pos.south()).isSolidRender())) {
+            if ((l == 2) && (!world.getBlockState(pos.south()).isSolidRender(world, pos.south()))) {
                 d3 = pos.getZ() + 1 + d;
             }
-            if ((l == 3) && (!world.getBlockState(pos.north()).isSolidRender())) {
+            if ((l == 3) && (!world.getBlockState(pos.north()).isSolidRender(world, pos.north()))) {
                 d3 = pos.getZ() + 0 - d;
             }
-            if ((l == 4) && (!world.getBlockState(pos.east()).isSolidRender())) {
+            if ((l == 4) && (!world.getBlockState(pos.east()).isSolidRender(world, pos.east()))) {
                 d1 = pos.getX() + 1 + d;
             }
-            if ((l == 5) && (!world.getBlockState(pos.west()).isSolidRender())) {
+            if ((l == 5) && (!world.getBlockState(pos.west()).isSolidRender(world, pos.west()))) {
                 d1 = pos.getX() + 0 - d;
             }
             if ((d1 < pos.getX()) || (d1 > pos.getX() + 1) || (d2 < 0.0D) || (d2 > pos.getY() + 1) || (d3 < pos.getZ()) || (d3 > pos.getZ() + 1))
@@ -164,7 +165,7 @@ public abstract class WandItem extends Item implements ISwitchModes {
     protected static void writeStart(ItemStack stack, WandCoord3D coord) {
         CompoundTag root = new CompoundTag();
         coord.writeToNBT(root, START_KEY);
-        NBTHelper.putTag(stack, START_KEY, root.getCompoundOrEmpty(START_KEY));
+        NBTHelper.putTag(stack, START_KEY, root.getCompound(START_KEY));
     }
 
     @Override
@@ -175,8 +176,8 @@ public abstract class WandItem extends Item implements ISwitchModes {
         InteractionHand hand = context.getHand();
         boolean isFree = WandsCommonMod.COMMON_CONFIG.freeBuildMode.get() || playerIn.isCreative();
 
-        this.stateOrig = worldIn.getBlockState(pos);
-        BlockState state = this.stateOrig;
+        final BlockState clicked = worldIn.getBlockState(pos);
+        BlockState state = clicked;
 
         // Grass builds as dirt since it can't be paid for out of the inventory; the building wand grasses the finished surface back over.
         if (state.getBlock() == Blocks.GRASS_BLOCK) {
@@ -197,7 +198,6 @@ public abstract class WandItem extends Item implements ISwitchModes {
             SoundType soundType = Services.LEVEL_PROPERTIES.getSoundType(worldIn, pos, null);
             worldIn.playSound((Player) null, pos, soundType.getBreakSound(), SoundSource.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F);
 
-            this.stateClicked = state;
             writeStart(stack, clicked_current);
 
             particles(worldIn, clicked_current, 0);
@@ -220,13 +220,13 @@ public abstract class WandItem extends Item implements ISwitchModes {
                 return InteractionResult.SUCCESS;
             }
 
-            boolean damage = this.doEffect(worldIn, playerIn, hand, start, clicked_current, state);
+            boolean damage = this.doEffect(worldIn, playerIn, hand, start, clicked_current, state, clicked);
 
             if (damage) {
                 NBTHelper.putBoolean(stack, FIRST_USE_KEY, true);
                 if (!isFree) {
                     NBTHelper.removeTag(stack, START_KEY);
-                    stack.hurtAndBreak(1, playerIn, hand);
+                    stack.hurtAndBreak(1, playerIn, LivingEntity.getSlotForHand(hand));
                     return InteractionResult.SUCCESS;
                 }
             }

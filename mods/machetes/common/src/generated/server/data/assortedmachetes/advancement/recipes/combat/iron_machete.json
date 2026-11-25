@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedmachetes:iron_machete"
+        "recipe": "assortedmachetes:iron_machete"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

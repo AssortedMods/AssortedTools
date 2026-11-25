@@ -19,6 +19,14 @@
       ]
     }
   },
+  "overrides": [
+    {
+      "model": "assortedthrowingspears:item/amethyst_throwing_spear_throwing",
+      "predicate": {
+        "assortedthrowingspears:throwing": 1.0
+      }
+    }
+  ],
   "textures": {
     "particle": "assortedthrowingspears:item/amethyst_throwing_spear"
   }

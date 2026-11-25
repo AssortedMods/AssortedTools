@@ -12,8 +12,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EntityTypes;
-import net.minecraft.world.entity.animal.sheep.Sheep;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -40,6 +40,24 @@ final class ShearsTests {
         out.accept("shears_cut_leaves", ShearsTests::shearsCutLeaves);
         out.accept("shears_cut_coral_with_coral_cutter", ShearsTests::shearsCutCoralWithCoralCutter);
         out.accept("coral_cutter_covers_every_coral", ShearsTests::coralCutterCoversEveryCoral);
+        out.accept("coral_cutter_leaves_other_tools_alone", ShearsTests::coralCutterLeavesOtherToolsAlone);
+    }
+
+    /**
+     * Live coral mined with a pickaxe that has neither Silk Touch nor Coral Cutter dies, as in vanilla. The drop
+     * handler re-rolls coral drops with Silk Touch, and once did it for every tool, not just Coral Cutter's.
+     */
+    private static void coralCutterLeavesOtherToolsAlone(GameTestHelper helper) {
+        final BlockPos target = new BlockPos(4, 1, 4);
+        helper.setBlock(target, Blocks.TUBE_CORAL_BLOCK);
+
+        ServerPlayer player = survivalPlayer(helper, new ItemStack(Items.IRON_PICKAXE));
+        stand(helper, player, new BlockPos(4, 1, 2));
+
+        helper.assertTrue(player.gameMode.destroyBlock(helper.absolutePos(target)), "the pickaxe could not break coral");
+        helper.assertItemEntityPresent(Items.DEAD_TUBE_CORAL_BLOCK, target, 2.0D);
+        helper.assertItemEntityNotPresent(Items.TUBE_CORAL_BLOCK, target, 2.0D);
+        helper.succeed();
     }
 
     /**
@@ -48,7 +66,7 @@ final class ShearsTests {
      */
     private static void shearsShearASheep(GameTestHelper helper) {
         final BlockPos where = new BlockPos(4, 1, 4);
-        Sheep sheep = helper.spawn(EntityTypes.SHEEP, where);
+        Sheep sheep = helper.spawn(EntityType.SHEEP, where);
         helper.assertTrue(sheep.readyForShearing(), "a freshly spawned sheep should be shearable");
 
         ServerPlayer player = survivalPlayer(helper, new ItemStack(ShearsItems.DIAMOND_SHEARS.get()));
@@ -60,7 +78,7 @@ final class ShearsTests {
         helper.assertFalse(sheep.readyForShearing(), "the sheep was not sheared");
         helper.assertValueEqual(player.getItemInHand(InteractionHand.MAIN_HAND).getDamageValue(), 1, "shears durability spent");
 
-        boolean wool = helper.getEntities(EntityTypes.ITEM, where, 4.0D).stream().anyMatch(item -> item.getItem().is(ItemTags.WOOL));
+        boolean wool = helper.getEntities(EntityType.ITEM, where, 4.0D).stream().anyMatch(item -> item.getItem().is(ItemTags.WOOL));
         helper.assertTrue(wool, "shearing dropped no wool");
 
         helper.succeed();
@@ -138,12 +156,12 @@ final class ShearsTests {
         cutter.enchant(coralCutter, 1);
 
         List<String> missed = new ArrayList<>();
-        BuiltInRegistries.BLOCK.listElements()
-                .filter(block -> block.key().identifier().getNamespace().equals("minecraft") && block.key().identifier().getPath().contains("coral"))
+        BuiltInRegistries.BLOCK.holders()
+                .filter(block -> block.key().location().getNamespace().equals("minecraft") && block.key().location().getPath().contains("coral"))
                 .forEach(block -> {
                     BlockState state = block.value().defaultBlockState();
                     if (!state.is(ShearsTags.ALL_CORALS) || cutter.getDestroySpeed(state) != 10.0F || !cutter.isCorrectToolForDrops(state)) {
-                        missed.add(block.key().identifier().getPath());
+                        missed.add(block.key().location().getPath());
                     }
                 });
         helper.assertTrue(missed.isEmpty(), "coral cutter does not cover: " + String.join(", ", missed));

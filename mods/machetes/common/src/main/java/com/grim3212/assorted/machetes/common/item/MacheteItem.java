@@ -3,20 +3,9 @@ package com.grim3212.assorted.machetes.common.item;
 import com.grim3212.assorted.lib.core.tool.ITiered;
 import com.grim3212.assorted.lib.core.tool.ToolTier;
 import com.grim3212.assorted.machetes.api.MachetesTags;
-import net.minecraft.core.HolderGetter;
-import net.minecraft.core.HolderSet;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.entity.EquipmentSlotGroup;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ToolMaterial;
-import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.item.DiggerItem;
+import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.component.Tool;
-import net.minecraft.world.item.component.Weapon;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.List;
@@ -24,8 +13,10 @@ import java.util.List;
 /**
  * A sword that clears plants: hits a little softer and swings a little faster than a sword of its
  * material, and cuts everything in {@code #assortedmachetes:mineable/machete} at the material's speed.
+ * A {@code SwordItem}, so it sweeps and cuts bamboo in one hit as swords do; its sword mining rules are replaced by
+ * {@link #toolComponent()}.
  */
-public class MacheteItem extends Item implements ITiered {
+public class MacheteItem extends SwordItem implements ITiered {
 
     public static final float ATTACK_DAMAGE = 2.2F;
     public static final float ATTACK_SPEED = -2.15F;
@@ -33,25 +24,16 @@ public class MacheteItem extends Item implements ITiered {
     private final ToolTier tierHolder;
 
     public MacheteItem(ToolTier tierHolder, Properties properties) {
-        super(machete(tierHolder.material(), tierHolder.tiered(properties)));
+        super(tierHolder, properties.attributes(DiggerItem.createAttributes(tierHolder, ATTACK_DAMAGE, ATTACK_SPEED)));
         this.tierHolder = tierHolder;
     }
 
-    /** {@code ToolMaterial#applySwordProperties} with one more rule, for the plants. */
-    private static Properties machete(ToolMaterial material, Properties properties) {
-        HolderGetter<Block> blocks = BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK);
-        Tool tool = new Tool(List.of(
-                Tool.Rule.minesAndDrops(HolderSet.direct(Blocks.COBWEB.builtInRegistryHolder()), 15.0F),
-                Tool.Rule.overrideSpeed(blocks.getOrThrow(BlockTags.SWORD_INSTANTLY_MINES), Float.MAX_VALUE),
-                Tool.Rule.overrideSpeed(blocks.getOrThrow(MachetesTags.MINEABLE_MACHETE), Math.max(material.speed(), 1.5F))),
-                1.0F, 1, false);
-
-        ItemAttributeModifiers attributes = ItemAttributeModifiers.builder()
-                .add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, ATTACK_DAMAGE + material.attackDamageBonus(), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
-                .add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, ATTACK_SPEED, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
-                .build();
-
-        return properties.component(DataComponents.TOOL, tool).attributes(attributes).component(DataComponents.WEAPON, new Weapon(1));
+    /** A sword's cobweb rule, then the plants at the material's speed, for one durability a block. */
+    public Tool toolComponent() {
+        return new Tool(List.of(
+                Tool.Rule.minesAndDrops(List.of(Blocks.COBWEB), 15.0F),
+                Tool.Rule.overrideSpeed(MachetesTags.MINEABLE_MACHETE, Math.max(this.tierHolder.getSpeed(), 1.5F))),
+                1.0F, 1);
     }
 
     @Override

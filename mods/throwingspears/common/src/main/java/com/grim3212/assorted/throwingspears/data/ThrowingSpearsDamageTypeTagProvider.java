@@ -4,7 +4,6 @@ import com.grim3212.assorted.lib.data.LibDamageTypeTagsProvider;
 import com.grim3212.assorted.throwingspears.api.ThrowingSpearsDamageSources;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.TagAppender;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
@@ -22,6 +21,6 @@ public class ThrowingSpearsDamageTypeTagProvider extends LibDamageTypeTagsProvid
     @Override
     public void addCommonTags(Function<TagKey<DamageType>, TagAppender<DamageType>> tagger) {
         // Optional only because the damage type is a hand-written resource, which datagen cannot see; it always loads.
-        tagger.apply(DamageTypeTags.IS_PROJECTILE).addOptional(ThrowingSpearsDamageSources.SPEAR);
+        tagger.apply(DamageTypeTags.IS_PROJECTILE).addOptional(ThrowingSpearsDamageSources.SPEAR.location());
     }
 }

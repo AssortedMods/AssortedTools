@@ -6,8 +6,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.TagAppender;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -19,7 +18,7 @@ import java.util.function.Function;
 public class PokeballItemTagProvider extends LibItemTagProvider {
 
     /** Assorted Decor's cages hold what is in this tag; filled here so a pokeball fits one whether or not Decor is installed. */
-    public static final TagKey<Item> CAGE_SUPPORTED = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath("assorteddecor", "cage_supported"));
+    public static final TagKey<Item> CAGE_SUPPORTED = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("assorteddecor", "cage_supported"));
 
     public PokeballItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookup, CompletableFuture<TagLookup<Block>> blockTags) {
         super(output, lookup, blockTags);

@@ -6,7 +6,8 @@
   "mixins": [
     "entity.EntityFireImmuneMixin",
     "entity.LivingEntityHotFloorMixin",
-    "entity.LivingEntityLavaSwimMixin"
+    "entity.LivingEntityLavaSwimMixin",
+    "entity.LivingEntityWornSuitMixin"
   ],
   "client": [],
   "injectors": {

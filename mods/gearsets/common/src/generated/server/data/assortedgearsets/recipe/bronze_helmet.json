@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "X": "#c:ingots/bronze"
+    "X": {
+      "tag": "c:ingots/bronze"
+    }
   },
   "pattern": [
     "XXX",
     "X X"
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:bronze_helmet"
   }
 }

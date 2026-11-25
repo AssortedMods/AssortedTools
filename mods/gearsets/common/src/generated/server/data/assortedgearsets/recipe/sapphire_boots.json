@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "X": "#c:gems/sapphire"
+    "X": {
+      "tag": "c:gems/sapphire"
+    }
   },
   "pattern": [
     "X X",
     "X X"
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:sapphire_boots"
   }
 }

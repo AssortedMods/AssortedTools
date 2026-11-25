@@ -6,7 +6,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
@@ -60,7 +60,7 @@ final class ScubaSuitTests {
     }
 
     private static LivingEntity diver(GameTestHelper helper, BlockPos at, Map<EquipmentSlot, Item> worn) {
-        LivingEntity diver = helper.spawn(EntityTypes.ARMOR_STAND, at);
+        LivingEntity diver = helper.spawn(EntityType.ARMOR_STAND, at);
         worn.forEach((slot, item) -> diver.setItemSlot(slot, new ItemStack(item)));
         return diver;
     }

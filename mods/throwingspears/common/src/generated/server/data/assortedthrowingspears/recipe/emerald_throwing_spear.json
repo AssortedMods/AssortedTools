@@ -25,13 +25,18 @@
     }
   ],
   "key": {
-    "I": "#c:gems/emerald",
-    "S": "#c:rods/wooden"
+    "I": {
+      "tag": "c:gems/emerald"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
   },
   "pattern": [
     "SSI"
   ],
   "result": {
+    "count": 1,
     "id": "assortedthrowingspears:emerald_throwing_spear"
   }
 }

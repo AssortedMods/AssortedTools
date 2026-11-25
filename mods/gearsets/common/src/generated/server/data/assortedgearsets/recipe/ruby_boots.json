@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "X": "#c:gems/ruby"
+    "X": {
+      "tag": "c:gems/ruby"
+    }
   },
   "pattern": [
     "X X",
     "X X"
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:ruby_boots"
   }
 }

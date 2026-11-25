@@ -7,30 +7,28 @@ import com.grim3212.assorted.lib.util.LibCommonTags;
 import com.grim3212.assorted.multitools.Constants;
 import com.grim3212.assorted.multitools.api.MultitoolsTags;
 import com.grim3212.assorted.multitools.common.item.MultitoolsItems;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.SmithingTransformRecipeBuilder;
-import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class MultitoolsRecipes extends ConditionalRecipeProvider {
 
-    public MultitoolsRecipes(BootstrapContext<Recipe<?>> recipes, BootstrapContext<Advancement> advancements) {
-        super(recipes, advancements, Constants.MOD_ID);
+    public MultitoolsRecipes(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, registries, Constants.MOD_ID);
     }
 
     @Override
@@ -52,16 +50,16 @@ public class MultitoolsRecipes extends ConditionalRecipeProvider {
         ToolTiers.get().extras().forEach((name, tier) -> extraMultiTool(MultitoolsItems.EXTRA_MULTITOOLS.get(name).get(), name, tier.getRepairItems()));
 
         SmithingTransformRecipeBuilder.smithing(Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(MultitoolsItems.DIAMOND_MULTITOOL.get()), Ingredient.of(Blocks.NETHERITE_BLOCK), RecipeCategory.TOOLS, MultitoolsItems.NETHERITE_MULTITOOL.get())
-                .unlocks("has_netherite_block", has(Blocks.NETHERITE_BLOCK)).save(this.output, recipeKey(Identifier.parse(id(MultitoolsItems.NETHERITE_MULTITOOL.get()) + "_smithing")));
+                .unlocks("has_netherite_block", has(Blocks.NETHERITE_BLOCK)).save(this.output, ResourceLocation.parse(id(MultitoolsItems.NETHERITE_MULTITOOL.get()) + "_smithing"));
     }
 
     private void multiTool(ItemLike output, TagKey<Item> input, ItemLike pickaxe, ItemLike shovel, ItemLike axe, ItemLike hoe, ItemLike sword) {
-        Identifier id = id(output.asItem());
+        ResourceLocation id = id(output.asItem());
         this.addConditions(itemTagExists(input), id);
 
-        ShapelessRecipeBuilder.shapeless(this.items, RecipeCategory.TOOLS, output).requires(pickaxe).requires(shovel).requires(axe).requires(hoe).requires(sword)
-                .requires(this.tag(input)).requires(this.tag(input)).requires(this.tag(input)).requires(this.tag(input))
-                .unlockedBy("has_item", has(input)).save(this.output, recipeKey(id));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, output).requires(pickaxe).requires(shovel).requires(axe).requires(hoe).requires(sword)
+                .requires(Ingredient.of(input)).requires(Ingredient.of(input)).requires(Ingredient.of(input)).requires(Ingredient.of(input))
+                .unlockedBy("has_item", has(input)).save(this.output, id);
     }
 
     /**
@@ -69,21 +67,17 @@ public class MultitoolsRecipes extends ConditionalRecipeProvider {
      * Assorted Gear Sets; the recipe only loads once some mod fills all five and the material itself.
      */
     private void extraMultiTool(ItemLike output, String material, TagKey<Item> input) {
-        Identifier id = id(output.asItem());
+        ResourceLocation id = id(output.asItem());
         List<LibConditionProvider> conditions = new ArrayList<>(List.of(itemTagExists(input)));
-        ShapelessRecipeBuilder builder = ShapelessRecipeBuilder.shapeless(this.items, RecipeCategory.TOOLS, output);
+        ShapelessRecipeBuilder builder = ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, output);
         for (String kind : MultitoolsTags.RECIPE_TOOL_KINDS) {
             TagKey<Item> tools = MultitoolsTags.materialTools(kind, material);
             conditions.add(itemTagExists(tools));
-            builder.requires(this.tag(tools));
+            builder.requires(Ingredient.of(tools));
         }
         this.addConditions(and(conditions.toArray(LibConditionProvider[]::new)), id);
 
-        builder.requires(this.tag(input)).requires(this.tag(input)).requires(this.tag(input)).requires(this.tag(input))
-                .unlockedBy("has_item", has(input)).save(this.output, recipeKey(id));
-    }
-
-    private static ResourceKey<Recipe<?>> recipeKey(Identifier id) {
-        return ResourceKey.create(Registries.RECIPE, id);
+        builder.requires(Ingredient.of(input)).requires(Ingredient.of(input)).requires(Ingredient.of(input)).requires(Ingredient.of(input))
+                .unlockedBy("has_item", has(input)).save(this.output, id);
     }
 }

@@ -4,8 +4,6 @@ import com.grim3212.assorted.lib.registry.IRegistryObject;
 import com.grim3212.assorted.lib.registry.RegistryProvider;
 import com.grim3212.assorted.ultimatefist.Constants;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 
@@ -37,8 +35,7 @@ public class UltimateFistItems {
     }
 
     private static <T extends Item> IRegistryObject<T> register(final String name, final Function<Item.Properties, ? extends T> factory) {
-        final ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(Constants.MOD_ID, name));
-        return ITEMS.register(name, () -> factory.apply(new Item.Properties().setId(key)));
+        return ITEMS.register(name, () -> factory.apply(new Item.Properties()));
     }
 
     public static void init() {

@@ -10,7 +10,7 @@ public final class ConfigurableTools {
     public static final float PICKAXE_SPEED = -2.8F;
     public static final float SHOVEL_DAMAGE = 1.5F;
     public static final float SHOVEL_SPEED = -3.0F;
-    public static final float SWORD_DAMAGE = 3.0F;
+    public static final int SWORD_DAMAGE = 3;
     public static final float SWORD_SPEED = -2.4F;
     public static final float HOE_SPEED = -0.0F;
 

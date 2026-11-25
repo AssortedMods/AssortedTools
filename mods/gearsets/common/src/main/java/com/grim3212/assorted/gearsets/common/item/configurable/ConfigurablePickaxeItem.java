@@ -2,18 +2,19 @@ package com.grim3212.assorted.gearsets.common.item.configurable;
 
 import com.grim3212.assorted.lib.core.tool.ITiered;
 import com.grim3212.assorted.lib.core.tool.ToolTier;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.DiggerItem;
+import net.minecraft.world.item.PickaxeItem;
 
 /**
- * A pickaxe built from a configured tool material. {@code Properties#pickaxe} applies the
- * material's speed, harvest level, durability and attributes.
+ * A pickaxe built from a configured tool material, which is its {@code Tier}: speed, harvest level, durability,
+ * enchantability and repair all come from it.
  */
-public class ConfigurablePickaxeItem extends Item implements ITiered {
+public class ConfigurablePickaxeItem extends PickaxeItem implements ITiered {
 
     private final ToolTier tierHolder;
 
-    public ConfigurablePickaxeItem(ToolTier tierHolder, Item.Properties builder) {
-        super(builder.pickaxe(tierHolder.material(), ConfigurableTools.PICKAXE_DAMAGE, ConfigurableTools.PICKAXE_SPEED));
+    public ConfigurablePickaxeItem(ToolTier tierHolder, Properties properties) {
+        super(tierHolder, properties.attributes(DiggerItem.createAttributes(tierHolder, ConfigurableTools.PICKAXE_DAMAGE, ConfigurableTools.PICKAXE_SPEED)));
         this.tierHolder = tierHolder;
     }
 

@@ -8,25 +8,21 @@ import com.grim3212.assorted.lib.core.tool.ToolTier;
 import com.grim3212.assorted.lib.core.tool.ToolTiers;
 import com.grim3212.assorted.lib.platform.Services;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.item.equipment.EquipmentAsset;
-import net.minecraft.world.item.equipment.EquipmentAssets;
 
 import java.util.HashMap;
 import java.util.Map;
 
-/** Each extra material's armor and spear numbers; its tool numbers are the shared tier's in Lib. */
+/** Each extra material's armor numbers; its tool numbers are the shared tier's in Lib. */
 public class GearSetsConfig {
 
     // Keyed by tier name.
-    public final Map<String, SpearConfig> spears = new HashMap<>();
     public final Map<String, ArmorMaterialConfig> armors = new HashMap<>();
 
     public GearSetsConfig() {
-        // Needed at registration: items bake their armor and spear values in as they are constructed.
+        // Needed at registration: items bake their armor values in as they are constructed.
         final IConfigurationBuilder builder = Services.CONFIG.createBuilder(ConfigurationType.NEEDED_AT_REGISTRATION, Constants.MOD_ID + "-common");
 
         extra(builder, "tin", 8, 14, 0.0F, 0.0F, new int[]{1, 3, 5, 2}, SoundEvents.ARMOR_EQUIP_IRON);
@@ -50,10 +46,10 @@ public class GearSetsConfig {
         builder.setup();
     }
 
+    /** The worn texture is {@code textures/models/armor/<name>_layer_1.png} and {@code _layer_2.png}. */
     private void extra(IConfigurationBuilder builder, String name, int durability, int enchantability, float toughness, float knockbackResistance, int[] reductionAmounts, Holder<SoundEvent> equipSound) {
         ToolTier tier = ToolTiers.get().extra(name);
-        this.spears.put(name, new SpearConfig(builder, "spears", name, tier.getHarvestLevel()));
-        ResourceKey<EquipmentAsset> assetId = ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath(Constants.MOD_ID, name));
-        this.armors.put(name, new ArmorMaterialConfig(builder, "extra_armor", name, durability, enchantability, toughness, knockbackResistance, reductionAmounts, () -> equipSound, tier.getRepairItems(), assetId));
+        ResourceLocation assetName = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, name);
+        this.armors.put(name, new ArmorMaterialConfig(builder, "extra_armor", name, durability, enchantability, toughness, knockbackResistance, reductionAmounts, () -> equipSound, tier.getRepairItems(), assetName));
     }
 }

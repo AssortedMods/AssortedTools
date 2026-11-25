@@ -19,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedshears:netherite_shears_smithing"
+        "recipe": "assortedshears:netherite_shears_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

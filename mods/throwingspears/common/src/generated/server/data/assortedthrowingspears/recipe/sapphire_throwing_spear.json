@@ -25,13 +25,18 @@
     }
   ],
   "key": {
-    "I": "#c:gems/sapphire",
-    "S": "#c:rods/wooden"
+    "I": {
+      "tag": "c:gems/sapphire"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
   },
   "pattern": [
     "SSI"
   ],
   "result": {
+    "count": 1,
     "id": "assortedthrowingspears:sapphire_throwing_spear"
   }
 }

@@ -30,18 +30,6 @@
       ],
       "text": "manual.assortedtools.chapter.materials.basic",
       "title": "manual.assortedtools.chapter.materials.basic.title"
-    },
-    {
-      "type": "assortedlib:recipe",
-      "id": "spears",
-      "interval": 50,
-      "recipes": [
-        "assortedgearsets:steel_spear",
-        "assortedgearsets:ruby_spear",
-        "assortedgearsets:emerald_spear"
-      ],
-      "text": "manual.assortedtools.chapter.materials.spears",
-      "title": "manual.assortedtools.chapter.materials.spears.title"
     }
   ]
 }

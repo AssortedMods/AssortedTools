@@ -11,19 +11,17 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EntityTypes;
-import net.minecraft.world.entity.animal.cow.Cow;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomModelData;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.storage.TagValueInput;
-import net.minecraft.world.level.storage.TagValueOutput;
 
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -69,7 +67,7 @@ final class StaffTests {
         player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(StaffsItems.POWER_STAFF.get()));
         CycleModePacket.handle(new CycleModePacket(InteractionHand.MAIN_HAND), player);
         helper.assertValueEqual(StaffsItems.POWER_STAFF.get().getMode(player.getMainHandItem()), StaffMode.FLOAT_PULL, "the power staff's mode after a cycle");
-        helper.assertValueEqual(player.getMainHandItem().getOrDefault(DataComponents.CUSTOM_MODEL_DATA, CustomModelData.EMPTY).getString(0), PowerStaffItem.PULL_MODEL, "the pull model flag");
+        helper.assertValueEqual(player.getMainHandItem().getOrDefault(DataComponents.CUSTOM_MODEL_DATA, CustomModelData.DEFAULT).value(), PowerStaffItem.PULL_MODEL, "the pull model flag");
 
         helper.succeed();
     }
@@ -79,8 +77,8 @@ final class StaffTests {
      * a mob that was already still alone.
      */
     private static void neptuneStaffFreezesAndPhoenixStaffThaws(GameTestHelper helper) {
-        Cow cow = helper.spawn(EntityTypes.COW, new BlockPos(4, 1, 5));
-        Cow statue = helper.spawn(EntityTypes.COW, new BlockPos(6, 1, 5));
+        Cow cow = helper.spawn(EntityType.COW, new BlockPos(4, 1, 5));
+        Cow statue = helper.spawn(EntityType.COW, new BlockPos(6, 1, 5));
         statue.setNoAi(true);
 
         ItemStack neptune = new ItemStack(StaffsItems.NEPTUNE_STAFF.get());
@@ -88,7 +86,7 @@ final class StaffTests {
         ServerPlayer player = survivalPlayer(helper, neptune);
         stand(helper, player, new BlockPos(4, 1, 3));
 
-        helper.assertTrue(neptune.use(helper.getLevel(), player, InteractionHand.MAIN_HAND).consumesAction(), "Freeze Mobs found nothing to freeze");
+        helper.assertTrue(neptune.use(helper.getLevel(), player, InteractionHand.MAIN_HAND).getResult().consumesAction(), "Freeze Mobs found nothing to freeze");
         helper.assertTrue(FrozenMobs.isFrozen(cow) && cow.isNoAi() && cow.isSilent(), "the cow was not frozen");
         helper.assertFalse(FrozenMobs.isFrozen(statue), "a mob that already had no AI was frozen again");
         helper.assertFalse(FrozenMobs.isFrozen(player), "the player froze themselves");
@@ -97,7 +95,7 @@ final class StaffTests {
         ItemStack phoenix = new ItemStack(StaffsItems.PHOENIX_STAFF.get());
         NBTHelper.putString(phoenix, StaffMode.KEY, StaffMode.THAW_MOBS.getSerializedName());
         player.setItemInHand(InteractionHand.MAIN_HAND, phoenix);
-        helper.assertTrue(phoenix.use(helper.getLevel(), player, InteractionHand.MAIN_HAND).consumesAction(), "Thaw Mobs found nothing to thaw");
+        helper.assertTrue(phoenix.use(helper.getLevel(), player, InteractionHand.MAIN_HAND).getResult().consumesAction(), "Thaw Mobs found nothing to thaw");
         helper.assertTrue(!FrozenMobs.isFrozen(cow) && !cow.isNoAi() && !cow.isSilent(), "the cow was not thawed");
         helper.assertTrue(statue.isNoAi(), "the thaw woke a mob the staff never froze");
 
@@ -112,7 +110,7 @@ final class StaffTests {
 
     /** Fire thaws a frozen mob through each loader's tick hook, not only a Phoenix staff. */
     private static void burningThawsAFrozenMob(GameTestHelper helper) {
-        Cow cow = helper.spawn(EntityTypes.COW, new BlockPos(4, 1, 4));
+        Cow cow = helper.spawn(EntityType.COW, new BlockPos(4, 1, 4));
         helper.assertTrue(FrozenMobs.freeze(cow), "the cow did not freeze");
         cow.setRemainingFireTicks(100);
 
@@ -123,13 +121,12 @@ final class StaffTests {
 
     /** The frozen marker is the loader's data attachment now, so it has to save with the mob. */
     private static void frozenMobsStayFrozenThroughAReload(GameTestHelper helper) {
-        Cow cow = helper.spawn(EntityTypes.COW, new BlockPos(4, 1, 4));
+        Cow cow = helper.spawn(EntityType.COW, new BlockPos(4, 1, 4));
         FrozenMobs.freeze(cow);
 
-        TagValueOutput output = TagValueOutput.createWithContext(ProblemReporter.DISCARDING, helper.getLevel().registryAccess());
-        cow.saveWithoutId(output);
-        Cow reloaded = helper.spawn(EntityTypes.COW, new BlockPos(6, 1, 4));
-        reloaded.load(TagValueInput.create(ProblemReporter.DISCARDING, helper.getLevel().registryAccess(), output.buildResult()));
+        CompoundTag saved = cow.saveWithoutId(new CompoundTag());
+        Cow reloaded = helper.spawn(EntityType.COW, new BlockPos(6, 1, 4));
+        reloaded.load(saved);
 
         helper.assertTrue(FrozenMobs.isFrozen(reloaded) && reloaded.isNoAi(), "a frozen cow thawed when it was saved and loaded");
         helper.assertTrue(FrozenMobs.thaw(reloaded) && !FrozenMobs.isFrozen(reloaded), "a reloaded frozen cow could not be thawed");
@@ -191,7 +188,7 @@ final class StaffTests {
         final BlockPos terracotta = new BlockPos(6, 2, 4);
         helper.setBlock(stone, Blocks.STONE);
         helper.setBlock(obsidian, Blocks.OBSIDIAN);
-        helper.setBlock(terracotta, Blocks.GLAZED_TERRACOTTA.white());
+        helper.setBlock(terracotta, Blocks.WHITE_GLAZED_TERRACOTTA);
 
         ServerPlayer player = survivalPlayer(helper, new ItemStack(StaffsItems.POWER_STAFF.get()));
         stand(helper, player, new BlockPos(4, 1, 1));
@@ -211,7 +208,7 @@ final class StaffTests {
 
         NBTHelper.putString(player.getMainHandItem(), StaffMode.KEY, StaffMode.FLOAT_PUSH.getSerializedName());
         helper.assertTrue(clickSide(helper, player, terracotta, Direction.NORTH).consumesAction(), "glazed terracotta could not be pushed");
-        helper.assertBlockPresent(Blocks.GLAZED_TERRACOTTA.white(), terracotta.south());
+        helper.assertBlockPresent(Blocks.WHITE_GLAZED_TERRACOTTA, terracotta.south());
 
         helper.succeed();
     }
@@ -229,7 +226,7 @@ final class StaffTests {
         clickSide(helper, player, stone, Direction.NORTH);
         helper.assertBlockPresent(Blocks.AIR, stone);
         helper.assertBlockPresent(Blocks.AIR, stone.south());
-        helper.assertTrue(helper.getEntities(EntityTypes.FALLING_BLOCK).stream().anyMatch(falling -> falling.getBlockState().is(Blocks.STONE)), "the pushed stone is not falling");
+        helper.assertTrue(helper.getEntities(EntityType.FALLING_BLOCK).stream().anyMatch(falling -> falling.getBlockState().is(Blocks.STONE)), "the pushed stone is not falling");
 
         helper.succeed();
     }

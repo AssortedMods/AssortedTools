@@ -13,26 +13,22 @@ import com.grim3212.assorted.buckets.config.BucketConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.attribute.EnvironmentAttributes;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
@@ -45,6 +41,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 public class BetterBucketItem extends Item implements ITiered {
@@ -84,7 +81,7 @@ public class BetterBucketItem extends Item implements ITiered {
     }
 
     @Override
-    public void onCraftedBy(ItemStack stack, Player playerIn) {
+    public void onCraftedBy(ItemStack stack, Level level, Player playerIn) {
         storeFluid(stack, Fluids.EMPTY, 0);
     }
 
@@ -105,7 +102,7 @@ public class BetterBucketItem extends Item implements ITiered {
     }
 
     @Override
-    public InteractionResult use(Level worldIn, Player playerIn, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand hand) {
         ItemStack itemStackIn = playerIn.getItemInHand(hand);
 
         boolean canContainMore = getAmount(itemStackIn) < getMaximumMillibuckets();
@@ -114,9 +111,9 @@ public class BetterBucketItem extends Item implements ITiered {
         BlockHitResult blockhitresult = getPlayerPOVHitResult(worldIn, playerIn, canContainMore ? ClipContext.Fluid.SOURCE_ONLY : ClipContext.Fluid.NONE);
 
         if (blockhitresult.getType() == HitResult.Type.MISS) {
-            return InteractionResult.PASS;
+            return InteractionResultHolder.pass(itemStackIn);
         } else if (blockhitresult.getType() != HitResult.Type.BLOCK) {
-            return InteractionResult.PASS;
+            return InteractionResultHolder.pass(itemStackIn);
         } else {
             BlockPos clickPos = blockhitresult.getBlockPos();
             Direction direction = blockhitresult.getDirection();
@@ -128,7 +125,7 @@ public class BetterBucketItem extends Item implements ITiered {
                 if (!filledResult.isEmpty()) {
                     // Creative players keep their item unchanged; only survival buckets record what they picked up.
                     if (playerIn.isCreative()) {
-                        return InteractionResult.SUCCESS;
+                        return InteractionResultHolder.sidedSuccess(itemStackIn, worldIn.isClientSide());
                     }
 
                     int filledAmount = getAmount(itemStackIn) + (int) filledResult.get().amount();
@@ -141,7 +138,7 @@ public class BetterBucketItem extends Item implements ITiered {
                     int newFillAmount = BucketsCommonMod.CONFIG.allowPartialBucketAmounts.get() ? filledAmount : filledAmount - leftover;
                     storeFluid(itemStackIn, filledResult.get(), newFillAmount);
 
-                    return InteractionResult.SUCCESS;
+                    return InteractionResultHolder.sidedSuccess(itemStackIn, worldIn.isClientSide());
                 }
             }
 
@@ -150,9 +147,9 @@ public class BetterBucketItem extends Item implements ITiered {
                 // Re-raytrace without fluids in the clip context, so a fluid in front of the target block isn't mistaken for it.
                 blockhitresult = getPlayerPOVHitResult(worldIn, playerIn, ClipContext.Fluid.NONE);
                 if (blockhitresult.getType() == HitResult.Type.MISS) {
-                    return InteractionResult.PASS;
+                    return InteractionResultHolder.pass(itemStackIn);
                 } else if (blockhitresult.getType() != HitResult.Type.BLOCK) {
-                    return InteractionResult.PASS;
+                    return InteractionResultHolder.pass(itemStackIn);
                 } else {
                     // Get new values
                     clickPos = blockhitresult.getBlockPos();
@@ -171,7 +168,7 @@ public class BetterBucketItem extends Item implements ITiered {
                                     // success!
                                     playerIn.awardStat(Stats.ITEM_USED.get(this));
                                     setAmount(itemStackIn, amount - getBucketAmount());
-                                    return InteractionResult.SUCCESS.heldItemTransformedTo(this.tryBreakBucket(itemStackIn));
+                                    return InteractionResultHolder.sidedSuccess(this.tryBreakBucket(itemStackIn), worldIn.isClientSide());
                                 }
                             }
                         }
@@ -180,7 +177,7 @@ public class BetterBucketItem extends Item implements ITiered {
             }
         }
         // couldn't place liquid there
-        return InteractionResult.PASS;
+        return InteractionResultHolder.pass(itemStackIn);
 
     }
 
@@ -238,8 +235,8 @@ public class BetterBucketItem extends Item implements ITiered {
                 if (!worldIn.isEmptyBlock(pos) && !flag && !flag1) {
                     return false;
                 } else {
-                    // Whether water boils away is a per position environment attribute, so a datapack can give any dimension that behaviour.
-                    if (worldIn.environmentAttributes().getValue(EnvironmentAttributes.WATER_EVAPORATES, pos) && fluid.fluid() == Fluids.WATER) {
+                    // Water boils away in an ultra warm dimension, as it does from vanilla's bucket.
+                    if (worldIn.dimensionType().ultraWarm() && fluid.fluid() == Fluids.WATER) {
                         int l = pos.getX();
                         int i = pos.getY();
                         int j = pos.getZ();
@@ -269,28 +266,32 @@ public class BetterBucketItem extends Item implements ITiered {
 
     /**
      * The crafting remainder: the same bucket with one bucket's worth taken out, or whatever
-     * {@link #tryBreakBucket} leaves once it runs dry. Null means no remainder.
+     * {@link #tryBreakBucket} leaves once it runs dry. Empty means no remainder.
      */
-    private @Nullable ItemStackTemplate craftingRemainder(ItemStack stack) {
+    static ItemStack craftingRemainder(BetterBucketItem bucket, ItemStack stack) {
         if (getAmount(stack) < getBucketAmount()) {
-            return null;
+            return ItemStack.EMPTY;
         }
 
         ItemStack remainder = stack.copy();
         setAmount(remainder, getAmount(remainder) - getBucketAmount());
 
-        ItemStack result = this.tryBreakBucket(remainder);
-        return result.isEmpty() ? null : ItemStackTemplate.fromStack(result);
+        return bucket.tryBreakBucket(remainder);
     }
 
     @LoaderImplement(loader = LoaderImplement.Loader.FORGE, value = "IItemExtension")
-    public @Nullable ItemStackTemplate getCraftingRemainder(ItemInstance instance) {
-        return instance instanceof ItemStack stack ? this.craftingRemainder(stack) : this.getCraftingRemainder();
+    public boolean hasCraftingRemainingItem(ItemStack stack) {
+        return !craftingRemainder(this, stack).isEmpty();
+    }
+
+    @LoaderImplement(loader = LoaderImplement.Loader.FORGE, value = "IItemExtension")
+    public ItemStack getCraftingRemainingItem(ItemStack stack) {
+        return craftingRemainder(this, stack);
     }
 
     @LoaderImplement(loader = LoaderImplement.Loader.FABRIC, value = "FabricItem")
-    public @Nullable ItemStackTemplate getCraftingRemainder(ItemStack stack) {
-        return this.craftingRemainder(stack);
+    public ItemStack getRecipeRemainder(ItemStack stack) {
+        return craftingRemainder(this, stack);
     }
 
     @Override
@@ -315,15 +316,15 @@ public class BetterBucketItem extends Item implements ITiered {
     }
 
     /**
-     * Two of what the bucket was made of. Tier#getRepairIngredient is gone, so the material comes
-     * from its repair tag - {@link #materialToBreakInto(Iterable)} picks which member.
+     * Two of what the bucket was made of, a member of its tier's repair ingredient;
+     * {@link #materialToBreakInto(Iterable)} picks which.
      */
     public ItemStack getBreakStack() {
         if (!this.bucketConfig.getBreaksAfterUse()) {
             return ItemStack.EMPTY;
         }
 
-        Holder<Item> material = materialToBreakInto(BuiltInRegistries.ITEM.getTagOrEmpty(this.tierHolder.getRepairItems()));
+        Holder<Item> material = materialToBreakInto(Arrays.stream(this.tierHolder.getRepairIngredient().getItems()).map(ItemStack::getItemHolder).toList());
         return material == null ? ItemStack.EMPTY : new ItemStack(material, 2);
     }
 
@@ -335,15 +336,15 @@ public class BetterBucketItem extends Item implements ITiered {
      */
     public static @Nullable Holder<Item> materialToBreakInto(Iterable<Holder<Item>> repairMaterials) {
         Holder<Item> fallback = null;
-        Identifier fallbackId = null;
+        ResourceLocation fallbackId = null;
 
         for (Holder<Item> repairMaterial : repairMaterials) {
-            Identifier id = BuiltInRegistries.ITEM.getKey(repairMaterial.value());
+            ResourceLocation id = BuiltInRegistries.ITEM.getKey(repairMaterial.value());
             if (id == null) {
                 continue;
             }
 
-            if (id.getNamespace().equals(Identifier.DEFAULT_NAMESPACE)) {
+            if (id.getNamespace().equals(ResourceLocation.DEFAULT_NAMESPACE)) {
                 return repairMaterial;
             }
 
@@ -379,7 +380,7 @@ public class BetterBucketItem extends Item implements ITiered {
     }
 
     public static Fluid getFluidFromString(String s) {
-        return Services.PLATFORM.getRegistry(Registries.FLUID).getValue(Identifier.parse(s)).orElse(Fluids.EMPTY);
+        return Services.PLATFORM.getRegistry(Registries.FLUID).getValue(ResourceLocation.parse(s)).orElse(Fluids.EMPTY);
     }
 
     public static void store(ItemStack stack, String toStore, int amount) {
@@ -426,11 +427,7 @@ public class BetterBucketItem extends Item implements ITiered {
     }
 
     public static int getAmount(ItemStack stack) {
-        return getAmount((DataComponentGetter) stack);
-    }
-
-    public static int getAmount(DataComponentGetter components) {
-        CompoundTag customData = components.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+        CompoundTag customData = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
         return NBTHelper.getInt(NBTHelper.getTag(customData, FLUID_TAG), AMOUNT_KEY);
     }
 }

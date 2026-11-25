@@ -25,14 +25,19 @@
     }
   ],
   "key": {
-    "B": "#c:rods/blaze",
-    "M": "minecraft:magma_cream"
+    "B": {
+      "tag": "c:rods/blaze"
+    },
+    "M": {
+      "item": "minecraft:magma_cream"
+    }
   },
   "pattern": [
     "M M",
     "MBM"
   ],
   "result": {
+    "count": 1,
     "id": "assortedsuits:lava_boots"
   }
 }

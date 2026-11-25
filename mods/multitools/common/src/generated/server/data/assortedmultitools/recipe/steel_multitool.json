@@ -90,17 +90,36 @@
     }
   ],
   "ingredients": [
-    "#c:pickaxes/steel",
-    "#c:shovels/steel",
-    "#c:axes/steel",
-    "#c:hoes/steel",
-    "#c:swords/steel",
-    "#c:ingots/steel",
-    "#c:ingots/steel",
-    "#c:ingots/steel",
-    "#c:ingots/steel"
+    {
+      "tag": "c:pickaxes/steel"
+    },
+    {
+      "tag": "c:shovels/steel"
+    },
+    {
+      "tag": "c:axes/steel"
+    },
+    {
+      "tag": "c:hoes/steel"
+    },
+    {
+      "tag": "c:swords/steel"
+    },
+    {
+      "tag": "c:ingots/steel"
+    },
+    {
+      "tag": "c:ingots/steel"
+    },
+    {
+      "tag": "c:ingots/steel"
+    },
+    {
+      "tag": "c:ingots/steel"
+    }
   ],
   "result": {
+    "count": 1,
     "id": "assortedmultitools:steel_multitool"
   }
 }

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedmachetes:bronze_machete"
+        "recipe": "assortedmachetes:bronze_machete"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

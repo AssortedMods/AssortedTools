@@ -6,8 +6,9 @@ import com.grim3212.assorted.gearsets.Constants;
 import com.grim3212.assorted.lib.test.TestSupport;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.gametest.framework.GameTestAssertException;
 import net.minecraft.gametest.framework.GameTestHelper;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -45,7 +46,7 @@ final class GearSetsTestSupport {
             helper.assertTrue(in != null, path + " is not on the classpath");
             return JsonParser.parseReader(new InputStreamReader(in, StandardCharsets.UTF_8)).getAsJsonObject();
         } catch (IOException e) {
-            throw helper.assertionException("could not read " + path + ": " + e);
+            throw new GameTestAssertException("could not read " + path + ": " + e);
         }
     }
 
@@ -63,7 +64,7 @@ final class GearSetsTestSupport {
 
     /** Asserts a grid crafts {@code expected} through the recipe manager, so a recipe dropped by a failing load condition fails here. */
     static void assertCrafts(GameTestHelper helper, int width, int height, List<ItemStack> grid, Item expected) {
-        Identifier id = BuiltInRegistries.ITEM.getKey(expected);
+        ResourceLocation id = BuiltInRegistries.ITEM.getKey(expected);
         ItemStack result = TestSupport.craft(helper, CraftingInput.of(width, height, grid), "the pattern for " + id);
         helper.assertTrue(result.is(expected), "the pattern for " + id + " crafted " + BuiltInRegistries.ITEM.getKey(result.getItem()) + " instead");
     }

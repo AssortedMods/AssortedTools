@@ -4,7 +4,7 @@ import com.grim3212.assorted.suits.Constants;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -13,7 +13,7 @@ import net.minecraft.world.item.enchantment.ItemEnchantments;
 /** The key the chicken jump enchantment is looked up by. The enchantment itself is data, written by {@code SuitsEnchantmentData}. */
 public class SuitsEnchantments {
 
-    public static final ResourceKey<Enchantment> CHICKEN_JUMP = ResourceKey.create(Registries.ENCHANTMENT, Identifier.fromNamespaceAndPath(Constants.MOD_ID, "chicken_jump"));
+    public static final ResourceKey<Enchantment> CHICKEN_JUMP = ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "chicken_jump"));
 
     public static boolean hasChickenJump(ItemStack stack) {
         return getLevel(stack, CHICKEN_JUMP) > 0;

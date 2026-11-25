@@ -25,7 +25,9 @@
     }
   ],
   "key": {
-    "X": "#c:ingots/nickel"
+    "X": {
+      "tag": "c:ingots/nickel"
+    }
   },
   "pattern": [
     "X X",
@@ -33,6 +35,7 @@
     "XXX"
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:nickel_chestplate"
   }
 }

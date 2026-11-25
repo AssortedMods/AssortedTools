@@ -10,7 +10,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -42,8 +41,11 @@ public class FluidHelper {
             if (!pickupBlock.isEmpty()) {
                 FluidInformation fluid = Services.FLUIDS.get(pickupBlock).orElse(new FluidInformation(Fluids.EMPTY));
                 if (!fluid.fluid().isSame(Fluids.EMPTY)) {
+                    // NeoForge deprecates this for a state-aware overload that vanilla, which common builds against, does not have.
+                    @SuppressWarnings("deprecation")
+                    Optional<SoundEvent> pickupSound = bucketPickup.getPickupSound();
                     if (playerIn != null)
-                        bucketPickup.getPickupSound().ifPresent((sound) -> playerIn.playSound(sound, 1.0F, 1.0F));
+                        pickupSound.ifPresent((sound) -> playerIn.playSound(sound, 1.0F, 1.0F));
                     return Optional.of(new FluidInformation(fluid.fluid(), Services.FLUIDS.getBucketAmount()));
                 }
             }
@@ -85,8 +87,8 @@ public class FluidHelper {
         boolean bl2 = blockState.isAir() || bl || block instanceof LiquidBlockContainer && ((LiquidBlockContainer) block).canPlaceLiquid(player, level, pos, blockState, content);
         if (!bl2) {
             return hitResult != null && tryPlaceFluid(player, level, hitResult.getBlockPos().relative(hitResult.getDirection()), null, information);
-            // Whether water boils off is an environment attribute sampled per position; particles use getRandom() so they follow the level's own random source.
-        } else if (level.environmentAttributes().getValue(EnvironmentAttributes.WATER_EVAPORATES, pos) && BuiltInRegistries.FLUID.wrapAsHolder(content).is(FluidTags.WATER)) {
+            // Water boils off in an ultra warm dimension; particles use getRandom() so they follow the level's own random source.
+        } else if (level.dimensionType().ultraWarm() && BuiltInRegistries.FLUID.wrapAsHolder(content).is(FluidTags.WATER)) {
             int i = pos.getX();
             int j = pos.getY();
             int k = pos.getZ();

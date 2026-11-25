@@ -25,14 +25,19 @@
     }
   ],
   "key": {
-    "I": "#minecraft:stone_tool_materials",
-    "L": "#c:leathers"
+    "I": {
+      "tag": "minecraft:stone_tool_materials"
+    },
+    "L": {
+      "tag": "c:leathers"
+    }
   },
   "pattern": [
     " I",
     "IL"
   ],
   "result": {
+    "count": 1,
     "id": "assortedshears:stone_shears"
   }
 }

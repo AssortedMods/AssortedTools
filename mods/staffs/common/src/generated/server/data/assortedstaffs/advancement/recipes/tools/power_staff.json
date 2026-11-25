@@ -19,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedstaffs:power_staff"
+        "recipe": "assortedstaffs:power_staff"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -6,7 +6,7 @@ import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentSyncPredicate;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 
 /**
@@ -15,11 +15,11 @@ import net.minecraft.world.entity.Entity;
  */
 public class FabricFrozenStorage implements IFrozenStorage {
 
-    public static final AttachmentType<Boolean> FROZEN = AttachmentRegistry.create(Identifier.fromNamespaceAndPath(Constants.MOD_ID, "frozen"),
+    public static final AttachmentType<Boolean> FROZEN = AttachmentRegistry.create(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "frozen"),
             builder -> builder.persistent(Codec.BOOL).syncWith(ByteBufCodecs.BOOL, AttachmentSyncPredicate.all()));
 
     // A mob frozen when this was all one mod carries this; Fabric has no attachment aliases, so it is moved over when read.
-    private static final AttachmentType<Boolean> OLD_FROZEN = AttachmentRegistry.create(Identifier.fromNamespaceAndPath(Constants.FAMILY_ID, "frozen"), builder -> builder.persistent(Codec.BOOL));
+    private static final AttachmentType<Boolean> OLD_FROZEN = AttachmentRegistry.create(ResourceLocation.fromNamespaceAndPath(Constants.FAMILY_ID, "frozen"), builder -> builder.persistent(Codec.BOOL));
 
     /**
      * Registers {@link #FROZEN} from mod init. A client only accepts synced attachment types it had

@@ -25,14 +25,19 @@
     }
   ],
   "key": {
-    "I": "#c:gems/ruby",
-    "L": "#c:leathers"
+    "I": {
+      "tag": "c:gems/ruby"
+    },
+    "L": {
+      "tag": "c:leathers"
+    }
   },
   "pattern": [
     " I",
     "IL"
   ],
   "result": {
+    "count": 1,
     "id": "assortedshears:ruby_shears"
   }
 }

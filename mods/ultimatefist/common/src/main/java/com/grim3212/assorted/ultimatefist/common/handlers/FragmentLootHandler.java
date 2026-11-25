@@ -4,7 +4,7 @@ import com.grim3212.assorted.lib.conditions.LibParts;
 import com.grim3212.assorted.lib.events.LootTableModifyEvent;
 import com.grim3212.assorted.ultimatefist.Constants;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -21,16 +21,16 @@ public class FragmentLootHandler {
     public static final ResourceKey<LootTable> NETHER_UF_LOOT = lootTable("fragments_nether_loot");
     public static final ResourceKey<LootTable> END_UF_LOOT = lootTable("fragments_end_loot");
 
-    private static final List<Identifier> OVERWORLD_UF_CHESTS = chests("stronghold_corridor", "stronghold_crossing", "stronghold_library", "woodland_mansion", "underwater_ruin_big", "underwater_ruin_small", "ancient_city");
-    private static final List<Identifier> NETHER_UF_CHESTS = chests("nether_bridge", "ruined_portal");
-    private static final List<Identifier> END_UF_CHESTS = chests("end_city_treasure");
+    private static final List<ResourceLocation> OVERWORLD_UF_CHESTS = chests("stronghold_corridor", "stronghold_crossing", "stronghold_library", "woodland_mansion", "underwater_ruin_big", "underwater_ruin_small", "ancient_city");
+    private static final List<ResourceLocation> NETHER_UF_CHESTS = chests("nether_bridge", "ruined_portal");
+    private static final List<ResourceLocation> END_UF_CHESTS = chests("end_city_treasure");
 
     private static ResourceKey<LootTable> lootTable(String name) {
-        return ResourceKey.create(Registries.LOOT_TABLE, Identifier.fromNamespaceAndPath(Constants.MOD_ID, name));
+        return ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, name));
     }
 
-    private static List<Identifier> chests(String... names) {
-        return Arrays.stream(names).map(name -> Identifier.withDefaultNamespace("chests/" + name)).toList();
+    private static List<ResourceLocation> chests(String... names) {
+        return Arrays.stream(names).map(name -> ResourceLocation.withDefaultNamespace("chests/" + name)).toList();
     }
 
     public static void init(LootTableModifyEvent event) {
@@ -43,9 +43,9 @@ public class FragmentLootHandler {
         inject(event, END_UF_CHESTS, END_UF_LOOT);
     }
 
-    private static void inject(LootTableModifyEvent event, Collection<Identifier> tables, ResourceKey<LootTable> loot) {
+    private static void inject(LootTableModifyEvent event, Collection<ResourceLocation> tables, ResourceKey<LootTable> loot) {
         if (tables.contains(event.getId())) {
-            event.getContext().addPool(LootPool.lootPool().add(NestedLootTable.lootTableReference(event.getContext().lootTable(loot)).setWeight(1)));
+            event.getContext().addPool(LootPool.lootPool().add(NestedLootTable.lootTableReference(loot).setWeight(1)));
         }
     }
 }

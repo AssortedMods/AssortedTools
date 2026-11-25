@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedmachetes:amethyst_machete"
+        "recipe": "assortedmachetes:amethyst_machete"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

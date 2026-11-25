@@ -7,7 +7,7 @@ import com.grim3212.assorted.boomerangs.common.item.BoomerangItem;
 import com.grim3212.assorted.boomerangs.common.item.BoomerangsItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.gametest.framework.GameTestHelper;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionHand;
@@ -50,12 +50,12 @@ final class BoomerangTests {
     }
 
     private static void assertBoomerangReturns(GameTestHelper helper, BoomerangItem item, int range) {
-        Identifier id = BuiltInRegistries.ITEM.getKey(item);
+        ResourceLocation id = BuiltInRegistries.ITEM.getKey(item);
         ServerPlayer player = survivalPlayer(helper, new ItemStack(item));
         // Above the test box's roof, so nothing overhead stops it short of its range.
         hover(helper, player, new Vec3(4.5D, 10.0D, 4.5D), -90.0F);
 
-        helper.assertTrue(player.getItemInHand(InteractionHand.MAIN_HAND).use(helper.getLevel(), player, InteractionHand.MAIN_HAND).consumesAction(), id + " refused to be thrown");
+        helper.assertTrue(player.getItemInHand(InteractionHand.MAIN_HAND).use(helper.getLevel(), player, InteractionHand.MAIN_HAND).getResult().consumesAction(), id + " refused to be thrown");
         helper.assertTrue(player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty(), id + " stayed in the hand after being thrown");
 
         List<BoomerangEntity> flying = helper.getLevel().getEntitiesOfClass(BoomerangEntity.class, player.getBoundingBox().inflate(4.0D));

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedgearsets:nickel_boots"
+        "recipe": "assortedgearsets:nickel_boots"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

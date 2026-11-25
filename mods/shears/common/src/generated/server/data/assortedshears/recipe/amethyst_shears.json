@@ -25,14 +25,19 @@
     }
   ],
   "key": {
-    "I": "#c:gems/amethyst",
-    "L": "#c:leathers"
+    "I": {
+      "tag": "c:gems/amethyst"
+    },
+    "L": {
+      "tag": "c:leathers"
+    }
   },
   "pattern": [
     " I",
     "IL"
   ],
   "result": {
+    "count": 1,
     "id": "assortedshears:amethyst_shears"
   }
 }

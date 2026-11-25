@@ -2,6 +2,7 @@ package com.grim3212.assorted.staffs.common.item;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
@@ -22,6 +23,8 @@ final class StaffFluids {
     private StaffFluids() {
     }
 
+    // NeoForge deprecates this four-argument emptyContents for its own, which takes the bucket stack; Fabric has only this one.
+    @SuppressWarnings("deprecation")
     static InteractionResult place(UseOnContext context, Fluid fluid, int cost) {
         Level level = context.getLevel();
         Player player = context.getPlayer();
@@ -40,7 +43,7 @@ final class StaffFluids {
             }
 
             ItemStack stack = context.getItemInHand();
-            stack.hurtAndBreak(cost, player, context.getHand());
+            stack.hurtAndBreak(cost, player, LivingEntity.getSlotForHand(context.getHand()));
         }
 
         return InteractionResult.SUCCESS;

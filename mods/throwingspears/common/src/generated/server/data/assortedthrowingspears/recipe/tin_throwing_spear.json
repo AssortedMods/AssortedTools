@@ -25,13 +25,18 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/tin",
-    "S": "#c:rods/wooden"
+    "I": {
+      "tag": "c:ingots/tin"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
   },
   "pattern": [
     "SSI"
   ],
   "result": {
+    "count": 1,
     "id": "assortedthrowingspears:tin_throwing_spear"
   }
 }

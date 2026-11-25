@@ -40,7 +40,7 @@ final class MacheteTests {
         for (MacheteItem item : MachetesItems.machetes()) {
             float speed = Math.max(item.getToolTier().getEfficiency(), 1.5F);
             ItemStack stack = new ItemStack(item);
-            for (BlockState state : List.of(Blocks.OAK_LEAVES.defaultBlockState(), Blocks.WOOL.white().defaultBlockState(), Blocks.CACTUS.defaultBlockState(), Blocks.VINE.defaultBlockState())) {
+            for (BlockState state : List.of(Blocks.OAK_LEAVES.defaultBlockState(), Blocks.WHITE_WOOL.defaultBlockState(), Blocks.CACTUS.defaultBlockState(), Blocks.VINE.defaultBlockState())) {
                 if (stack.getDestroySpeed(state) != speed) {
                     wrong.add(item + " cuts " + state.getBlock() + " at " + stack.getDestroySpeed(state) + " rather than " + speed);
                 }
@@ -70,7 +70,7 @@ final class MacheteTests {
         compare(helper, MachetesItems.DIAMOND_MACHETE.get(), Items.DIAMOND_SWORD);
         compare(helper, MachetesItems.NETHERITE_MACHETE.get(), Items.NETHERITE_SWORD);
 
-        helper.assertTrue(MachetesItems.NETHERITE_MACHETE.get().getDefaultInstance().has(DataComponents.DAMAGE_RESISTANT), "the netherite machete should survive fire and lava");
+        helper.assertTrue(MachetesItems.NETHERITE_MACHETE.get().getDefaultInstance().has(DataComponents.FIRE_RESISTANT), "the netherite machete should survive fire and lava");
         helper.succeed();
     }
 
@@ -87,6 +87,9 @@ final class MacheteTests {
     }
 
     private static double swing(ItemStack stack, Holder<Attribute> attribute) {
-        return stack.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY).compute(attribute, 0.0D, EquipmentSlot.MAINHAND);
+        // 1.21.1's compute sums every attribute's modifiers together, so keep only the one asked for.
+        ItemAttributeModifiers modifiers = stack.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
+        return new ItemAttributeModifiers(modifiers.modifiers().stream().filter(entry -> entry.attribute().equals(attribute)).toList(), false)
+                .compute(0.0D, EquipmentSlot.MAINHAND);
     }
 }

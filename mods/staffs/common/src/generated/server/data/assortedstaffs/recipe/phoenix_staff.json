@@ -14,9 +14,15 @@
     }
   ],
   "key": {
-    "C": "minecraft:fire_charge",
-    "D": "#c:gems/diamond",
-    "S": "#c:rods/blaze"
+    "C": {
+      "item": "minecraft:fire_charge"
+    },
+    "D": {
+      "tag": "c:gems/diamond"
+    },
+    "S": {
+      "tag": "c:rods/blaze"
+    }
   },
   "pattern": [
     "D",
@@ -24,6 +30,7 @@
     "S"
   ],
   "result": {
+    "count": 1,
     "id": "assortedstaffs:phoenix_staff"
   }
 }

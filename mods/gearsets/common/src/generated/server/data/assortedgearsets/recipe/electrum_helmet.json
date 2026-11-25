@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "X": "#c:ingots/electrum"
+    "X": {
+      "tag": "c:ingots/electrum"
+    }
   },
   "pattern": [
     "XXX",
     "X X"
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:electrum_helmet"
   }
 }

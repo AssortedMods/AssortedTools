@@ -25,13 +25,18 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/aluminum",
-    "S": "#c:rods/wooden"
+    "I": {
+      "tag": "c:ingots/aluminum"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
   },
   "pattern": [
     "SSI"
   ],
   "result": {
+    "count": 1,
     "id": "assortedthrowingspears:aluminum_throwing_spear"
   }
 }

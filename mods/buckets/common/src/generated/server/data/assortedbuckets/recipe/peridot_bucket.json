@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "I": "#c:gems/peridot"
+    "I": {
+      "tag": "c:gems/peridot"
+    }
   },
   "pattern": [
     "I I",
     " I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedbuckets:peridot_bucket"
   }
 }

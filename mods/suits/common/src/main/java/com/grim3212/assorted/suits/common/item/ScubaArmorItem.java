@@ -2,20 +2,18 @@ package com.grim3212.assorted.suits.common.item;
 
 import com.grim3212.assorted.lib.core.tool.ConfigurableArmorItem;
 import com.grim3212.assorted.suits.SuitsCommonMod;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.equipment.ArmorType;
-import org.jetbrains.annotations.Nullable;
 
 /** The scuba suit, in halves: mask and tank to breathe and see, legs and fins to swim. */
-public class ScubaArmorItem extends ConfigurableArmorItem {
+public class ScubaArmorItem extends ConfigurableArmorItem implements IWornTick {
 
     /** Short enough to lapse on surfacing. */
     private static final int EFFECT_DURATION = 60;
@@ -24,15 +22,13 @@ public class ScubaArmorItem extends ConfigurableArmorItem {
     /** A point of durability every five seconds, and only while the half is working. */
     private static final int WEAR_INTERVAL = 100;
 
-    public ScubaArmorItem(ArmorType type, Properties builderIn) {
+    public ScubaArmorItem(ArmorItem.Type type, Properties builderIn) {
         super(SuitsCommonMod.COMMON_CONFIG.scubaSuitArmorMaterial, type, builderIn);
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, ServerLevel level, Entity owner, @Nullable EquipmentSlot slot) {
-        super.inventoryTick(stack, level, owner, slot);
-
-        if (slot == null || !(owner instanceof LivingEntity wearer) || !wearer.isInWater()) {
+    public void wornTick(ItemStack stack, ServerLevel level, LivingEntity wearer, EquipmentSlot slot) {
+        if (!wearer.isInWater()) {
             return;
         }
 

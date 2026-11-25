@@ -48,7 +48,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedmultitools:peridot_multitool"
+        "recipe": "assortedmultitools:peridot_multitool"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

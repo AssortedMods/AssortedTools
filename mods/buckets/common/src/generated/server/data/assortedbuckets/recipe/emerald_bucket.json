@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "I": "#c:gems/emerald"
+    "I": {
+      "tag": "c:gems/emerald"
+    }
   },
   "pattern": [
     "I I",
     " I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedbuckets:emerald_bucket"
   }
 }

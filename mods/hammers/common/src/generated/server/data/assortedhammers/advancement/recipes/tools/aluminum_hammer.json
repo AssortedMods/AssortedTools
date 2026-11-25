@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedhammers:aluminum_hammer"
+        "recipe": "assortedhammers:aluminum_hammer"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

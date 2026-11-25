@@ -1,15 +1,20 @@
 package com.grim3212.assorted.buckets.client;
 
-import com.grim3212.assorted.buckets.client.color.FluidContainerTintSource;
-import com.grim3212.assorted.buckets.client.model.fluidcontainer.FluidContainerItemModel;
+import com.grim3212.assorted.buckets.client.model.fluidcontainer.FluidContainerModel;
+import com.grim3212.assorted.buckets.common.item.BucketsItems;
 import com.grim3212.assorted.lib.platform.ClientServices;
+import com.grim3212.assorted.lib.platform.Services;
 
 public class BucketsClient {
 
+    /** No tint: white, fully opaque, as 1.21.1 reads the alpha off an item colour too. */
+    private static final int NO_TINT = 0xFFFFFFFF;
+
     public static void init() {
-        // FluidContainerItemModel names this source on its fluid layer itself; registering it lets a resource pack name it too.
-        ClientServices.CLIENT.registerItemTintSource(FluidContainerTintSource.ID, FluidContainerTintSource.MAP_CODEC);
-        // Not a model json loader: the fluid it draws is only known after baking, and a loader has to finish its quads during it.
-        ClientServices.CLIENT.registerItemModelType(FluidContainerItemModel.ID, FluidContainerItemModel.Unbaked.MAP_CODEC);
+        ClientServices.CLIENT.registerModelLoader(FluidContainerModel.LOADER_NAME, FluidContainerModel.Loader.INSTANCE);
+        // The fluid layer takes the colour of the fluid the bucket holds; the bucket's own layers are drawn as they are.
+        ClientServices.CLIENT.registerItemColor((stack, tintIndex) -> tintIndex == FluidContainerModel.FLUID_TINT_INDEX
+                ? Services.FLUIDS.get(stack).map(ClientServices.FLUIDS::getFluidColor).orElse(NO_TINT)
+                : NO_TINT, BucketsItems::buckets);
     }
 }

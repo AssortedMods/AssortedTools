@@ -25,14 +25,19 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/aluminum",
-    "L": "#c:leathers"
+    "I": {
+      "tag": "c:ingots/aluminum"
+    },
+    "L": {
+      "tag": "c:leathers"
+    }
   },
   "pattern": [
     "LI",
     "I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedshears:aluminum_shears"
   }
 }

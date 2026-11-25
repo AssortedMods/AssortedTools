@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedhammers:lead_hammer"
+        "recipe": "assortedhammers:lead_hammer"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

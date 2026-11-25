@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "X": "#c:ingots/lead"
+    "X": {
+      "tag": "c:ingots/lead"
+    }
   },
   "pattern": [
     "X X",
     "X X"
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:lead_boots"
   }
 }

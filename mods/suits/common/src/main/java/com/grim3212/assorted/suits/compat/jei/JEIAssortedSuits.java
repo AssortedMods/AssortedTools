@@ -5,28 +5,27 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.registration.IRecipeRegistration;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.crafting.display.SlotDisplayContext;
+import net.minecraft.client.Minecraft;
+import net.minecraft.resources.ResourceLocation;
 
 @JeiPlugin
 public class JEIAssortedSuits implements IModPlugin {
 
-    private static final Identifier PLUGIN_ID = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "jei");
+    private static final ResourceLocation PLUGIN_ID = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "jei");
 
     @Override
-    public Identifier getPluginUid() {
+    public ResourceLocation getPluginUid() {
         return PLUGIN_ID;
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        // Building an enchanted display stack needs a registry lookup, which JEI hands over under the vanilla slot-display key.
-        HolderLookup.Provider registries = registration.getContextMap().get(SlotDisplayContext.REGISTRIES);
-        if (registries == null) {
+        // Building an enchanted display stack needs the enchantment registry, which is the joined world's.
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.level == null) {
             return;
         }
 
-        registration.addRecipes(RecipeTypes.ANVIL, AnvilRecipes.chickenEnchantRecipes(registration.getVanillaRecipeFactory(), registration.getIngredientManager(), registries));
+        registration.addRecipes(RecipeTypes.ANVIL, AnvilRecipes.chickenEnchantRecipes(registration.getVanillaRecipeFactory(), registration.getIngredientManager(), minecraft.level.registryAccess()));
     }
 }

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedgearsets:lead_shovel"
+        "recipe": "assortedgearsets:lead_shovel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

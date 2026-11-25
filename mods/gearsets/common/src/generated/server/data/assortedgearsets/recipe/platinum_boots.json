@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "X": "#c:ingots/platinum"
+    "X": {
+      "tag": "c:ingots/platinum"
+    }
   },
   "pattern": [
     "X X",
     "X X"
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:platinum_boots"
   }
 }

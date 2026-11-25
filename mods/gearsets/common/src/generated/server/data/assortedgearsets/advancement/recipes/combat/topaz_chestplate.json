@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedgearsets:topaz_chestplate"
+        "recipe": "assortedgearsets:topaz_chestplate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

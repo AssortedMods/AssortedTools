@@ -6,6 +6,7 @@
     }
   ],
   "type": "minecraft:crafting_shapeless",
+  "category": "misc",
   "fabric:load_conditions": [
     {
       "condition": "assortedlib:part_enabled",
@@ -13,9 +14,15 @@
     }
   ],
   "ingredients": [
-    "#c:gunpowders",
-    "assortedstaffs:frost_powder",
-    "minecraft:snowball"
+    {
+      "tag": "c:gunpowders"
+    },
+    {
+      "item": "assortedstaffs:frost_powder"
+    },
+    {
+      "item": "minecraft:snowball"
+    }
   ],
   "result": {
     "count": 3,

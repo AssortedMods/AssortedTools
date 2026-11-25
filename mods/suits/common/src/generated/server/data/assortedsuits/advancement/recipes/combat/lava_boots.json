@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedsuits:lava_boots"
+        "recipe": "assortedsuits:lava_boots"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

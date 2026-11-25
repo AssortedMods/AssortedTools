@@ -12,10 +12,12 @@ import com.grim3212.assorted.shears.data.ShearsEnchantmentTagProvider;
 import com.grim3212.assorted.shears.data.ShearsItemTagProvider;
 import com.grim3212.assorted.shears.data.ShearsRecipes;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.concurrent.CompletableFuture;
@@ -25,30 +27,26 @@ public class AssortedShearsNeoForge {
 
     /** The mod event bus and container are injected into the {@code @Mod} constructor. */
     public AssortedShearsNeoForge(IEventBus modBus, ModContainer modContainer) {
-        modBus.addListener(this::gatherServerData);
-        modBus.addListener(this::gatherClientData);
+        modBus.addListener(this::gatherData);
 
         ShearsCommonMod.init();
     }
 
-    /** Server datagen. If the client half runs instead, the build still succeeds, with "All providers took: 0 ms". */
-    private void gatherServerData(final GatherDataEvent.Server event) {
-        PackOutput packOutput = event.getGenerator().getPackOutput();
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getWorldLookupProvider();
+    /** One event for both halves; each provider is added for the half its output belongs to. */
+    private void gatherData(final GatherDataEvent event) {
+        DataGenerator generator = event.getGenerator();
+        PackOutput packOutput = generator.getPackOutput();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        ExistingFileHelper fileHelper = event.getExistingFileHelper();
 
         ForgeRegistryEntries.of(Constants.MOD_ID).world(new ShearsEnchantmentData()).recipes(ShearsRecipes::new).addTo(event);
-        ForgeBlockTagProvider blockTagProvider = event.addProvider(new ForgeBlockTagProvider(packOutput, lookupProvider, Constants.MOD_ID, new ShearsBlockTagProvider(packOutput, lookupProvider)));
-        event.addProvider(new ForgeItemTagProvider(packOutput, lookupProvider, blockTagProvider.contentsGetter(), Constants.MOD_ID, new ShearsItemTagProvider(packOutput, lookupProvider, blockTagProvider.contentsGetter())));
+        ForgeBlockTagProvider blockTagProvider = generator.addProvider(event.includeServer(), new ForgeBlockTagProvider(packOutput, lookupProvider, Constants.MOD_ID, fileHelper, new ShearsBlockTagProvider(packOutput, lookupProvider)));
+        generator.addProvider(event.includeServer(), new ForgeItemTagProvider(packOutput, lookupProvider, blockTagProvider.contentsGetter(), Constants.MOD_ID, fileHelper, new ShearsItemTagProvider(packOutput, lookupProvider, blockTagProvider.contentsGetter())));
         // Enchantments are datapack registry content, not registered from code.
-        event.addProvider(new ShearsEnchantmentTagProvider(packOutput, lookupProvider));
-    }
+        generator.addProvider(event.includeServer(), new ShearsEnchantmentTagProvider(packOutput, lookupProvider));
 
-    /** Client datagen: models, the language file and the manual, written into common for both loaders. */
-    private void gatherClientData(final GatherDataEvent.Client event) {
-        PackOutput packOutput = event.getGenerator().getPackOutput();
-
-        event.addProvider(new ShearsItemModelProvider(packOutput));
-        event.addProvider(new ShearsLanguageProvider(packOutput));
-        event.addProvider(new ShearsManualProvider(packOutput));
+        generator.addProvider(event.includeClient(), new ShearsItemModelProvider(packOutput, fileHelper));
+        generator.addProvider(event.includeClient(), new ShearsLanguageProvider(packOutput));
+        generator.addProvider(event.includeClient(), new ShearsManualProvider(packOutput));
     }
 }

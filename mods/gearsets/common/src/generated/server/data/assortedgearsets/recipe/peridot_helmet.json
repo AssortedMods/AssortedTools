@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "X": "#c:gems/peridot"
+    "X": {
+      "tag": "c:gems/peridot"
+    }
   },
   "pattern": [
     "XXX",
     "X X"
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:peridot_helmet"
   }
 }

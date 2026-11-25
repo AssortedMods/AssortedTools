@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedmachetes:electrum_machete"
+        "recipe": "assortedmachetes:electrum_machete"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

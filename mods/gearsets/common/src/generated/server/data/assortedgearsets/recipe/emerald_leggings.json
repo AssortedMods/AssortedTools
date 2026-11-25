@@ -25,7 +25,9 @@
     }
   ],
   "key": {
-    "X": "#c:gems/emerald"
+    "X": {
+      "tag": "c:gems/emerald"
+    }
   },
   "pattern": [
     "XXX",
@@ -33,6 +35,7 @@
     "X X"
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:emerald_leggings"
   }
 }

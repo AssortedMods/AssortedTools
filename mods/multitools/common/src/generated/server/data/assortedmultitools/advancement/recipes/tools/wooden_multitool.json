@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedmultitools:wooden_multitool"
+        "recipe": "assortedmultitools:wooden_multitool"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

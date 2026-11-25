@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedgearsets:platinum_hoe"
+        "recipe": "assortedgearsets:platinum_hoe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

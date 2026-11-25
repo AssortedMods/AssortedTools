@@ -2,7 +2,7 @@ package com.grim3212.assorted.boomerangs.common.entity;
 
 import com.grim3212.assorted.boomerangs.BoomerangsCommonMod;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -10,7 +10,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityReference;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
@@ -23,8 +22,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.LeverBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -48,11 +45,8 @@ public abstract class BoomerangEntity extends Entity {
     private ItemStack selfStack = ItemStack.EMPTY;
     private InteractionHand hand;
     private static final EntityDataAccessor<Float> ROTATION = SynchedEntityData.defineId(BoomerangEntity.class, EntityDataSerializers.FLOAT);
-    /**
-     * There is no UUID entity data serializer any more; owners are tracked as an
-     * {@link EntityReference}, which carries the UUID and resolves it lazily against the level.
-     */
-    private static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> RETURN_TO = SynchedEntityData.defineId(BoomerangEntity.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
+    /** The player the boomerang flies back to, by UUID, resolved against the level each time it is needed. */
+    private static final EntityDataAccessor<Optional<UUID>> RETURN_TO = SynchedEntityData.defineId(BoomerangEntity.class, EntityDataSerializers.OPTIONAL_UUID);
 
     /** A thrown boomerang flies out at half a block a tick. */
     private static final double SPEED = 0.5D;
@@ -213,19 +207,10 @@ public abstract class BoomerangEntity extends Entity {
     }
 
     public void onEntityHit(Entity hitEntity, Player player) {
-        // hurtServer only exists server-side, which is where damage is actually applied.
-        if (this.level() instanceof ServerLevel serverLevel) {
-            hitEntity.hurtServer(serverLevel, causeNewDamage(this, player), getDamage(hitEntity, player));
+        // Damage is only dealt on the server.
+        if (!this.level().isClientSide()) {
+            hitEntity.hurt(causeNewDamage(this, player), getDamage(hitEntity, player));
         }
-    }
-
-    /**
-     * Abstract on {@link Entity} now. A boomerang cannot be attacked, like vanilla's own
-     * non-living projectiles.
-     */
-    @Override
-    public boolean hurtServer(ServerLevel level, DamageSource source, float damage) {
-        return false;
     }
 
     protected abstract int getDamage(Entity hitEntity, Player player);
@@ -260,26 +245,21 @@ public abstract class BoomerangEntity extends Entity {
 
     @Nullable
     public UUID getReturnToId() {
-        return this.entityData.get(RETURN_TO).map(EntityReference::getUUID).orElse(null);
+        return this.entityData.get(RETURN_TO).orElse(null);
     }
 
     public void setReturnTo(@Nullable Player player) {
-        this.entityData.set(RETURN_TO, Optional.ofNullable(EntityReference.<LivingEntity>of(player)));
+        this.setReturnToId(player == null ? null : player.getUUID());
     }
 
-    private void setReturnTo(@Nullable EntityReference<LivingEntity> reference) {
-        this.entityData.set(RETURN_TO, Optional.ofNullable(reference));
+    private void setReturnToId(@Nullable UUID id) {
+        this.entityData.set(RETURN_TO, Optional.ofNullable(id));
     }
 
     @Nullable
     public Player getReturnTo() {
-        EntityReference<LivingEntity> reference = this.entityData.get(RETURN_TO).orElse(null);
-        if (reference == null) {
-            return null;
-        }
-
-        LivingEntity entity = reference.getEntity(this.level(), LivingEntity.class);
-        return entity instanceof Player player ? player : null;
+        UUID id = this.getReturnToId();
+        return id == null ? null : this.level().getPlayerByUUID(id);
     }
 
     public boolean isReturnTo(LivingEntity entityIn) {
@@ -295,42 +275,46 @@ public abstract class BoomerangEntity extends Entity {
     }
 
     @Override
-    protected void readAdditionalSaveData(ValueInput input) {
-        this.isBouncing = input.getBooleanOr("IsBouncing", false);
-        this.bounceFactor = input.getDoubleOr("BounceFactor", 0.84999999999999998D);
-        this.prevBoomerangRotation = input.getFloatOr("PrevBoomerangRotation", 0.0F);
-        this.setBoomerangRotation(input.getFloatOr("BoomerangRotation", 0.0F));
-        this.turningAround = input.getBooleanOr("TurningAround", false);
-        this.timeBeforeTurnAround = input.getIntOr("TimeBeforeTurnAround", 30);
+    protected void readAdditionalSaveData(CompoundTag tag) {
+        this.isBouncing = tag.getBoolean("IsBouncing");
+        this.bounceFactor = tag.contains("BounceFactor") ? tag.getDouble("BounceFactor") : 0.84999999999999998D;
+        this.prevBoomerangRotation = tag.getFloat("PrevBoomerangRotation");
+        this.setBoomerangRotation(tag.getFloat("BoomerangRotation"));
+        this.turningAround = tag.getBoolean("TurningAround");
+        this.timeBeforeTurnAround = tag.contains("TimeBeforeTurnAround") ? tag.getInt("TimeBeforeTurnAround") : 30;
 
-        int[] activated = input.getIntArray("ActivatedPos").orElse(null);
-        this.activatedPos = activated != null && activated.length == 3 ? new BlockPos(activated[0], activated[1], activated[2]) : null;
+        int[] activated = tag.getIntArray("ActivatedPos");
+        this.activatedPos = activated.length == 3 ? new BlockPos(activated[0], activated[1], activated[2]) : null;
 
-        this.setReturnTo(EntityReference.<LivingEntity>read(input, "ReturnTo"));
+        // An int array UUID, which is also how the 26.x line stores it.
+        this.setReturnToId(tag.hasUUID("ReturnTo") ? tag.getUUID("ReturnTo") : null);
 
-        this.selfStack = input.read("SelfStack", ItemStack.CODEC).orElse(ItemStack.EMPTY);
+        this.selfStack = ItemStack.parseOptional(this.registryAccess(), tag.getCompound("SelfStack"));
 
-        this.hand = "OFF_HAND".equals(input.getStringOr("hand", InteractionHand.MAIN_HAND.name())) ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
+        this.hand = "OFF_HAND".equals(tag.getString("hand")) ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
     }
 
     @Override
-    protected void addAdditionalSaveData(ValueOutput output) {
-        output.putBoolean("IsBouncing", isBouncing);
-        output.putDouble("BounceFactor", bounceFactor);
-        output.putFloat("PrevBoomerangRotation", prevBoomerangRotation);
-        output.putFloat("BoomerangRotation", this.getBoomerangRotation());
-        output.putBoolean("TurningAround", turningAround);
-        output.putInt("TimeBeforeTurnAround", timeBeforeTurnAround);
+    protected void addAdditionalSaveData(CompoundTag tag) {
+        tag.putBoolean("IsBouncing", isBouncing);
+        tag.putDouble("BounceFactor", bounceFactor);
+        tag.putFloat("PrevBoomerangRotation", prevBoomerangRotation);
+        tag.putFloat("BoomerangRotation", this.getBoomerangRotation());
+        tag.putBoolean("TurningAround", turningAround);
+        tag.putInt("TimeBeforeTurnAround", timeBeforeTurnAround);
         if (activatedPos != null) {
-            output.putIntArray("ActivatedPos", new int[]{activatedPos.getX(), activatedPos.getY(), activatedPos.getZ()});
+            tag.putIntArray("ActivatedPos", new int[]{activatedPos.getX(), activatedPos.getY(), activatedPos.getZ()});
         }
 
-        EntityReference.store(this.entityData.get(RETURN_TO).orElse(null), output, "ReturnTo");
+        UUID returnTo = this.getReturnToId();
+        if (returnTo != null) {
+            tag.putUUID("ReturnTo", returnTo);
+        }
 
-        // ItemStack.CODEC refuses an empty stack, which a boomerang spawned without one still has.
+        // An empty stack cannot be saved, which a boomerang spawned without one still has.
         if (!this.selfStack.isEmpty()) {
-            output.store("SelfStack", ItemStack.CODEC, this.selfStack);
+            tag.put("SelfStack", this.selfStack.save(this.registryAccess()));
         }
-        output.putString("hand", this.hand.name());
+        tag.putString("hand", this.hand.name());
     }
 }

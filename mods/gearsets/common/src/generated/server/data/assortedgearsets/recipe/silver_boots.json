@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "X": "#c:ingots/silver"
+    "X": {
+      "tag": "c:ingots/silver"
+    }
   },
   "pattern": [
     "X X",
     "X X"
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:silver_boots"
   }
 }

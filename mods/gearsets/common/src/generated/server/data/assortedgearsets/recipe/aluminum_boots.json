@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "X": "#c:ingots/aluminum"
+    "X": {
+      "tag": "c:ingots/aluminum"
+    }
   },
   "pattern": [
     "X X",
     "X X"
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:aluminum_boots"
   }
 }

@@ -4,26 +4,23 @@ import com.grim3212.assorted.buckets.BucketsCommonMod;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import net.neoforged.neoforge.transfer.ItemAccessResourceHandler;
-import net.neoforged.neoforge.transfer.access.ItemAccess;
-import net.neoforged.neoforge.transfer.fluid.FluidResource;
-import net.neoforged.neoforge.transfer.item.ItemResource;
-import net.neoforged.neoforge.transfer.transaction.TransactionContext;
-import org.jspecify.annotations.Nullable;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 
 /**
- * Not an {@code ItemAccessFluidHandler}, which stores fluid in a {@code SimpleFluidContent}
- * component: the bucket keeps it in its own tag, which the tooltip, milking, dispenser, model and Fabric side all read.
+ * Not a {@code FluidHandlerItemStack}, which stores fluid in a {@code SimpleFluidContent} component:
+ * the bucket keeps it in its own tag, which the tooltip, milking, dispenser, model and Fabric side all read.
  */
-public class NeoForgeBetterBucketFluidHandler extends ItemAccessResourceHandler<FluidResource> {
+public class NeoForgeBetterBucketFluidHandler implements IFluidHandlerItem {
 
     private final BetterBucketItem bucket;
     private final ItemStack onBroken;
     private final ItemStack empty;
     private final int capacity;
+    private ItemStack container;
 
-    public NeoForgeBetterBucketFluidHandler(ItemAccess itemAccess, BetterBucketItem bucket, ItemStack onBroken, ItemStack empty, int capacity) {
-        super(itemAccess, 1);
+    public NeoForgeBetterBucketFluidHandler(ItemStack container, BetterBucketItem bucket, ItemStack onBroken, ItemStack empty, int capacity) {
+        this.container = container;
         this.bucket = bucket;
         this.onBroken = onBroken;
         this.empty = empty;
@@ -31,34 +28,37 @@ public class NeoForgeBetterBucketFluidHandler extends ItemAccessResourceHandler<
     }
 
     @Override
-    protected FluidResource getResourceFrom(ItemResource accessResource, int index) {
-        if (!accessResource.is(this.bucket)) {
-            return FluidResource.EMPTY;
-        }
-
-        Fluid fluid = BetterBucketItem.getFluidFromString(BetterBucketItem.getFluid(accessResource.toStack()));
-        return fluid == Fluids.EMPTY ? FluidResource.EMPTY : FluidResource.of(fluid);
+    public ItemStack getContainer() {
+        return this.container;
     }
 
     @Override
-    protected int getAmountFrom(ItemResource accessResource, int index) {
-        return accessResource.is(this.bucket) ? BetterBucketItem.getAmount(accessResource.toStack()) : 0;
+    public int getTanks() {
+        return 1;
+    }
+
+    private boolean isBucket() {
+        return this.container.getCount() == 1 && this.container.is(this.bucket);
+    }
+
+    private FluidStack contained() {
+        if (!this.isBucket()) {
+            return FluidStack.EMPTY;
+        }
+
+        Fluid fluid = BetterBucketItem.getFluidFromString(BetterBucketItem.getFluid(this.container));
+        int amount = BetterBucketItem.getAmount(this.container);
+        return fluid == Fluids.EMPTY || amount <= 0 ? FluidStack.EMPTY : new FluidStack(fluid, amount);
     }
 
     @Override
-    protected @Nullable ItemResource update(ItemResource accessResource, int index, FluidResource newResource, int newAmount) {
-        // Emptying a bucket that breaks on use hands back the broken remainder instead of an empty stack.
-        if (newAmount <= 0 || newResource.isEmpty()) {
-            if (!this.onBroken.isEmpty()) {
-                return ItemResource.of(this.onBroken);
-            }
+    public FluidStack getFluidInTank(int tank) {
+        return this.contained();
+    }
 
-            return this.empty.isEmpty() ? ItemResource.of(accessResource.toStack()) : ItemResource.of(this.empty);
-        }
-
-        ItemStack updated = accessResource.toStack();
-        BetterBucketItem.storeFluid(updated, newResource.getFluid(), newAmount);
-        return ItemResource.of(updated);
+    @Override
+    public int getTankCapacity(int tank) {
+        return this.capacity;
     }
 
     /**
@@ -66,29 +66,67 @@ public class NeoForgeBetterBucketFluidHandler extends ItemAccessResourceHandler<
      * bucket this handler was built for.
      */
     @Override
-    public boolean isValid(int index, FluidResource resource) {
-        return this.itemAccess.getResource().is(this.bucket) && resource.getFluid() != Fluids.EMPTY && this.bucket.canHoldTemperatureOf(resource.getFluid());
+    public boolean isFluidValid(int tank, FluidStack stack) {
+        return this.isBucket() && !stack.isEmpty() && this.bucket.canHoldTemperatureOf(stack.getFluid());
     }
 
     @Override
-    protected int getCapacity(int index, FluidResource resource) {
-        return this.capacity;
+    public int fill(FluidStack resource, FluidAction action) {
+        if (resource.isEmpty() || !this.isFluidValid(0, resource)) {
+            return 0;
+        }
+
+        FluidStack contained = this.contained();
+        // One kind of fluid at a time.
+        if (!contained.isEmpty() && !FluidStack.isSameFluidSameComponents(contained, resource)) {
+            return 0;
+        }
+
+        int filled = roundToBuckets(Math.min(this.capacity - contained.getAmount(), resource.getAmount()));
+        if (filled > 0 && action.execute()) {
+            BetterBucketItem.storeFluid(this.container, resource.getFluid(), contained.getAmount() + filled);
+        }
+        return Math.max(filled, 0);
     }
 
     @Override
-    public int insert(int index, FluidResource resource, int amount, TransactionContext transaction) {
-        return super.insert(index, resource, roundToBuckets(amount), transaction);
+    public FluidStack drain(FluidStack resource, FluidAction action) {
+        FluidStack contained = this.contained();
+        if (resource.isEmpty() || !FluidStack.isSameFluidSameComponents(contained, resource)) {
+            return FluidStack.EMPTY;
+        }
+        return this.drain(resource.getAmount(), action);
     }
 
     @Override
-    public int extract(int index, FluidResource resource, int amount, TransactionContext transaction) {
-        return super.extract(index, resource, roundToBuckets(amount), transaction);
+    public FluidStack drain(int maxDrain, FluidAction action) {
+        FluidStack contained = this.contained();
+        if (contained.isEmpty() || maxDrain <= 0) {
+            return FluidStack.EMPTY;
+        }
+
+        int drained = roundToBuckets(Math.min(contained.getAmount(), maxDrain));
+        if (drained <= 0) {
+            return FluidStack.EMPTY;
+        }
+
+        if (action.execute()) {
+            int left = contained.getAmount() - drained;
+            if (left > 0) {
+                BetterBucketItem.setAmount(this.container, left);
+            } else if (!this.onBroken.isEmpty()) {
+                // Emptying a bucket that breaks on use hands back the broken remainder instead of an empty bucket.
+                this.container = this.onBroken.copy();
+            } else if (!this.empty.isEmpty()) {
+                this.container = this.empty.copy();
+            } else {
+                BetterBucketItem.storeFluid(this.container, Fluids.EMPTY, 0);
+            }
+        }
+        return contained.copyWithAmount(drained);
     }
 
-    /**
-     * Unless partial amounts are enabled, these buckets move fluid a whole bucket at a time.
-     * Previously spelled out twice, in overrides of {@code fill} and {@code drain}.
-     */
+    /** Unless partial amounts are enabled, these buckets move fluid a whole bucket at a time. */
     private static int roundToBuckets(int amount) {
         if (BucketsCommonMod.CONFIG.allowPartialBucketAmounts.get()) {
             return amount;

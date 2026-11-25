@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/netherite"
+    "I": {
+      "tag": "c:ingots/netherite"
+    }
   },
   "pattern": [
     "I I",
     " I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedbuckets:netherite_bucket"
   }
 }

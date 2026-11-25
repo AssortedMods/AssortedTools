@@ -11,8 +11,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityTypes;
-import net.minecraft.world.entity.animal.cow.Cow;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
@@ -60,7 +60,7 @@ final class ThrowingSpearTests {
 
     /** The same throw, into a cow. */
     private static void spearDamagesAMob(GameTestHelper helper) {
-        Cow cow = helper.spawn(EntityTypes.COW, new BlockPos(4, 1, 4));
+        Cow cow = helper.spawn(EntityType.COW, new BlockPos(4, 1, 4));
         float before = cow.getHealth();
 
         ServerPlayer player = survivalPlayer(helper, new ItemStack(ThrowingSpearsItems.IRON_THROWING_SPEAR.get()));
@@ -88,8 +88,9 @@ final class ThrowingSpearTests {
 
         player.startUsingItem(InteractionHand.MAIN_HAND);
         // releaseUsing counts backwards: twenty short of the full duration is a twenty tick charge, past the ten it insists on.
-        boolean thrown = spear.releaseUsing(stack, helper.getLevel(), player, spear.getUseDuration(stack, player) - 20);
-        helper.assertTrue(thrown, "the spear refused to be thrown");
+        // On 1.21.1 it returns nothing, so a throw shows as the spear entity it leaves and the stack it takes from the hand.
+        spear.releaseUsing(stack, helper.getLevel(), player, spear.getUseDuration(stack, player) - 20);
+        helper.assertTrue(player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty(), "the spear refused to be thrown");
 
         List<BetterSpearEntity> spears = helper.getEntities(ThrowingSpearsEntities.BETTER_SPEAR.get());
         helper.assertValueEqual(spears.size(), 1, "spear entities in the world after one throw");

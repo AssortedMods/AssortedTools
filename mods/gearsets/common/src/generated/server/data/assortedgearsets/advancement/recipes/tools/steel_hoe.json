@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedgearsets:steel_hoe"
+        "recipe": "assortedgearsets:steel_hoe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

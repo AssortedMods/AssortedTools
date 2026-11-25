@@ -10,7 +10,7 @@ import mezz.jei.api.runtime.IIngredientManager;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -34,10 +34,7 @@ public class AnvilRecipes {
             Map.entry(ItemTags.FOOT_ARMOR, SuitsItems.CHICKEN_SUIT_BOOTS)
     );
 
-    /**
-     * Takes a {@link HolderLookup.Provider} because writing an enchantment onto a stack needs its
-     * {@link Holder}; JEI's context supplies it.
-     */
+    /** Takes a {@link HolderLookup.Provider} because writing an enchantment onto a stack needs its {@link Holder}. */
     public static List<IJeiAnvilRecipe> chickenEnchantRecipes(IVanillaRecipeFactory recipeFactory, IIngredientManager ingredientManager, HolderLookup.Provider registries) {
         List<IJeiAnvilRecipe> recipes = new ArrayList<>();
 
@@ -56,7 +53,7 @@ public class AnvilRecipes {
             var enchantedArmors = armors.stream().map((stack) -> getChickenEnchanted(stack, chickenJump)).toList();
 
             // Keyed by the armor slot's tag, since that's what makes these four recipes distinct.
-            Identifier uid = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "chicken_jump/" + tag.location().getNamespace() + "/" + tag.location().getPath().replace('/', '_'));
+            ResourceLocation uid = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "chicken_jump/" + tag.location().getNamespace() + "/" + tag.location().getPath().replace('/', '_'));
 
             recipes.add(recipeFactory.createAnvilRecipe(armors, List.of(new ItemStack(item.get())), enchantedArmors, uid));
         });

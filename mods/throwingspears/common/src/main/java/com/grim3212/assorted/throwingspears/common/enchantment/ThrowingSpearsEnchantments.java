@@ -4,7 +4,7 @@ import com.grim3212.assorted.throwingspears.Constants;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -21,10 +21,10 @@ public class ThrowingSpearsEnchantments {
     public static final ResourceKey<Enchantment> UNSTABLE = key("unstable");
 
     /** What the four enchantments name as their supported items, in place of the old {@code canEnchant} checks. */
-    public static final TagKey<Item> SPEAR_ENCHANTABLE = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(Constants.MOD_ID, "enchantable/throwing_spear"));
+    public static final TagKey<Item> SPEAR_ENCHANTABLE = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "enchantable/throwing_spear"));
 
     private static ResourceKey<Enchantment> key(String name) {
-        return ResourceKey.create(Registries.ENCHANTMENT, Identifier.fromNamespaceAndPath(Constants.MOD_ID, name));
+        return ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, name));
     }
 
     public static int getConductivity(ItemStack stack) {

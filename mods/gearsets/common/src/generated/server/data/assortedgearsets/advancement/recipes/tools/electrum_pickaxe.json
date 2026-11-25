@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedgearsets:electrum_pickaxe"
+        "recipe": "assortedgearsets:electrum_pickaxe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

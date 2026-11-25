@@ -14,17 +14,36 @@
     }
   ],
   "ingredients": [
-    "assortedultimatefist:u_fragment",
-    "assortedultimatefist:l_fragment",
-    "assortedultimatefist:t_fragment",
-    "assortedultimatefist:i_fragment",
-    "assortedultimatefist:m_fragment",
-    "assortedultimatefist:a_fragment",
-    "assortedultimatefist:missing_fragment",
-    "assortedultimatefist:e_fragment",
-    "#c:nether_stars"
+    {
+      "item": "assortedultimatefist:u_fragment"
+    },
+    {
+      "item": "assortedultimatefist:l_fragment"
+    },
+    {
+      "item": "assortedultimatefist:t_fragment"
+    },
+    {
+      "item": "assortedultimatefist:i_fragment"
+    },
+    {
+      "item": "assortedultimatefist:m_fragment"
+    },
+    {
+      "item": "assortedultimatefist:a_fragment"
+    },
+    {
+      "item": "assortedultimatefist:missing_fragment"
+    },
+    {
+      "item": "assortedultimatefist:e_fragment"
+    },
+    {
+      "tag": "c:nether_stars"
+    }
   ],
   "result": {
+    "count": 1,
     "id": "assortedultimatefist:ultimate_fist"
   }
 }

@@ -8,7 +8,7 @@ import com.grim3212.assorted.ultimatefist.common.handlers.FragmentLootHandler;
 import com.grim3212.assorted.ultimatefist.common.handlers.UltimateFistCreativeItems;
 import com.grim3212.assorted.ultimatefist.common.item.UltimateFistItems;
 import com.grim3212.assorted.ultimatefist.config.UltimateFistConfig;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * Loader-agnostic startup. Both loader entry points call {@link #init()} and nothing else; anything
@@ -21,7 +21,7 @@ public class UltimateFistCommonMod {
     public static void init() {
         Constants.LOG.info(Constants.MOD_NAME + " starting up...");
         Families.join(Constants.MOD_ID, Constants.FAMILY_ID)
-                .icon(Identifier.fromNamespaceAndPath(Constants.MOD_ID, "ultimate_fist"), 20)
+                .icon(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "ultimate_fist"), 20)
                 .manualOrder(120);
 
         UltimateFistItems.init();

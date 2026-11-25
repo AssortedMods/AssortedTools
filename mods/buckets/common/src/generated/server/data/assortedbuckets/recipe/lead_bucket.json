@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/lead"
+    "I": {
+      "tag": "c:ingots/lead"
+    }
   },
   "pattern": [
     "I I",
     " I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedbuckets:lead_bucket"
   }
 }

@@ -25,14 +25,19 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/lead",
-    "L": "#c:leathers"
+    "I": {
+      "tag": "c:ingots/lead"
+    },
+    "L": {
+      "tag": "c:leathers"
+    }
   },
   "pattern": [
     "LI",
     "I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedshears:lead_shears"
   }
 }

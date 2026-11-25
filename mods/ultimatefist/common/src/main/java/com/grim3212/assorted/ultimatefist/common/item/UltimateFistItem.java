@@ -2,7 +2,6 @@ package com.grim3212.assorted.ultimatefist.common.item;
 
 import com.grim3212.assorted.ultimatefist.UltimateFistCommonMod;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
@@ -11,13 +10,12 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.minecraft.world.item.component.Weapon;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 /**
  * The reward for assembling all eight fragments. Not a tiered item: it reads its numbers from the
- * ultimate tier's configuration, and has no {@code enchantable} component so it can't be enchanted.
+ * ultimate tier's configuration, and is not enchantable, so an enchanting table won't take it.
  */
 public class UltimateFistItem extends Item {
 
@@ -26,9 +24,7 @@ public class UltimateFistItem extends Item {
     public UltimateFistItem(Properties props) {
         super(props.durability(UltimateFistCommonMod.COMMON_CONFIG.ultimateItemTier.getMaxUses())
                 .fireResistant()
-                .attributes(attributes())
-                // The fist costs one durability per swing, which used to be an overridden hurtEnemy.
-                .component(DataComponents.WEAPON, new Weapon(1)));
+                .attributes(attributes()));
     }
 
     private static ItemAttributeModifiers attributes() {
@@ -36,6 +32,24 @@ public class UltimateFistItem extends Item {
                 .add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, UltimateFistCommonMod.COMMON_CONFIG.ultimateItemTier.getDamage(), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
                 .add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, ATTACK_SPEED, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
                 .build();
+    }
+
+    /** A hit counts, so {@link #postHurtEnemy} spends the durability, as a sword's does. */
+    @Override
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        return true;
+    }
+
+    /** The fist costs one durability per swing. */
+    @Override
+    public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
+    }
+
+    /** It has durability, which alone would let it into an enchanting table. */
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return false;
     }
 
     @Override

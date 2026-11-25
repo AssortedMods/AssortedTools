@@ -48,7 +48,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedmultitools:ruby_multitool"
+        "recipe": "assortedmultitools:ruby_multitool"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

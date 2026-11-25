@@ -25,17 +25,36 @@
     }
   ],
   "ingredients": [
-    "minecraft:iron_pickaxe",
-    "minecraft:iron_shovel",
-    "minecraft:iron_axe",
-    "minecraft:iron_hoe",
-    "minecraft:iron_sword",
-    "#c:ingots/iron",
-    "#c:ingots/iron",
-    "#c:ingots/iron",
-    "#c:ingots/iron"
+    {
+      "item": "minecraft:iron_pickaxe"
+    },
+    {
+      "item": "minecraft:iron_shovel"
+    },
+    {
+      "item": "minecraft:iron_axe"
+    },
+    {
+      "item": "minecraft:iron_hoe"
+    },
+    {
+      "item": "minecraft:iron_sword"
+    },
+    {
+      "tag": "c:ingots/iron"
+    },
+    {
+      "tag": "c:ingots/iron"
+    },
+    {
+      "tag": "c:ingots/iron"
+    },
+    {
+      "tag": "c:ingots/iron"
+    }
   ],
   "result": {
+    "count": 1,
     "id": "assortedmultitools:iron_multitool"
   }
 }

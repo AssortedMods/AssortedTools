@@ -90,17 +90,36 @@
     }
   ],
   "ingredients": [
-    "#c:pickaxes/sapphire",
-    "#c:shovels/sapphire",
-    "#c:axes/sapphire",
-    "#c:hoes/sapphire",
-    "#c:swords/sapphire",
-    "#c:gems/sapphire",
-    "#c:gems/sapphire",
-    "#c:gems/sapphire",
-    "#c:gems/sapphire"
+    {
+      "tag": "c:pickaxes/sapphire"
+    },
+    {
+      "tag": "c:shovels/sapphire"
+    },
+    {
+      "tag": "c:axes/sapphire"
+    },
+    {
+      "tag": "c:hoes/sapphire"
+    },
+    {
+      "tag": "c:swords/sapphire"
+    },
+    {
+      "tag": "c:gems/sapphire"
+    },
+    {
+      "tag": "c:gems/sapphire"
+    },
+    {
+      "tag": "c:gems/sapphire"
+    },
+    {
+      "tag": "c:gems/sapphire"
+    }
   ],
   "result": {
+    "count": 1,
     "id": "assortedmultitools:sapphire_multitool"
   }
 }

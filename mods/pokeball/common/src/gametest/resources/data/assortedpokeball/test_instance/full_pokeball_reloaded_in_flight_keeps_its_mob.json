@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedpokeball:full_pokeball_reloaded_in_flight_keeps_its_mob",
+  "structure": "assortedpokeball:test_box",
+  "max_ticks": 200,
+  "setup_ticks": 0,
+  "required": true
+}

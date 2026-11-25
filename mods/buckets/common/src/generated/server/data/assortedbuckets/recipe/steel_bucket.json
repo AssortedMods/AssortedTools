@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/steel"
+    "I": {
+      "tag": "c:ingots/steel"
+    }
   },
   "pattern": [
     "I I",
     " I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedbuckets:steel_bucket"
   }
 }

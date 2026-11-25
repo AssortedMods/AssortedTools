@@ -3,6 +3,8 @@ package com.grim3212.assorted.throwingspears.client.render.model;
 import com.grim3212.assorted.lib.platform.Services;
 import com.grim3212.assorted.throwingspears.Constants;
 import com.grim3212.assorted.throwingspears.common.item.BetterSpearItem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -10,23 +12,22 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
-import net.minecraft.util.Unit;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * The spear model. It has no animated parts, so its state is {@link Unit}, like vanilla's
- * {@code TridentModel}.
- */
-public class SpearModel extends Model<Unit> {
+/** The spear model. It has no animated parts, like vanilla's {@code TridentModel}. */
+public class SpearModel extends Model {
+
+    private final ModelPart root;
 
     public SpearModel(ModelPart root) {
-        super(root, RenderTypes::entitySolid);
+        super(RenderType::entitySolid);
+        this.root = root;
     }
 
     public static LayerDefinition createLayer() {
@@ -39,16 +40,20 @@ public class SpearModel extends Model<Unit> {
         return LayerDefinition.create(meshdefinition, 32, 32);
     }
 
-    public static final Identifier DEFAULT_TEXTURE = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "textures/entity/projectiles/wood_throwing_spear.png");
+    @Override
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer consumer, int packedLight, int packedOverlay, int color) {
+        this.root.render(poseStack, consumer, packedLight, packedOverlay, color);
+    }
 
-    protected final Map<Identifier, Identifier> cache = new HashMap<Identifier, Identifier>();
+    public static final ResourceLocation DEFAULT_TEXTURE = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/entity/projectiles/wood_throwing_spear.png");
 
-    public Identifier getTexture(Item item) {
-        Identifier key = key(item);
+    protected final Map<ResourceLocation, ResourceLocation> cache = new HashMap<ResourceLocation, ResourceLocation>();
+
+    public ResourceLocation getTexture(Item item) {
+        ResourceLocation key = key(item);
         if (!this.cache.containsKey(key)) {
-            if (item instanceof BetterSpearItem) {
-                BetterSpearItem spear = (BetterSpearItem) item;
-                this.cache.put(key(spear), Identifier.fromNamespaceAndPath(Constants.MOD_ID, "textures/entity/projectiles/" + spear.getToolTier().getName() + "_throwing_spear.png"));
+            if (item instanceof BetterSpearItem spear) {
+                this.cache.put(key, texture(spear));
             } else {
                 Constants.LOG.error("Tried to get spear texture for non-spear item");
                 return DEFAULT_TEXTURE;
@@ -58,7 +63,12 @@ public class SpearModel extends Model<Unit> {
         return this.cache.get(key);
     }
 
-    private Identifier key(Item item) {
+    /** The entity texture of a spear, by the name of its material. */
+    public static ResourceLocation texture(BetterSpearItem spear) {
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/entity/projectiles/" + spear.getToolTier().getName() + "_throwing_spear.png");
+    }
+
+    private ResourceLocation key(Item item) {
         return Services.PLATFORM.getRegistry(Registries.ITEM).getRegistryName(item);
     }
 }

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedgearsets:peridot_chestplate"
+        "recipe": "assortedgearsets:peridot_chestplate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

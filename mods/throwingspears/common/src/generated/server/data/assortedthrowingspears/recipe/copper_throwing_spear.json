@@ -25,13 +25,18 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/copper",
-    "S": "#c:rods/wooden"
+    "I": {
+      "tag": "c:ingots/copper"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
   },
   "pattern": [
     "SSI"
   ],
   "result": {
+    "count": 1,
     "id": "assortedthrowingspears:copper_throwing_spear"
   }
 }

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedgearsets:emerald_shovel"
+        "recipe": "assortedgearsets:emerald_shovel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

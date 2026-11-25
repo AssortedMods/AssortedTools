@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "I": "#minecraft:planks"
+    "I": {
+      "tag": "minecraft:planks"
+    }
   },
   "pattern": [
     "I I",
     " I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedbuckets:wood_bucket"
   }
 }

@@ -27,7 +27,6 @@ public class MaterialShears extends ShearsItem implements ITiered {
     public MaterialShears(Properties props, ToolTier tierHolder) {
         // 0.952 is vanilla iron shears' durability ratio to iron tools, kept so every material stays proportional.
         super(props.durability((int) Math.rint(tierHolder.getMaxUses() * 0.952F))
-                .enchantable(tierHolder.getEnchantability())
                 .component(DataComponents.TOOL, ShearsItem.createToolProperties()));
         this.tierHolder = tierHolder;
 
@@ -40,9 +39,21 @@ public class MaterialShears extends ShearsItem implements ITiered {
     }
 
     /**
-     * NeoForge's patched {@code super} routes through {@code IShearable} and covers modded mobs, so
-     * it goes first; on Fabric it passes and the vanilla {@link Shearable} fallback runs instead.
+     * 1.21.1 has no enchantable component; an item's enchantability is this override. NeoForge deprecates it for a
+     * stack-aware overload that only it has and that defaults to this one, so common code can only override this.
      */
+    @SuppressWarnings("deprecation")
+    @Override
+    public int getEnchantmentValue() {
+        return this.tierHolder.getEnchantability();
+    }
+
+    /**
+     * NeoForge's patched {@code super} routes through {@code IShearable} and covers modded mobs, so
+     * it goes first; on Fabric it passes and the vanilla {@link Shearable} fallback runs instead. NeoForge deprecates
+     * {@code Shearable} for its {@code IShearable}, but vanilla's interface is all Fabric has.
+     */
+    @SuppressWarnings("deprecation")
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
         InteractionResult result = super.interactLivingEntity(stack, player, target, hand);
@@ -54,7 +65,7 @@ public class MaterialShears extends ShearsItem implements ITiered {
             return InteractionResult.PASS;
         }
 
-        if (!(target.level() instanceof ServerLevel level)) {
+        if (!(target.level() instanceof ServerLevel)) {
             return shearable.readyForShearing() ? InteractionResult.SUCCESS : InteractionResult.PASS;
         }
 
@@ -62,10 +73,11 @@ public class MaterialShears extends ShearsItem implements ITiered {
             return InteractionResult.CONSUME;
         }
 
-        shearable.shear(level, SoundSource.PLAYERS, stack);
+        shearable.shear(SoundSource.PLAYERS);
         target.gameEvent(GameEvent.SHEAR, player);
-        stack.hurtAndBreak(1, player, hand.asEquipmentSlot());
+        stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
 
-        return InteractionResult.SUCCESS_SERVER;
+        // What vanilla's own shearing returns on the server.
+        return InteractionResult.CONSUME;
     }
 }

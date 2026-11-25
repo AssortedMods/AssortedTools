@@ -12,6 +12,6 @@ public class AssortedStaffsFabric implements ModInitializer {
         StaffsCommonMod.init();
         FabricFrozenStorage.init();
         // Fabric has no per-entity tick event, so the level's entities are walked once a tick instead.
-        ServerTickEvents.END_LEVEL_TICK.register(level -> level.getAllEntities().forEach(FrozenMobs::thawIfBurning));
+        ServerTickEvents.END_WORLD_TICK.register(level -> level.getAllEntities().forEach(FrozenMobs::thawIfBurning));
     }
 }

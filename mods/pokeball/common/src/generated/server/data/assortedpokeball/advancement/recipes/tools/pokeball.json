@@ -29,7 +29,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedpokeball:pokeball"
+        "recipe": "assortedpokeball:pokeball"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

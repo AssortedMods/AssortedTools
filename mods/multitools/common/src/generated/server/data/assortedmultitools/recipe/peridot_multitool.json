@@ -90,17 +90,36 @@
     }
   ],
   "ingredients": [
-    "#c:pickaxes/peridot",
-    "#c:shovels/peridot",
-    "#c:axes/peridot",
-    "#c:hoes/peridot",
-    "#c:swords/peridot",
-    "#c:gems/peridot",
-    "#c:gems/peridot",
-    "#c:gems/peridot",
-    "#c:gems/peridot"
+    {
+      "tag": "c:pickaxes/peridot"
+    },
+    {
+      "tag": "c:shovels/peridot"
+    },
+    {
+      "tag": "c:axes/peridot"
+    },
+    {
+      "tag": "c:hoes/peridot"
+    },
+    {
+      "tag": "c:swords/peridot"
+    },
+    {
+      "tag": "c:gems/peridot"
+    },
+    {
+      "tag": "c:gems/peridot"
+    },
+    {
+      "tag": "c:gems/peridot"
+    },
+    {
+      "tag": "c:gems/peridot"
+    }
   ],
   "result": {
+    "count": 1,
     "id": "assortedmultitools:peridot_multitool"
   }
 }

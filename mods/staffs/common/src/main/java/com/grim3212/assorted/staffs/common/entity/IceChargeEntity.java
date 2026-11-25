@@ -11,7 +11,7 @@ import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrowableItemProjectile;
+import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -35,11 +35,13 @@ public class IceChargeEntity extends ThrowableItemProjectile {
     }
 
     public IceChargeEntity(Level level, LivingEntity owner, ItemStack stack) {
-        super(StaffsEntities.ICE_CHARGE.get(), owner, level, stack);
+        super(StaffsEntities.ICE_CHARGE.get(), owner, level);
+        this.setItem(stack);
     }
 
     public IceChargeEntity(Level level, double x, double y, double z, ItemStack stack) {
-        super(StaffsEntities.ICE_CHARGE.get(), x, y, z, level, stack);
+        super(StaffsEntities.ICE_CHARGE.get(), x, y, z, level);
+        this.setItem(stack);
     }
 
     @Override
@@ -52,7 +54,7 @@ public class IceChargeEntity extends ThrowableItemProjectile {
         super.onHitEntity(result);
         Entity entity = result.getEntity();
         // Blazes, magma cubes and striders take extra, as they do from powder snow.
-        float damage = entity.is(EntityTypeTags.FREEZE_HURTS_EXTRA_TYPES) ? 5.0F : 1.0F;
+        float damage = entity.getType().is(EntityTypeTags.FREEZE_HURTS_EXTRA_TYPES) ? 5.0F : 1.0F;
         entity.hurt(this.damageSources().thrown(this, this.getOwner()), damage);
         entity.clearFire();
         if (entity.canFreeze()) {

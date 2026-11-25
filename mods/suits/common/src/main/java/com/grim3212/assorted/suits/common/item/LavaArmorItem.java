@@ -2,6 +2,7 @@ package com.grim3212.assorted.suits.common.item;
 
 import com.grim3212.assorted.lib.core.tool.ConfigurableArmorItem;
 import com.grim3212.assorted.suits.SuitsCommonMod;
+import net.minecraft.world.item.ArmorItem;
 import com.grim3212.assorted.suits.common.effect.SuitsMobEffects;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
@@ -9,39 +10,30 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Fire resistance exists for the lava fog, which reads that effect and nothing else; the actual
  * protection is the two entity mixins' doing.
  */
-public class LavaArmorItem extends ConfigurableArmorItem {
+public class LavaArmorItem extends ConfigurableArmorItem implements IWornTick {
 
     private static final int EFFECT_DURATION = 60;
     private static final int REFRESH_BELOW = 20;
     /** A point of durability every four seconds. */
     private static final int WEAR_INTERVAL = 80;
 
-    public LavaArmorItem(ArmorType type, Properties builderIn) {
+    public LavaArmorItem(ArmorItem.Type type, Properties builderIn) {
         super(SuitsCommonMod.COMMON_CONFIG.lavaSuitArmorMaterial, type, builderIn);
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, ServerLevel level, Entity owner, @Nullable EquipmentSlot slot) {
-        super.inventoryTick(stack, level, owner, slot);
-
-        if (slot == null || !(owner instanceof LivingEntity wearer)) {
-            return;
-        }
-
+    public void wornTick(ItemStack stack, ServerLevel level, LivingEntity wearer, EquipmentSlot slot) {
         boolean whole = isWholeSuit(wearer);
         boolean striding = wearer.isInLava() && isLava(wearer, EquipmentSlot.LEGS) && isLava(wearer, EquipmentSlot.FEET);
 
@@ -71,7 +63,7 @@ public class LavaArmorItem extends ConfigurableArmorItem {
     /** What burns only the feet, and so costs only the boots. Magma is stood on rather than in. */
     private static boolean onHotFloor(LivingEntity wearer) {
         BlockState inside = wearer.level().getBlockState(wearer.blockPosition());
-        if (inside.is(BlockTags.CAMPFIRES) && inside.getValueOrElse(CampfireBlock.LIT, false)) {
+        if (inside.is(BlockTags.CAMPFIRES) && inside.getOptionalValue(CampfireBlock.LIT).orElse(false)) {
             return true;
         }
 

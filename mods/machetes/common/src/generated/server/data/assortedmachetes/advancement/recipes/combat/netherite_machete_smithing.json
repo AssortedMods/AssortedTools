@@ -19,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedmachetes:netherite_machete_smithing"
+        "recipe": "assortedmachetes:netherite_machete_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

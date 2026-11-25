@@ -6,7 +6,7 @@ import com.grim3212.assorted.pokeball.common.entity.PokeballEntities;
 import com.grim3212.assorted.pokeball.common.handlers.PokeballCreativeItems;
 import com.grim3212.assorted.pokeball.common.item.PokeballDataComponents;
 import com.grim3212.assorted.pokeball.common.item.PokeballItems;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * Loader-agnostic startup. Both loader entry points call {@link #init()} and nothing else; anything
@@ -17,7 +17,7 @@ public class PokeballCommonMod {
     public static void init() {
         Constants.LOG.info(Constants.MOD_NAME + " starting up...");
         Families.join(Constants.MOD_ID, Constants.FAMILY_ID)
-                .icon(Identifier.fromNamespaceAndPath(Constants.MOD_ID, "pokeball"), 10)
+                .icon(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "pokeball"), 10)
                 .manualOrder(120);
 
         PokeballDataComponents.init();

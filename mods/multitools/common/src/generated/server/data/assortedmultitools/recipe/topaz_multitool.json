@@ -90,17 +90,36 @@
     }
   ],
   "ingredients": [
-    "#c:pickaxes/topaz",
-    "#c:shovels/topaz",
-    "#c:axes/topaz",
-    "#c:hoes/topaz",
-    "#c:swords/topaz",
-    "#c:gems/topaz",
-    "#c:gems/topaz",
-    "#c:gems/topaz",
-    "#c:gems/topaz"
+    {
+      "tag": "c:pickaxes/topaz"
+    },
+    {
+      "tag": "c:shovels/topaz"
+    },
+    {
+      "tag": "c:axes/topaz"
+    },
+    {
+      "tag": "c:hoes/topaz"
+    },
+    {
+      "tag": "c:swords/topaz"
+    },
+    {
+      "tag": "c:gems/topaz"
+    },
+    {
+      "tag": "c:gems/topaz"
+    },
+    {
+      "tag": "c:gems/topaz"
+    },
+    {
+      "tag": "c:gems/topaz"
+    }
   ],
   "result": {
+    "count": 1,
     "id": "assortedmultitools:topaz_multitool"
   }
 }

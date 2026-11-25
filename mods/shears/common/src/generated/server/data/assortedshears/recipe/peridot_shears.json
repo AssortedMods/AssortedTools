@@ -25,14 +25,19 @@
     }
   ],
   "key": {
-    "I": "#c:gems/peridot",
-    "L": "#c:leathers"
+    "I": {
+      "tag": "c:gems/peridot"
+    },
+    "L": {
+      "tag": "c:leathers"
+    }
   },
   "pattern": [
     " I",
     "IL"
   ],
   "result": {
+    "count": 1,
     "id": "assortedshears:peridot_shears"
   }
 }

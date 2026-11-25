@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedthrowingspears:nickel_throwing_spear"
+        "recipe": "assortedthrowingspears:nickel_throwing_spear"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

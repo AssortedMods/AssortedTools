@@ -25,13 +25,18 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/invar",
-    "S": "#c:rods/wooden"
+    "I": {
+      "tag": "c:ingots/invar"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
   },
   "pattern": [
     "SSI"
   ],
   "result": {
+    "count": 1,
     "id": "assortedthrowingspears:invar_throwing_spear"
   }
 }

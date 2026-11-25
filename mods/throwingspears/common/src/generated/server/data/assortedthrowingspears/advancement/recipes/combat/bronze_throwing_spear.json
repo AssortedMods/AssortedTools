@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedthrowingspears:bronze_throwing_spear"
+        "recipe": "assortedthrowingspears:bronze_throwing_spear"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

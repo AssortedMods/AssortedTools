@@ -25,13 +25,18 @@
     }
   ],
   "key": {
-    "I": "#c:gems/ruby",
-    "S": "#c:rods/wooden"
+    "I": {
+      "tag": "c:gems/ruby"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
   },
   "pattern": [
     "SSI"
   ],
   "result": {
+    "count": 1,
     "id": "assortedthrowingspears:ruby_throwing_spear"
   }
 }

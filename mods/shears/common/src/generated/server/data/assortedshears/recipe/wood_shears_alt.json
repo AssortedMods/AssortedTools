@@ -25,14 +25,19 @@
     }
   ],
   "key": {
-    "I": "#minecraft:planks",
-    "L": "#c:leathers"
+    "I": {
+      "tag": "minecraft:planks"
+    },
+    "L": {
+      "tag": "c:leathers"
+    }
   },
   "pattern": [
     "LI",
     "I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedshears:wood_shears"
   }
 }

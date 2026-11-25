@@ -5,21 +5,20 @@ import com.grim3212.assorted.lib.registry.IRegistryObject;
 import com.grim3212.assorted.lib.util.LibCommonTags;
 import com.grim3212.assorted.wands.Constants;
 import com.grim3212.assorted.wands.common.item.WandsItems;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.crafting.Recipe;
+
+import java.util.concurrent.CompletableFuture;
 
 public class WandsRecipes extends ConditionalRecipeProvider {
 
-    public WandsRecipes(BootstrapContext<Recipe<?>> recipes, BootstrapContext<Advancement> advancements) {
-        super(recipes, advancements, Constants.MOD_ID);
+    public WandsRecipes(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, registries, Constants.MOD_ID);
     }
 
     @Override
@@ -41,7 +40,7 @@ public class WandsRecipes extends ConditionalRecipeProvider {
 
     private void wand(IRegistryObject<? extends Item> wand, TagKey<Item> shaft, TagKey<Item> core, String unlock) {
         TagKey<Item> unlockedBy = unlock.equals("has_obsidian") ? shaft : core;
-        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, wand.get()).define('X', shaft).define('G', core).pattern("XGX").pattern("XGX").pattern("XGX")
-                .unlockedBy(unlock, has(unlockedBy)).save(this.output, ResourceKey.create(Registries.RECIPE, wand.getId()));
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, wand.get()).define('X', shaft).define('G', core).pattern("XGX").pattern("XGX").pattern("XGX")
+                .unlockedBy(unlock, has(unlockedBy)).save(this.output, wand.getId());
     }
 }

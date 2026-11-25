@@ -19,6 +19,14 @@
       ]
     }
   },
+  "overrides": [
+    {
+      "model": "assortedthrowingspears:item/electrum_throwing_spear_throwing",
+      "predicate": {
+        "assortedthrowingspears:throwing": 1.0
+      }
+    }
+  ],
   "textures": {
     "particle": "assortedthrowingspears:item/electrum_throwing_spear"
   }

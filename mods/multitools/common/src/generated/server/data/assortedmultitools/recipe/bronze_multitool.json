@@ -90,17 +90,36 @@
     }
   ],
   "ingredients": [
-    "#c:pickaxes/bronze",
-    "#c:shovels/bronze",
-    "#c:axes/bronze",
-    "#c:hoes/bronze",
-    "#c:swords/bronze",
-    "#c:ingots/bronze",
-    "#c:ingots/bronze",
-    "#c:ingots/bronze",
-    "#c:ingots/bronze"
+    {
+      "tag": "c:pickaxes/bronze"
+    },
+    {
+      "tag": "c:shovels/bronze"
+    },
+    {
+      "tag": "c:axes/bronze"
+    },
+    {
+      "tag": "c:hoes/bronze"
+    },
+    {
+      "tag": "c:swords/bronze"
+    },
+    {
+      "tag": "c:ingots/bronze"
+    },
+    {
+      "tag": "c:ingots/bronze"
+    },
+    {
+      "tag": "c:ingots/bronze"
+    },
+    {
+      "tag": "c:ingots/bronze"
+    }
   ],
   "result": {
+    "count": 1,
     "id": "assortedmultitools:bronze_multitool"
   }
 }

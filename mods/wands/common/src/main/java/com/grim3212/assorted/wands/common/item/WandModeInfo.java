@@ -1,17 +1,17 @@
 package com.grim3212.assorted.wands.common.item;
 
+import com.grim3212.assorted.lib.core.item.IStackTooltipProvider;
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
-import net.minecraft.world.item.component.TooltipProvider;
 
 import java.util.function.Consumer;
 
@@ -21,14 +21,14 @@ import java.util.function.Consumer;
  *
  * @param kind which wand this is
  */
-public record WandModeInfo(Kind kind) implements TooltipProvider {
+public record WandModeInfo(Kind kind) implements IStackTooltipProvider {
 
     public static final Codec<WandModeInfo> CODEC = Kind.CODEC.xmap(WandModeInfo::new, WandModeInfo::kind);
     public static final StreamCodec<ByteBuf, WandModeInfo> STREAM_CODEC = Kind.STREAM_CODEC.map(WandModeInfo::new, WandModeInfo::kind);
 
     @Override
-    public void addToTooltip(Item.TooltipContext context, Consumer<Component> tooltip, TooltipFlag flag, DataComponentGetter components) {
-        String mode = components.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getStringOr("Mode", "");
+    public void addToTooltip(Item.TooltipContext context, Consumer<Component> tooltip, TooltipFlag flag, ItemStack stack) {
+        String mode = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getString("Mode");
         tooltip.accept(switch (this.kind) {
             case BUILDING -> WandBuildingItem.describeMode(mode);
             case BREAKING -> WandBreakingItem.describeMode(mode);

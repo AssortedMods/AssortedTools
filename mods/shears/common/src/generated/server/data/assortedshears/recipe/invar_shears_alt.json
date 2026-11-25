@@ -25,14 +25,19 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/invar",
-    "L": "#c:leathers"
+    "I": {
+      "tag": "c:ingots/invar"
+    },
+    "L": {
+      "tag": "c:leathers"
+    }
   },
   "pattern": [
     "LI",
     "I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedshears:invar_shears"
   }
 }

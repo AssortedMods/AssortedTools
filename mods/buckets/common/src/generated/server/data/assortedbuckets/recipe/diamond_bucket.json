@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "I": "#c:gems/diamond"
+    "I": {
+      "tag": "c:gems/diamond"
+    }
   },
   "pattern": [
     "I I",
     " I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedbuckets:diamond_bucket"
   }
 }

@@ -90,17 +90,36 @@
     }
   ],
   "ingredients": [
-    "#c:pickaxes/invar",
-    "#c:shovels/invar",
-    "#c:axes/invar",
-    "#c:hoes/invar",
-    "#c:swords/invar",
-    "#c:ingots/invar",
-    "#c:ingots/invar",
-    "#c:ingots/invar",
-    "#c:ingots/invar"
+    {
+      "tag": "c:pickaxes/invar"
+    },
+    {
+      "tag": "c:shovels/invar"
+    },
+    {
+      "tag": "c:axes/invar"
+    },
+    {
+      "tag": "c:hoes/invar"
+    },
+    {
+      "tag": "c:swords/invar"
+    },
+    {
+      "tag": "c:ingots/invar"
+    },
+    {
+      "tag": "c:ingots/invar"
+    },
+    {
+      "tag": "c:ingots/invar"
+    },
+    {
+      "tag": "c:ingots/invar"
+    }
   ],
   "result": {
+    "count": 1,
     "id": "assortedmultitools:invar_multitool"
   }
 }

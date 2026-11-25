@@ -10,11 +10,8 @@
   "license": "${license}",
   "environment": "*",
   "entrypoints": {
-    "main": [
+    "fabric-gametest": [
       "com.grim3212.assorted.ultimatefist.gametest.UltimateFistFabricGameTests"
-    ],
-    "fabric-client-gametest": [
-      "com.grim3212.assorted.ultimatefist.gametest.UltimateFistClientGameTests"
     ]
   },
   "depends": {

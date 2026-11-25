@@ -5,14 +5,16 @@ import com.grim3212.assorted.lib.events.OnDropStacksEvent;
 import com.grim3212.assorted.shears.api.ShearsTags;
 import com.grim3212.assorted.shears.common.enchantment.ShearsEnchantments;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
@@ -24,8 +26,8 @@ import java.util.Optional;
 
 public class CoralCutterHandler {
     public static void handleDrop(final OnDropStacksEvent event) {
-        // We only will ever modify corals
-        if (event.getState().is(ShearsTags.ALL_CORALS)) {
+        // We only will ever modify corals, and only for a tool carrying Coral Cutter: any other tool keeps its own drops.
+        if (event.getState().is(ShearsTags.ALL_CORALS) && ShearsEnchantments.hasCoralCutter(event.getStack())) {
             ServerLevel level = event.getWorld();
             ItemStack toolStack = event.getStack();
 
@@ -33,13 +35,13 @@ public class CoralCutterHandler {
             Holder<Enchantment> silkTouch = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.SILK_TOUCH);
 
             // Silk touch will handle this already
-            if (EnchantmentHelper.getItemEnchantmentLevel(silkTouch, toolStack) > 0) {
+            if (toolStack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY).getLevel(silkTouch) > 0) {
                 return;
             }
 
-            // Loot table id is an Optional ResourceKey, resolved via the server's reloadable registries.
-            Optional<ResourceKey<LootTable>> lootTableKey = event.getState().getBlock().getLootTable();
-            if (lootTableKey.isEmpty()) {
+            // A block without loot names BuiltInLootTables.EMPTY rather than having no table.
+            ResourceKey<LootTable> lootTableKey = event.getState().getBlock().getLootTable();
+            if (lootTableKey == BuiltInLootTables.EMPTY) {
                 return;
             }
 
@@ -50,7 +52,7 @@ public class CoralCutterHandler {
                     .withParameter(LootContextParams.BLOCK_STATE, event.getState())
                     .withParameter(LootContextParams.TOOL, fakeTool)
                     .create(LootContextParamSets.BLOCK);
-            LootTable loottable = level.getServer().reloadableRegistries().getLootTable(lootTableKey.get());
+            LootTable loottable = level.getServer().reloadableRegistries().getLootTable(lootTableKey);
             List<ItemStack> droppedItems = loottable.getRandomItems(fakeContext);
             event.setDrops(droppedItems);
         }

@@ -8,7 +8,6 @@ import com.grim3212.assorted.shears.common.item.MaterialShears;
 import com.grim3212.assorted.shears.common.item.ShearsItems;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -42,9 +41,8 @@ final class CoralCutterTests {
     }
 
     private static void coralCutterIsObtainable(GameTestHelper helper) {
-        Registry<Enchantment> registry = helper.getLevel().registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
-        Optional<Holder.Reference<Enchantment>> coralCutter = registry.get(ShearsEnchantments.CORAL_CUTTER);
-        helper.assertTrue(coralCutter.isPresent(), ShearsEnchantments.CORAL_CUTTER.identifier() + " is not registered");
+        Optional<Holder.Reference<Enchantment>> coralCutter = helper.getLevel().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).get(ShearsEnchantments.CORAL_CUTTER);
+        helper.assertTrue(coralCutter.isPresent(), ShearsEnchantments.CORAL_CUTTER.location() + " is not registered");
 
         List<String> missing = new ArrayList<>();
         for (TagKey<Enchantment> tag : List.of(EnchantmentTags.IN_ENCHANTING_TABLE, EnchantmentTags.TRADEABLE, EnchantmentTags.ON_RANDOM_LOOT)) {

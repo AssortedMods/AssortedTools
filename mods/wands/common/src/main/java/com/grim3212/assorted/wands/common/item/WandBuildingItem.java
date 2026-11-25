@@ -36,7 +36,7 @@ public class WandBuildingItem extends WandItem {
     protected boolean canBreak(Level worldIn, BlockPos pos, ItemStack stack) {
         BlockState state = worldIn.getBlockState(pos);
 
-        if (state.canBeReplaced() || state.getPistonPushReaction() == PushReaction.POPPED || state.liquid())
+        if (state.canBeReplaced() || state.getPistonPushReaction() == PushReaction.DESTROY || state.liquid())
             return true;
 
         switch (BuildingMode.fromString(NBTHelper.getString(stack, "Mode"))) {
@@ -165,14 +165,15 @@ public class WandBuildingItem extends WandItem {
     }
 
     @Override
-    protected boolean doEffect(Level world, Player entityplayer, InteractionHand hand, WandCoord3D start, WandCoord3D end, BlockState state) {
+    protected boolean doEffect(Level world, Player entityplayer, InteractionHand hand, WandCoord3D start, WandCoord3D end, BlockState state, BlockState clicked) {
         BuildingMode mode = BuildingMode.fromString(NBTHelper.getString(entityplayer.getItemInHand(hand), "Mode"));
 
-        if (state != this.stateClicked && (mode == BuildingMode.BUILD_BOX || mode == BuildingMode.BUILD_ROOM || mode == BuildingMode.BUILD_FRAME || mode == BuildingMode.BUILD_TORCHES)) {
+        // The first corner's block is saved with it on the stack, so the check holds per player and across a restart.
+        if (state != start.state && (mode == BuildingMode.BUILD_BOX || mode == BuildingMode.BUILD_ROOM || mode == BuildingMode.BUILD_FRAME || mode == BuildingMode.BUILD_TORCHES)) {
             error(entityplayer, end, "notsamecorner");
             return false;
         }
-        boolean flag = doBuilding(world, start, end, mode, entityplayer, hand, state);
+        boolean flag = doBuilding(world, start, end, mode, entityplayer, hand, state, clicked);
         if (flag && mode != BuildingMode.BUILD_WATER && mode != BuildingMode.BUILD_LAVA)
             world.playSound((Player) null, end.pos, SoundEvents.ARROW_SHOOT, SoundSource.BLOCKS, (world.getRandom().nextFloat() + 0.7F) / 2.0F, 1.0F + (world.getRandom().nextFloat() - world.getRandom().nextFloat()) * 0.4F);
         if (flag && mode == BuildingMode.BUILD_WATER)
@@ -183,7 +184,7 @@ public class WandBuildingItem extends WandItem {
         return flag;
     }
 
-    private boolean doBuilding(Level world, WandCoord3D start, WandCoord3D end, BuildingMode mode, Player entityplayer, InteractionHand hand, BlockState state) {
+    private boolean doBuilding(Level world, WandCoord3D start, WandCoord3D end, BuildingMode mode, Player entityplayer, InteractionHand hand, BlockState state, BlockState clicked) {
         int X = 0;
         int Y = 0;
         int Z = 0;
@@ -229,7 +230,7 @@ public class WandBuildingItem extends WandItem {
                         }
                     }
 
-                    if ((this.stateOrig.getBlock() == Blocks.GRASS_BLOCK) && (affected > 0)) {
+                    if ((clicked.getBlock() == Blocks.GRASS_BLOCK) && (affected > 0)) {
                         for (int run = 0; run <= 1; run++) {
                             if (run == 0)
                                 Y = start.pos.getY();
@@ -240,7 +241,7 @@ public class WandBuildingItem extends WandItem {
                                 for (Z = start.pos.getZ(); Z <= end.pos.getZ(); Z++) {
                                     BlockPos newPos = new BlockPos(X, Y, Z);
 
-                                    if ((world.getBlockState(newPos).getBlock() == Blocks.DIRT) && ((world.getBlockState(newPos.above()).getBlock() == null) || (!world.getBlockState(newPos.above()).isSolidRender()))) {
+                                    if ((world.getBlockState(newPos).getBlock() == Blocks.DIRT) && ((world.getBlockState(newPos.above()).getBlock() == null) || (!world.getBlockState(newPos.above()).isSolidRender(world, newPos.above())))) {
                                         world.setBlockAndUpdate(newPos, Blocks.GRASS_BLOCK.defaultBlockState());
                                     }
                                 }
@@ -286,7 +287,7 @@ public class WandBuildingItem extends WandItem {
                         }
                     }
 
-                    if ((this.stateOrig.getBlock() == Blocks.GRASS_BLOCK) && (affected > 0)) {
+                    if ((clicked.getBlock() == Blocks.GRASS_BLOCK) && (affected > 0)) {
                         for (int run = 0; run <= 1; run++) {
                             if (run == 0)
                                 Y = start.pos.getY();
@@ -297,7 +298,7 @@ public class WandBuildingItem extends WandItem {
                                 for (Z = start.pos.getZ(); Z <= end.pos.getZ(); Z++) {
                                     BlockPos newPos = new BlockPos(X, Y, Z);
 
-                                    if ((world.getBlockState(newPos).getBlock() == Blocks.DIRT) && ((world.getBlockState(newPos.above()).getBlock() == null) || (!world.getBlockState(newPos.above()).isSolidRender()))) {
+                                    if ((world.getBlockState(newPos).getBlock() == Blocks.DIRT) && ((world.getBlockState(newPos.above()).getBlock() == null) || (!world.getBlockState(newPos.above()).isSolidRender(world, newPos.above())))) {
                                         world.setBlockAndUpdate(newPos, Blocks.GRASS_BLOCK.defaultBlockState());
                                     }
                                 }
@@ -348,7 +349,7 @@ public class WandBuildingItem extends WandItem {
                         }
                     }
 
-                    if ((this.stateOrig.getBlock() == Blocks.GRASS_BLOCK) && (affected > 0)) {
+                    if ((clicked.getBlock() == Blocks.GRASS_BLOCK) && (affected > 0)) {
                         for (int run = 0; run <= 1; run++) {
                             if (run == 0)
                                 Y = start.pos.getY();
@@ -359,7 +360,7 @@ public class WandBuildingItem extends WandItem {
                                 for (Z = start.pos.getZ(); Z <= end.pos.getZ(); Z++) {
                                     BlockPos newPos = new BlockPos(X, Y, Z);
                                     if (((X == start.pos.getX()) && (Y == start.pos.getY())) || ((Y == start.pos.getY()) && (Z == start.pos.getZ())) || ((Z == start.pos.getZ()) && (X == start.pos.getX())) || ((X == start.pos.getX()) && (Y == end.pos.getY())) || ((X == end.pos.getX()) && (Y == start.pos.getY())) || ((Y == start.pos.getY()) && (Z == end.pos.getZ())) || ((Y == end.pos.getY()) && (Z == start.pos.getZ())) || ((Z == start.pos.getZ()) && (X == end.pos.getX()))
-                                            || ((Z == end.pos.getZ()) && (X == start.pos.getX())) || ((X == end.pos.getX()) && (Y == end.pos.getY())) || ((Y == end.pos.getY()) && (Z == end.pos.getZ())) || ((Z == end.pos.getZ()) && (X == end.pos.getX()) && (world.getBlockState(newPos).getBlock() == Blocks.DIRT) && ((world.getBlockState(newPos.above()).getBlock() == null) || (!world.getBlockState(newPos.above()).isSolidRender())))) {
+                                            || ((Z == end.pos.getZ()) && (X == start.pos.getX())) || ((X == end.pos.getX()) && (Y == end.pos.getY())) || ((Y == end.pos.getY()) && (Z == end.pos.getZ())) || ((Z == end.pos.getZ()) && (X == end.pos.getX()) && (world.getBlockState(newPos).getBlock() == Blocks.DIRT) && ((world.getBlockState(newPos.above()).getBlock() == null) || (!world.getBlockState(newPos.above()).isSolidRender(world, newPos.above()))))) {
                                         world.setBlockAndUpdate(newPos, Blocks.GRASS_BLOCK.defaultBlockState());
                                     }
                                 }
@@ -598,7 +599,7 @@ public class WandBuildingItem extends WandItem {
     }
 
     @Override
-    public void onCraftedBy(ItemStack stack, Player playerIn) {
+    public void onCraftedBy(ItemStack stack, Level level, Player playerIn) {
         NBTHelper.putString(stack, "Mode", BuildingMode.BUILD_BOX.getSerializedName());
     }
 

@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "I": "#c:gems/ruby"
+    "I": {
+      "tag": "c:gems/ruby"
+    }
   },
   "pattern": [
     "I I",
     " I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedbuckets:ruby_bucket"
   }
 }

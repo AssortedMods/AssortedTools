@@ -5,26 +5,25 @@ import com.grim3212.assorted.lib.core.tool.ToolTiers;
 import com.grim3212.assorted.lib.util.LibCommonTags;
 import com.grim3212.assorted.machetes.Constants;
 import com.grim3212.assorted.machetes.common.item.MachetesItems;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.SmithingTransformRecipeBuilder;
-import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
+
+import java.util.concurrent.CompletableFuture;
 
 public class MachetesRecipes extends ConditionalRecipeProvider {
 
-    public MachetesRecipes(BootstrapContext<Recipe<?>> recipes, BootstrapContext<Advancement> advancements) {
-        super(recipes, advancements, Constants.MOD_ID);
+    public MachetesRecipes(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, registries, Constants.MOD_ID);
     }
 
     @Override
@@ -44,19 +43,15 @@ public class MachetesRecipes extends ConditionalRecipeProvider {
 
         ToolTiers.get().extras().forEach((name, tier) -> machetePattern(MachetesItems.EXTRA_MACHETES.get(name).get(), tier.getRepairItems()));
 
-        SmithingTransformRecipeBuilder.smithing(Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(MachetesItems.DIAMOND_MACHETE.get()), this.tag(LibCommonTags.Items.INGOTS_NETHERITE), RecipeCategory.COMBAT, MachetesItems.NETHERITE_MACHETE.get())
-                .unlocks("has_netherite_ingot", has(LibCommonTags.Items.INGOTS_NETHERITE)).save(this.output, recipeKey(Identifier.parse(id(MachetesItems.NETHERITE_MACHETE.get()) + "_smithing")));
+        SmithingTransformRecipeBuilder.smithing(Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(MachetesItems.DIAMOND_MACHETE.get()), Ingredient.of(LibCommonTags.Items.INGOTS_NETHERITE), RecipeCategory.COMBAT, MachetesItems.NETHERITE_MACHETE.get())
+                .unlocks("has_netherite_ingot", has(LibCommonTags.Items.INGOTS_NETHERITE)).save(this.output, ResourceLocation.parse(id(MachetesItems.NETHERITE_MACHETE.get()) + "_smithing"));
     }
 
     /** A blade two wide on the diagonal, above a handle. */
     private void machetePattern(ItemLike output, TagKey<Item> input) {
-        Identifier id = id(output.asItem());
+        ResourceLocation id = id(output.asItem());
         this.addConditions(itemTagExists(input), id);
 
-        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, output).define('S', LibCommonTags.Items.RODS_WOODEN).define('X', input).pattern(" XX").pattern("XX ").pattern("S  ").unlockedBy("has_item", has(input)).save(this.output, recipeKey(id));
-    }
-
-    private static ResourceKey<Recipe<?>> recipeKey(Identifier id) {
-        return ResourceKey.create(Registries.RECIPE, id);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, output).define('S', LibCommonTags.Items.RODS_WOODEN).define('X', input).pattern(" XX").pattern("XX ").pattern("S  ").unlockedBy("has_item", has(input)).save(this.output, id);
     }
 }

@@ -90,17 +90,36 @@
     }
   ],
   "ingredients": [
-    "#c:pickaxes/aluminum",
-    "#c:shovels/aluminum",
-    "#c:axes/aluminum",
-    "#c:hoes/aluminum",
-    "#c:swords/aluminum",
-    "#c:ingots/aluminum",
-    "#c:ingots/aluminum",
-    "#c:ingots/aluminum",
-    "#c:ingots/aluminum"
+    {
+      "tag": "c:pickaxes/aluminum"
+    },
+    {
+      "tag": "c:shovels/aluminum"
+    },
+    {
+      "tag": "c:axes/aluminum"
+    },
+    {
+      "tag": "c:hoes/aluminum"
+    },
+    {
+      "tag": "c:swords/aluminum"
+    },
+    {
+      "tag": "c:ingots/aluminum"
+    },
+    {
+      "tag": "c:ingots/aluminum"
+    },
+    {
+      "tag": "c:ingots/aluminum"
+    },
+    {
+      "tag": "c:ingots/aluminum"
+    }
   ],
   "result": {
+    "count": 1,
     "id": "assortedmultitools:aluminum_multitool"
   }
 }

@@ -90,17 +90,36 @@
     }
   ],
   "ingredients": [
-    "#c:pickaxes/lead",
-    "#c:shovels/lead",
-    "#c:axes/lead",
-    "#c:hoes/lead",
-    "#c:swords/lead",
-    "#c:ingots/lead",
-    "#c:ingots/lead",
-    "#c:ingots/lead",
-    "#c:ingots/lead"
+    {
+      "tag": "c:pickaxes/lead"
+    },
+    {
+      "tag": "c:shovels/lead"
+    },
+    {
+      "tag": "c:axes/lead"
+    },
+    {
+      "tag": "c:hoes/lead"
+    },
+    {
+      "tag": "c:swords/lead"
+    },
+    {
+      "tag": "c:ingots/lead"
+    },
+    {
+      "tag": "c:ingots/lead"
+    },
+    {
+      "tag": "c:ingots/lead"
+    },
+    {
+      "tag": "c:ingots/lead"
+    }
   ],
   "result": {
+    "count": 1,
     "id": "assortedmultitools:lead_multitool"
   }
 }

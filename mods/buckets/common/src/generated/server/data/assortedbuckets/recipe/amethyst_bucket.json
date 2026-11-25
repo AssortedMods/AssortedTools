@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "I": "#c:gems/amethyst"
+    "I": {
+      "tag": "c:gems/amethyst"
+    }
   },
   "pattern": [
     "I I",
     " I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedbuckets:amethyst_bucket"
   }
 }

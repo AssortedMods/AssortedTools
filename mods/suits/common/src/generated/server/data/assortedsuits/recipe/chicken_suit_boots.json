@@ -25,13 +25,16 @@
     }
   ],
   "key": {
-    "X": "#c:feathers"
+    "X": {
+      "tag": "c:feathers"
+    }
   },
   "pattern": [
     "X X",
     "X X"
   ],
   "result": {
+    "count": 1,
     "id": "assortedsuits:chicken_suit_boots"
   }
 }

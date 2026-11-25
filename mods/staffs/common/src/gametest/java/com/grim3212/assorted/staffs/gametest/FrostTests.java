@@ -6,13 +6,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTestHelper;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.EntityTypes;
-import net.minecraft.world.entity.animal.cow.Cow;
-import net.minecraft.world.entity.monster.skeleton.Stray;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.Cow;
+import net.minecraft.world.entity.monster.Stray;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -80,7 +80,7 @@ final class FrostTests {
         helper.setBlock(fire.below(), Blocks.SOUL_SOIL);
         helper.setBlock(fire, Blocks.SOUL_FIRE);
         helper.setBlock(dispenser, Blocks.DISPENSER.defaultBlockState().setValue(DispenserBlock.FACING, Direction.DOWN));
-        helper.getBlockEntity(dispenser, DispenserBlockEntity.class).setItem(0, new ItemStack(StaffsItems.ICE_CHARGE.get()));
+        ((DispenserBlockEntity) helper.getBlockEntity(dispenser)).setItem(0, new ItemStack(StaffsItems.ICE_CHARGE.get()));
         helper.setBlock(dispenser.above(), Blocks.REDSTONE_BLOCK);
 
         helper.startSequence()
@@ -91,14 +91,14 @@ final class FrostTests {
 
     /** A thrown charge leaves a cow frozen through, as powder snow would, and hurts it a little. */
     private static void iceChargeChillsWhatItHits(GameTestHelper helper) {
-        Cow cow = helper.spawn(EntityTypes.COW, new BlockPos(4, 1, 4));
+        Cow cow = helper.spawn(EntityType.COW, new BlockPos(4, 1, 4));
         cow.setNoAi(true);
         float health = cow.getHealth();
 
         ServerPlayer player = survivalPlayer(helper, ItemStack.EMPTY);
         Vec3 from = helper.absoluteVec(new Vec3(4.5D, 4.5D, 4.5D));
         IceChargeEntity charge = new IceChargeEntity(helper.getLevel(), player, new ItemStack(StaffsItems.ICE_CHARGE.get()));
-        charge.snapTo(from.x, from.y, from.z, 0.0F, 0.0F);
+        charge.moveTo(from.x, from.y, from.z, 0.0F, 0.0F);
         charge.shoot(0.0D, -1.0D, 0.0D, 1.5F, 0.0F);
         helper.getLevel().addFreshEntity(charge);
 
@@ -110,7 +110,7 @@ final class FrostTests {
 
     /** A stray killed by a player drops a frost rod half the time, as a blaze does its rod. */
     private static void straysDropFrostRods(GameTestHelper helper) {
-        Stray stray = helper.spawn(EntityTypes.STRAY, new BlockPos(4, 1, 4));
+        Stray stray = helper.spawn(EntityType.STRAY, new BlockPos(4, 1, 4));
         ServerPlayer player = survivalPlayer(helper, ItemStack.EMPTY);
         ServerLevel level = helper.getLevel();
         LootParams params = new LootParams.Builder(level)
@@ -121,7 +121,7 @@ final class FrostTests {
                 .withParameter(LootContextParams.LAST_DAMAGE_PLAYER, player)
                 .create(LootContextParamSets.ENTITY);
 
-        int rods = count(helper, EntityTypes.STRAY.getDefaultLootTable().orElseThrow(), params, 100, StaffsItems.FROST_ROD.get());
+        int rods = count(helper, EntityType.STRAY.getDefaultLootTable(), params, 100, StaffsItems.FROST_ROD.get());
         helper.assertTrue(rods > 10, "a hundred stray kills dropped only " + rods + " frost rods");
         helper.succeed();
     }
@@ -137,11 +137,11 @@ final class FrostTests {
     }
 
     private static boolean craftsNothing(GameTestHelper helper, List<ItemStack> column) {
-        return helper.getLevel().recipeAccess().getRecipeFor(RecipeType.CRAFTING, CraftingInput.of(1, 3, column), helper.getLevel()).isEmpty();
+        return helper.getLevel().getRecipeManager().getRecipeFor(RecipeType.CRAFTING, CraftingInput.of(1, 3, column), helper.getLevel()).isEmpty();
     }
 
     private static void assertFound(GameTestHelper helper, String chest, LootParams params, Item staff) {
-        ResourceKey<LootTable> table = ResourceKey.create(Registries.LOOT_TABLE, Identifier.withDefaultNamespace("chests/" + chest));
+        ResourceKey<LootTable> table = ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.withDefaultNamespace("chests/" + chest));
         int found = count(helper, table, params, 1000, staff);
         helper.assertTrue(found > 0 && found < 100, "a thousand " + chest + " chests held " + found + " " + staff);
     }

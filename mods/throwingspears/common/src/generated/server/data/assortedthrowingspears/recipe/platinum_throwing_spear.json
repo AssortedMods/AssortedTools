@@ -25,13 +25,18 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/platinum",
-    "S": "#c:rods/wooden"
+    "I": {
+      "tag": "c:ingots/platinum"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
   },
   "pattern": [
     "SSI"
   ],
   "result": {
+    "count": 1,
     "id": "assortedthrowingspears:platinum_throwing_spear"
   }
 }

@@ -3,7 +3,7 @@ package com.grim3212.assorted.staffs.platform;
 import com.grim3212.assorted.staffs.Constants;
 import com.mojang.serialization.Codec;
 import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -17,7 +17,7 @@ public class NeoForgeFrozenStorage implements IFrozenStorage {
 
     // Thawing sets false rather than removing, so the change reaches clients as a sync; only true is saved.
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> FROZEN = ATTACHMENT_TYPES.register("frozen",
-            () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL.fieldOf("frozen"), frozen -> frozen).sync(ByteBufCodecs.BOOL).build());
+            () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL, frozen -> frozen).sync(ByteBufCodecs.BOOL).build());
 
     /**
      * A mob frozen when this was all one mod is saved under assortedtools:frozen; the alias reads it back as this.
@@ -26,7 +26,7 @@ public class NeoForgeFrozenStorage implements IFrozenStorage {
     public static void aliasOldId() {
         // Mods are constructed in parallel, and the registry keeps its aliases in a plain map.
         synchronized (NeoForgeRegistries.ATTACHMENT_TYPES) {
-            NeoForgeRegistries.ATTACHMENT_TYPES.addAlias(Identifier.fromNamespaceAndPath(Constants.FAMILY_ID, "frozen"), Identifier.fromNamespaceAndPath(Constants.MOD_ID, "frozen"));
+            NeoForgeRegistries.ATTACHMENT_TYPES.addAlias(ResourceLocation.fromNamespaceAndPath(Constants.FAMILY_ID, "frozen"), ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "frozen"));
         }
     }
 

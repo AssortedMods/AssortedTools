@@ -23,7 +23,6 @@ public final class GearSetsGameTests {
         AliasTests.register(out);
         MigrationTests.register(out);
         MaterialSetTests.register(out);
-        SpearTests.register(out);
         MiningToolTests.register(out);
         FamilyTests.register(out);
         CommonTests.register(out, Constants.MOD_ID);

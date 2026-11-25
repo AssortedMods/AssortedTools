@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedgearsets:copper_axe"
+        "recipe": "assortedgearsets:copper_axe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

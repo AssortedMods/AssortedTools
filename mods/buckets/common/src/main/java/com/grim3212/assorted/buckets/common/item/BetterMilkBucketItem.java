@@ -5,21 +5,20 @@ import com.grim3212.assorted.lib.core.tool.ITiered;
 import com.grim3212.assorted.lib.core.tool.ToolTier;
 import com.grim3212.assorted.lib.platform.Services;
 import com.grim3212.assorted.buckets.config.BucketConfig;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemStackTemplate;
-import net.minecraft.world.item.component.Consumables;
+import net.minecraft.world.item.MilkBucketItem;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
-public class BetterMilkBucketItem extends Item implements ITiered {
+/**
+ * A milk bucket of one of the materials. Vanilla's milk bucket class does the drinking: the
+ * animation and duration, the stat and advancement, and clearing effects the way each loader does.
+ */
+public class BetterMilkBucketItem extends MilkBucketItem implements ITiered {
 
     private final Supplier<BetterBucketItem> parent;
 
@@ -28,8 +27,7 @@ public class BetterMilkBucketItem extends Item implements ITiered {
      *               parent is not read while items are still being registered
      */
     public BetterMilkBucketItem(Supplier<BetterBucketItem> parent, BucketConfig bucket, Properties props) {
-        // The drink animation, duration, swallow sounds and clearing effects are all the consumable component's job, so there is nothing left to override here.
-        super(props.stacksTo(1).component(DataComponents.CONSUMABLE, Consumables.MILK_BUCKET).component(BucketsDataComponents.BUCKET_CONTENTS.get(), new BucketContents(bucket.getMaxBuckets())));
+        super(props.stacksTo(1).component(BucketsDataComponents.BUCKET_CONTENTS.get(), new BucketContents(bucket.getMaxBuckets())));
         this.parent = parent;
     }
 
@@ -44,7 +42,7 @@ public class BetterMilkBucketItem extends Item implements ITiered {
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level worldIn, LivingEntity entityLiving) {
-        // Handing super a copy keeps the swallow, effect clear, stat and advancement the consumable component drives, while the bucket only loses one bucket of milk instead of being consumed outright.
+        // Handing super a copy keeps the effect clear, stat and advancement it drives, while the bucket only loses one bucket of milk instead of being swapped for an empty vanilla one.
         super.finishUsingItem(stack.copy(), worldIn, entityLiving);
 
         if (entityLiving instanceof Player player && !player.getAbilities().instabuild) {
@@ -55,30 +53,19 @@ public class BetterMilkBucketItem extends Item implements ITiered {
         return this.getParent().tryBreakBucket(stack);
     }
 
-    /**
-     * See {@code BetterBucketItem#craftingRemainder}: both loaders now ask for a nullable
-     * {@code ItemStackTemplate} and neither has a {@code hasCraftingRemainingItem} any more.
-     */
-    private @Nullable ItemStackTemplate craftingRemainder(ItemStack stack) {
-        if (BetterBucketItem.getAmount(stack) < getBucketAmount()) {
-            return null;
-        }
-
-        ItemStack remainder = stack.copy();
-        BetterBucketItem.setAmount(remainder, BetterBucketItem.getAmount(remainder) - getBucketAmount());
-
-        ItemStack result = this.getParent().tryBreakBucket(remainder);
-        return result.isEmpty() ? null : ItemStackTemplate.fromStack(result);
+    @LoaderImplement(loader = LoaderImplement.Loader.FORGE, value = "IItemExtension")
+    public boolean hasCraftingRemainingItem(ItemStack stack) {
+        return !BetterBucketItem.craftingRemainder(this.getParent(), stack).isEmpty();
     }
 
     @LoaderImplement(loader = LoaderImplement.Loader.FORGE, value = "IItemExtension")
-    public @Nullable ItemStackTemplate getCraftingRemainder(ItemInstance instance) {
-        return instance instanceof ItemStack stack ? this.craftingRemainder(stack) : this.getCraftingRemainder();
+    public ItemStack getCraftingRemainingItem(ItemStack stack) {
+        return BetterBucketItem.craftingRemainder(this.getParent(), stack);
     }
 
     @LoaderImplement(loader = LoaderImplement.Loader.FABRIC, value = "FabricItem")
-    public @Nullable ItemStackTemplate getCraftingRemainder(ItemStack stack) {
-        return this.craftingRemainder(stack);
+    public ItemStack getRecipeRemainder(ItemStack stack) {
+        return BetterBucketItem.craftingRemainder(this.getParent(), stack);
     }
 
     public int getBucketAmount() {

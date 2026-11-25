@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedgearsets:bronze_axe_alt"
+        "recipe": "assortedgearsets:bronze_axe_alt"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

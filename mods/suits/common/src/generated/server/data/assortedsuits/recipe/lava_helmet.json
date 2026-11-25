@@ -25,14 +25,19 @@
     }
   ],
   "key": {
-    "M": "minecraft:magma_cream",
-    "O": "minecraft:crying_obsidian"
+    "M": {
+      "item": "minecraft:magma_cream"
+    },
+    "O": {
+      "item": "minecraft:crying_obsidian"
+    }
   },
   "pattern": [
     "MMM",
     "MOM"
   ],
   "result": {
+    "count": 1,
     "id": "assortedsuits:lava_helmet"
   }
 }

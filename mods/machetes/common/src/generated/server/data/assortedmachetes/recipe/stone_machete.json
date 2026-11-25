@@ -25,8 +25,12 @@
     }
   ],
   "key": {
-    "S": "#c:rods/wooden",
-    "X": "#minecraft:stone_tool_materials"
+    "S": {
+      "tag": "c:rods/wooden"
+    },
+    "X": {
+      "tag": "minecraft:stone_tool_materials"
+    }
   },
   "pattern": [
     " XX",
@@ -34,6 +38,7 @@
     "S  "
   ],
   "result": {
+    "count": 1,
     "id": "assortedmachetes:stone_machete"
   }
 }

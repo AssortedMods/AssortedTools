@@ -19,14 +19,16 @@ public final class ShearsMatch {
      * Whether {@code stack} should satisfy a vanilla {@code is(item)} check. Only widens a check
      * for shears, since the redirected call sites test other items too.
      */
-    public static boolean matches(ItemStack stack, Object item) {
-        // Object, not Item: only `is(T rawType)` erases to `is(Object)`, which is what Mixin matches, so this is always an Item.
-        Item asItem = (Item) item;
-
-        if (asItem != Items.SHEARS) {
-            return stack.is(asItem);
+    public static boolean matches(ItemStack stack, Item item) {
+        if (item != Items.SHEARS) {
+            return stack.is(item);
         }
 
-        return stack.is(asItem) || stack.getItem() instanceof ShearsItem || stack.is(LibCommonTags.Items.SHEARS);
+        return isShears(stack);
+    }
+
+    /** Vanilla shears, any {@link ShearsItem}, or anything in the common shears tag. */
+    public static boolean isShears(ItemStack stack) {
+        return stack.is(Items.SHEARS) || stack.getItem() instanceof ShearsItem || stack.is(LibCommonTags.Items.SHEARS);
     }
 }

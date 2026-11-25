@@ -2,7 +2,7 @@ package com.grim3212.assorted.machetes.api;
 
 import com.grim3212.assorted.machetes.Constants;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -16,7 +16,7 @@ public final class MachetesTags {
     private MachetesTags() {
     }
 
-    private static Identifier id(String path) {
-        return Identifier.fromNamespaceAndPath(Constants.MOD_ID, path);
+    private static ResourceLocation id(String path) {
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, path);
     }
 }

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedgearsets:electrum_leggings"
+        "recipe": "assortedgearsets:electrum_leggings"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

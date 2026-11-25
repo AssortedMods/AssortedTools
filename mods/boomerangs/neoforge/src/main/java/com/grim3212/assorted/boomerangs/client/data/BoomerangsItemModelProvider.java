@@ -2,20 +2,17 @@ package com.grim3212.assorted.boomerangs.client.data;
 
 import com.grim3212.assorted.boomerangs.Constants;
 import com.grim3212.assorted.boomerangs.common.item.BoomerangsItems;
-import net.minecraft.client.data.models.BlockModelGenerators;
-import net.minecraft.client.data.models.ItemModelGenerators;
-import net.minecraft.client.data.models.ModelProvider;
-import net.minecraft.client.data.models.model.ModelTemplates;
-import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
-import java.util.stream.Stream;
+public class BoomerangsItemModelProvider extends ItemModelProvider {
 
-public class BoomerangsItemModelProvider extends ModelProvider {
-
-    public BoomerangsItemModelProvider(PackOutput output) {
-        super(output, Constants.MOD_ID);
+    public BoomerangsItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+        super(output, Constants.MOD_ID, existingFileHelper);
     }
 
     @Override
@@ -24,13 +21,13 @@ public class BoomerangsItemModelProvider extends ModelProvider {
     }
 
     @Override
-    protected Stream<? extends Holder<Block>> getKnownBlocks() {
-        return Stream.empty();
+    protected void registerModels() {
+        handheld(BoomerangsItems.WOOD_BOOMERANG.get());
+        handheld(BoomerangsItems.DIAMOND_BOOMERANG.get());
     }
 
-    @Override
-    protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
-        itemModels.generateFlatItem(BoomerangsItems.WOOD_BOOMERANG.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        itemModels.generateFlatItem(BoomerangsItems.DIAMOND_BOOMERANG.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+    private void handheld(Item item) {
+        ResourceLocation id = BuiltInRegistries.ITEM.getKey(item);
+        this.withExistingParent(id.getPath(), "item/handheld").texture("layer0", id.withPrefix("item/"));
     }
 }

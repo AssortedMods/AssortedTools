@@ -90,17 +90,36 @@
     }
   ],
   "ingredients": [
-    "#c:pickaxes/silver",
-    "#c:shovels/silver",
-    "#c:axes/silver",
-    "#c:hoes/silver",
-    "#c:swords/silver",
-    "#c:ingots/silver",
-    "#c:ingots/silver",
-    "#c:ingots/silver",
-    "#c:ingots/silver"
+    {
+      "tag": "c:pickaxes/silver"
+    },
+    {
+      "tag": "c:shovels/silver"
+    },
+    {
+      "tag": "c:axes/silver"
+    },
+    {
+      "tag": "c:hoes/silver"
+    },
+    {
+      "tag": "c:swords/silver"
+    },
+    {
+      "tag": "c:ingots/silver"
+    },
+    {
+      "tag": "c:ingots/silver"
+    },
+    {
+      "tag": "c:ingots/silver"
+    },
+    {
+      "tag": "c:ingots/silver"
+    }
   ],
   "result": {
+    "count": 1,
     "id": "assortedmultitools:silver_multitool"
   }
 }

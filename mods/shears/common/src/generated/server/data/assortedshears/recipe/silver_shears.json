@@ -25,14 +25,19 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/silver",
-    "L": "#c:leathers"
+    "I": {
+      "tag": "c:ingots/silver"
+    },
+    "L": {
+      "tag": "c:leathers"
+    }
   },
   "pattern": [
     " I",
     "IL"
   ],
   "result": {
+    "count": 1,
     "id": "assortedshears:silver_shears"
   }
 }

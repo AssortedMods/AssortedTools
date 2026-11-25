@@ -6,11 +6,9 @@ import com.mojang.serialization.JsonOps;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.Identifier;
-import net.minecraft.util.ProblemReporter;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.storage.TagValueInput;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -26,25 +24,24 @@ final class AliasTests {
     }
 
     private static void assortedtoolsIdsStillLoad(GameTestHelper helper) {
-        BuiltInRegistries.ITEM.entrySet().stream().filter(entry -> entry.getKey().identifier().getNamespace().equals(Constants.MOD_ID)).forEach(entry -> {
-            Identifier old = old(entry.getKey().identifier());
+        BuiltInRegistries.ITEM.entrySet().stream().filter(entry -> entry.getKey().location().getNamespace().equals(Constants.MOD_ID)).forEach(entry -> {
+            ResourceLocation old = old(entry.getKey().location());
             ItemStack stack = ItemStack.CODEC.parse(helper.getLevel().registryAccess().createSerializationContext(JsonOps.INSTANCE),
                     JsonParser.parseString("{\"id\": \"" + old + "\", \"count\": 1}")).getOrThrow();
             helper.assertTrue(stack.is(entry.getValue()), "a stack saved as " + old + " reads back as " + stack);
         });
 
-        BuiltInRegistries.ENTITY_TYPE.entrySet().stream().filter(entry -> entry.getKey().identifier().getNamespace().equals(Constants.MOD_ID)).forEach(entry -> {
+        BuiltInRegistries.ENTITY_TYPE.entrySet().stream().filter(entry -> entry.getKey().location().getNamespace().equals(Constants.MOD_ID)).forEach(entry -> {
             // The id a chunk saved an entity under, read back the way the world reads it.
             CompoundTag saved = new CompoundTag();
-            saved.putString("id", old(entry.getKey().identifier()).toString());
-            ProblemReporter.Collector problems = new ProblemReporter.Collector();
-            helper.assertValueEqual(EntityType.by(TagValueInput.create(problems, helper.getLevel().registryAccess(), saved)).orElse(null), entry.getValue(),
-                    "the entity saved as " + old(entry.getKey().identifier()));
+            saved.putString("id", old(entry.getKey().location()).toString());
+            helper.assertValueEqual(EntityType.by(saved).orElse(null), entry.getValue(),
+                    "the entity saved as " + old(entry.getKey().location()));
         });
         helper.succeed();
     }
 
-    private static Identifier old(Identifier id) {
-        return Identifier.fromNamespaceAndPath(Constants.FAMILY_ID, id.getPath());
+    private static ResourceLocation old(ResourceLocation id) {
+        return ResourceLocation.fromNamespaceAndPath(Constants.FAMILY_ID, id.getPath());
     }
 }

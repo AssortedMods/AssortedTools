@@ -6,6 +6,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
+import net.minecraft.nbt.Tag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -64,7 +65,6 @@ public class WandCoord3D {
     }
 
     public void writeToNBT(CompoundTag compound, String key) {
-        // CompoundTag#getCompound returns an Optional, so mutating the child in place doesn't work; it is written whole instead.
         CompoundTag coord = new CompoundTag();
         coord.putIntArray("Pos", new int[]{pos.getX(), pos.getY(), pos.getZ()});
         coord.put("BlockState", NbtUtils.writeBlockState(this.state));
@@ -98,20 +98,19 @@ public class WandCoord3D {
     }
 
     public static WandCoord3D getFromNBT(Level level, CompoundTag compound, String key) {
-        CompoundTag nbt = compound.getCompound(key).orElse(null);
-        if (nbt == null) {
+        if (!compound.contains(key, Tag.TAG_COMPOUND)) {
+            return null;
+        }
+        CompoundTag nbt = compound.getCompound(key);
+
+        int[] coord = nbt.getIntArray("Pos");
+        if (coord.length != 3) {
             return null;
         }
 
-        int[] coord = nbt.getIntArray("Pos").orElse(null);
-        if (coord == null || coord.length != 3) {
-            return null;
-        }
+        HolderGetter<Block> holdergetter = level != null ? level.holderLookup(Registries.BLOCK) : BuiltInRegistries.BLOCK.asLookup();
 
-        // BuiltInRegistries.BLOCK is itself the HolderGetter needed here, since Registry is a HolderLookup.RegistryLookup.
-        HolderGetter<Block> holdergetter = level != null ? level.holderLookup(Registries.BLOCK) : BuiltInRegistries.BLOCK;
-
-        BlockState state = NbtUtils.readBlockState(holdergetter, nbt.getCompoundOrEmpty("BlockState"));
+        BlockState state = NbtUtils.readBlockState(holdergetter, nbt.getCompound("BlockState"));
         return new WandCoord3D(new BlockPos(coord[0], coord[1], coord[2]), state);
     }
 }

@@ -19,8 +19,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-
 /**
  * Pushes the clicked block one step away from the clicked face, or pulls it toward it. A floating
  * move leaves the block where it lands; a dropping move lets it fall, and a rider goes along for it.
@@ -28,10 +26,10 @@ import java.util.List;
 public class PowerStaffItem extends StaffItem {
 
     /**
-     * The {@code custom_model_data} string the item model selects the pull texture on. Kept in step
-     * with the mode, since a model cannot read {@code custom_data}.
+     * The {@code custom_model_data} the item model's override picks the pull texture on, and 0 for push.
+     * Kept in step with the mode, since a model cannot read {@code custom_data}.
      */
-    public static final String PULL_MODEL = "pull";
+    public static final int PULL_MODEL = 1;
 
     public PowerStaffItem(Properties properties) {
         super(StaffModeInfo.Kind.POWER, properties);
@@ -40,7 +38,7 @@ public class PowerStaffItem extends StaffItem {
     @Override
     protected void setMode(ItemStack stack, StaffMode mode) {
         super.setMode(stack, mode);
-        stack.set(DataComponents.CUSTOM_MODEL_DATA, new CustomModelData(List.of(), List.of(), List.of(mode.pulls() ? PULL_MODEL : "push"), List.of()));
+        stack.set(DataComponents.CUSTOM_MODEL_DATA, new CustomModelData(mode.pulls() ? PULL_MODEL : 0));
     }
 
     @Override
@@ -58,7 +56,7 @@ public class PowerStaffItem extends StaffItem {
 
         BlockPos target = pos.relative(direction);
         Player rider = riderOf(context.getPlayer(), pos);
-        if (!level.getBlockState(target).isAir() || !level.isUnobstructed(rider, state.getCollisionShape(level, target, CollisionContext.empty()).move(target))) {
+        if (!level.getBlockState(target).isAir() || !level.isUnobstructed(rider, state.getCollisionShape(level, target, CollisionContext.empty()).move(target.getX(), target.getY(), target.getZ()))) {
             return InteractionResult.FAIL;
         }
 

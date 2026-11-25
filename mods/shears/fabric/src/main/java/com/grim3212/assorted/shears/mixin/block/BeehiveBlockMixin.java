@@ -1,6 +1,7 @@
 package com.grim3212.assorted.shears.mixin.block;
 
 import com.grim3212.assorted.shears.common.item.ShearsMatch;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.BeehiveBlock;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,9 +15,9 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(BeehiveBlock.class)
 public abstract class BeehiveBlockMixin {
 
-    // Target is(Object), not is(Item) - it erases that way and is(Item) fails at load; ordinal 0 is the shears branch, ordinal 1 the glass bottle.
-    @Redirect(method = "useItemOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Ljava/lang/Object;)Z", ordinal = 0))
-    private boolean assortedshears_shearsHarvest(ItemStack stack, Object item) {
+    // Ordinal 0 is the shears branch, ordinal 1 the glass bottle.
+    @Redirect(method = "useItemOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z", ordinal = 0))
+    private boolean assortedshears_shearsHarvest(ItemStack stack, Item item) {
         return ShearsMatch.matches(stack, item);
     }
 }

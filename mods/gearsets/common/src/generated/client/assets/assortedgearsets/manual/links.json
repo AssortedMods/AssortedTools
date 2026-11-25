@@ -92,28 +92,6 @@
     },
     {
       "items": [
-        "assortedgearsets:aluminum_spear",
-        "assortedgearsets:amethyst_spear",
-        "assortedgearsets:bronze_spear",
-        "assortedgearsets:copper_spear",
-        "assortedgearsets:electrum_spear",
-        "assortedgearsets:emerald_spear",
-        "assortedgearsets:invar_spear",
-        "assortedgearsets:lead_spear",
-        "assortedgearsets:nickel_spear",
-        "assortedgearsets:peridot_spear",
-        "assortedgearsets:platinum_spear",
-        "assortedgearsets:ruby_spear",
-        "assortedgearsets:sapphire_spear",
-        "assortedgearsets:silver_spear",
-        "assortedgearsets:steel_spear",
-        "assortedgearsets:tin_spear",
-        "assortedgearsets:topaz_spear"
-      ],
-      "page": "assortedtools:materials/spears"
-    },
-    {
-      "items": [
         "assortedgearsets:aluminum_boots",
         "assortedgearsets:aluminum_chestplate",
         "assortedgearsets:aluminum_helmet",

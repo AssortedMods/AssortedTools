@@ -1,5 +1,9 @@
 {
   "parent": "assortedlib:item/default",
+  "apply_fluid_luminosity": true,
+  "cover_is_mask": true,
+  "flip_gas": true,
+  "loader": "assortedbuckets:fluid_container",
   "textures": {
     "base": "assortedbuckets:item/buckets/silver_bucket",
     "cover": "assortedbuckets:item/buckets/bucket_covered",

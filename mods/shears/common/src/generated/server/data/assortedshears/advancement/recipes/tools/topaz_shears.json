@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedshears:topaz_shears"
+        "recipe": "assortedshears:topaz_shears"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

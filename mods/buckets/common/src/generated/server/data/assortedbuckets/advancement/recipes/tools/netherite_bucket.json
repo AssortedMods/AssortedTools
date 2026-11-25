@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedbuckets:netherite_bucket"
+        "recipe": "assortedbuckets:netherite_bucket"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

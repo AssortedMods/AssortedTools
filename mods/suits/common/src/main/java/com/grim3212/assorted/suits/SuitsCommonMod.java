@@ -7,10 +7,11 @@ import com.grim3212.assorted.lib.platform.Services;
 import com.grim3212.assorted.suits.common.effect.SuitsMobEffects;
 import com.grim3212.assorted.suits.common.handlers.ChickenSuitConversionHandler;
 import com.grim3212.assorted.suits.common.handlers.SuitsCreativeItems;
+import com.grim3212.assorted.suits.common.item.SuitsArmorMaterials;
 import com.grim3212.assorted.suits.common.item.SuitsItems;
 import com.grim3212.assorted.suits.common.network.SuitsPackets;
 import com.grim3212.assorted.suits.config.SuitsConfig;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * Loader-agnostic startup. Both loader entry points call {@link #init()} and nothing else; anything
@@ -23,9 +24,10 @@ public class SuitsCommonMod {
     public static void init() {
         Constants.LOG.info(Constants.MOD_NAME + " starting up...");
         Families.join(Constants.MOD_ID, Constants.FAMILY_ID)
-                .icon(Identifier.fromNamespaceAndPath(Constants.MOD_ID, "chicken_suit_helmet"), 40)
+                .icon(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "chicken_suit_helmet"), 40)
                 .manualOrder(120);
 
+        SuitsArmorMaterials.init();
         SuitsItems.init();
         SuitsMobEffects.init();
         SuitsPackets.init();

@@ -14,12 +14,14 @@ import com.grim3212.assorted.staffs.data.StaffsItemTagProvider;
 import com.grim3212.assorted.staffs.data.StaffsRecipes;
 import com.grim3212.assorted.staffs.platform.NeoForgeFrozenStorage;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
@@ -30,8 +32,7 @@ public class AssortedStaffsNeoForge {
 
     /** The mod event bus and container are injected into the {@code @Mod} constructor. */
     public AssortedStaffsNeoForge(IEventBus modBus, ModContainer modContainer) {
-        modBus.addListener(this::gatherServerData);
-        modBus.addListener(this::gatherClientData);
+        modBus.addListener(this::gatherData);
 
         NeoForgeFrozenStorage.ATTACHMENT_TYPES.register(modBus);
         NeoForgeFrozenStorage.aliasOldId();
@@ -44,22 +45,20 @@ public class AssortedStaffsNeoForge {
         StaffsCommonMod.init();
     }
 
-    /** Server datagen. If the client half runs instead, the build still succeeds, with "All providers took: 0 ms". */
-    private void gatherServerData(final GatherDataEvent.Server event) {
-        PackOutput packOutput = event.getGenerator().getPackOutput();
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getWorldLookupProvider();
+    /** One event for both halves; the data run's --server and --client flags pick which providers run. */
+    private void gatherData(final GatherDataEvent event) {
+        DataGenerator generator = event.getGenerator();
+        PackOutput packOutput = generator.getPackOutput();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        ExistingFileHelper fileHelper = event.getExistingFileHelper();
 
         ForgeRegistryEntries.of(Constants.MOD_ID).recipes(StaffsRecipes::new).loot(StaffsChestLoot::new, LootContextParamSets.CHEST).loot(StaffsEntityLoot::new, LootContextParamSets.ENTITY).addTo(event);
-        ForgeBlockTagProvider blockTagProvider = event.addProvider(new ForgeBlockTagProvider(packOutput, lookupProvider, Constants.MOD_ID, new StaffsBlockTagProvider(packOutput, lookupProvider)));
-        event.addProvider(new ForgeItemTagProvider(packOutput, lookupProvider, blockTagProvider.contentsGetter(), Constants.MOD_ID, new StaffsItemTagProvider(packOutput, lookupProvider, blockTagProvider.contentsGetter())));
-    }
+        ForgeBlockTagProvider blockTagProvider = generator.addProvider(event.includeServer(), new ForgeBlockTagProvider(packOutput, lookupProvider, Constants.MOD_ID, fileHelper, new StaffsBlockTagProvider(packOutput, lookupProvider)));
+        generator.addProvider(event.includeServer(), new ForgeItemTagProvider(packOutput, lookupProvider, blockTagProvider.contentsGetter(), Constants.MOD_ID, fileHelper, new StaffsItemTagProvider(packOutput, lookupProvider, blockTagProvider.contentsGetter())));
 
-    /** Client datagen: models, the language file and the manual, written into common for both loaders. */
-    private void gatherClientData(final GatherDataEvent.Client event) {
-        PackOutput packOutput = event.getGenerator().getPackOutput();
-
-        event.addProvider(new StaffsItemModelProvider(packOutput));
-        event.addProvider(new StaffsLanguageProvider(packOutput));
-        event.addProvider(new StaffsManualProvider(packOutput));
+        // Models, the language file and the manual, written into common for both loaders.
+        generator.addProvider(event.includeClient(), new StaffsItemModelProvider(packOutput, fileHelper));
+        generator.addProvider(event.includeClient(), new StaffsLanguageProvider(packOutput));
+        generator.addProvider(event.includeClient(), new StaffsManualProvider(packOutput));
     }
 }

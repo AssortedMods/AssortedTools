@@ -25,13 +25,18 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/silver",
-    "S": "#c:rods/wooden"
+    "I": {
+      "tag": "c:ingots/silver"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
   },
   "pattern": [
     "SSI"
   ],
   "result": {
+    "count": 1,
     "id": "assortedthrowingspears:silver_throwing_spear"
   }
 }

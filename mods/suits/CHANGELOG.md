@@ -1,17 +1,8 @@
 # Changelog
 
-## 2.0.1
+## 21.1.0.0
 
-- Added a client setting to turn off the chicken cluck when jumping in the chicken suit
+First release for Minecraft 1.21.1, for NeoForge and Fabric. Releases for 1.21.1 are numbered 21.1.x.y, where 21.1 is the Minecraft version.
 
-## 2.0.0
-
-Updated to Minecraft 26.3, for NeoForge and Fabric.
-
-- Requires Assorted Lib 5.0.0
-
-## 1.0.0
-
-- First release as its own mod. It used to only be part of Assorted Tools
-- Worlds from Assorted Tools 11.x keep all of these items, recipes and enchantments
-- Requires Assorted Lib 4.3.0
+- Matches Assorted Suits 2.0.2 for Minecraft 26.3
+- Requires Assorted Lib 21.1.0.0

@@ -1,10 +1,10 @@
 package com.grim3212.assorted.shears.mixin.loot;
 
-import com.grim3212.assorted.lib.util.LibCommonTags;
-import net.minecraft.advancements.predicates.ItemPredicate;
+import com.grim3212.assorted.shears.common.item.ShearsMatch;
+import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.core.HolderSet;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemInstance;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,14 +17,13 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(ItemPredicate.class)
 public abstract class ItemPredicateMixin {
 
-    @Redirect(method = "test", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemInstance;is(Lnet/minecraft/core/HolderSet;)Z"))
-    private boolean assortedshears_shearsMatch(ItemInstance stack, HolderSet<Item> items) {
+    @Redirect(method = "test", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/core/HolderSet;)Z"))
+    private boolean assortedshears_shearsMatch(ItemStack stack, HolderSet<Item> items) {
         if (stack.is(items)) {
             return true;
         }
 
-        // Tag only: ItemInstance has no item accessor for an instanceof ShearsItem check, but the common shears tag covers the same set via datagen.
-        boolean wantsShears = items.contains(Items.SHEARS.builtInRegistryHolder());
-        return wantsShears && stack.is(LibCommonTags.Items.SHEARS);
+        boolean wantsShears = items.stream().anyMatch(holder -> holder.value() == Items.SHEARS);
+        return wantsShears && ShearsMatch.isShears(stack);
     }
 }

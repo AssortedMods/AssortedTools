@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedsuits:chicken_suit_chestplate"
+        "recipe": "assortedsuits:chicken_suit_chestplate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

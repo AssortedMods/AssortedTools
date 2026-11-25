@@ -44,9 +44,6 @@ public class GearSetsLanguageProvider extends LibLanguageProvider {
         this.add(chapter + "materials.basic.title", "The Basic Set");
         this.add(chapter + "materials.basic",
                 "Pickaxe, axe, shovel, hoe and sword, in every material. They behave exactly as the vanilla ones do.");
-        this.add(chapter + "materials.spears.title", "Spears");
-        this.add(chapter + "materials.spears",
-                "These spears act exactly like the Vanilla spears in Minecraft but in all of the different materials we support.");
 
         this.add(chapter + "armor", "Armor");
         this.add(chapter + "armor.armor.title", "Armor Sets");

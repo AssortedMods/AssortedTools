@@ -25,13 +25,18 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/netherite",
-    "S": "#c:rods/wooden"
+    "I": {
+      "tag": "c:ingots/netherite"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
   },
   "pattern": [
     "SSI"
   ],
   "result": {
+    "count": 1,
     "id": "assortedthrowingspears:netherite_throwing_spear"
   }
 }

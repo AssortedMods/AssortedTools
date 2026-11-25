@@ -41,7 +41,7 @@ public class WandBreakingItem extends WandItem {
 
         switch (BreakingMode.fromString(NBTHelper.getString(stack, "Mode"))) {
             case BREAK_WEAK:
-                return (state.canBeReplaced() || state.getPistonPushReaction() == PushReaction.POPPED || state.liquid());
+                return (state.canBeReplaced() || state.getPistonPushReaction() == PushReaction.DESTROY || state.liquid());
             case BREAK_ALL:
                 return (state.getBlock() != Blocks.BEDROCK || WandsCommonMod.COMMON_CONFIG.bedrockBreaking.get());
             case BREAK_XORES:
@@ -61,7 +61,7 @@ public class WandBreakingItem extends WandItem {
     }
 
     @Override
-    protected boolean doEffect(Level world, Player entityplayer, InteractionHand hand, WandCoord3D start, WandCoord3D end, BlockState state) {
+    protected boolean doEffect(Level world, Player entityplayer, InteractionHand hand, WandCoord3D start, WandCoord3D end, BlockState state, BlockState clicked) {
         boolean damage = doBreaking(world, start, end, entityplayer, hand);
         if (damage)
             world.playSound((Player) null, end.pos, SoundEvents.GENERIC_EXPLODE.value(), SoundSource.BLOCKS, 2.5F, 0.5F + world.getRandom().nextFloat() * 0.3F);
@@ -127,7 +127,7 @@ public class WandBreakingItem extends WandItem {
     }
 
     @Override
-    public void onCraftedBy(ItemStack stack, Player playerIn) {
+    public void onCraftedBy(ItemStack stack, Level level, Player playerIn) {
         NBTHelper.putString(stack, "Mode", BreakingMode.BREAK_WEAK.getSerializedName());
     }
 

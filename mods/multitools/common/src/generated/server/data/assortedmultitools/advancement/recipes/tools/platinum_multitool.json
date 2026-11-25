@@ -48,7 +48,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedmultitools:platinum_multitool"
+        "recipe": "assortedmultitools:platinum_multitool"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

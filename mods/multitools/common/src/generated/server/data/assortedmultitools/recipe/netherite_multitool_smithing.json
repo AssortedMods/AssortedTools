@@ -6,8 +6,12 @@
     }
   ],
   "type": "minecraft:smithing_transform",
-  "addition": "minecraft:netherite_block",
-  "base": "assortedmultitools:diamond_multitool",
+  "addition": {
+    "item": "minecraft:netherite_block"
+  },
+  "base": {
+    "item": "assortedmultitools:diamond_multitool"
+  },
   "fabric:load_conditions": [
     {
       "condition": "assortedlib:part_enabled",
@@ -15,7 +19,10 @@
     }
   ],
   "result": {
+    "count": 1,
     "id": "assortedmultitools:netherite_multitool"
   },
-  "template": "minecraft:netherite_upgrade_smithing_template"
+  "template": {
+    "item": "minecraft:netherite_upgrade_smithing_template"
+  }
 }

@@ -5,5 +5,6 @@
   "structure": "assortedboomerangs:test_box",
   "max_ticks": 1,
   "setup_ticks": 0,
-  "required": true
+  "required": true,
+  "sky_access": true
 }

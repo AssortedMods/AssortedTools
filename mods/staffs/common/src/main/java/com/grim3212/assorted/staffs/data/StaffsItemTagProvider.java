@@ -7,7 +7,6 @@ import com.grim3212.assorted.staffs.common.item.StaffsItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.TagAppender;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -28,7 +27,7 @@ public class StaffsItemTagProvider extends LibItemTagProvider {
     public void addCommonTags(Function<TagKey<Item>, TagAppender<Item>> appender, BiConsumer<TagKey<Block>, TagKey<Item>> copier) {
         // Opt-in: without these the Neptune and Phoenix staffs take no weapon enchantment at a table.
         for (Item staff : List.of(StaffsItems.NEPTUNE_STAFF.get(), StaffsItems.PHOENIX_STAFF.get())) {
-            add(appender, staff, ItemTags.WEAPON_ENCHANTABLE, ItemTags.MELEE_WEAPON_ENCHANTABLE, ItemTags.SHARP_WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE,
+            add(appender, staff, ItemTags.WEAPON_ENCHANTABLE, ItemTags.SWORD_ENCHANTABLE, ItemTags.SHARP_WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE,
                     ItemTags.DURABILITY_ENCHANTABLE, ItemTags.VANISHING_ENCHANTABLE, LibCommonTags.Items.TOOLS_MELEE_WEAPONS);
         }
         add(appender, StaffsItems.FROST_ROD.get(), StaffsTags.RODS_FROST);

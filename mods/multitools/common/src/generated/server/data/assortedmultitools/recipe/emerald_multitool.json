@@ -90,17 +90,36 @@
     }
   ],
   "ingredients": [
-    "#c:pickaxes/emerald",
-    "#c:shovels/emerald",
-    "#c:axes/emerald",
-    "#c:hoes/emerald",
-    "#c:swords/emerald",
-    "#c:gems/emerald",
-    "#c:gems/emerald",
-    "#c:gems/emerald",
-    "#c:gems/emerald"
+    {
+      "tag": "c:pickaxes/emerald"
+    },
+    {
+      "tag": "c:shovels/emerald"
+    },
+    {
+      "tag": "c:axes/emerald"
+    },
+    {
+      "tag": "c:hoes/emerald"
+    },
+    {
+      "tag": "c:swords/emerald"
+    },
+    {
+      "tag": "c:gems/emerald"
+    },
+    {
+      "tag": "c:gems/emerald"
+    },
+    {
+      "tag": "c:gems/emerald"
+    },
+    {
+      "tag": "c:gems/emerald"
+    }
   ],
   "result": {
+    "count": 1,
     "id": "assortedmultitools:emerald_multitool"
   }
 }

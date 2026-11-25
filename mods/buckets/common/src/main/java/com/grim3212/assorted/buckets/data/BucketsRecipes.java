@@ -4,27 +4,26 @@ import com.grim3212.assorted.buckets.Constants;
 import com.grim3212.assorted.buckets.common.item.BucketsItems;
 import com.grim3212.assorted.lib.core.conditions.ConditionalRecipeProvider;
 import com.grim3212.assorted.lib.util.LibCommonTags;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.SmithingTransformRecipeBuilder;
-import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 
+import java.util.concurrent.CompletableFuture;
+
 public class BucketsRecipes extends ConditionalRecipeProvider {
 
-    public BucketsRecipes(BootstrapContext<Recipe<?>> recipes, BootstrapContext<Advancement> advancements) {
-        super(recipes, advancements, Constants.MOD_ID);
+    public BucketsRecipes(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, registries, Constants.MOD_ID);
     }
 
     @Override
@@ -43,22 +42,18 @@ public class BucketsRecipes extends ConditionalRecipeProvider {
         bucketPattern(BucketsItems.NETHERITE.bucket().get(), LibCommonTags.Items.INGOTS_NETHERITE);
         BucketsItems.EXTRAS.forEach(pair -> bucketPattern(pair.bucket().get(), pair.tier().getRepairItems()));
 
-        SmithingTransformRecipeBuilder.smithing(Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(BucketsItems.DIAMOND.bucket().get()), this.tag(LibCommonTags.Items.INGOTS_NETHERITE), RecipeCategory.TOOLS, BucketsItems.NETHERITE.bucket().get())
-                .unlocks("has_netherite_ingot", has(LibCommonTags.Items.INGOTS_NETHERITE)).save(this.output, recipeKey(Identifier.parse(id(BucketsItems.NETHERITE.bucket().get()) + "_smithing")));
+        SmithingTransformRecipeBuilder.smithing(Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(BucketsItems.DIAMOND.bucket().get()), Ingredient.of(LibCommonTags.Items.INGOTS_NETHERITE), RecipeCategory.TOOLS, BucketsItems.NETHERITE.bucket().get())
+                .unlocks("has_netherite_ingot", has(LibCommonTags.Items.INGOTS_NETHERITE)).save(this.output, ResourceLocation.parse(id(BucketsItems.NETHERITE.bucket().get()) + "_smithing"));
 
         // Vanilla's cake asks for its own milk bucket by identity, so this one takes any of them.
-        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.FOOD, Blocks.CAKE).define('A', LibCommonTags.Items.BUCKETS_MILK).define('B', Items.SUGAR).define('C', LibCommonTags.Items.CROPS_WHEAT).define('E', LibCommonTags.Items.EGGS)
-                .pattern("AAA").pattern("BEB").pattern("CCC").unlockedBy("has_egg", has(LibCommonTags.Items.EGGS)).save(this.output, recipeKey(prefix("cake_alt")));
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, Blocks.CAKE).define('A', LibCommonTags.Items.BUCKETS_MILK).define('B', Items.SUGAR).define('C', LibCommonTags.Items.CROPS_WHEAT).define('E', LibCommonTags.Items.EGGS)
+                .pattern("AAA").pattern("BEB").pattern("CCC").unlockedBy("has_egg", has(LibCommonTags.Items.EGGS)).save(this.output, prefix("cake_alt"));
     }
 
     private void bucketPattern(ItemLike output, TagKey<Item> input) {
-        Identifier id = id(output.asItem());
+        ResourceLocation id = id(output.asItem());
         this.addConditions(itemTagExists(input), id);
 
-        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, output).define('I', input).pattern("I I").pattern(" I ").unlockedBy("has_item", has(input)).save(this.output, recipeKey(id));
-    }
-
-    private static ResourceKey<Recipe<?>> recipeKey(Identifier id) {
-        return ResourceKey.create(Registries.RECIPE, id);
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, output).define('I', input).pattern("I I").pattern(" I ").unlockedBy("has_item", has(input)).save(this.output, id);
     }
 }

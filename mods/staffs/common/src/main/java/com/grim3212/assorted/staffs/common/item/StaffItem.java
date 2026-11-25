@@ -4,13 +4,12 @@ import com.grim3212.assorted.lib.core.item.ISwitchModes;
 import com.grim3212.assorted.lib.util.NBTHelper;
 import com.grim3212.assorted.staffs.Constants;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.Weapon;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 
@@ -35,11 +34,17 @@ public abstract class StaffItem extends Item implements ISwitchModes {
     }
 
     /**
-     * The Neptune and Phoenix staffs: a hit freezes or thaws, for one durability, but does no more
-     * damage than a bare hand. They are not a weapon.
+     * The Neptune and Phoenix staffs: a hit freezes or thaws, for one durability (see {@link #postHurtEnemy}),
+     * but does no more damage than a bare hand. They are not a weapon.
      */
     protected static Properties elemental(Properties properties) {
-        return properties.component(DataComponents.WEAPON, new Weapon(1));
+        return properties;
+    }
+
+    /** Only reached when {@code hurtEnemy} counted the hit, which only the elemental staffs do. */
+    @Override
+    public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
     }
 
     public StaffMode getMode(ItemStack stack) {

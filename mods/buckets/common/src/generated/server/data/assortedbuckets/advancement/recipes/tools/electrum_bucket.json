@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedbuckets:electrum_bucket"
+        "recipe": "assortedbuckets:electrum_bucket"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

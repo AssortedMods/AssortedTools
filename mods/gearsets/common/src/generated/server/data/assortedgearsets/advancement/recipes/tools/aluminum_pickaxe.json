@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedgearsets:aluminum_pickaxe"
+        "recipe": "assortedgearsets:aluminum_pickaxe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

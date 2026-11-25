@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedbuckets:milking_level_past_the_last_level_still_milks",
+  "structure": "assortedbuckets:test_box",
+  "max_ticks": 1,
+  "setup_ticks": 0,
+  "required": true
+}

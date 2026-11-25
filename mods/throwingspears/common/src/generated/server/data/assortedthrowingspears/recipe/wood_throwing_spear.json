@@ -25,13 +25,18 @@
     }
   ],
   "key": {
-    "I": "#minecraft:planks",
-    "S": "#c:rods/wooden"
+    "I": {
+      "tag": "minecraft:planks"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
   },
   "pattern": [
     "SSI"
   ],
   "result": {
+    "count": 1,
     "id": "assortedthrowingspears:wood_throwing_spear"
   }
 }

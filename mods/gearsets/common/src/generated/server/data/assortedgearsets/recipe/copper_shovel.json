@@ -25,8 +25,12 @@
     }
   ],
   "key": {
-    "S": "#c:rods/wooden",
-    "X": "#c:ingots/copper"
+    "S": {
+      "tag": "c:rods/wooden"
+    },
+    "X": {
+      "tag": "c:ingots/copper"
+    }
   },
   "pattern": [
     "X",
@@ -34,6 +38,7 @@
     "S"
   ],
   "result": {
+    "count": 1,
     "id": "assortedgearsets:copper_shovel"
   }
 }

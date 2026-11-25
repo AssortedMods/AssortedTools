@@ -25,14 +25,19 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/tin",
-    "L": "#c:leathers"
+    "I": {
+      "tag": "c:ingots/tin"
+    },
+    "L": {
+      "tag": "c:leathers"
+    }
   },
   "pattern": [
     "LI",
     "I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedshears:tin_shears"
   }
 }

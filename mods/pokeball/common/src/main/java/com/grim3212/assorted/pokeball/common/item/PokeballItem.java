@@ -5,7 +5,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -24,7 +24,7 @@ public class PokeballItem extends Item {
     }
 
     @Override
-    public InteractionResult use(Level worldIn, Player playerIn, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand hand) {
         ItemStack itemStackIn = playerIn.getItemInHand(hand);
 
         if (!worldIn.isClientSide()) {
@@ -37,10 +37,10 @@ public class PokeballItem extends Item {
 
         if (!playerIn.isCreative() || !CapturedEntity.of(itemStackIn).isEmpty()) {
             // The ball itself becomes the thrown entity, so the hand is emptied.
-            return InteractionResult.SUCCESS.heldItemTransformedTo(ItemStack.EMPTY);
+            return InteractionResultHolder.sidedSuccess(ItemStack.EMPTY, worldIn.isClientSide());
         }
 
-        return InteractionResult.SUCCESS;
+        return InteractionResultHolder.sidedSuccess(itemStackIn, worldIn.isClientSide());
     }
 
     /** A full bar shows a mob is inside, the way the old durability bar did after a catch. */

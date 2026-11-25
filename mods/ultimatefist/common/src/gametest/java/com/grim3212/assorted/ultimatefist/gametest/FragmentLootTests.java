@@ -4,7 +4,7 @@ import com.grim3212.assorted.ultimatefist.common.item.UltimateFistItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTestHelper;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -45,7 +45,7 @@ final class FragmentLootTests {
 
         for (Map.Entry<String, List<String>> chest : CHESTS.entrySet()) {
             LootTable table = helper.getLevel().getServer().reloadableRegistries()
-                    .getLootTable(ResourceKey.create(Registries.LOOT_TABLE, Identifier.withDefaultNamespace("chests/" + chest.getKey())));
+                    .getLootTable(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.withDefaultNamespace("chests/" + chest.getKey())));
             Set<Item> found = new HashSet<>();
             for (int i = 0; i < 2000; i++) {
                 for (ItemStack stack : table.getRandomItems(params)) {

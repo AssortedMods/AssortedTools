@@ -9,10 +9,10 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.Equipable;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.equipment.Equippable;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Optional;
@@ -27,13 +27,13 @@ public class ChickenSuitConversionHandler {
             return;
         }
 
-        // "Same armor type" is tested by comparing the EquipmentSlot of each item's equippable component.
-        Equippable equippable = left.get(DataComponents.EQUIPPABLE);
-        if (equippable == null || !equippable.slot().isArmor()) {
+        // "Same armor type" is tested by comparing the slot each item is worn in.
+        Equipable equipable = Equipable.get(left);
+        if (equipable == null || !equipable.getEquipmentSlot().isArmor()) {
             return;
         }
 
-        EquipmentSlot slot = equippable.slot();
+        EquipmentSlot slot = equipable.getEquipmentSlot();
         if (slot != chickenArmor.getArmorType().getSlot()) {
             return;
         }
@@ -49,10 +49,9 @@ public class ChickenSuitConversionHandler {
         EnchantmentHelper.updateEnchantments(output, mutable -> mutable.set(chickenJump, 1));
 
         int cost = 0;
-        if (!StringUtils.isBlank(event.getName()) && !event.getName().equals(output.getHoverName().toString())) {
+        if (!StringUtils.isBlank(event.getName()) && !event.getName().equals(output.getHoverName().getString())) {
             cost++;
 
-            // ItemStack#setHoverName is gone; the display name is the custom_name component.
             output.set(DataComponents.CUSTOM_NAME, Component.literal(event.getName()));
         }
 

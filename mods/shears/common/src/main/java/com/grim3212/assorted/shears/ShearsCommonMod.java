@@ -8,7 +8,7 @@ import com.grim3212.assorted.lib.platform.Services;
 import com.grim3212.assorted.shears.common.handlers.CoralCutterHandler;
 import com.grim3212.assorted.shears.common.handlers.ShearsCreativeItems;
 import com.grim3212.assorted.shears.common.item.ShearsItems;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * Loader-agnostic startup. Both loader entry points call {@link #init()} and nothing else; anything
@@ -19,7 +19,7 @@ public class ShearsCommonMod {
     public static void init() {
         Constants.LOG.info(Constants.MOD_NAME + " starting up...");
         Families.join(Constants.MOD_ID, Constants.FAMILY_ID)
-                .icon(Identifier.fromNamespaceAndPath(Constants.MOD_ID, "diamond_shears"), 80)
+                .icon(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "diamond_shears"), 80)
                 .manualOrder(120);
 
         ShearsItems.init();

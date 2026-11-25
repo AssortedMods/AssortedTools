@@ -25,14 +25,19 @@
     }
   ],
   "key": {
-    "I": "#c:ingots/netherite",
-    "L": "#c:leathers"
+    "I": {
+      "tag": "c:ingots/netherite"
+    },
+    "L": {
+      "tag": "c:leathers"
+    }
   },
   "pattern": [
     "LI",
     "I "
   ],
   "result": {
+    "count": 1,
     "id": "assortedshears:netherite_shears"
   }
 }

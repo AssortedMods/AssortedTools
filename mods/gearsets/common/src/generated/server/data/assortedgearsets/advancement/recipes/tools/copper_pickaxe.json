@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "assortedgearsets:copper_pickaxe"
+        "recipe": "assortedgearsets:copper_pickaxe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

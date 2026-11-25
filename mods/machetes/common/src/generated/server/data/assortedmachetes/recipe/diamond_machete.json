@@ -25,8 +25,12 @@
     }
   ],
   "key": {
-    "S": "#c:rods/wooden",
-    "X": "#c:gems/diamond"
+    "S": {
+      "tag": "c:rods/wooden"
+    },
+    "X": {
+      "tag": "c:gems/diamond"
+    }
   },
   "pattern": [
     " XX",
@@ -34,6 +38,7 @@
     "S  "
   ],
   "result": {
+    "count": 1,
     "id": "assortedmachetes:diamond_machete"
   }
 }
