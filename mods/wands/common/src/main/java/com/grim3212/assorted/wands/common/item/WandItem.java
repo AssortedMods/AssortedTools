@@ -40,7 +40,6 @@ public abstract class WandItem extends Item implements ISwitchModes {
     protected Random rand;
 
     protected BlockState stateOrig = Blocks.AIR.defaultBlockState();
-    protected BlockState stateClicked = Blocks.AIR.defaultBlockState();
 
     public WandItem(boolean reinforced, Properties properties) {
         super(properties);
@@ -197,7 +196,6 @@ public abstract class WandItem extends Item implements ISwitchModes {
             SoundType soundType = Services.LEVEL_PROPERTIES.getSoundType(worldIn, pos, null);
             worldIn.playSound((Player) null, pos, soundType.getBreakSound(), SoundSource.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F);
 
-            this.stateClicked = state;
             writeStart(stack, clicked_current);
 
             particles(worldIn, clicked_current, 0);

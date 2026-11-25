@@ -40,6 +40,24 @@ final class ShearsTests {
         out.accept("shears_cut_leaves", ShearsTests::shearsCutLeaves);
         out.accept("shears_cut_coral_with_coral_cutter", ShearsTests::shearsCutCoralWithCoralCutter);
         out.accept("coral_cutter_covers_every_coral", ShearsTests::coralCutterCoversEveryCoral);
+        out.accept("coral_cutter_leaves_other_tools_alone", ShearsTests::coralCutterLeavesOtherToolsAlone);
+    }
+
+    /**
+     * Live coral mined with a pickaxe that has neither Silk Touch nor Coral Cutter dies, as in vanilla. The drop
+     * handler re-rolls coral drops with Silk Touch, and once did it for every tool, not just Coral Cutter's.
+     */
+    private static void coralCutterLeavesOtherToolsAlone(GameTestHelper helper) {
+        final BlockPos target = new BlockPos(4, 1, 4);
+        helper.setBlock(target, Blocks.TUBE_CORAL_BLOCK);
+
+        ServerPlayer player = survivalPlayer(helper, new ItemStack(Items.IRON_PICKAXE));
+        stand(helper, player, new BlockPos(4, 1, 2));
+
+        helper.assertTrue(player.gameMode.destroyBlock(helper.absolutePos(target)), "the pickaxe could not break coral");
+        helper.assertItemEntityPresent(Items.DEAD_TUBE_CORAL_BLOCK, target, 2.0D);
+        helper.assertItemEntityNotPresent(Items.TUBE_CORAL_BLOCK, target, 2.0D);
+        helper.succeed();
     }
 
     /**

@@ -16,5 +16,8 @@ public class BucketsFabricGameTests implements ModInitializer {
     public void onInitialize() {
         BucketsGameTests.forEach((name, function) ->
                 Registry.register(BuiltInRegistries.TEST_FUNCTION, Identifier.fromNamespaceAndPath(Constants.MOD_ID, name), function));
+        // Fabric only: what the bucket looks like through this loader's own transfer API.
+        BucketTransferTests.register((name, function) ->
+                Registry.register(BuiltInRegistries.TEST_FUNCTION, Identifier.fromNamespaceAndPath(Constants.MOD_ID, name), function));
     }
 }

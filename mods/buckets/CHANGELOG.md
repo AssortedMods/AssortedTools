@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.1
+
+- A bucket set to a milking level above 2 in the config no longer crashes when milking
+- On Fabric, mods that move as much fluid as they can into or out of a better bucket now move it, instead of nothing
+
 ## 2.0.0
 
 Updated to Minecraft 26.3, for NeoForge and Fabric.

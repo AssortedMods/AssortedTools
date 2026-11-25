@@ -168,7 +168,8 @@ public class WandBuildingItem extends WandItem {
     protected boolean doEffect(Level world, Player entityplayer, InteractionHand hand, WandCoord3D start, WandCoord3D end, BlockState state) {
         BuildingMode mode = BuildingMode.fromString(NBTHelper.getString(entityplayer.getItemInHand(hand), "Mode"));
 
-        if (state != this.stateClicked && (mode == BuildingMode.BUILD_BOX || mode == BuildingMode.BUILD_ROOM || mode == BuildingMode.BUILD_FRAME || mode == BuildingMode.BUILD_TORCHES)) {
+        // The first corner's block is saved with it on the stack, so the check holds per player and across a restart.
+        if (state != start.state && (mode == BuildingMode.BUILD_BOX || mode == BuildingMode.BUILD_ROOM || mode == BuildingMode.BUILD_FRAME || mode == BuildingMode.BUILD_TORCHES)) {
             error(entityplayer, end, "notsamecorner");
             return false;
         }

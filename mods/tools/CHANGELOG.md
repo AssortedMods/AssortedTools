@@ -1,5 +1,13 @@
 # Changelog
 
+## 13.0.2
+
+- Includes Assorted Buckets 2.0.1, Assorted Pokeball 2.0.1, Assorted Shears 2.0.1, Assorted Suits 2.0.2 and
+  Assorted Wands 2.0.1. A bucket milks with a config milking level above 2 without crashing, and on Fabric
+  takes and gives as much fluid as other mods ask for. A full pokeball keeps its mob after a reload mid
+  flight. Only Coral Cutter, not every tool, keeps coral alive. The building wand keeps each player's first
+  corner through a restart. A chicken suit conversion in an anvil charges for a rename only when you type one
+
 ## 13.0.1
 
 - Includes Assorted Suits 2.0.1, which adds a client setting to turn off the chicken cluck when jumping in

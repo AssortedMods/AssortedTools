@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "assortedwands:building_wand_keeps_each_players_first_corner",
+  "structure": "assortedwands:test_box",
+  "max_ticks": 1,
+  "setup_ticks": 0,
+  "required": true
+}

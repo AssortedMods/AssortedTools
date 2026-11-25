@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.1
+
+- A full pokeball saved mid flight, as when its chunk unloads, no longer forgets its mob and catches the next one it hits over it
+
 ## 2.0.0
 
 Updated to Minecraft 26.3, for NeoForge and Fabric.

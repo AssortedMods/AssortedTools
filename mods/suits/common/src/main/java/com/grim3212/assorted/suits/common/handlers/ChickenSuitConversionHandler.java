@@ -49,7 +49,7 @@ public class ChickenSuitConversionHandler {
         EnchantmentHelper.updateEnchantments(output, mutable -> mutable.set(chickenJump, 1));
 
         int cost = 0;
-        if (!StringUtils.isBlank(event.getName()) && !event.getName().equals(output.getHoverName().toString())) {
+        if (!StringUtils.isBlank(event.getName()) && !event.getName().equals(output.getHoverName().getString())) {
             cost++;
 
             // ItemStack#setHoverName is gone; the display name is the custom_name component.
