@@ -61,7 +61,7 @@ public class WandBreakingItem extends WandItem {
     }
 
     @Override
-    protected boolean doEffect(Level world, Player entityplayer, InteractionHand hand, WandCoord3D start, WandCoord3D end, BlockState state) {
+    protected boolean doEffect(Level world, Player entityplayer, InteractionHand hand, WandCoord3D start, WandCoord3D end, BlockState state, BlockState clicked) {
         boolean damage = doBreaking(world, start, end, entityplayer, hand);
         if (damage)
             world.playSound((Player) null, end.pos, SoundEvents.GENERIC_EXPLODE.value(), SoundSource.BLOCKS, 2.5F, 0.5F + world.getRandom().nextFloat() * 0.3F);
