@@ -1,5 +1,6 @@
 package com.grim3212.assorted.pokeball.gametest;
 
+import com.grim3212.assorted.pokeball.common.entity.PokeballEntities;
 import com.grim3212.assorted.pokeball.common.entity.PokeballEntity;
 import com.grim3212.assorted.pokeball.common.item.CapturedEntity;
 import com.grim3212.assorted.pokeball.common.item.PokeballDataComponents;
@@ -12,10 +13,13 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.animal.cow.Cow;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.TagValueInput;
+import net.minecraft.world.level.storage.TagValueOutput;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
@@ -33,6 +37,7 @@ final class PokeballTests {
     static void register(BiConsumer<String, Consumer<GameTestHelper>> out) {
         out.accept("pokeball_captures_and_releases", PokeballTests::pokeballCapturesAndReleases);
         out.accept("pokeball_tooltip_names_what_it_holds", PokeballTests::pokeballTooltipNamesWhatItHolds);
+        out.accept("full_pokeball_reloaded_in_flight_keeps_its_mob", PokeballTests::fullPokeballReloadedInFlightKeepsItsMob);
     }
 
     private static void pokeballCapturesAndReleases(GameTestHelper helper) {
@@ -65,6 +70,42 @@ final class PokeballTests {
                     throwPokeball(helper, player, captured, helper.absoluteVec(Vec3.atCenterOf(new BlockPos(4, 0, 6))));
                 })
                 .thenWaitUntil(() -> helper.assertEntityPresent(EntityTypes.COW))
+                .thenSucceed();
+    }
+
+    /**
+     * A full ball saved mid flight, as an unloading chunk does, still knows it is full once loaded: it must not catch
+     * the next mob it hits over the one already inside.
+     */
+    private static void fullPokeballReloadedInFlightKeepsItsMob(GameTestHelper helper) {
+        ServerPlayer player = survivalPlayer(helper, ItemStack.EMPTY);
+        stand(helper, player, new BlockPos(1, 1, 1));
+        Cow cow = helper.spawn(EntityTypes.COW, new BlockPos(4, 1, 6));
+        cow.setNoAi(true);
+
+        CompoundTag pig = new CompoundTag();
+        pig.putString("id", "minecraft:pig");
+        ItemStack full = new ItemStack(PokeballItems.POKEBALL.get());
+        full.set(PokeballDataComponents.CAPTURED_ENTITY.get(), new CapturedEntity(pig));
+
+        PokeballEntity reloaded = new PokeballEntity(PokeballEntities.POKEBALL.get(), helper.getLevel());
+        ProblemReporter.Collector problems = new ProblemReporter.Collector();
+        TagValueOutput saved = TagValueOutput.createWithContext(problems, helper.getLevel().registryAccess());
+        new PokeballEntity(player, helper.getLevel(), full).saveWithoutId(saved);
+        reloaded.load(TagValueInput.create(problems, helper.getLevel().registryAccess(), saved.buildResult()));
+
+        Vec3 from = helper.absoluteVec(new Vec3(4.5D, 1.8D, 1.5D));
+        reloaded.snapTo(from.x, from.y, from.z, 0.0F, 0.0F);
+        Vec3 aim = cow.getBoundingBox().getCenter().subtract(from);
+        reloaded.shoot(aim.x, aim.y, aim.z, 1.0F, 0.0F);
+        helper.getLevel().addFreshEntity(reloaded);
+
+        helper.startSequence()
+                .thenWaitUntil(() -> helper.assertTrue(!filledPokeballs(helper).isEmpty(), "the reloaded pokeball dropped no full ball"))
+                .thenExecute(() -> {
+                    helper.assertEntityPresent(EntityTypes.COW);
+                    helper.assertValueEqual(CapturedEntity.of(filledPokeballs(helper).get(0)).entity().getStringOr("id", ""), "minecraft:pig", "the mob in the reloaded ball");
+                })
                 .thenSucceed();
     }
 

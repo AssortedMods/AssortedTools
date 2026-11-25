@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.2
+
+- Putting a chicken suit piece on armor in an anvil no longer charges an extra level for a rename, or renames the armor, unless you type a new name
+
 ## 2.0.1
 
 - Added a client setting to turn off the chicken cluck when jumping in the chicken suit

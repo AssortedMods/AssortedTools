@@ -24,8 +24,8 @@ import java.util.Optional;
 
 public class CoralCutterHandler {
     public static void handleDrop(final OnDropStacksEvent event) {
-        // We only will ever modify corals
-        if (event.getState().is(ShearsTags.ALL_CORALS)) {
+        // We only will ever modify corals, and only for a tool carrying Coral Cutter: any other tool keeps its own drops.
+        if (event.getState().is(ShearsTags.ALL_CORALS) && ShearsEnchantments.hasCoralCutter(event.getStack())) {
             ServerLevel level = event.getWorld();
             ItemStack toolStack = event.getStack();
 

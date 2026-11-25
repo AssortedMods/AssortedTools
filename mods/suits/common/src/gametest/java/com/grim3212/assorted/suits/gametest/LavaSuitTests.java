@@ -46,6 +46,11 @@ final class LavaSuitTests {
     private static final int SETTLE = 10;
     /** Long enough to cross a wear interval whenever the test happens to start. */
     private static final int A_WHILE = 110;
+    /**
+     * A multiple of both suits' wear intervals, 80 and 100 ticks, so any stretch this long holds the same number of
+     * each suit's wear ticks wherever it starts: five of the lava suit's against four of the scuba suit's.
+     */
+    private static final int BOTH_INTERVALS = 400;
     /** Long enough for a shove to run itself out under either drag. */
     private static final int COAST = 30;
 
@@ -54,7 +59,7 @@ final class LavaSuitTests {
         out.accept("lava_legs_and_boots_let_you_swim", LavaSuitTests::lavaLegsAndBootsLetYouSwim);
         out.accept("lava_striding_swims_like_water", LavaSuitTests::lavaStridingSwimsLikeWater);
         out.accept("lava_halves_need_both_pieces_and_lava", LavaSuitTests::lavaHalvesNeedBothPiecesAndLava);
-        out.accept("lava_suit_wears_at_the_scuba_suits_rate", LavaSuitTests::lavaSuitWearsAtTheScubaSuitsRate);
+        out.accept("lava_suit_wears_faster_than_the_scuba_suit", LavaSuitTests::lavaSuitWearsFasterThanTheScubaSuit);
         out.accept("lava_suit_never_catches_fire", LavaSuitTests::lavaSuitNeverCatchesFire);
         out.accept("lava_suit_wears_wherever_it_burns", LavaSuitTests::lavaSuitWearsWhereverItBurns);
         out.accept("lava_boots_alone_see_off_a_hot_floor", LavaSuitTests::lavaBootsAloneSeeOffAHotFloor);
@@ -318,10 +323,11 @@ final class LavaSuitTests {
     }
 
     /**
-     * The lava suit is expensive enough to build without charging extra for it, so this asks both
-     * suits at once rather than trusting two constants to stay in step.
+     * The lava suit is the less durable of the two, wearing a point every four seconds against the scuba suit's five.
+     * Both are read at the same two points {@link #BOTH_INTERVALS} ticks apart, so the counts do not hang on which
+     * tick the test starts at.
      */
-    private static void lavaSuitWearsAtTheScubaSuitsRate(GameTestHelper helper) {
+    private static void lavaSuitWearsFasterThanTheScubaSuit(GameTestHelper helper) {
         tank(helper, LAVA_TANK, Blocks.LAVA);
         tank(helper, WATER_TANK, Blocks.WATER);
 
@@ -332,17 +338,27 @@ final class LavaSuitTests {
         scuba.put(EquipmentSlot.CHEST, SuitsItems.SCUBA_CHESTPLATE.get());
         LivingEntity inWater = diver(helper, WATER_TANK, scuba);
 
+        int[] before = new int[2];
         helper.startSequence()
-                .thenIdle(A_WHILE)
+                .thenIdle(SETTLE)
                 .thenExecute(() -> {
-                    helper.assertTrue(inLava.isInLava(), "the lava diver never got into the lava");
-                    helper.assertTrue(inWater.isInWater(), "the scuba diver never got into the water");
-
-                    int lavaWorn = inLava.getItemBySlot(EquipmentSlot.HEAD).getDamageValue();
-                    int scubaWorn = inWater.getItemBySlot(EquipmentSlot.HEAD).getDamageValue();
-                    helper.assertTrue(scubaWorn > 0, "neither suit wore at all in " + A_WHILE + " ticks, so this proves nothing");
-                    helper.assertValueEqual(lavaWorn, scubaWorn, "wear on the lava hood against the scuba mask over the same stretch");
+                    assertInTheirTanks(helper, inLava, inWater);
+                    before[0] = inLava.getItemBySlot(EquipmentSlot.HEAD).getDamageValue();
+                    before[1] = inWater.getItemBySlot(EquipmentSlot.HEAD).getDamageValue();
+                })
+                .thenIdle(BOTH_INTERVALS)
+                .thenExecute(() -> {
+                    assertInTheirTanks(helper, inLava, inWater);
+                    int lavaWorn = inLava.getItemBySlot(EquipmentSlot.HEAD).getDamageValue() - before[0];
+                    int scubaWorn = inWater.getItemBySlot(EquipmentSlot.HEAD).getDamageValue() - before[1];
+                    helper.assertTrue(scubaWorn > 0, "the scuba mask did not wear at all in " + BOTH_INTERVALS + " ticks, so this proves nothing");
+                    helper.assertTrue(lavaWorn > scubaWorn, "over " + BOTH_INTERVALS + " ticks the lava hood wore " + lavaWorn + " and the scuba mask " + scubaWorn + ", but the lava suit should wear faster");
                 })
                 .thenSucceed();
+    }
+
+    private static void assertInTheirTanks(GameTestHelper helper, LivingEntity inLava, LivingEntity inWater) {
+        helper.assertTrue(inLava.isInLava(), "the lava diver is not in the lava");
+        helper.assertTrue(inWater.isInWater(), "the scuba diver is not in the water");
     }
 }

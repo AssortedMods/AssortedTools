@@ -32,6 +32,7 @@ final class WandTests {
     static void register(BiConsumer<String, Consumer<GameTestHelper>> out) {
         out.accept("mining_wand_cycles_and_mines", WandTests::miningWandCyclesAndMines);
         out.accept("building_wand_builds_and_consumes_blocks", WandTests::buildingWandBuildsAndConsumesBlocks);
+        out.accept("building_wand_keeps_each_players_first_corner", WandTests::buildingWandKeepsEachPlayersFirstCorner);
         out.accept("mining_wand_dirt_mode_clears_grass_plants", WandTests::miningWandDirtModeClearsGrassPlants);
         out.accept("mining_wand_dirt_mode_takes_every_soil", WandTests::miningWandDirtModeTakesEverySoil);
         out.accept("breaking_wands_clear_their_modes", WandTests::breakingWandsClearTheirModes);
@@ -121,6 +122,48 @@ final class WandTests {
         helper.assertBlockPresent(Blocks.AIR, poorGap);
         helper.assertValueEqual(player.getItemInHand(InteractionHand.MAIN_HAND).getDamageValue(), 1, "the wand should not wear when it refuses to build");
 
+        helper.succeed();
+    }
+
+    /**
+     * Two players' selections overlap: each wand checks the second corner against the first corner saved on its own
+     * stack. The first corner's block was once kept on the item, which every wand shares, so whoever clicked last
+     * decided it and the other player was told the corners did not match.
+     */
+    private static void buildingWandKeepsEachPlayersFirstCorner(GameTestHelper helper) {
+        final BlockPos stoneStart = new BlockPos(2, 1, 2);
+        final BlockPos stoneGap = new BlockPos(2, 1, 3);
+        final BlockPos stoneEnd = new BlockPos(2, 1, 4);
+        final BlockPos planksStart = new BlockPos(6, 1, 2);
+        final BlockPos planksGap = new BlockPos(6, 1, 3);
+        final BlockPos planksEnd = new BlockPos(6, 1, 4);
+        helper.setBlock(stoneStart, Blocks.STONE);
+        helper.setBlock(stoneEnd, Blocks.STONE);
+        helper.setBlock(planksStart, Blocks.OAK_PLANKS);
+        helper.setBlock(planksEnd, Blocks.OAK_PLANKS);
+
+        WandBuildingItem wand = WandsItems.BUILDING_WAND.get();
+        ItemStack stoneStack = new ItemStack(wand);
+        ServerPlayer stoneBuilder = survivalPlayer(helper, stoneStack);
+        stand(helper, stoneBuilder, new BlockPos(3, 1, 3));
+        wand.onCraftedBy(stoneStack, stoneBuilder);
+        stoneBuilder.getInventory().add(new ItemStack(Blocks.STONE, 4));
+
+        ItemStack planksStack = new ItemStack(wand);
+        ServerPlayer planksBuilder = survivalPlayer(helper, planksStack);
+        stand(helper, planksBuilder, new BlockPos(5, 1, 3));
+        wand.onCraftedBy(planksStack, planksBuilder);
+        planksBuilder.getInventory().add(new ItemStack(Blocks.OAK_PLANKS, 4));
+
+        useOnTopOf(helper, stoneBuilder, stoneStart);
+        useOnTopOf(helper, planksBuilder, planksStart);
+        useOnTopOf(helper, stoneBuilder, stoneEnd);
+        useOnTopOf(helper, planksBuilder, planksEnd);
+
+        helper.assertBlockPresent(Blocks.STONE, stoneGap);
+        helper.assertBlockPresent(Blocks.OAK_PLANKS, planksGap);
+        helper.assertValueEqual(countInInventory(stoneBuilder, Blocks.STONE.asItem()), 3, "stone left after the first player's wand filled its gap");
+        helper.assertValueEqual(countInInventory(planksBuilder, Blocks.OAK_PLANKS.asItem()), 3, "planks left after the second player's wand filled its gap");
         helper.succeed();
     }
 

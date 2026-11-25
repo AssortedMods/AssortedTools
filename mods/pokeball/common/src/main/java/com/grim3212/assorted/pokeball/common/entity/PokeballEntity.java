@@ -29,8 +29,6 @@ import java.util.Optional;
 
 public class PokeballEntity extends ThrowableItemProjectile {
 
-    private boolean hasEntity;
-
     public PokeballEntity(EntityType<? extends PokeballEntity> type, Level worldIn) {
         super(type, worldIn);
     }
@@ -42,7 +40,6 @@ public class PokeballEntity extends ThrowableItemProjectile {
     public PokeballEntity(LivingEntity livingEntityIn, Level worldIn, ItemStack stack) {
         // ThrowableItemProjectile syncs the thrown stack itself, so getItem()/setItem() are the pokeball.
         super(PokeballEntities.POKEBALL.get(), livingEntityIn, worldIn, stack);
-        this.hasEntity = !CapturedEntity.of(stack).isEmpty();
     }
 
     @Override
@@ -53,9 +50,11 @@ public class PokeballEntity extends ThrowableItemProjectile {
 
         // getItem() hands back the live synched stack, so it is copied before being changed.
         ItemStack currentPokeball = this.getItem().copy();
+        // Read off the ball itself, which saves with the entity: a field set when thrown was lost on a reload mid flight.
+        boolean hasEntity = !CapturedEntity.of(currentPokeball).isEmpty();
 
         if (result.getType() == HitResult.Type.BLOCK) {
-            if (this.hasEntity) {
+            if (hasEntity) {
                 // Entities deserialize from a ValueInput now, so the stored tag is wrapped in one.
                 try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(this.problemPath(), Constants.LOG)) {
                     Optional<Entity> loadEntity = EntityType.create(
@@ -74,7 +73,7 @@ public class PokeballEntity extends ThrowableItemProjectile {
             }
         } else if (result.getType() == HitResult.Type.ENTITY) {
             Entity hitEntity = ((EntityHitResult) result).getEntity();
-            if (hitEntity != null && !this.hasEntity && !(hitEntity instanceof Player || hitEntity instanceof EnderDragon || hitEntity instanceof EnderDragonPart)) {
+            if (hitEntity != null && !hasEntity && !(hitEntity instanceof Player || hitEntity instanceof EnderDragon || hitEntity instanceof EnderDragonPart)) {
                 if (hitEntity instanceof LivingEntity livingEntity) {
                     try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(livingEntity.problemPath(), Constants.LOG)) {
                         TagValueOutput entityOutput = TagValueOutput.createWithContext(reporter, serverLevel.registryAccess());

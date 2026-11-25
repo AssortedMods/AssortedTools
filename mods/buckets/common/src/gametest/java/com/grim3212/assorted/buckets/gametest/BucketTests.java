@@ -21,6 +21,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.cow.Cow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Item;
@@ -52,6 +53,7 @@ final class BucketTests {
     static void register(BiConsumer<String, Consumer<GameTestHelper>> out) {
         out.accept("better_bucket_fills_and_empties", BucketTests::betterBucketFillsAndEmpties);
         out.accept("better_bucket_milks_a_cow", BucketTests::betterBucketMilksACow);
+        out.accept("milking_level_past_the_last_level_still_milks", BucketTests::milkingLevelPastTheLastLevelStillMilks);
         out.accept("uncrafted_better_bucket_milks_and_fills", BucketTests::uncraftedBetterBucketMilksAndFills);
         out.accept("better_bucket_picks_up_and_places_lava", BucketTests::betterBucketPicksUpAndPlacesLava);
         out.accept("better_bucket_refuses_a_fluid_too_hot_for_it", BucketTests::betterBucketRefusesAFluidTooHotForIt);
@@ -250,6 +252,33 @@ final class BucketTests {
         helper.assertTrue(second.isCanceled(), "milking again into a part full milk bucket was not handled");
         helper.assertValueEqual(BetterBucketItem.getAmount(player.getItemInHand(InteractionHand.MAIN_HAND)), 2 * oneBucket, "milk held after two milkings");
 
+        helper.succeed();
+    }
+
+    /**
+     * A bucket whose milking level is past the last level anything is milkable at still milks what is below it. The
+     * config allows levels up to 5 while only 0 to 2 are registered, and the handler once read a level for every
+     * number up to the bucket's, running off the end of the list. The netherite tier milks at level 2, so dropping
+     * the top level for the length of the test puts it past the end without changing the config.
+     */
+    private static void milkingLevelPastTheLastLevelStillMilks(GameTestHelper helper) {
+        Cow cow = helper.spawn(EntityTypes.COW, new BlockPos(4, 1, 4));
+        BetterBucketItem bucket = BucketsItems.NETHERITE.bucket().get();
+        helper.assertTrue(bucket.bucketConfig.getMilkingLevel() == MilkingHandler.levels.size() - 1, "the netherite bucket no longer milks at the top level, so this test sets nothing up");
+        ServerPlayer player = survivalPlayer(helper, bucket.getEmptyStack());
+
+        List<Class<? extends Entity>> top = MilkingHandler.levels.remove(MilkingHandler.levels.size() - 1);
+        EntityInteractEvent event = new EntityInteractEvent(player, InteractionHand.MAIN_HAND, cow);
+        try {
+            MilkingHandler.interact(event);
+        } finally {
+            MilkingHandler.levels.add(top);
+        }
+
+        helper.assertTrue(event.isCanceled(), "milking a cow with a bucket past the last milking level was not handled");
+        ItemStack milk = player.getItemInHand(InteractionHand.MAIN_HAND);
+        helper.assertTrue(milk.is(BucketsItems.NETHERITE.milk().get()), "the bucket did not turn into its milk bucket");
+        helper.assertValueEqual(BetterBucketItem.getAmount(milk), BetterBucketItem.getBucketAmount(), "milk held after one milking");
         helper.succeed();
     }
 

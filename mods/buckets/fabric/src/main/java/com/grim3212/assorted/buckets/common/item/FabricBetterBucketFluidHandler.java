@@ -30,7 +30,8 @@ public class FabricBetterBucketFluidHandler implements SingleSlotStorage<FluidVa
             int currentAmount = BetterBucketItem.getAmount(stack);
             if (currentAmount < bucket.getMaximumMillibuckets()) {
 
-                int newMax = (int) maxAmount;
+                // Clamped to what the bucket holds: a caller asking to move as much as it can passes Long.MAX_VALUE, which a plain cast turns into -1.
+                int newMax = (int) Math.min(maxAmount, bucket.getMaximumMillibuckets());
                 int newAmount = currentAmount + newMax;
                 int leftOver = newAmount - bucket.getMaximumMillibuckets();
                 int returnAmount = newMax;
@@ -74,11 +75,8 @@ public class FabricBetterBucketFluidHandler implements SingleSlotStorage<FluidVa
         String stored = BetterBucketItem.getFluid(stack);
         if (stored.equals(BetterBucketItem.getStringFromFluid(resource.getFluid())) && !BetterBucketItem.getFluidFromString(stored).isSame(Fluids.EMPTY)) {
             int currentAmount = BetterBucketItem.getAmount(stack);
-            int newMax = (int) maxAmount;
+            int newMax = (int) Math.min(maxAmount, bucket.getMaximumMillibuckets());
             int returnAmount = newMax;
-            if (newMax > bucket.getMaximumMillibuckets()) {
-                newMax = bucket.getMaximumMillibuckets();
-            }
 
             int newAmount = currentAmount - newMax;
 

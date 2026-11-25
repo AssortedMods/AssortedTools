@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.1
+
+- The building wand no longer says the corner blocks must be the same when another player used a building wand between your two clicks, or the game restarted in between
+
 ## 2.0.0
 
 Updated to Minecraft 26.3, for NeoForge and Fabric.

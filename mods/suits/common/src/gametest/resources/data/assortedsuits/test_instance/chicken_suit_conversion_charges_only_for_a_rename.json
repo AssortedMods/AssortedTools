@@ -1,9 +1,9 @@
 {
   "type": "minecraft:function",
   "environment": "minecraft:default",
-  "function": "assortedsuits:lava_suit_wears_at_the_scuba_suits_rate",
+  "function": "assortedsuits:chicken_suit_conversion_charges_only_for_a_rename",
   "structure": "assortedsuits:test_box",
-  "max_ticks": 260,
+  "max_ticks": 1,
   "setup_ticks": 0,
   "required": true
 }

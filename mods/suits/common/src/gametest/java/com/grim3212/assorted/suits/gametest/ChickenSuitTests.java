@@ -9,6 +9,7 @@ import com.grim3212.assorted.suits.common.item.SuitsItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -38,6 +39,7 @@ final class ChickenSuitTests {
 
     static void register(BiConsumer<String, Consumer<GameTestHelper>> out) {
         out.accept("chicken_suit_converts_armor_in_an_anvil", ChickenSuitTests::chickenSuitConvertsArmorInAnAnvil);
+        out.accept("chicken_suit_conversion_charges_only_for_a_rename", ChickenSuitTests::chickenSuitConversionChargesOnlyForARename);
         out.accept("chicken_jump_is_obtainable", ChickenSuitTests::chickenJumpIsObtainable);
         out.accept("chicken_suit_takes_armor_enchantments", ChickenSuitTests::chickenSuitTakesArmorEnchantments);
         out.accept("jei_plugin_is_registered_on_fabric", ChickenSuitTests::jeiPluginIsRegisteredOnFabric);
@@ -65,6 +67,29 @@ final class ChickenSuitTests {
         ChickenSuitConversionHandler.anvilUpdateEvent(notArmor);
         helper.assertTrue(notArmor.getOutput().isEmpty(), "a chicken suit helmet converted a pickaxe");
 
+        helper.succeed();
+    }
+
+    /**
+     * An anvil sends the name in its text box, which holds the item's own name until the player changes it. Leaving
+     * it alone costs nothing extra and names nothing; typing a new one costs a level and names the armor. The name was
+     * once compared against the name component's debug text, so every conversion was charged for and renamed.
+     */
+    private static void chickenSuitConversionChargesOnlyForARename(GameTestHelper helper) {
+        ServerPlayer player = survivalPlayer(helper, ItemStack.EMPTY);
+        stand(helper, player, new BlockPos(4, 1, 4));
+        ItemStack chestplate = new ItemStack(Items.IRON_CHESTPLATE);
+
+        AnvilUpdatedEvent unchanged = new AnvilUpdatedEvent(chestplate.copy(), new ItemStack(SuitsItems.CHICKEN_SUIT_CHESTPLATE.get()), chestplate.getHoverName().getString(), 0, player);
+        ChickenSuitConversionHandler.anvilUpdateEvent(unchanged);
+        helper.assertFalse(unchanged.getOutput().isEmpty(), "the anvil gave nothing for a chestplate under its own name");
+        helper.assertValueEqual(unchanged.getCost(), 5, "level cost of converting a chestplate under its own name");
+        helper.assertTrue(unchanged.getOutput().get(DataComponents.CUSTOM_NAME) == null, "converting a chestplate under its own name gave it a custom name");
+
+        AnvilUpdatedEvent renamed = new AnvilUpdatedEvent(chestplate.copy(), new ItemStack(SuitsItems.CHICKEN_SUIT_CHESTPLATE.get()), "Clucky", 0, player);
+        ChickenSuitConversionHandler.anvilUpdateEvent(renamed);
+        helper.assertValueEqual(renamed.getCost(), 6, "level cost of converting and renaming a chestplate");
+        helper.assertValueEqual(renamed.getOutput().getHoverName().getString(), "Clucky", "the name of the renamed chestplate");
         helper.succeed();
     }
 

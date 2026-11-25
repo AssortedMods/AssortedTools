@@ -67,7 +67,8 @@ public class MilkingHandler {
                     int milkingLevel = bucket.getParent().bucketConfig.getMilkingLevel();
 
                     if (bucket != null) {
-                        for (int i = 0; i <= milkingLevel; i++) {
+                        // The config allows levels past the last one anything is milkable at, which have nothing more to add.
+                        for (int i = 0; i <= milkingLevel && i < levels.size(); i++) {
                             for (int j = 0; j < levels.get(i).size(); j++) {
                                 if (levels.get(i).contains(entity.getClass())) {
                                     if (BetterBucketItem.getAmount(stack) < bucket.getParent().getMaximumMillibuckets()) {
@@ -90,7 +91,8 @@ public class MilkingHandler {
                     int milkingLevel = bucket.bucketConfig.getMilkingLevel();
 
                     if (bucket != null) {
-                        for (int i = 0; i <= milkingLevel; i++) {
+                        // The config allows levels past the last one anything is milkable at, which have nothing more to add.
+                        for (int i = 0; i <= milkingLevel && i < levels.size(); i++) {
                             for (int j = 0; j < levels.get(i).size(); j++) {
                                 if (levels.get(i).contains(entity.getClass())) {
                                     if (BetterBucketItem.isEmptyOrContains(stack, "milk")) {

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.1
+
+- Coral mined with a tool that has neither Silk Touch nor Coral Cutter dies as in vanilla, instead of dropping live coral
+
 ## 2.0.0
 
 Updated to Minecraft 26.3, for NeoForge and Fabric.
