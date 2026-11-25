@@ -39,8 +39,6 @@ public abstract class WandItem extends Item implements ISwitchModes {
     protected final boolean reinforced;
     protected Random rand;
 
-    protected BlockState stateOrig = Blocks.AIR.defaultBlockState();
-
     public WandItem(boolean reinforced, Properties properties) {
         super(properties);
         this.reinforced = reinforced;
@@ -76,7 +74,11 @@ public abstract class WandItem extends Item implements ISwitchModes {
         return this.isTooFar((int) a.getDistance(b), 10, (int) a.getDistanceFlat(b), stack);
     }
 
-    protected abstract boolean doEffect(Level world, Player entityplayer, InteractionHand hand, WandCoord3D start, WandCoord3D end, BlockState state);
+    /**
+     * @param state   the block the wand works with, dirt where grass was clicked
+     * @param clicked the block that was clicked, as it stands in the world
+     */
+    protected abstract boolean doEffect(Level world, Player entityplayer, InteractionHand hand, WandCoord3D start, WandCoord3D end, BlockState state, BlockState clicked);
 
     protected void sendMessage(Player player, Component message) {
         if (!player.level().isClientSide()) {
@@ -174,8 +176,8 @@ public abstract class WandItem extends Item implements ISwitchModes {
         InteractionHand hand = context.getHand();
         boolean isFree = WandsCommonMod.COMMON_CONFIG.freeBuildMode.get() || playerIn.isCreative();
 
-        this.stateOrig = worldIn.getBlockState(pos);
-        BlockState state = this.stateOrig;
+        final BlockState clicked = worldIn.getBlockState(pos);
+        BlockState state = clicked;
 
         // Grass builds as dirt since it can't be paid for out of the inventory; the building wand grasses the finished surface back over.
         if (state.getBlock() == Blocks.GRASS_BLOCK) {
@@ -218,7 +220,7 @@ public abstract class WandItem extends Item implements ISwitchModes {
                 return InteractionResult.SUCCESS;
             }
 
-            boolean damage = this.doEffect(worldIn, playerIn, hand, start, clicked_current, state);
+            boolean damage = this.doEffect(worldIn, playerIn, hand, start, clicked_current, state, clicked);
 
             if (damage) {
                 NBTHelper.putBoolean(stack, FIRST_USE_KEY, true);
